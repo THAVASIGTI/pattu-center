@@ -36,6 +36,7 @@ These items are **filler** and must be swapped for the real business's data:
 | "Since 1985" / "40+ years" | `index.html` hero badge and `.hero__chip` | Taken from third-party directory listings. Confirm the real founding year. |
 | Chennai address | `chennai.html`, `index.html` `#branches` | No street address was published for Chennai, so the page is written honestly as "collections by appointment". Add the real shop address if one exists. |
 | Email address | not present | The source site lists no email. Add one to the footer if the business has one. |
+| **Phone numbers** | every page + `_partials/` | All numbers are **dummy placeholders** (`+91 90000 00001/2/3`, WhatsApp `90000 00002`). Swap in the real numbers before launch — see the grep command below. |
 | Photography | all pages | See below. |
 
 ## Images
@@ -61,15 +62,23 @@ below the fold.
 ## Editing content
 
 Colours, fonts, spacing and radii are all CSS custom properties at the top of
-`assets/css/style.css` (`:root`). Changing `--maroon`, `--gold` and `--cream`
+`assets/css/style.css` (`:root`). Changing `--royal`, `--gold` and `--cream`
 re-themes the whole site.
+
+The theme is royal blue with gold zari accents. Gradients are defined once as
+tokens and reused everywhere:
+
+- `--grad-royal` — the main blue gradient (buttons, icon chips, avatars, accent cards)
+- `--grad-royal-deep` — dark sections, drawer, footer
+- `--grad-sky` — the page's soft background wash
+- `--foil` — the gold gradient used for display text, ornaments and primary buttons
 
 Phone numbers appear in several places — the top bar, hero, branch cards,
 mobile action bar, footer and every `tel:`/`wa.me` link. Search and replace
 across all three HTML files when they change:
 
 ```bash
-grep -rn "9500401200\|9787070503\|9843267698" *.html
+grep -rn "9000000001\|9000000002\|9000000003" *.html _partials/
 ```
 
 ### The `_partials/` directory
