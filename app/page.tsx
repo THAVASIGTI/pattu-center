@@ -44,8 +44,37 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-[radial-gradient(780px_440px_at_10%_2%,rgba(202,154,4,.24),transparent_58%),radial-gradient(680px_560px_at_92%_96%,rgba(34,197,94,.46),transparent_64%),linear-gradient(172deg,rgba(10,46,26,.82),rgba(10,46,26,.95))]" />
         </div>
 
-        <Wrap className="relative z-10 grid items-center gap-8 py-12 sm:py-16 lg:grid-cols-[1.05fr_.95fr] lg:gap-14 lg:py-24">
-          <div>
+        <Wrap className="relative z-10 grid items-center gap-8 py-12 sm:py-16 lg:grid-cols-[.95fr_1.05fr] lg:gap-14 lg:py-24">
+          <HeroSlider
+            className="order-2 lg:order-1"
+            slides={[
+              {
+                src: img(16239658),
+                alt: "Green silk saree with a woven gold zari border and traditional jewellery",
+                caption: "Kanchipuram pattu",
+                captionTa: "காஞ்சிபுரம் பட்டு",
+              },
+              {
+                src: img(6167463),
+                alt: "Teal silk saree with intricate golden paisley brocade",
+                caption: "Mysore & Banarasi silk",
+                captionTa: "மைசூர் & பனாரஸ் பட்டு",
+              },
+              {
+                src: img(10317113),
+                alt: "Close-up of a silk saree showing its woven gold zari border",
+                caption: "Zari borders & pallu",
+                captionTa: "ஜரிகை கரை & முந்தானை",
+              },
+              {
+                src: img(20181020),
+                alt: "Close-up of gold and silver brocade fabric",
+                caption: "Gold & silver zari",
+                captionTa: "தங்கம் & வெள்ளி ஜரிகை",
+              },
+            ]}
+          />
+          <div className="order-1 lg:order-2">
             <span className="mb-4 inline-flex flex-wrap items-center gap-2 rounded-full border border-yellow/40 bg-yellow/15 px-4 py-1.5 text-[0.71rem] font-semibold uppercase tracking-[0.13em] text-yellow-light">
               <i className="size-1.5 animate-pulse-ring rounded-full bg-yellow-light" />
               {business.foundedText}
@@ -98,34 +127,6 @@ export default function HomePage() {
             </p>
           </div>
 
-          <HeroSlider
-            slides={[
-              {
-                src: img(16239658),
-                alt: "Green silk saree with a woven gold zari border and traditional jewellery",
-                caption: "Kanchipuram pattu",
-                captionTa: "காஞ்சிபுரம் பட்டு",
-              },
-              {
-                src: img(6167463),
-                alt: "Teal silk saree with intricate golden paisley brocade",
-                caption: "Mysore & Banarasi silk",
-                captionTa: "மைசூர் & பனாரஸ் பட்டு",
-              },
-              {
-                src: img(10317113),
-                alt: "Close-up of a silk saree showing its woven gold zari border",
-                caption: "Zari borders & pallu",
-                captionTa: "ஜரிகை கரை & முந்தானை",
-              },
-              {
-                src: img(20181020),
-                alt: "Close-up of gold and silver brocade fabric",
-                caption: "Gold & silver zari",
-                captionTa: "தங்கம் & வெள்ளி ஜரிகை",
-              },
-            ]}
-          />
         </Wrap>
       </section>
 

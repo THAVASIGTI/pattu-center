@@ -19,7 +19,13 @@ const FADE = 200;
  * the rotation pauses on hover/focus and is disabled entirely for
  * reduced-motion users, who simply get the first image.
  */
-export default function HeroSlider({ slides }: { slides: Slide[] }) {
+export default function HeroSlider({
+  slides,
+  className = "",
+}: {
+  slides: Slide[];
+  className?: string;
+}) {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const timer = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -44,7 +50,7 @@ export default function HeroSlider({ slides }: { slides: Slide[] }) {
 
   return (
     <div
-      className="relative mx-auto w-full max-w-[440px] lg:mr-0 lg:ml-auto"
+      className={`relative mx-auto w-full max-w-[440px] lg:mr-auto lg:ml-0 ${className}`}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocusCapture={() => setPaused(true)}
@@ -52,7 +58,7 @@ export default function HeroSlider({ slides }: { slides: Slide[] }) {
     >
       <span
         aria-hidden
-        className="absolute inset-y-0 -right-3.5 left-3.5 -z-10 translate-y-3.5 rounded-[30px] border border-yellow/40"
+        className="absolute inset-y-0 right-3.5 -left-3.5 -z-10 translate-y-3.5 rounded-[30px] border border-yellow/40"
       />
 
       <div
