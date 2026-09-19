@@ -1,0 +1,213 @@
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import CtaBand from "@/components/CtaBand";
+import { Check, Clock, Mail, Phone, Pin, WhatsApp } from "@/components/Icons";
+import PageHero from "@/components/PageHero";
+import Reveal from "@/components/Reveal";
+import { Button, Section, SectionHead, Wrap } from "@/components/ui";
+import { branchBySlug, branches, business, waLink } from "@/config/business";
+import { sareeTypes } from "@/config/content";
+
+type Params = { params: Promise<{ slug: string }> };
+
+/** One static route per branch — /branches/madurai, /branches/thanjavur, … */
+export function generateStaticParams() {
+  return branches.map((b) => ({ slug: b.slug }));
+}
+
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
+  const { slug } = await params;
+  const branch = branchBySlug(slug);
+  if (!branch) return {};
+  return {
+    title: `Old Silk Saree Buyers in ${branch.city}`,
+    description: `Sell old pattu and silk sarees in ${branch.city}. ${branch.lines.join(", ")}. Instant cash, free doorstep pickup and honest weighing.`,
+    alternates: { canonical: `/branches/${branch.slug}` },
+  };
+}
+
+export default async function BranchPage({ params }: Params) {
+  const { slug } = await params;
+  const branch = branchBySlug(slug);
+  if (!branch) notFound();
+
+  const phone = business.phones[branch.phoneIndex] ?? business.phones[0];
+  const mapSrc = `https://maps.google.com/maps?q=${branch.mapQuery}&output=embed`;
+  const others = branches.filter((b) => b.slug !== branch.slug).slice(0, 3);
+
+  return (
+    <>
+      <PageHero
+        crumbs={[
+          { label: "Home", href: "/" },
+          { label: "Branches", href: "/branches" },
+          { label: branch.city },
+        ]}
+        eyebrow={branch.isHeadOffice ? "Head office" : "Branch"}
+        title={<>Old Silk Saree Buyers in <span className="foil-text">{branch.city}</span></>}
+        lead={branch.intro}
+      >
+        <Button href={phone.href} variant="gold">
+          <Phone className="size-[17px]" />
+          Call {phone.label}
+        </Button>
+        <Button
+          href={waLink(`Hello, I want to sell my old silk sarees in ${branch.city}.`)}
+          variant="whatsapp"
+          external
+        >
+          <WhatsApp className="size-[17px]" />
+          WhatsApp Photos
+        </Button>
+      </PageHero>
+
+      {/* Address + what to expect */}
+      <Section>
+        <Wrap>
+          <div className="grid items-start gap-8 lg:grid-cols-2 lg:gap-14">
+            <Reveal>
+              <SectionHead align="left" eyebrow={`${branch.city} branch`} title={branch.title} />
+              <ul className="grid gap-3">
+                {[
+                  "Weighed openly on a calibrated scale — you watch every reading.",
+                  `Free doorstep pickup across ${branch.city} for ten sarees or more.`,
+                  "Cash, UPI or bank transfer the moment you accept the price.",
+                  "Torn, faded and stained silk still bought for its zari.",
+                  "Silver articles and brass valued on the same visit.",
+                ].map((p) => (
+                  <li key={p} className="flex items-start gap-3 text-[0.96rem] text-ink-soft">
+                    <Check className="mt-0.5 size-5 shrink-0 text-gold" />
+                    <span>{p}</span>
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+
+            <Reveal delay={120}>
+              <article className="rounded-[22px] border border-line bg-white p-6 shadow-soft sm:p-7">
+                <div className="mb-4 flex items-center gap-2.5">
+                  <span className="grid size-[34px] shrink-0 place-items-center rounded-full bg-gold-pale">
+                    <Pin className="size-[15px] text-royal" />
+                  </span>
+                  <h3 className="font-serif text-[1.3rem] text-royal-deep">{branch.city}</h3>
+                </div>
+
+                <address className="text-[0.96rem] leading-relaxed text-ink-soft not-italic">
+                  {branch.lines.map((l) => (
+                    <span key={l} className="block">{l}</span>
+                  ))}
+                </address>
+
+                <div className="mt-5 grid gap-2.5 border-t border-line pt-5">
+                  <a href={phone.href} className="inline-flex items-center gap-2.5 font-semibold text-royal hover:text-gold">
+                    <Phone className="size-4" /> {phone.label}
+                  </a>
+                  <a
+                    href={waLink(`Hello, I want to sell my old silk sarees in ${branch.city}.`)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2.5 font-semibold text-royal hover:text-gold"
+                  >
+                    <WhatsApp className="size-4" /> WhatsApp {business.whatsapp[0].label}
+                  </a>
+                  <a href={`mailto:${business.email}`} className="inline-flex items-center gap-2.5 break-all font-semibold text-royal hover:text-gold">
+                    <Mail className="size-4" /> {business.email}
+                  </a>
+                  <p className="mt-1 flex items-center gap-2.5 text-[0.9rem] text-ink-mute">
+                    <Clock className="size-4" /> {business.hours}
+                  </p>
+                </div>
+              </article>
+            </Reveal>
+          </div>
+        </Wrap>
+      </Section>
+
+      {/* Areas covered */}
+      <Section tone="royal">
+        <Wrap>
+          <Reveal>
+            <SectionHead
+              tone="dark"
+              eyebrow="Areas covered"
+              title={`We collect right across ${branch.city}.`}
+              lead="Free pickup for ten sarees or more. Call ahead and we will fix a time that suits your household."
+            />
+          </Reveal>
+          <Reveal>
+            <div className="flex flex-wrap justify-center gap-2.5">
+              {branch.areas.map((a) => (
+                <span key={a} className="rounded-full border border-gold/30 bg-cream/[0.07] px-4 py-2 text-[0.85rem] text-cream/85">
+                  {a}
+                </span>
+              ))}
+            </div>
+          </Reveal>
+        </Wrap>
+      </Section>
+
+      {/* What we buy here */}
+      <Section tone="cream">
+        <Wrap>
+          <Reveal>
+            <SectionHead eyebrow="What we buy" title="Bring anything woven in silk or zari." />
+          </Reveal>
+          <Reveal>
+            <div className="grid gap-3.5 md:grid-cols-2 lg:grid-cols-3">
+              {sareeTypes.map((t) => (
+                <article key={t.slug} className="flex items-start gap-3.5 rounded-[22px] border border-line bg-white p-5 shadow-soft">
+                  <Check className="mt-0.5 size-5 shrink-0 text-gold" />
+                  <div>
+                    <h3 className="mb-1 font-serif text-[1.08rem] text-royal-deep">{t.name}</h3>
+                    <p className="text-[0.9rem] text-ink-soft">{t.blurb}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </Reveal>
+        </Wrap>
+      </Section>
+
+      {/* Map */}
+      <Section>
+        <Wrap>
+          <Reveal>
+            <SectionHead eyebrow="Getting here" title="Find us on the map." />
+          </Reveal>
+          <Reveal>
+            <div className="overflow-hidden rounded-[22px] border border-line-gold bg-cream-2 shadow-mid">
+              <iframe
+                src={mapSrc}
+                title={`Map showing our ${branch.city} location`}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+                className="block h-[300px] w-full border-0 lg:h-[420px]"
+              />
+            </div>
+          </Reveal>
+        </Wrap>
+      </Section>
+
+      {/* Other branches */}
+      <Section tone="cream">
+        <Wrap>
+          <Reveal>
+            <SectionHead eyebrow="Other branches" title="Somewhere else more convenient?" />
+          </Reveal>
+          <Reveal>
+            <div className="grid gap-3.5 md:grid-cols-3">
+              {others.map((b) => (
+                <Button key={b.slug} href={`/branches/${b.slug}`} variant="outline" className="w-full">
+                  {b.city}
+                </Button>
+              ))}
+            </div>
+          </Reveal>
+        </Wrap>
+      </Section>
+
+      <CtaBand title={`Selling silk in ${branch.city}? Call before you decide.`} />
+    </>
+  );
+}

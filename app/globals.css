@@ -1,0 +1,137 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   Royal blue + zari gold theme.
+   Tailwind v4 reads these tokens, so `bg-royal`, `text-gold`,
+   `border-line` etc. are available as normal utilities.
+   ------------------------------------------------------------------ */
+@theme {
+  --color-royal: #1e40af;
+  --color-royal-deep: #0a1738;
+  --color-royal-mid: #142a6b;
+  --color-royal-soft: #2d54c8;
+
+  --color-gold: #c0912f;
+  --color-gold-light: #e6c877;
+  --color-gold-bright: #f2dfa4;
+  --color-gold-pale: #f5e9cd;
+
+  --color-cream: #f9fbfe;
+  --color-cream-2: #edf2fb;
+
+  --color-ink: #16203a;
+  --color-ink-soft: #4a5674;
+  --color-ink-mute: #7c88a4;
+
+  --color-line: rgba(30, 64, 175, 0.14);
+  --color-line-gold: rgba(192, 145, 47, 0.34);
+
+  --font-serif: var(--font-marcellus), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-tamil: var(--font-tamil), "Noto Sans Tamil", sans-serif;
+
+  --radius-xl2: 22px;
+  --radius-xl3: 30px;
+
+  --shadow-soft: 0 2px 10px rgba(10, 23, 56, 0.08);
+  --shadow-mid: 0 12px 34px rgba(10, 23, 56, 0.13);
+  --shadow-deep: 0 28px 70px rgba(10, 23, 56, 0.24);
+
+  --animate-nudge: nudge 1.9s ease-in-out infinite;
+  --animate-pulse-ring: pulse-ring 2.4s ease-in-out infinite;
+}
+
+@keyframes nudge {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(5px); }
+}
+
+@keyframes pulse-ring {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(230, 200, 119, 0.2); }
+  50% { box-shadow: 0 0 0 7px rgba(230, 200, 119, 0); }
+}
+
+/* ------------------------------------------------------------------
+   Reusable gradients and text treatments
+   ------------------------------------------------------------------ */
+@utility grad-royal {
+  background-image: linear-gradient(135deg, #3a63d8 0%, #1e40af 44%, #0a1738 100%);
+}
+
+@utility grad-royal-deep {
+  background-image: linear-gradient(168deg, #1a3480 0%, #0a1738 100%);
+}
+
+@utility grad-sky {
+  background-image: linear-gradient(180deg, #f9fbfe 0%, #edf2fb 100%);
+}
+
+/* Gold foil, used for display text, ornament rules and primary buttons */
+@utility foil {
+  background-image: linear-gradient(
+    100deg, #a97d24 0%, #e6c877 26%, #fff3d0 46%, #e6c877 66%, #a97d24 100%
+  );
+}
+
+@utility foil-text {
+  background-image: linear-gradient(
+    100deg, #a97d24 0%, #e6c877 26%, #fff3d0 46%, #e6c877 66%, #a97d24 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+@utility blue-text {
+  background-image: linear-gradient(120deg, #2d54c8, #0a1738);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Horizontal snap rail used for card carousels on small screens */
+@utility rail {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 78%;
+  gap: 0.875rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  padding-bottom: 0.75rem;
+}
+
+/* ------------------------------------------------------------------
+   Base
+   ------------------------------------------------------------------ */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-image: linear-gradient(180deg, #f9fbfe 0%, #edf2fb 100%);
+  background-attachment: fixed;
+  color: var(--color-ink);
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: rgba(192, 145, 47, 0.18);
+}
+
+.rail::-webkit-scrollbar { display: none; }
+.rail > * { scroll-snap-align: center; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

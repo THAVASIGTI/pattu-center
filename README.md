@@ -1,113 +1,106 @@
-# Sri Kamatchi Pattu Center — static website
+# Sri Kamatchi Pattu Center
 
-A static, mobile-first website for an old silk / pattu saree buying business.
-No build step, no dependencies: three HTML files, one stylesheet, one small JS file.
+Multi-page marketing site for an old silk / pattu saree buying business, built
+with **Next.js 16 (App Router) + TypeScript + Tailwind CSS 4**.
 
-```
-index.html            Home — hero, about, what we buy, services, process,
-                      why us, gallery, branches, coverage, reviews, FAQ, CTA
-madurai.html          Madurai branch landing page
-chennai.html          Chennai collections landing page
-assets/css/style.css  All styling (design tokens at the top of the file)
-assets/js/main.js     Drawer nav, scroll reveal, count-up stats, FAQ accordion
-_partials/            Source fragments used to generate the pages (see below)
-```
+Every menu item is a real route with its own URL, its own `<h1>` and its own
+`<title>` — navigation loads a page, it never scroll-jumps to an anchor.
+
+> **A note on the stack:** Next.js and Vite are alternatives, not a combination.
+> Next.js ships its own bundler (Turbopack), so it cannot run on Vite. Next.js
+> was chosen here because real per-URL pages and server-rendered metadata are
+> exactly what this site needs for local SEO. If you'd rather have Vite, the
+> equivalent stack is React + Vite + React Router, and the `config/`,
+> `components/` and page content all port across nearly unchanged.
+
+## Routes
+
+| URL | Page |
+|---|---|
+| `/` | Home |
+| `/about` | About us |
+| `/what-we-buy` | Saree types and how value is decided |
+| `/services` | Services and promises |
+| `/how-it-works` | Four-step process, preparation tips |
+| `/branches` | All branches + coverage |
+| `/branches/[slug]` | One page per branch (7 of them) |
+| `/gallery` | Gallery |
+| `/faq` | FAQ (with `FAQPage` structured data) |
+| `/contact` | Contact details + head-office map |
+
+Branch slugs: `madurai`, `thoothukudi`, `thoothukudi-jn-pattu-mahal`,
+`thanjavur`, `villupuram`, `tiruppur`, `coimbatore`.
+
+All 19 pages are statically prerendered at build time.
 
 ## Running it
 
-Any static server, or just open `index.html` in a browser:
-
 ```bash
-python3 -m http.server 8000
-# then visit http://127.0.0.1:8000/
+npm install
+npm run dev     # http://localhost:3000
+npm run build   # production build
+npm start       # serve the production build
+npm run lint
 ```
-
-Deploy by uploading the repo as-is to any static host (Netlify, Vercel,
-GitHub Pages, Hostinger, cPanel). There is nothing to compile.
-
-## Before this goes live — replace the placeholder data
-
-These items are **filler** and must be swapped for the real business's data:
-
-| What | Where | Note |
-|---|---|---|
-| Statistics counters | `index.html`, `.counters` block | `4,205+ / 245+ / 3,550+ / 6,545+` are illustrative figures, not this shop's real numbers. Edit the `data-count` attributes. |
-| Customer reviews | `index.html`, `#reviews` | Three sample quotes. Replace with real reviews (ideally pulled from the Google Business profile). |
-| "Since 1985" / "40+ years" | `index.html` hero badge and `.hero__chip` | Taken from third-party directory listings. Confirm the real founding year. |
-| Chennai address | `chennai.html`, `index.html` `#branches` | No street address was published for Chennai, so the page is written honestly as "collections by appointment". Add the real shop address if one exists. |
-| Email address | not present | The source site lists no email. Add one to the footer if the business has one. |
-| **Phone numbers** | every page + `_partials/` | All numbers are **dummy placeholders** (`+91 90000 00001/2/3`, WhatsApp `90000 00002`). Swap in the real numbers before launch — see the grep command below. |
-| Photography | all pages | See below. |
-
-## Images
-
-Every photo is currently hot-linked from Unsplash (free to use, no
-attribution required) and shows silk, zari and textile close-ups rather
-than people — as requested.
-
-**Replace them with real photographs of the shop, the counter and actual
-stock as soon as you have them.** Real photos convert far better than stock,
-and self-hosting removes the dependency on an external CDN.
-
-To swap one:
-
-1. Drop the file into `assets/img/`.
-2. Find the `https://images.unsplash.com/...` URL in the HTML.
-3. Replace it with `assets/img/your-photo.jpg`.
-
-Keep the `width`/`height` attributes roughly proportional to the new image so
-the page doesn't shift while loading, and keep `loading="lazy"` on everything
-below the fold.
 
 ## Editing content
 
-Colours, fonts, spacing and radii are all CSS custom properties at the top of
-`assets/css/style.css` (`:root`). Changing `--royal`, `--gold` and `--cream`
-re-themes the whole site.
+Everything the business says about itself lives in two files — no markup to touch:
 
-The theme is royal blue with gold zari accents. Gradients are defined once as
-tokens and reused everywhere:
+- **`config/business.ts`** — name, owner, phone numbers, WhatsApp, email, hours,
+  social links, and the full branch list (address lines, map query, areas covered,
+  per-branch intro copy). Adding a branch here automatically creates its page,
+  its footer link and its card on `/branches`.
+- **`config/content.ts`** — saree types, services, why-choose-us, process steps,
+  FAQ entries, gallery images and testimonials.
 
-- `--grad-royal` — the main blue gradient (buttons, icon chips, avatars, accent cards)
-- `--grad-royal-deep` — dark sections, drawer, footer
-- `--grad-sky` — the page's soft background wash
-- `--foil` — the gold gradient used for display text, ornaments and primary buttons
+The business name appears in one place (`business.name`) and flows through every
+page title, the header, the footer and the structured data.
 
-Phone numbers appear in several places — the top bar, hero, branch cards,
-mobile action bar, footer and every `tel:`/`wa.me` link. Search and replace
-across all three HTML files when they change:
+## Theme
 
-```bash
-grep -rn "9000000001\|9000000002\|9000000003" *.html _partials/
-```
+Royal blue with zari gold, defined as Tailwind v4 tokens in `app/globals.css`
+under `@theme`. Change `--color-royal` / `--color-gold` there and the whole site
+re-themes. Gradients are custom utilities in the same file: `grad-royal`,
+`grad-royal-deep`, `grad-sky`, `foil`, `foil-text`, `blue-text`.
 
-### The `_partials/` directory
+## Mobile
 
-`_partials/header.html` and `_partials/footer.html` are the shared header and
-footer. They were used to generate the three pages so the nav and footer stay
-identical. They are **not** loaded at runtime — the pages are fully
-self-contained. If you change the nav or footer, either edit the same block in
-all three HTML files, or edit the partial and re-assemble.
+Mobile was the priority:
 
-## Mobile behaviour
+- **Sticky bottom action bar** — Call / WhatsApp / Branches, always one tap away.
+- **Slide-in drawer nav**, closed by tap-outside, the X, Escape, or picking a link.
+- **Swipeable scroll-snap rails** for card rows, so cards stay readable.
+- **48px minimum tap targets** throughout.
+- **Safe-area insets** honoured so the bar clears the iPhone home indicator.
+- Verified: **no horizontal scroll on any route from 360px to 1440px**.
 
-Mobile was the priority. Specifically:
+## Before this goes live
 
-- **Sticky bottom action bar** — Call / WhatsApp / Branches, always one thumb-tap away.
-- **Slide-in drawer nav** with a scrim, closed by tap-outside, the X button, Escape, or selecting a link.
-- **Swipeable card rails** with scroll-snap for "What we buy" and reviews, so cards stay readable instead of shrinking.
-- **48px minimum tap targets** on every button and link.
-- **Safe-area insets** honoured so the action bar clears the iPhone home indicator.
-- **No horizontal scroll** at any width (verified from 360px to 1440px).
-- Full nav bar appears at 1120px and up; below that it is the drawer.
+| What | Where | Note |
+|---|---|---|
+| Statistics counters | `app/page.tsx`, the `Counter` block | `4,205+ / 245+ / 3,550+ / 6,545+` are illustrative, **not** this shop's real numbers. |
+| Customer reviews | `config/content.ts` → `testimonials` | Three placeholder quotes. Replace with real reviews. |
+| "Four decades" / "40+ years" | `config/business.ts` → `foundedText`, and the hero chip in `app/page.tsx` | Confirm the real founding year. |
+| Business name | `config/business.ts` → `name` | Carried over from the previous site. Change this one line if the trading name differs. |
+| `siteUrl` | `config/business.ts` | Set to the real domain so canonical URLs and Open Graph tags resolve correctly. |
+| Photography | `config/content.ts` | Currently Unsplash silk/zari stock. Swap in real shop photos — see below. |
 
-## Accessibility and performance notes
+### Replacing the images
 
-- Fonts load from Google Fonts with `display=swap`; `preconnect` hints are set.
-- Below-the-fold images are lazy-loaded; hero images use `fetchpriority="high"`.
+Images are hot-linked from Unsplash (free, no attribution required) and show
+silk, zari and handloom rather than people. To use your own:
+
+1. Put files in `public/img/`.
+2. Change the URLs in `config/content.ts` to `/img/your-photo.jpg`.
+3. Remove `images.remotePatterns` from `next.config.ts` once no remote images remain.
+
+`next/image` handles sizing, lazy loading and modern formats automatically.
+
+## Accessibility & SEO
+
+- Per-page `<title>`, description and canonical URL via the Metadata API.
+- `LocalBusiness` JSON-LD in the root layout; `FAQPage` JSON-LD on `/faq`.
 - `prefers-reduced-motion` disables reveals, count-ups and smooth scrolling.
-- Every page carries `LocalBusiness` JSON-LD, Open Graph tags and a canonical URL.
-- Decorative images have empty `alt` and `aria-hidden`; content images are described.
-
-Update the `<link rel="canonical">` and `og:url` values if the site is
-deployed to a different domain than `srikamatchipattucenter.in`.
+- FAQ accordion uses real buttons with `aria-expanded` / `aria-controls`.
+- Drawer is keyboard-dismissible, decorative images are `aria-hidden`.
