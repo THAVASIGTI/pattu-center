@@ -41,9 +41,9 @@ export default function WhatWeBuyPage() {
                     />
                   </div>
                   <div className="flex-1 p-5 pb-6">
-                    <h2 className="mb-2 font-serif text-[1.22rem] text-royal-deep">{t.name}</h2>
+                    <h2 className="mb-2 font-serif text-[1.22rem] text-green-deep">{t.name}</h2>
                     <p className="text-[0.92rem] text-ink-soft">{t.blurb}</p>
-                    {t.ta && <p className="mt-2.5 font-tamil text-[0.85rem] text-gold">{t.ta}</p>}
+                    {t.ta && <p className="mt-2.5 font-tamil text-[0.85rem] text-yellow">{t.ta}</p>}
                   </div>
                 </Card>
               </Reveal>
@@ -70,7 +70,7 @@ export default function WhatWeBuyPage() {
                 { h: "Condition", p: "Tears and stains reduce the figure but never disqualify a saree." },
               ].map((x) => (
                 <article key={x.h} className="rounded-[22px] border border-line bg-white p-6 shadow-soft">
-                  <h3 className="mb-2 font-serif text-[1.15rem] text-royal-deep">{x.h}</h3>
+                  <h3 className="mb-2 font-serif text-[1.15rem] text-green-deep">{x.h}</h3>
                   <p className="text-[0.92rem] text-ink-soft">{x.p}</p>
                 </article>
               ))}

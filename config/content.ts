@@ -288,3 +288,98 @@ export const testimonials = [
     city: "Coimbatore",
   },
 ];
+
+/* ------------------------------------------------------------------ */
+/* Roadmap — the customer's journey, start to payment                  */
+/* ------------------------------------------------------------------ */
+
+export const roadmap = [
+  {
+    stop: "Send photos",
+    when: "Day one, any hour",
+    blurb:
+      "WhatsApp pictures of each saree spread out, plus a close-up of the border. We reply with an indicative range — no visit needed yet.",
+  },
+  {
+    stop: "Pick how we meet",
+    when: "You choose",
+    blurb:
+      "Walk into any of our seven branches, or ask for a free home visit if you have ten sarees or more. We work around your timing.",
+  },
+  {
+    stop: "Open weighing",
+    when: "About 10 minutes",
+    blurb:
+      "Each piece goes on a calibrated scale in front of you. Nothing is taken to a back room, and nothing is weighed out of your sight.",
+  },
+  {
+    stop: "Zari tested",
+    when: "Same visit",
+    blurb:
+      "We sample the border thread to check whether the zari is real silver-gilt. The test takes a moment and does not damage the saree.",
+  },
+  {
+    stop: "One clear price",
+    when: "Before you decide",
+    blurb:
+      "You get a single figure with the arithmetic behind it — silk weight, purity, zari and condition. Questions answered before anything is agreed.",
+  },
+  {
+    stop: "Paid on the spot",
+    when: "Immediately",
+    blurb:
+      "Accept and you are paid in full: cash, UPI or bank transfer. Decline and you take your sarees home. Nothing is owed either way.",
+  },
+];
+
+/* ------------------------------------------------------------------ */
+/* How the number is reached — ledger of what moves the price          */
+/* ------------------------------------------------------------------ */
+
+export const priceLedger = [
+  {
+    factor: "Silk weight",
+    detail: "The base of every valuation.",
+    raises: "Heavy, densely woven sarees; nine-yard and koorai pieces",
+    lowers: "Light crepe, blended or art silk",
+  },
+  {
+    factor: "Zari content",
+    detail: "Priced separately from the cloth.",
+    raises: "Wide borders, heavy pallu work, real silver-gilt thread",
+    lowers: "Thin borders, modern plastic or tested-metal zari",
+  },
+  {
+    factor: "Silk purity",
+    detail: "Checked by feel, burn test and weave.",
+    raises: "Pure mulberry silk, traditional handloom weaves",
+    lowers: "Power-loom blends, mixed cotton-silk",
+  },
+  {
+    factor: "Condition",
+    detail: "Adjusts the figure — never disqualifies.",
+    raises: "Clean, unfaded sarees stored folded in cotton",
+    lowers: "Water stains, moth holes, cuts through the border",
+  },
+];
+
+/* ------------------------------------------------------------------ */
+/* Before you sell — practical do's and don'ts                         */
+/* ------------------------------------------------------------------ */
+
+export const sellingTips = {
+  dos: [
+    "Photograph each saree spread out flat in daylight.",
+    "Include one close-up of the border and pallu — that is where the zari is.",
+    "Keep sarees of the same type stacked together to speed up weighing.",
+    "Set loose zari, cut borders and blouse bits aside; they are weighed separately.",
+    "Bring silver articles and brass along for valuation on the same visit.",
+  ],
+  donts: [
+    "Don't throw away torn or moth-eaten sarees — the zari still holds value.",
+    "Don't cut the border off before bringing it in; it is worth more attached.",
+    "Don't wash or dry-clean old silk first — it can weaken the thread.",
+    "Don't accept a price that hasn't been explained to you, from anyone.",
+    "Don't hand over sarees before a figure has been agreed in writing or in person.",
+  ],
+};

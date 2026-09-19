@@ -14,7 +14,7 @@ export default function Faq({ items }: { items: { q: string; a: string }[] }) {
           <div
             key={item.q}
             className={`overflow-hidden rounded-[14px] border bg-white shadow-soft transition-colors ${
-              isOpen ? "border-line-gold" : "border-line"
+              isOpen ? "border-line-yellow" : "border-line"
             }`}
           >
             <h3>
@@ -24,7 +24,7 @@ export default function Faq({ items }: { items: { q: string; a: string }[] }) {
                 aria-expanded={isOpen}
                 aria-controls={`faq-panel-${i}`}
                 id={`faq-btn-${i}`}
-                className="flex min-h-14 w-full cursor-pointer items-center justify-between gap-4 px-5 py-4 text-left font-serif text-[1.02rem] text-royal-deep"
+                className="flex min-h-14 w-full cursor-pointer items-center justify-between gap-4 px-5 py-4 text-left font-serif text-[1.02rem] text-green-deep"
               >
                 {item.q}
                 <span
@@ -32,7 +32,7 @@ export default function Faq({ items }: { items: { q: string; a: string }[] }) {
                   className={`shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
                 >
                   <svg viewBox="0 0 24 24" className="size-[18px]" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round">
-                    <path d="m6 9 6 6 6-6" className="text-gold" />
+                    <path d="m6 9 6 6 6-6" className="text-yellow" />
                   </svg>
                 </span>
               </button>

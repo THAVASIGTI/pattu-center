@@ -3,17 +3,29 @@ import Link from "next/link";
 import BranchCard from "@/components/BranchCard";
 import Counter from "@/components/Counter";
 import CtaBand from "@/components/CtaBand";
+import HeroSlider from "@/components/HeroSlider";
+import Roadmap from "@/components/Roadmap";
 import { ArrowRight, Check, Phone, WhatsApp, serviceIcons } from "@/components/Icons";
 import Reveal from "@/components/Reveal";
 import { Button, Card, Section, SectionHead, Wrap } from "@/components/ui";
 import { branches, business, waLink } from "@/config/business";
-import { processSteps, img, sareeTypes, services, testimonials, whyChooseUs } from "@/config/content";
+import {
+  img,
+  priceLedger,
+  processSteps,
+  roadmap,
+  sareeTypes,
+  sellingTips,
+  services,
+  testimonials,
+  whyChooseUs,
+} from "@/config/content";
 
 export default function HomePage() {
   return (
     <>
       {/* ---------------- Hero ---------------- */}
-      <section className="relative overflow-hidden bg-royal-deep text-cream">
+      <section className="relative overflow-hidden bg-green-deep text-cream">
         <div className="absolute inset-0">
           <Image
             src={img(7676340)}
@@ -24,13 +36,13 @@ export default function HomePage() {
             sizes="100vw"
             className="object-cover opacity-[0.34]"
           />
-          <div className="absolute inset-0 bg-[radial-gradient(780px_440px_at_10%_2%,rgba(192,145,47,.24),transparent_58%),radial-gradient(680px_560px_at_92%_96%,rgba(58,99,216,.46),transparent_64%),linear-gradient(172deg,rgba(10,23,56,.82),rgba(10,23,56,.95))]" />
+          <div className="absolute inset-0 bg-[radial-gradient(780px_440px_at_10%_2%,rgba(202,154,4,.24),transparent_58%),radial-gradient(680px_560px_at_92%_96%,rgba(34,197,94,.46),transparent_64%),linear-gradient(172deg,rgba(10,46,26,.82),rgba(10,46,26,.95))]" />
         </div>
 
         <Wrap className="relative z-10 grid items-center gap-8 py-12 sm:py-16 lg:grid-cols-[1.05fr_.95fr] lg:gap-14 lg:py-24">
           <div>
-            <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/15 px-4 py-1.5 text-[0.71rem] font-semibold uppercase tracking-[0.13em] text-gold-light">
-              <i className="size-1.5 animate-pulse-ring rounded-full bg-gold-light" />
+            <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-yellow/40 bg-yellow/15 px-4 py-1.5 text-[0.71rem] font-semibold uppercase tracking-[0.13em] text-yellow-light">
+              <i className="size-1.5 animate-pulse-ring rounded-full bg-yellow-light" />
               {business.foundedText}
             </span>
 
@@ -38,7 +50,7 @@ export default function HomePage() {
               Sell your old <span className="foil-text">silk sarees</span> for what they are truly worth.
             </h1>
 
-            <p className="mt-3.5 font-tamil text-[clamp(1.1rem,4.6vw,1.6rem)] text-gold">
+            <p className="mt-3.5 font-tamil text-[clamp(1.1rem,4.6vw,1.6rem)] text-yellow">
               {business.tagline}
             </p>
 
@@ -48,7 +60,7 @@ export default function HomePage() {
             </p>
 
             <div className="mt-7 flex flex-wrap gap-2.5">
-              <Button href={business.phones[0].href} variant="gold" className="flex-1 sm:flex-none">
+              <Button href={business.phones[0].href} variant="yellow" className="flex-1 sm:flex-none">
                 <Phone className="size-[17px]" />
                 Call {business.phones[0].label}
               </Button>
@@ -63,41 +75,44 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="relative mx-auto w-full max-w-[440px] lg:mr-0 lg:ml-auto">
-            <span
-              aria-hidden
-              className="absolute inset-y-0 -right-3.5 left-3.5 -z-10 translate-y-3.5 rounded-[30px] border border-gold/40"
-            />
-            <Image
-              src={img(38890438)}
-              alt="Blue Banarasi silk saree with golden peacock brocade laid out on a wooden table"
-              width={900}
-              height={1125}
-              priority
-              sizes="(max-width: 1024px) 90vw, 440px"
-              className="aspect-4/5 w-full rounded-[30px] border border-gold/40 object-cover shadow-deep"
-            />
-            <div className="mt-4 flex items-center gap-3 rounded-[14px] border border-gold/30 bg-cream/[0.07] px-4.5 py-3.5 lg:absolute lg:bottom-8 lg:-left-6 lg:mt-0 lg:max-w-[200px] lg:flex-col lg:items-start lg:gap-0.5 lg:border-transparent lg:bg-cream lg:shadow-deep">
-              <b className="font-serif text-[1.85rem] leading-none text-gold-light lg:text-royal">40+</b>
-              <small className="text-[0.76rem] uppercase tracking-wider text-cream/65 lg:text-ink-soft">
-                Years in the silk trade
-              </small>
-            </div>
-          </div>
+          <HeroSlider
+            slides={[
+              {
+                src: img(16239658),
+                alt: "Green silk saree with a woven gold zari border and traditional jewellery",
+                caption: "Kanchipuram pattu",
+              },
+              {
+                src: img(6167463),
+                alt: "Teal silk saree with intricate golden paisley brocade",
+                caption: "Mysore & Banarasi silk",
+              },
+              {
+                src: img(10317113),
+                alt: "Close-up of a silk saree showing its woven gold zari border",
+                caption: "Zari borders & pallu",
+              },
+              {
+                src: img(20181020),
+                alt: "Close-up of gold and silver brocade fabric",
+                caption: "Gold & silver zari",
+              },
+            ]}
+          />
         </Wrap>
       </section>
 
       {/* ---------------- Trust strip ---------------- */}
-      <section className="border-y border-line-gold bg-[linear-gradient(90deg,#e6edfb_0%,#f4f7fd_50%,#e6edfb_100%)]">
-        <div className="grid grid-cols-2 gap-px bg-gold/30 sm:grid-cols-4">
+      <section className="border-y border-line-yellow bg-[linear-gradient(90deg,#e6f2e9_0%,#f4faf5_50%,#e6f2e9_100%)]">
+        <div className="grid grid-cols-2 gap-px bg-yellow/30 sm:grid-cols-4">
           {[
             { n: "7", l: "Branches" },
             { n: "40+", l: "Years" },
             { n: "Cash", l: "Same day" },
             { n: "Free", l: "Pickup" },
           ].map((s) => (
-            <div key={s.l} className="bg-[#eef3fc] px-3.5 py-5 text-center sm:py-6">
-              <b className="blue-text block font-serif text-[clamp(1.5rem,5.4vw,1.9rem)] leading-none">
+            <div key={s.l} className="bg-[#eef6f0] px-3.5 py-5 text-center sm:py-6">
+              <b className="green-text block font-serif text-[clamp(1.5rem,5.4vw,1.9rem)] leading-none">
                 {s.n}
               </b>
               <span className="mt-2 block text-[0.7rem] font-semibold uppercase tracking-[0.11em] text-ink-soft">
@@ -136,16 +151,16 @@ export default function HomePage() {
             <Reveal delay={120}>
               <div className="relative pb-12">
                 <Image
-                  src={img(32655889)}
-                  alt="Close-up of a weaving loom strung with fine silk threads"
+                  src={img(30834841)}
+                  alt="A buyer inspecting patterned silk closely through a magnifying loupe"
                   width={800}
                   height={1000}
                   sizes="(max-width: 1024px) 90vw, 540px"
-                  className="aspect-4/5 w-full rounded-[22px] border border-line-gold object-cover shadow-mid"
+                  className="aspect-4/5 w-full rounded-[22px] border border-line-yellow object-cover shadow-mid"
                 />
                 <Image
-                  src={img(6876952)}
-                  alt="Golden silk threads drying beside a traditional spinning wheel"
+                  src={img(5447529)}
+                  alt="Gold bangles resting on folded, brightly coloured silk"
                   width={500}
                   height={500}
                   sizes="220px"
@@ -183,9 +198,9 @@ export default function HomePage() {
                     />
                   </div>
                   <div className="flex-1 p-5 pb-6">
-                    <h3 className="mb-2 font-serif text-[1.22rem] text-royal-deep">{t.name}</h3>
+                    <h3 className="mb-2 font-serif text-[1.22rem] text-green-deep">{t.name}</h3>
                     <p className="text-[0.92rem] text-ink-soft">{t.blurb}</p>
-                    {t.ta && <p className="mt-2.5 font-tamil text-[0.85rem] text-gold">{t.ta}</p>}
+                    {t.ta && <p className="mt-2.5 font-tamil text-[0.85rem] text-yellow">{t.ta}</p>}
                   </div>
                 </Card>
               ))}
@@ -224,13 +239,13 @@ export default function HomePage() {
                 return (
                   <article
                     key={s.slug}
-                    className="flex items-start gap-4 rounded-[22px] border border-line bg-white p-5 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-line-gold hover:shadow-mid"
+                    className="flex items-start gap-4 rounded-[22px] border border-line bg-white p-5 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-line-yellow hover:shadow-mid"
                   >
-                    <span className="grad-royal grid size-12 shrink-0 place-items-center rounded-[14px] border border-line-gold shadow-[0_4px_14px_rgba(30,64,175,.3)]">
-                      {Icon && <Icon className="size-[21px] text-gold-light" />}
+                    <span className="grad-green grid size-12 shrink-0 place-items-center rounded-[14px] border border-line-yellow shadow-[0_4px_14px_rgba(21,128,61,.3)]">
+                      {Icon && <Icon className="size-[21px] text-yellow-light" />}
                     </span>
                     <div>
-                      <h3 className="mb-1.5 font-serif text-[1.22rem] text-royal-deep">{s.title}</h3>
+                      <h3 className="mb-1.5 font-serif text-[1.22rem] text-green-deep">{s.title}</h3>
                       <p className="text-[0.92rem] text-ink-soft">{s.blurb}</p>
                     </div>
                   </article>
@@ -242,7 +257,7 @@ export default function HomePage() {
       </Section>
 
       {/* ---------------- Process + counters ---------------- */}
-      <Section tone="royal">
+      <Section tone="green">
         <Wrap>
           <Reveal>
             <SectionHead
@@ -258,7 +273,7 @@ export default function HomePage() {
               {processSteps.map((s, i) => (
                 <div
                   key={s.title}
-                  className="rounded-[22px] border border-gold/25 bg-cream/[0.055] p-6"
+                  className="rounded-[22px] border border-yellow/25 bg-cream/[0.055] p-6"
                 >
                   <span className="foil-text mb-3 block font-serif text-[2.2rem] leading-none">
                     0{i + 1}
@@ -281,7 +296,7 @@ export default function HomePage() {
               ].map((c) => (
                 <div
                   key={c.l}
-                  className="rounded-[22px] border border-gold/25 bg-cream/[0.055] px-3 py-6 text-center"
+                  className="rounded-[22px] border border-yellow/25 bg-cream/[0.055] px-3 py-6 text-center"
                 >
                   <b className="foil-text block font-serif text-[clamp(1.7rem,6.4vw,2.5rem)] leading-none">
                     <Counter value={c.v} />
@@ -293,6 +308,127 @@ export default function HomePage() {
               ))}
             </div>
           </Reveal>
+        </Wrap>
+      </Section>
+
+
+      {/* ---------------- Roadmap: the journey ---------------- */}
+      <Section tone="green">
+        <Wrap>
+          <Reveal>
+            <SectionHead
+              tone="dark"
+              eyebrow="The road to a fair price"
+              title="Where your saree goes, step by step."
+              lead="From the first photo you send to the cash in your hand — six stops, no surprises in between."
+            />
+          </Reveal>
+          <Roadmap stops={roadmap} />
+        </Wrap>
+      </Section>
+
+      {/* ---------------- Price ledger ---------------- */}
+      <Section>
+        <Wrap>
+          <Reveal>
+            <SectionHead
+              eyebrow="How the number is reached"
+              title="Four things move the price. Nothing else."
+              lead="No handling charge, no hidden deduction, no commission taken off the top."
+            />
+          </Reveal>
+
+          <Reveal>
+            <div className="overflow-hidden rounded-[22px] border border-line bg-white shadow-soft">
+              <div className="hidden grid-cols-[1.1fr_1fr_1fr] gap-6 border-b border-line bg-cream-2 px-7 py-4 text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-ink-mute md:grid">
+                <span>Factor</span>
+                <span className="text-green">Raises the price</span>
+                <span className="text-yellow">Lowers the price</span>
+              </div>
+
+              {priceLedger.map((row) => (
+                <div
+                  key={row.factor}
+                  className="grid gap-4 border-b border-line px-6 py-6 last:border-b-0 md:grid-cols-[1.1fr_1fr_1fr] md:gap-6 md:px-7"
+                >
+                  <div>
+                    <h3 className="font-serif text-[1.15rem] text-green-deep">{row.factor}</h3>
+                    <p className="mt-1 text-[0.86rem] text-ink-mute">{row.detail}</p>
+                  </div>
+                  <p className="flex items-start gap-2.5 text-[0.92rem] text-ink-soft">
+                    <span aria-hidden className="mt-2 size-1.5 shrink-0 rounded-full bg-green-soft" />
+                    <span>
+                      <span className="font-semibold text-green md:hidden">Raises: </span>
+                      {row.raises}
+                    </span>
+                  </p>
+                  <p className="flex items-start gap-2.5 text-[0.92rem] text-ink-soft">
+                    <span aria-hidden className="mt-2 size-1.5 shrink-0 rounded-full bg-yellow" />
+                    <span>
+                      <span className="font-semibold text-yellow md:hidden">Lowers: </span>
+                      {row.lowers}
+                    </span>
+                  </p>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        </Wrap>
+      </Section>
+
+      {/* ---------------- Do's and don'ts ---------------- */}
+      <Section tone="cream">
+        <Wrap>
+          <Reveal>
+            <SectionHead
+              eyebrow="Before you sell"
+              title="Five things to do, five to avoid."
+              lead="A few minutes of preparation usually means a better price and a much faster visit."
+            />
+          </Reveal>
+
+          <div className="grid gap-5 lg:grid-cols-2 lg:gap-6">
+            <Reveal>
+              <div className="h-full rounded-[22px] border-t-4 border-green bg-white p-6 shadow-soft sm:p-7">
+                <h3 className="mb-4 flex items-center gap-2.5 font-serif text-[1.3rem] text-green-deep">
+                  <span className="grid size-8 place-items-center rounded-full bg-green-soft/15">
+                    <Check className="size-4 text-green" />
+                  </span>
+                  Please do
+                </h3>
+                <ul className="grid gap-3">
+                  {sellingTips.dos.map((t) => (
+                    <li key={t} className="flex items-start gap-3 text-[0.94rem] text-ink-soft">
+                      <Check className="mt-0.5 size-4.5 shrink-0 text-green-soft" />
+                      <span>{t}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Reveal>
+
+            <Reveal delay={100}>
+              <div className="h-full rounded-[22px] border-t-4 border-yellow bg-white p-6 shadow-soft sm:p-7">
+                <h3 className="mb-4 flex items-center gap-2.5 font-serif text-[1.3rem] text-green-deep">
+                  <span className="grid size-8 place-items-center rounded-full bg-yellow/15">
+                    <span aria-hidden className="font-serif text-[1.1rem] leading-none text-yellow">!</span>
+                  </span>
+                  Please don&apos;t
+                </h3>
+                <ul className="grid gap-3">
+                  {sellingTips.donts.map((t) => (
+                    <li key={t} className="flex items-start gap-3 text-[0.94rem] text-ink-soft">
+                      <span
+                        aria-hidden
+                        className="mt-1.5 size-2 shrink-0 rotate-45 rounded-[1px] bg-yellow"
+                      />
+                      <span>{t}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Reveal>
+          </div>
         </Wrap>
       </Section>
 
@@ -309,11 +445,11 @@ export default function HomePage() {
                   key={w.title}
                   className="flex items-start gap-4 rounded-[22px] border border-line bg-white p-5 shadow-soft"
                 >
-                  <span className="grad-royal grid size-12 shrink-0 place-items-center rounded-[14px] border border-line-gold">
-                    <Check className="size-[21px] text-gold-light" />
+                  <span className="grad-green grid size-12 shrink-0 place-items-center rounded-[14px] border border-line-yellow">
+                    <Check className="size-[21px] text-yellow-light" />
                   </span>
                   <div>
-                    <h3 className="mb-1.5 font-serif text-[1.22rem] text-royal-deep">{w.title}</h3>
+                    <h3 className="mb-1.5 font-serif text-[1.22rem] text-green-deep">{w.title}</h3>
                     <p className="text-[0.92rem] text-ink-soft">{w.blurb}</p>
                   </div>
                 </article>
@@ -338,18 +474,18 @@ export default function HomePage() {
               {branches.map((b) => (
                 <BranchCard key={b.slug} branch={b} />
               ))}
-              <article className="grad-royal flex flex-col rounded-[22px] p-6 text-cream">
+              <article className="grad-green flex flex-col rounded-[22px] p-6 text-cream">
                 <h3 className="mb-3 font-serif text-[1.25rem] text-white">Not near a branch?</h3>
                 <p className="flex-1 text-[0.92rem] text-cream/80">
                   We travel across Tamil Nadu for collections of ten sarees or more. Send photos on
                   WhatsApp and we will tell you when we are next in your area.
                 </p>
-                <div className="mt-4 border-t border-gold/30 pt-4">
+                <div className="mt-4 border-t border-yellow/30 pt-4">
                   <a
                     href={waLink("Hello, I want to sell my old silk sarees. I am not near a branch.")}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex min-h-10 items-center gap-1.5 rounded-full bg-gold/20 px-3.5 text-[0.83rem] font-semibold text-gold-light"
+                    className="inline-flex min-h-10 items-center gap-1.5 rounded-full bg-yellow/20 px-3.5 text-[0.83rem] font-semibold text-yellow-light"
                   >
                     <WhatsApp className="size-3.5" />
                     Message us
@@ -376,13 +512,13 @@ export default function HomePage() {
                 >
                   <span
                     aria-hidden
-                    className="absolute top-0.5 right-5 font-serif text-[4.6rem] leading-none text-gold/20"
+                    className="absolute top-0.5 right-5 font-serif text-[4.6rem] leading-none text-yellow/20"
                   >
                     &ldquo;
                   </span>
                   <p className="relative text-[0.95rem] italic text-ink-soft">{t.quote}</p>
                   <footer className="mt-4 flex items-center gap-3 border-t border-line pt-3.5">
-                    <span className="grad-royal grid size-10 shrink-0 place-items-center rounded-full font-serif text-base text-gold-light">
+                    <span className="grad-green grid size-10 shrink-0 place-items-center rounded-full font-serif text-base text-yellow-light">
                       {t.name[0]}
                     </span>
                     <span>
@@ -403,7 +539,7 @@ export default function HomePage() {
           <div className="mt-8 text-center">
             <Link
               href="/faq"
-              className="inline-flex items-center gap-2 font-semibold text-royal underline-offset-4 hover:underline"
+              className="inline-flex items-center gap-2 font-semibold text-green underline-offset-4 hover:underline"
             >
               Read common questions
               <ArrowRight className="size-[17px]" />

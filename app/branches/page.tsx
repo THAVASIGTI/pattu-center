@@ -41,18 +41,18 @@ export default function BranchesPage() {
               </Reveal>
             ))}
             <Reveal delay={90}>
-              <article className="grad-royal flex h-full flex-col rounded-[22px] p-6 text-cream">
+              <article className="grad-green flex h-full flex-col rounded-[22px] p-6 text-cream">
                 <h2 className="mb-3 font-serif text-[1.25rem] text-white">Not near a branch?</h2>
                 <p className="flex-1 text-[0.92rem] text-cream/80">
                   We run collection routes across the state for ten sarees or more. Send photos on
                   WhatsApp and we will tell you when we are next in your area.
                 </p>
-                <div className="mt-4 border-t border-gold/30 pt-4">
+                <div className="mt-4 border-t border-yellow/30 pt-4">
                   <a
                     href={waLink("Hello, I want to sell my old silk sarees. I am not near a branch.")}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex min-h-10 items-center gap-1.5 rounded-full bg-gold/20 px-3.5 text-[0.83rem] font-semibold text-gold-light"
+                    className="inline-flex min-h-10 items-center gap-1.5 rounded-full bg-yellow/20 px-3.5 text-[0.83rem] font-semibold text-yellow-light"
                   >
                     <WhatsApp className="size-3.5" />
                     Message us
@@ -64,7 +64,7 @@ export default function BranchesPage() {
         </Wrap>
       </Section>
 
-      <Section tone="royal">
+      <Section tone="green">
         <Wrap>
           <Reveal>
             <SectionHead
@@ -79,7 +79,7 @@ export default function BranchesPage() {
               {coverage.map((c) => (
                 <span
                   key={c}
-                  className="rounded-full border border-gold/30 bg-cream/[0.07] px-4 py-2 text-[0.85rem] text-cream/85"
+                  className="rounded-full border border-yellow/30 bg-cream/[0.07] px-4 py-2 text-[0.85rem] text-cream/85"
                 >
                   {c}
                 </span>

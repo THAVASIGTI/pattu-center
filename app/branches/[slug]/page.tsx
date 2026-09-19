@@ -47,7 +47,7 @@ export default async function BranchPage({ params }: Params) {
         title={<>Old Silk Saree Buyers in <span className="foil-text">{branch.city}</span></>}
         lead={branch.intro}
       >
-        <Button href={phone.href} variant="gold">
+        <Button href={phone.href} variant="yellow">
           <Phone className="size-[17px]" />
           Call {phone.label}
         </Button>
@@ -76,7 +76,7 @@ export default async function BranchPage({ params }: Params) {
                   "Silver articles and brass valued on the same visit.",
                 ].map((p) => (
                   <li key={p} className="flex items-start gap-3 text-[0.96rem] text-ink-soft">
-                    <Check className="mt-0.5 size-5 shrink-0 text-gold" />
+                    <Check className="mt-0.5 size-5 shrink-0 text-yellow" />
                     <span>{p}</span>
                   </li>
                 ))}
@@ -86,10 +86,10 @@ export default async function BranchPage({ params }: Params) {
             <Reveal delay={120}>
               <article className="rounded-[22px] border border-line bg-white p-6 shadow-soft sm:p-7">
                 <div className="mb-4 flex items-center gap-2.5">
-                  <span className="grid size-[34px] shrink-0 place-items-center rounded-full bg-gold-pale">
-                    <Pin className="size-[15px] text-royal" />
+                  <span className="grid size-[34px] shrink-0 place-items-center rounded-full bg-yellow-pale">
+                    <Pin className="size-[15px] text-green" />
                   </span>
-                  <h3 className="font-serif text-[1.3rem] text-royal-deep">{branch.city}</h3>
+                  <h3 className="font-serif text-[1.3rem] text-green-deep">{branch.city}</h3>
                 </div>
 
                 <address className="text-[0.96rem] leading-relaxed text-ink-soft not-italic">
@@ -99,18 +99,18 @@ export default async function BranchPage({ params }: Params) {
                 </address>
 
                 <div className="mt-5 grid gap-2.5 border-t border-line pt-5">
-                  <a href={phone.href} className="inline-flex items-center gap-2.5 font-semibold text-royal hover:text-gold">
+                  <a href={phone.href} className="inline-flex items-center gap-2.5 font-semibold text-green hover:text-yellow">
                     <Phone className="size-4" /> {phone.label}
                   </a>
                   <a
                     href={waLink(`Hello, I want to sell my old silk sarees in ${branch.city}.`)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2.5 font-semibold text-royal hover:text-gold"
+                    className="inline-flex items-center gap-2.5 font-semibold text-green hover:text-yellow"
                   >
                     <WhatsApp className="size-4" /> WhatsApp {business.whatsapp[0].label}
                   </a>
-                  <a href={`mailto:${business.email}`} className="inline-flex items-center gap-2.5 break-all font-semibold text-royal hover:text-gold">
+                  <a href={`mailto:${business.email}`} className="inline-flex items-center gap-2.5 break-all font-semibold text-green hover:text-yellow">
                     <Mail className="size-4" /> {business.email}
                   </a>
                   <p className="mt-1 flex items-center gap-2.5 text-[0.9rem] text-ink-mute">
@@ -124,7 +124,7 @@ export default async function BranchPage({ params }: Params) {
       </Section>
 
       {/* Areas covered */}
-      <Section tone="royal">
+      <Section tone="green">
         <Wrap>
           <Reveal>
             <SectionHead
@@ -137,7 +137,7 @@ export default async function BranchPage({ params }: Params) {
           <Reveal>
             <div className="flex flex-wrap justify-center gap-2.5">
               {branch.areas.map((a) => (
-                <span key={a} className="rounded-full border border-gold/30 bg-cream/[0.07] px-4 py-2 text-[0.85rem] text-cream/85">
+                <span key={a} className="rounded-full border border-yellow/30 bg-cream/[0.07] px-4 py-2 text-[0.85rem] text-cream/85">
                   {a}
                 </span>
               ))}
@@ -156,9 +156,9 @@ export default async function BranchPage({ params }: Params) {
             <div className="grid gap-3.5 md:grid-cols-2 lg:grid-cols-3">
               {sareeTypes.map((t) => (
                 <article key={t.slug} className="flex items-start gap-3.5 rounded-[22px] border border-line bg-white p-5 shadow-soft">
-                  <Check className="mt-0.5 size-5 shrink-0 text-gold" />
+                  <Check className="mt-0.5 size-5 shrink-0 text-yellow" />
                   <div>
-                    <h3 className="mb-1 font-serif text-[1.08rem] text-royal-deep">{t.name}</h3>
+                    <h3 className="mb-1 font-serif text-[1.08rem] text-green-deep">{t.name}</h3>
                     <p className="text-[0.9rem] text-ink-soft">{t.blurb}</p>
                   </div>
                 </article>
@@ -175,7 +175,7 @@ export default async function BranchPage({ params }: Params) {
             <SectionHead eyebrow="Getting here" title="Find us on the map." />
           </Reveal>
           <Reveal>
-            <div className="overflow-hidden rounded-[22px] border border-line-gold bg-cream-2 shadow-mid">
+            <div className="overflow-hidden rounded-[22px] border border-line-yellow bg-cream-2 shadow-mid">
               <iframe
                 src={mapSrc}
                 title={`Map showing our ${branch.city} location`}

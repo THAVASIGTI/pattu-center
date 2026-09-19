@@ -29,7 +29,7 @@ export default function GalleryPage() {
           <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:gap-4">
             {galleryImages.map((g, i) => (
               <Reveal key={g.id} delay={(i % 3) * 80}>
-                <figure className="overflow-hidden rounded-[14px] border border-line-gold bg-cream-2 shadow-soft">
+                <figure className="overflow-hidden rounded-[14px] border border-line-yellow bg-cream-2 shadow-soft">
                   <Image
                     src={img(g.id)}
                     alt={g.alt}

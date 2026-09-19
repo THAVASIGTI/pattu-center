@@ -1,30 +1,30 @@
 @import "tailwindcss";
 
 /* ------------------------------------------------------------------
-   Royal blue + zari gold theme.
-   Tailwind v4 reads these tokens, so `bg-royal`, `text-gold`,
+   Emerald green + zari yellow theme.
+   Tailwind v4 reads these tokens, so `bg-green`, `text-yellow`,
    `border-line` etc. are available as normal utilities.
    ------------------------------------------------------------------ */
 @theme {
-  --color-royal: #1e40af;
-  --color-royal-deep: #0a1738;
-  --color-royal-mid: #142a6b;
-  --color-royal-soft: #2d54c8;
+  --color-green: #15803d;
+  --color-green-deep: #0a2e1a;
+  --color-green-mid: #14532d;
+  --color-green-soft: #22c55e;
 
-  --color-gold: #c0912f;
-  --color-gold-light: #e6c877;
-  --color-gold-bright: #f2dfa4;
-  --color-gold-pale: #f5e9cd;
+  --color-yellow: #ca9a04;
+  --color-yellow-light: #fde047;
+  --color-yellow-bright: #fef08a;
+  --color-yellow-pale: #fef9c3;
 
-  --color-cream: #f9fbfe;
-  --color-cream-2: #edf2fb;
+  --color-cream: #fbfdf9;
+  --color-cream-2: #eef4ea;
 
-  --color-ink: #16203a;
-  --color-ink-soft: #4a5674;
-  --color-ink-mute: #7c88a4;
+  --color-ink: #14241a;
+  --color-ink-soft: #46584c;
+  --color-ink-mute: #7d8f82;
 
-  --color-line: rgba(30, 64, 175, 0.14);
-  --color-line-gold: rgba(192, 145, 47, 0.34);
+  --color-line: rgba(21, 128, 61, 0.15);
+  --color-line-yellow: rgba(202, 154, 4, 0.34);
 
   --font-serif: var(--font-marcellus), Georgia, "Times New Roman", serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
@@ -33,9 +33,9 @@
   --radius-xl2: 22px;
   --radius-xl3: 30px;
 
-  --shadow-soft: 0 2px 10px rgba(10, 23, 56, 0.08);
-  --shadow-mid: 0 12px 34px rgba(10, 23, 56, 0.13);
-  --shadow-deep: 0 28px 70px rgba(10, 23, 56, 0.24);
+  --shadow-soft: 0 2px 10px rgba(10, 46, 26, 0.08);
+  --shadow-mid: 0 12px 34px rgba(10, 46, 26, 0.13);
+  --shadow-deep: 0 28px 70px rgba(10, 46, 26, 0.24);
 
   --animate-nudge: nudge 1.9s ease-in-out infinite;
   --animate-pulse-ring: pulse-ring 2.4s ease-in-out infinite;
@@ -47,35 +47,35 @@
 }
 
 @keyframes pulse-ring {
-  0%, 100% { box-shadow: 0 0 0 3px rgba(230, 200, 119, 0.2); }
-  50% { box-shadow: 0 0 0 7px rgba(230, 200, 119, 0); }
+  0%, 100% { box-shadow: 0 0 0 3px rgba(253, 224, 71, 0.25); }
+  50% { box-shadow: 0 0 0 7px rgba(253, 224, 71, 0); }
 }
 
 /* ------------------------------------------------------------------
    Reusable gradients and text treatments
    ------------------------------------------------------------------ */
-@utility grad-royal {
-  background-image: linear-gradient(135deg, #3a63d8 0%, #1e40af 44%, #0a1738 100%);
+@utility grad-green {
+  background-image: linear-gradient(135deg, #22c55e 0%, #15803d 44%, #0a2e1a 100%);
 }
 
-@utility grad-royal-deep {
-  background-image: linear-gradient(168deg, #1a3480 0%, #0a1738 100%);
+@utility grad-green-deep {
+  background-image: linear-gradient(168deg, #14532d 0%, #0a2e1a 100%);
 }
 
-@utility grad-sky {
-  background-image: linear-gradient(180deg, #f9fbfe 0%, #edf2fb 100%);
+@utility grad-leaf {
+  background-image: linear-gradient(180deg, #fbfdf9 0%, #eef4ea 100%);
 }
 
-/* Gold foil, used for display text, ornament rules and primary buttons */
+/* Zari yellow foil, used for display text, ornaments and primary buttons */
 @utility foil {
   background-image: linear-gradient(
-    100deg, #a97d24 0%, #e6c877 26%, #fff3d0 46%, #e6c877 66%, #a97d24 100%
+    100deg, #a87f0a 0%, #fde047 26%, #fffbe6 46%, #fde047 66%, #a87f0a 100%
   );
 }
 
 @utility foil-text {
   background-image: linear-gradient(
-    100deg, #a97d24 0%, #e6c877 26%, #fff3d0 46%, #e6c877 66%, #a97d24 100%
+    100deg, #a87f0a 0%, #fde047 26%, #fffbe6 46%, #fde047 66%, #a87f0a 100%
   );
   background-clip: text;
   -webkit-background-clip: text;
@@ -83,8 +83,8 @@
   -webkit-text-fill-color: transparent;
 }
 
-@utility blue-text {
-  background-image: linear-gradient(120deg, #2d54c8, #0a1738);
+@utility green-text {
+  background-image: linear-gradient(120deg, #22c55e, #0a2e1a);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
@@ -113,11 +113,11 @@ html {
 }
 
 body {
-  background-image: linear-gradient(180deg, #f9fbfe 0%, #edf2fb 100%);
+  background-image: linear-gradient(180deg, #fbfdf9 0%, #eef4ea 100%);
   background-attachment: fixed;
   color: var(--color-ink);
   overflow-x: hidden;
-  -webkit-tap-highlight-color: rgba(192, 145, 47, 0.18);
+  -webkit-tap-highlight-color: rgba(202, 154, 4, 0.18);
 }
 
 .rail::-webkit-scrollbar { display: none; }
@@ -129,9 +129,5 @@ body {
     opacity: 1 !important;
     transform: none !important;
   }
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
+  .hero-slide { transition: none !important; }
 }

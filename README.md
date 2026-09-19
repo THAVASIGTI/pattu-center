@@ -17,7 +17,7 @@ Every menu item is a real route with its own URL, its own `<h1>` and its own
 
 | URL | Page |
 |---|---|
-| `/` | Home |
+| `/` | Home — hero slideshow, about, what we buy, services, process, roadmap, price ledger, do's & don'ts, why us, branches, reviews |
 | `/about` | About us |
 | `/what-we-buy` | Saree types and how value is decided |
 | `/services` | Services and promises |
@@ -43,6 +43,37 @@ npm start       # serve the production build
 npm run lint
 ```
 
+## Homepage sections
+
+Each block is deliberately a different shape so the page doesn't read as one
+long stack of cards:
+
+| Section | Style |
+|---|---|
+| Hero | Split layout with an auto-advancing image slideshow |
+| Trust strip | Four-up gradient band |
+| About | Asymmetric image pair, large primary with an overlapping inset |
+| What we buy | Swipeable card rail on mobile, 3-up grid on desktop |
+| Services | Icon-and-text rows |
+| How it works | Four numbered panels |
+| **Roadmap** | Vertical spine with numbered nodes; alternates left/right from `lg` up |
+| **Price ledger** | Table-style rows: factor / what raises it / what lowers it |
+| **Do's & don'ts** | Two contrasting columns, green top rule vs yellow top rule |
+| Why choose us | Icon cards |
+| Branches | Address cards with an accent CTA tile |
+| Reviews | Swipeable quote rail |
+
+### The hero slideshow
+
+`components/HeroSlider.tsx`. Slides cross-fade and drift leftwards one at a
+time on a 4.5s timer, loop continuously, and expose dot controls. It pauses on
+hover and on keyboard focus, and reduced-motion users get a single static image
+with no rotation. Edit the `slides` array in `app/page.tsx` to change which
+photographs appear or what their captions say.
+
+The image column sits on the right of the hero on desktop. To move it to the
+left instead, swap the two children inside the hero `<Wrap>` in `app/page.tsx`.
+
 ## Editing content
 
 Everything the business says about itself lives in two files — no markup to touch:
@@ -52,17 +83,19 @@ Everything the business says about itself lives in two files — no markup to to
   per-branch intro copy). Adding a branch here automatically creates its page,
   its footer link and its card on `/branches`.
 - **`config/content.ts`** — saree types, services, why-choose-us, process steps,
-  FAQ entries, gallery images and testimonials.
+  the roadmap stops, the price ledger, the do's & don'ts, FAQ entries, gallery
+  images and testimonials.
 
 The business name appears in one place (`business.name`) and flows through every
 page title, the header, the footer and the structured data.
 
 ## Theme
 
-Royal blue with zari gold, defined as Tailwind v4 tokens in `app/globals.css`
-under `@theme`. Change `--color-royal` / `--color-gold` there and the whole site
-re-themes. Gradients are custom utilities in the same file: `grad-royal`,
-`grad-royal-deep`, `grad-sky`, `foil`, `foil-text`, `blue-text`.
+Emerald green with zari yellow, defined as Tailwind v4 tokens in
+`app/globals.css` under `@theme`. Change `--color-green` / `--color-yellow`
+there and the whole site re-themes. Gradients are custom utilities in the same
+file: `grad-green`, `grad-green-deep`, `grad-leaf`, `foil`, `foil-text`,
+`green-text`.
 
 ## Mobile
 

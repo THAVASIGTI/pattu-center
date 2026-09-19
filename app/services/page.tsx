@@ -31,12 +31,12 @@ export default function ServicesPage() {
               const Icon = serviceIcons[s.icon];
               return (
                 <Reveal key={s.slug} delay={(i % 2) * 90}>
-                  <article className="flex h-full items-start gap-5 rounded-[22px] border border-line bg-white p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-line-gold hover:shadow-mid">
-                    <span className="grad-royal grid size-14 shrink-0 place-items-center rounded-[16px] border border-line-gold shadow-[0_4px_14px_rgba(30,64,175,.3)]">
-                      {Icon && <Icon className="size-6 text-gold-light" />}
+                  <article className="flex h-full items-start gap-5 rounded-[22px] border border-line bg-white p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-line-yellow hover:shadow-mid">
+                    <span className="grad-green grid size-14 shrink-0 place-items-center rounded-[16px] border border-line-yellow shadow-[0_4px_14px_rgba(21,128,61,.3)]">
+                      {Icon && <Icon className="size-6 text-yellow-light" />}
                     </span>
                     <div>
-                      <h2 className="mb-2 font-serif text-[1.3rem] text-royal-deep">{s.title}</h2>
+                      <h2 className="mb-2 font-serif text-[1.3rem] text-green-deep">{s.title}</h2>
                       <p className="text-ink-soft">{s.blurb}</p>
                     </div>
                   </article>
@@ -47,7 +47,7 @@ export default function ServicesPage() {
         </Wrap>
       </Section>
 
-      <Section tone="royal">
+      <Section tone="green">
         <Wrap>
           <Reveal>
             <SectionHead
@@ -66,7 +66,7 @@ export default function ServicesPage() {
                 "Free doorstep collection on ten sarees or more",
                 "No obligation to sell once we have quoted",
               ].map((p) => (
-                <div key={p} className="rounded-[14px] border border-gold/25 bg-cream/[0.055] p-5 text-cream/80">
+                <div key={p} className="rounded-[14px] border border-yellow/25 bg-cream/[0.055] p-5 text-cream/80">
                   {p}
                 </div>
               ))}

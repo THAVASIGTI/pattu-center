@@ -30,11 +30,11 @@ export default function HowItWorksPage() {
             {processSteps.map((s, i) => (
               <Reveal key={s.title} delay={i * 80}>
                 <article className="flex items-start gap-5 rounded-[22px] border border-line bg-white p-6 shadow-soft sm:gap-7 sm:p-8">
-                  <span className="blue-text shrink-0 font-serif text-[2.6rem] leading-none sm:text-[3.2rem]">
+                  <span className="green-text shrink-0 font-serif text-[2.6rem] leading-none sm:text-[3.2rem]">
                     0{i + 1}
                   </span>
                   <div>
-                    <h2 className="mb-2 font-serif text-[1.35rem] text-royal-deep">{s.title}</h2>
+                    <h2 className="mb-2 font-serif text-[1.35rem] text-green-deep">{s.title}</h2>
                     <p className="text-ink-soft">{s.blurb}</p>
                   </div>
                 </article>
@@ -63,7 +63,7 @@ export default function HowItWorksPage() {
                 "Have ten or more pieces? Ask for a free home visit instead of travelling to us.",
               ].map((tip) => (
                 <li key={tip} className="flex items-start gap-3.5 rounded-[14px] border border-line bg-white p-4 shadow-soft">
-                  <Check className="mt-0.5 size-5 shrink-0 text-gold" />
+                  <Check className="mt-0.5 size-5 shrink-0 text-yellow" />
                   <span className="text-ink-soft">{tip}</span>
                 </li>
               ))}

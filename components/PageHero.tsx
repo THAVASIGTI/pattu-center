@@ -20,7 +20,7 @@ export default function PageHero({
   children?: ReactNode;
 }) {
   return (
-    <section className="relative overflow-hidden bg-royal-deep text-cream">
+    <section className="relative overflow-hidden bg-green-deep text-cream">
       <div className="absolute inset-0">
         <Image
           src={image}
@@ -31,14 +31,14 @@ export default function PageHero({
           sizes="100vw"
           className="object-cover opacity-30"
         />
-        <div className="absolute inset-0 bg-[radial-gradient(780px_440px_at_10%_2%,rgba(192,145,47,.24),transparent_58%),radial-gradient(680px_560px_at_92%_96%,rgba(58,99,216,.46),transparent_64%),linear-gradient(172deg,rgba(10,23,56,.84),rgba(10,23,56,.95))]" />
+        <div className="absolute inset-0 bg-[radial-gradient(780px_440px_at_10%_2%,rgba(202,154,4,.24),transparent_58%),radial-gradient(680px_560px_at_92%_96%,rgba(34,197,94,.46),transparent_64%),linear-gradient(172deg,rgba(10,46,26,.84),rgba(10,46,26,.95))]" />
       </div>
 
       <Wrap className="relative z-10 py-11 text-center sm:py-16 lg:py-20">
         <Crumbs items={crumbs} />
         <Ornament />
         {eyebrow && (
-          <p className="mt-3 text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-gold-light">
+          <p className="mt-3 text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-yellow-light">
             {eyebrow}
           </p>
         )}

@@ -66,7 +66,7 @@ export default function AboutPage() {
                   width={800}
                   height={1000}
                   sizes="(max-width: 1024px) 90vw, 540px"
-                  className="aspect-4/5 w-full rounded-[22px] border border-line-gold object-cover shadow-mid"
+                  className="aspect-4/5 w-full rounded-[22px] border border-line-yellow object-cover shadow-mid"
                 />
                 <Image
                   src={img(14695808)}
@@ -82,7 +82,7 @@ export default function AboutPage() {
         </Wrap>
       </Section>
 
-      <Section tone="royal">
+      <Section tone="green">
         <Wrap>
           <Reveal>
             <SectionHead tone="dark" eyebrow="How we work" title="What you can expect on the day." />
@@ -92,9 +92,9 @@ export default function AboutPage() {
               {points.map((p) => (
                 <li
                   key={p}
-                  className="flex items-start gap-3.5 rounded-[14px] border border-gold/25 bg-cream/[0.055] p-4"
+                  className="flex items-start gap-3.5 rounded-[14px] border border-yellow/25 bg-cream/[0.055] p-4"
                 >
-                  <Check className="mt-0.5 size-5 shrink-0 text-gold" />
+                  <Check className="mt-0.5 size-5 shrink-0 text-yellow" />
                   <span className="text-cream/80">{p}</span>
                 </li>
               ))}
@@ -112,7 +112,7 @@ export default function AboutPage() {
             <div className="grid gap-3.5 md:grid-cols-2 lg:grid-cols-3">
               {whyChooseUs.map((w) => (
                 <article key={w.title} className="rounded-[22px] border border-line bg-white p-6 shadow-soft">
-                  <h3 className="mb-2 font-serif text-[1.22rem] text-royal-deep">{w.title}</h3>
+                  <h3 className="mb-2 font-serif text-[1.22rem] text-green-deep">{w.title}</h3>
                   <p className="text-[0.92rem] text-ink-soft">{w.blurb}</p>
                 </article>
               ))}
