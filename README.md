@@ -53,15 +53,29 @@ long stack of cards:
 | Hero | Split layout with an auto-advancing image slideshow |
 | Trust strip | Four-up gradient band |
 | About | Asymmetric image pair, large primary with an overlapping inset |
-| What we buy | Swipeable card rail on mobile, 3-up grid on desktop |
+| What we buy | **Temple-arch cards** — semicircular arch tops, gold ring and shimmer sweep on hover, staggered scale-in |
 | Services | Icon-and-text rows |
-| How it works | Four numbered panels |
+| How it works | **Staircase** — each step sits one tread lower than the last, sliding in from alternating sides |
 | **Roadmap** | Vertical spine with numbered nodes; alternates left/right from `lg` up |
-| **Price ledger** | Table-style rows: factor / what raises it / what lowers it |
+| **Price ledger** | **Balance scale** — factor on a central pivot, what raises it weighing out one side and what lowers it the other |
 | **Do's & don'ts** | Two contrasting columns, green top rule vs yellow top rule |
 | Why choose us | Icon cards |
 | Branches | Address cards with an accent CTA tile |
 | Reviews | Swipeable quote rail |
+
+### Animation
+
+`components/Reveal.tsx` wraps anything that should animate into view and takes
+a `from` direction (`up`, `left`, `right`, `scale`, `arch`), a `delay` for
+stagger and a `duration`. It uses one IntersectionObserver per element and
+disconnects after firing.
+
+`Section` sets `overflow-x-clip` so slide-in transforms and offset decorations
+cannot widen the page — without it, a `from="right"` reveal adds its offset to
+the document scroll width on narrow screens.
+
+Reduced-motion users skip every entrance animation and the hero rotation,
+handled in `app/globals.css` via `[data-reveal]`.
 
 ### The hero slideshow
 

@@ -28,7 +28,12 @@ export function Section({
       "text-cream bg-[radial-gradient(760px_440px_at_88%_-10%,rgba(202,154,4,.18),transparent_62%),radial-gradient(620px_520px_at_6%_104%,rgba(34,197,94,.34),transparent_66%),linear-gradient(168deg,#14532d_0%,#0a2e1a_100%)]",
   };
   return (
-    <section id={id} className={`py-14 sm:py-20 lg:py-24 ${tones[tone]} ${className}`}>
+    // overflow-x-clip contains decorative transforms (slide-in reveals, offset
+    // rings) without creating a scroll container or affecting the sticky header
+    <section
+      id={id}
+      className={`overflow-x-clip py-14 sm:py-20 lg:py-24 ${tones[tone]} ${className}`}
+    >
       {children}
     </section>
   );

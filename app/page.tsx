@@ -4,10 +4,13 @@ import BranchCard from "@/components/BranchCard";
 import Counter from "@/components/Counter";
 import CtaBand from "@/components/CtaBand";
 import HeroSlider from "@/components/HeroSlider";
+import ArchCard from "@/components/ArchCard";
+import PriceScale from "@/components/PriceScale";
 import Roadmap from "@/components/Roadmap";
+import StepStair from "@/components/StepStair";
 import { ArrowRight, Check, Phone, WhatsApp, serviceIcons } from "@/components/Icons";
 import Reveal from "@/components/Reveal";
-import { Button, Card, Section, SectionHead, Wrap } from "@/components/ui";
+import { Button, Section, SectionHead, Wrap } from "@/components/ui";
 import { branches, business, waLink } from "@/config/business";
 import {
   img,
@@ -183,34 +186,13 @@ export default function HomePage() {
             />
           </Reveal>
 
-          <Reveal>
-            <div className="rail -mx-5 px-5 sm:[grid-auto-columns:52%] md:mx-0 md:grid-cols-2 md:grid-flow-row md:gap-[18px] md:overflow-visible md:px-0 md:[grid-auto-columns:auto] lg:grid-cols-3 lg:gap-6">
-              {sareeTypes.slice(0, 6).map((t) => (
-                <Card key={t.slug}>
-                  <div className="aspect-4/3 overflow-hidden bg-cream-2">
-                    <Image
-                      src={img(t.imageId)}
-                      alt={t.alt}
-                      width={640}
-                      height={480}
-                      sizes="(max-width: 768px) 80vw, (max-width: 1024px) 45vw, 360px"
-                      className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                  </div>
-                  <div className="flex-1 p-5 pb-6">
-                    <h3 className="mb-2 font-serif text-[1.22rem] text-green-deep">{t.name}</h3>
-                    <p className="text-[0.92rem] text-ink-soft">{t.blurb}</p>
-                    {t.ta && <p className="mt-2.5 font-tamil text-[0.85rem] text-yellow">{t.ta}</p>}
-                  </div>
-                </Card>
-              ))}
-            </div>
-          </Reveal>
-
-          <p className="mt-1 flex items-center justify-center gap-2 text-[0.76rem] font-medium uppercase tracking-[0.09em] text-ink-mute md:hidden">
-            <ArrowRight className="size-[15px] animate-nudge" />
-            Swipe for more
-          </p>
+          <div className="grid gap-10 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 lg:grid-cols-3">
+            {sareeTypes.slice(0, 6).map((t, i) => (
+              <Reveal key={t.slug} from="arch" delay={(i % 3) * 110} duration={850}>
+                <ArchCard item={t} />
+              </Reveal>
+            ))}
+          </div>
 
           <div className="mt-8 text-center">
             <Button href="/what-we-buy" variant="outline">
@@ -268,22 +250,7 @@ export default function HomePage() {
             />
           </Reveal>
 
-          <Reveal>
-            <div className="grid gap-3.5 md:grid-cols-2 lg:grid-cols-4 lg:gap-5">
-              {processSteps.map((s, i) => (
-                <div
-                  key={s.title}
-                  className="rounded-[22px] border border-yellow/25 bg-cream/[0.055] p-6"
-                >
-                  <span className="foil-text mb-3 block font-serif text-[2.2rem] leading-none">
-                    0{i + 1}
-                  </span>
-                  <h3 className="mb-2 font-serif text-[1.08rem] text-white">{s.title}</h3>
-                  <p className="text-[0.9rem] text-cream/70">{s.blurb}</p>
-                </div>
-              ))}
-            </div>
-          </Reveal>
+          <StepStair steps={processSteps} />
 
           {/* Placeholder figures — replace with the real numbers before launch. */}
           <Reveal>
@@ -338,41 +305,7 @@ export default function HomePage() {
             />
           </Reveal>
 
-          <Reveal>
-            <div className="overflow-hidden rounded-[22px] border border-line bg-white shadow-soft">
-              <div className="hidden grid-cols-[1.1fr_1fr_1fr] gap-6 border-b border-line bg-cream-2 px-7 py-4 text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-ink-mute md:grid">
-                <span>Factor</span>
-                <span className="text-green">Raises the price</span>
-                <span className="text-yellow">Lowers the price</span>
-              </div>
-
-              {priceLedger.map((row) => (
-                <div
-                  key={row.factor}
-                  className="grid gap-4 border-b border-line px-6 py-6 last:border-b-0 md:grid-cols-[1.1fr_1fr_1fr] md:gap-6 md:px-7"
-                >
-                  <div>
-                    <h3 className="font-serif text-[1.15rem] text-green-deep">{row.factor}</h3>
-                    <p className="mt-1 text-[0.86rem] text-ink-mute">{row.detail}</p>
-                  </div>
-                  <p className="flex items-start gap-2.5 text-[0.92rem] text-ink-soft">
-                    <span aria-hidden className="mt-2 size-1.5 shrink-0 rounded-full bg-green-soft" />
-                    <span>
-                      <span className="font-semibold text-green md:hidden">Raises: </span>
-                      {row.raises}
-                    </span>
-                  </p>
-                  <p className="flex items-start gap-2.5 text-[0.92rem] text-ink-soft">
-                    <span aria-hidden className="mt-2 size-1.5 shrink-0 rounded-full bg-yellow" />
-                    <span>
-                      <span className="font-semibold text-yellow md:hidden">Lowers: </span>
-                      {row.lowers}
-                    </span>
-                  </p>
-                </div>
-              ))}
-            </div>
-          </Reveal>
+          <PriceScale rows={priceLedger} />
         </Wrap>
       </Section>
 
