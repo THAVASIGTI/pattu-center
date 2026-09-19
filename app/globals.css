@@ -146,6 +146,11 @@ body {
     opacity: 1 !important;
     transform: none !important;
   }
-  .hero-slide { transition: none !important; }
+  /* Rotating content still advances; it just swaps instead of animating. */
+  .hero-slide,
+  .rotating-line { transition: none !important; }
+  .rotating-line { transform: none !important; }
+  /* The hold bar would otherwise snap to empty, so show it filled. */
+  .hero-progress { animation: none !important; transform: scaleX(1) !important; }
   .foil-shimmer { animation: none !important; }
 }

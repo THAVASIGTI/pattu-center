@@ -21,7 +21,8 @@ export default function RotatingLines({
   const [i, setI] = useState(0);
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    // Each line is a different promise, so reduced-motion users still see all
+    // of them; only the fade is dropped, in CSS via .rotating-line.
     const id = setInterval(() => setI((v) => (v + 1) % lines.length), interval);
     return () => clearInterval(id);
   }, [lines.length, interval]);
@@ -46,7 +47,7 @@ export default function RotatingLines({
               transitionDuration: active ? `${FADE_IN}ms` : `${FADE_OUT}ms`,
               transitionDelay: active ? `${FADE_OUT}ms` : "0ms",
             }}
-            className={`absolute inset-0 transition-all ease-out ${
+            className={`rotating-line absolute inset-0 transition-all ease-out ${
               active ? "translate-y-0 opacity-100" : "pointer-events-none -translate-y-2 opacity-0"
             }`}
           >

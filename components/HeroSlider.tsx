@@ -16,8 +16,8 @@ const FADE = 200;
 
 /**
  * Auto-advancing hero slideshow. Each image swaps for the next once a second;
- * the rotation pauses on hover/focus and is disabled entirely for
- * reduced-motion users, who simply get the first image.
+ * the rotation pauses on hover/focus. Reduced-motion users still get all four
+ * images — the crossfade is removed rather than the rotation.
  */
 export default function HeroSlider({
   slides,
@@ -37,8 +37,9 @@ export default function HeroSlider({
 
   useEffect(() => {
     if (paused) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
+    // The images are content, not decoration: reduced-motion users still see
+    // all four. Only the crossfade is dropped, in CSS via .hero-slide.
     timer.current = setInterval(
       () => setIndex((i) => (i + 1) % slides.length),
       INTERVAL,
@@ -100,7 +101,7 @@ export default function HeroSlider({
       <div aria-hidden className="mt-3 h-[3px] overflow-hidden rounded-full bg-cream/15">
         <span
           key={`${index}-${paused}`}
-          className="foil block h-full w-full origin-left"
+          className="hero-progress foil block h-full w-full origin-left"
           style={{
             animation: paused ? "none" : `drain ${INTERVAL}ms linear forwards`,
           }}
