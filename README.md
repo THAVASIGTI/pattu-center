@@ -50,7 +50,7 @@ long stack of cards:
 
 | Section | Style |
 |---|---|
-| Hero | Split layout with an auto-advancing image slideshow |
+| Hero | Bilingual copy, word-by-word heading animation, rotating Tamil/English promise line, auto-advancing slideshow |
 | Trust strip | Four-up gradient band |
 | About | Asymmetric image pair, large primary with an overlapping inset |
 | What we buy | **Temple-arch cards** — semicircular arch tops, gold ring and shimmer sweep on hover, staggered scale-in |
@@ -77,13 +77,37 @@ the document scroll width on narrow screens.
 Reduced-motion users skip every entrance animation and the hero rotation,
 handled in `app/globals.css` via `[data-reveal]`.
 
-### The hero slideshow
+### The hero
 
-`components/HeroSlider.tsx`. Slides cross-fade and drift leftwards one at a
-time on a 4.5s timer, loop continuously, and expose dot controls. It pauses on
-hover and on keyboard focus, and reduced-motion users get a single static image
-with no rotation. Edit the `slides` array in `app/page.tsx` to change which
-photographs appear or what their captions say.
+Three moving parts, all in `app/page.tsx`:
+
+- **`AnimatedHeading`** splits the headline into words and lifts them in one
+  after another on mount. Pass `segments`; mark one `foil: true` to give it the
+  shimmering gold gradient. The gradient is applied per word — `background-clip:
+  text` does not reach through the `inline-block` wrappers from a parent.
+- **`RotatingLines`** cycles a Tamil promise with its English translation every
+  3.2s. Height is reserved for the tallest line so swapping never shifts the
+  page.
+- **`HeroSlider`** cross-fades four images, drifting leftwards.
+
+**Slide speed:** `INTERVAL` at the top of `components/HeroSlider.tsx` is
+`1000` (one second per slide) as requested, with `TRANSITION` at `550` so each
+crossfade finishes before the next begins. At this speed the captions flash by
+— raise `INTERVAL` to around `3500` if you want them readable. A foil progress
+bar drains over each slide's hold so the cadence is visible.
+
+The slider pauses on hover and keyboard focus, and has dot controls. Reduced
+motion disables the rotation, the heading animation and the line rotation.
+
+### Bilingual copy
+
+The hero carries Tamil and English together: a bilingual badge, the headline
+with a Tamil restatement under it, the rotating promise line in both scripts,
+bilingual slide captions and a bilingual footnote. Tamil strings live inline in
+`app/page.tsx` and in the `slides` array.
+
+> The Tamil copy was written during development and has **not** been reviewed
+> by a native speaker. Have someone check it before the site goes live.
 
 The image column sits on the right of the hero on desktop. To move it to the
 left instead, swap the two children inside the hero `<Wrap>` in `app/page.tsx`.

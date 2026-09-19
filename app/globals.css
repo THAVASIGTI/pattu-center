@@ -46,6 +46,16 @@
   50% { transform: translateX(5px); }
 }
 
+@keyframes shimmer {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+@keyframes drain {
+  from { transform: scaleX(1); }
+  to   { transform: scaleX(0); }
+}
+
 @keyframes pulse-ring {
   0%, 100% { box-shadow: 0 0 0 3px rgba(253, 224, 71, 0.25); }
   50% { box-shadow: 0 0 0 7px rgba(253, 224, 71, 0); }
@@ -81,6 +91,12 @@
   -webkit-background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
+}
+
+/* Slow continuous sweep across gold foil text */
+@utility foil-shimmer {
+  background-size: 200% 100%;
+  animation: shimmer 6s linear infinite;
 }
 
 @utility green-text {
@@ -125,9 +141,11 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  [data-reveal] {
+  [data-reveal],
+  [data-word] {
     opacity: 1 !important;
     transform: none !important;
   }
   .hero-slide { transition: none !important; }
+  .foil-shimmer { animation: none !important; }
 }

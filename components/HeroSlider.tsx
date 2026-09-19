@@ -3,9 +3,15 @@
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-export type Slide = { src: string; alt: string; caption: string };
+export type Slide = { src: string; alt: string; caption: string; captionTa: string };
 
-const INTERVAL = 4500;
+/**
+ * How long each slide holds, in ms. At 1000ms the rotation is deliberately
+ * brisk — raise this to ~3500 if you want the captions to be readable.
+ * TRANSITION must stay comfortably below INTERVAL or slides overlap.
+ */
+const INTERVAL = 1000;
+const TRANSITION = 550;
 
 /**
  * Auto-advancing hero slideshow. Slides cross-fade and drift sideways one at a
@@ -58,7 +64,8 @@ export default function HeroSlider({ slides }: { slides: Slide[] }) {
           return (
             <div
               key={s.src}
-              className={`hero-slide absolute inset-0 transition-[opacity,transform] duration-[900ms] ease-out ${
+              style={{ transitionDuration: `${TRANSITION}ms` }}
+              className={`hero-slide absolute inset-0 transition-[opacity,transform] ease-out ${
                 active ? "z-10 translate-x-0 opacity-100" : "z-0 translate-x-6 opacity-0"
               }`}
               aria-hidden={!active}
@@ -71,16 +78,30 @@ export default function HeroSlider({ slides }: { slides: Slide[] }) {
                 sizes="(max-width: 1024px) 90vw, 440px"
                 className="object-cover"
               />
-              <div className="absolute inset-x-0 bottom-0 bg-[linear-gradient(0deg,rgba(10,46,26,.88),transparent)] px-5 pt-10 pb-4">
-                <p className="font-serif text-[1.05rem] text-white">{s.caption}</p>
+              <div className="absolute inset-x-0 bottom-0 bg-[linear-gradient(0deg,rgba(10,46,26,.9),transparent)] px-5 pt-12 pb-4">
+                <p className="font-tamil text-[0.95rem] leading-tight text-yellow-light">
+                  {s.captionTa}
+                </p>
+                <p className="mt-0.5 font-serif text-[1.05rem] text-white">{s.caption}</p>
               </div>
             </div>
           );
         })}
       </div>
 
+      {/* Hold indicator */}
+      <div aria-hidden className="mt-3 h-[3px] overflow-hidden rounded-full bg-cream/15">
+        <span
+          key={`${index}-${paused}`}
+          className="foil block h-full w-full origin-left"
+          style={{
+            animation: paused ? "none" : `drain ${INTERVAL}ms linear forwards`,
+          }}
+        />
+      </div>
+
       {/* Slide controls */}
-      <div className="mt-3.5 flex items-center justify-center gap-2.5">
+      <div className="mt-1.5 flex items-center justify-center gap-2.5">
         {slides.map((s, i) => (
           <button
             key={s.src}

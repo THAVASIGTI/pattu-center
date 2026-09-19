@@ -4,9 +4,11 @@ import BranchCard from "@/components/BranchCard";
 import Counter from "@/components/Counter";
 import CtaBand from "@/components/CtaBand";
 import HeroSlider from "@/components/HeroSlider";
+import AnimatedHeading from "@/components/AnimatedHeading";
 import ArchCard from "@/components/ArchCard";
 import PriceScale from "@/components/PriceScale";
 import Roadmap from "@/components/Roadmap";
+import RotatingLines from "@/components/RotatingLines";
 import StepStair from "@/components/StepStair";
 import { ArrowRight, Check, Phone, WhatsApp, serviceIcons } from "@/components/Icons";
 import Reveal from "@/components/Reveal";
@@ -44,18 +46,35 @@ export default function HomePage() {
 
         <Wrap className="relative z-10 grid items-center gap-8 py-12 sm:py-16 lg:grid-cols-[1.05fr_.95fr] lg:gap-14 lg:py-24">
           <div>
-            <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-yellow/40 bg-yellow/15 px-4 py-1.5 text-[0.71rem] font-semibold uppercase tracking-[0.13em] text-yellow-light">
+            <span className="mb-4 inline-flex flex-wrap items-center gap-2 rounded-full border border-yellow/40 bg-yellow/15 px-4 py-1.5 text-[0.71rem] font-semibold uppercase tracking-[0.13em] text-yellow-light">
               <i className="size-1.5 animate-pulse-ring rounded-full bg-yellow-light" />
               {business.foundedText}
+              <span className="font-tamil text-[0.78rem] normal-case tracking-normal text-yellow-light/80">
+                · நாற்பது ஆண்டு அனுபவம்
+              </span>
             </span>
 
-            <h1 className="font-serif text-[clamp(2rem,7.4vw,3.95rem)] leading-[1.14] text-white">
-              Sell your old <span className="foil-text">silk sarees</span> for what they are truly worth.
-            </h1>
+            <AnimatedHeading
+              className="font-serif text-[clamp(2rem,7.4vw,3.95rem)] leading-[1.14] text-white"
+              segments={[
+                { text: "Sell your old" },
+                { text: " silk sarees ", foil: true },
+                { text: "for what they are truly worth." },
+              ]}
+            />
 
-            <p className="mt-3.5 font-tamil text-[clamp(1.1rem,4.6vw,1.6rem)] text-yellow">
-              {business.tagline}
+            <p className="mt-3 font-tamil text-[clamp(1rem,4vw,1.35rem)] leading-snug text-cream/85">
+              உங்கள் பழைய பட்டு புடவைகளை நியாயமான விலைக்கு விற்கலாம்.
             </p>
+
+            <RotatingLines
+              lines={[
+                { ta: "பழைய பட்டு வீணாகாது", en: "Old silk should never go to waste" },
+                { ta: "உங்கள் கண் முன்னே எடை போடப்படும்", en: "Weighed in front of your own eyes" },
+                { ta: "அன்றைக்கே பணம் கையில்", en: "Cash in your hand the very same day" },
+                { ta: "வீட்டிற்கே வந்து வாங்குகிறோம்", en: "We come to your home and collect" },
+              ]}
+            />
 
             <p className="mt-4 max-w-[48ch] text-[clamp(.97rem,2.6vw,1.07rem)] text-cream/80">
               Old pattu sarees, Kanchipuram and Mysore silk, silk vetti, zari and silver — weighed
@@ -73,8 +92,11 @@ export default function HomePage() {
               </Button>
             </div>
 
-            <p className="mt-4.5 text-[0.84rem] text-cream/55">
+            <p className="mt-4 text-[0.84rem] text-cream/55">
               Free doorstep pickup · Instant cash · No obligation to sell
+            </p>
+            <p className="mt-1 font-tamil text-[0.86rem] text-cream/50">
+              இலவச வீட்டு சேவை · உடனடி பணம் · விற்றே ஆக வேண்டும் என்பதில்லை
             </p>
           </div>
 
@@ -84,21 +106,25 @@ export default function HomePage() {
                 src: img(16239658),
                 alt: "Green silk saree with a woven gold zari border and traditional jewellery",
                 caption: "Kanchipuram pattu",
+                captionTa: "காஞ்சிபுரம் பட்டு",
               },
               {
                 src: img(6167463),
                 alt: "Teal silk saree with intricate golden paisley brocade",
                 caption: "Mysore & Banarasi silk",
+                captionTa: "மைசூர் & பனாரஸ் பட்டு",
               },
               {
                 src: img(10317113),
                 alt: "Close-up of a silk saree showing its woven gold zari border",
                 caption: "Zari borders & pallu",
+                captionTa: "ஜரிகை கரை & முந்தானை",
               },
               {
                 src: img(20181020),
                 alt: "Close-up of gold and silver brocade fabric",
                 caption: "Gold & silver zari",
+                captionTa: "தங்கம் & வெள்ளி ஜரிகை",
               },
             ]}
           />
