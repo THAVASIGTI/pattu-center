@@ -14,9 +14,10 @@ export const business = {
   owner: "M. Sarathkumar",
   foundedText: "40 years in silk",
   foundedTextTa: "40 ஆண்டு அனுபவம்",
-  // TODO: point this at the real domain — it drives canonical URLs, the
-  // sitemap and Open Graph. Still the old brand's domain otherwise.
-  siteUrl: "https://www.oldsilverzari.com",
+  // Drives canonical URLs and Open Graph. Currently the GitHub Pages address
+  // this deploys to — change it (and basePath in next.config.ts) when a real
+  // domain is pointed at the site.
+  siteUrl: "https://thavasigti.github.io/pattu-center",
 
   phones: [
     { label: "+91 85955 20856", href: "tel:+918595520856", raw: "8595520856" },

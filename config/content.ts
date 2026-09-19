@@ -13,7 +13,15 @@
  * no runtime dependency on an external CDN and next/image can optimise them
  * locally. Swap them for real shop photographs when you have them.
  */
-export const img = (id: number) => `/img/silk-${id}.jpg`;
+/**
+ * next/image with `unoptimized` emits `src` verbatim — basePath is only applied
+ * to the /_next/image optimiser URL, which a static export does not have. So
+ * the prefix has to be baked in here or every image 404s on GitHub Pages.
+ * Empty locally, "/pattu-center" in the Pages build.
+ */
+export const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
+export const img = (id: number) => `${BASE_PATH}/img/silk-${id}.jpg`;
 
 export type SareeType = {
   slug: string;

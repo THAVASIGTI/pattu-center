@@ -47,7 +47,9 @@ export const metadata: Metadata = {
     siteName: business.name,
     title: `${business.name} — Old Silk Saree Buyers`,
     description: `${business.tagline} — sell your old pattu sarees, silk vetti and zari at a fair price. Instant cash across Tamil Nadu.`,
-    images: [`${business.siteUrl}${img(38890438)}`],
+    // img() already includes basePath, so join it to the bare origin rather
+    // than to siteUrl (which also ends in the repo path) to avoid doubling it.
+    images: [`${new URL(business.siteUrl).origin}${img(38890438)}`],
   },
   twitter: { card: "summary_large_image" },
   alternates: { canonical: "/" },

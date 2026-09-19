@@ -15,7 +15,10 @@
 
 # next.js
 /.next/
-/out/
+# out/ is committed on request so the built site is visible in the repo.
+# The Pages workflow rebuilds from source and deploys that, so this copy is
+# not what goes live — delete the next line to stop tracking it.
+# /out/
 
 # production
 /build

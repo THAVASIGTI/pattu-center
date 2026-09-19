@@ -37,11 +37,56 @@ All 19 pages are statically prerendered at build time.
 
 ```bash
 npm install
-npm run dev     # http://localhost:3000
-npm run build   # production build
-npm start       # serve the production build
+npm run dev       # http://localhost:3000
+npm run build     # static export into out/
+npm run preview   # serve out/ at http://localhost:4173
 npm run lint
 ```
+
+`next.config.ts` sets `output: "export"`, so `npm run build` writes a plain
+static site to `out/` — HTML, CSS, JS and images, no Node server needed.
+
+## Deployment
+
+Pushing to `master` deploys automatically via
+`.github/workflows/deploy.yml`: it installs, type-checks, lints, builds the
+export, sanity-checks the output and publishes it to GitHub Pages. You can also
+trigger it by hand from the Actions tab.
+
+**One-time setup in the repo:** Settings → Pages → *Source: GitHub Actions*.
+Without that the workflow builds but has nowhere to publish.
+
+The site then lives at `https://<user>.github.io/pattu-center/`.
+
+### Why the basePath exists
+
+A GitHub Pages *project* site is served from `/<repo>/`, not from the domain
+root, so every asset needs that prefix or it 404s. `next.config.ts` applies
+`basePath` and `assetPrefix` only when `GITHUB_PAGES=true`, which the workflow
+sets — so `npm run dev` still works at `localhost:3000/`.
+
+Two things basePath does **not** cover on its own, both handled explicitly:
+
+- `next/image` with `unoptimized: true` emits `src` verbatim, because the
+  prefix normally rides on the `/_next/image` optimiser URL that a static
+  export doesn't have. `img()` in `config/content.ts` bakes the prefix in from
+  `NEXT_PUBLIC_BASE_PATH` instead.
+- `public/.nojekyll` stops GitHub Pages running Jekyll, which discards
+  directories beginning with an underscore — that would delete `_next/` and
+  with it every stylesheet and script.
+
+### Moving to a real domain
+
+Set `siteUrl` in `config/business.ts` to the domain, drop `basePath` and
+`assetPrefix` from `next.config.ts`, remove `NEXT_PUBLIC_BASE_PATH` from the
+workflow, and add a `CNAME` file in `public/`.
+
+### The committed `out/`
+
+`out/` is checked in so the built site is visible in the repo. The workflow
+rebuilds from source and deploys *that*, so the committed copy is not what goes
+live and will drift from `app/` as soon as anything changes. To stop tracking
+it, uncomment `/out/` in `.gitignore` and `git rm -r --cached out`.
 
 ## Homepage sections
 
