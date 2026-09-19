@@ -23,9 +23,13 @@ const FADE = 620;
 export default function HeroSlider({
   slides,
   className = "",
+  side = "right",
 }: {
   slides: Slide[];
   className?: string;
+  /** Which side of the hero the slideshow sits on, from `lg` up. Controls the
+   *  column alignment and which way the decorative frame trails. */
+  side?: "left" | "right";
 }) {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -52,7 +56,9 @@ export default function HeroSlider({
 
   return (
     <div
-      className={`relative mx-auto w-full max-w-[440px] lg:mr-auto lg:ml-0 ${className}`}
+      className={`relative mx-auto w-full max-w-[440px] ${
+        side === "left" ? "lg:mr-auto lg:ml-0" : "lg:mr-0 lg:ml-auto"
+      } ${className}`}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocusCapture={() => setPaused(true)}
@@ -60,7 +66,9 @@ export default function HeroSlider({
     >
       <span
         aria-hidden
-        className="absolute inset-y-0 right-3.5 -left-3.5 -z-10 translate-y-3.5 rounded-[30px] border border-yellow/40"
+        className={`absolute inset-y-0 -z-10 translate-y-3.5 rounded-[30px] border border-yellow/40 ${
+          side === "left" ? "right-3.5 -left-3.5" : "-right-3.5 left-3.5"
+        }`}
       />
 
       <div

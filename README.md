@@ -112,11 +112,14 @@ bilingual slide captions and a bilingual footnote. Tamil strings live inline in
 > The Tamil copy was written during development and has **not** been reviewed
 > by a native speaker. Have someone check it before the site goes live.
 
-The image column sits on the **left** of the hero from `lg` up, with the copy
-on the right. On phones the copy still comes first so the headline and the call
-buttons are what you land on — the order is handled by `order-1 lg:order-2` on
-the copy and `order-2 lg:order-1` on the slider, so swapping sides again is a
-matter of flipping those two classes.
+**Which side the images sit on:** `HeroSlider` takes `side="left" | "right"`
+(default `right`), which sets both the column alignment and the direction the
+decorative frame trails. To put the images on the left instead, pass
+`side="left"`, flip the grid to `lg:grid-cols-[.95fr_1.05fr]` and swap the
+`order-1` / `order-2` classes on the two children in `app/page.tsx`.
+
+On phones the copy always comes first, so the headline and the call buttons are
+what you land on regardless of the desktop arrangement.
 
 ## Editing content
 
