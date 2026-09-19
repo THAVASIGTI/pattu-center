@@ -199,6 +199,22 @@ them:
 
 `next/image` handles sizing, lazy loading and modern formats automatically.
 
+## Browser extensions and hydration
+
+Some extensions edit the page before React hydrates — ColorZilla adds
+`cz-shortcut-listen` to `<body>`, Grammarly adds `data-gr-*` — which React
+reports as a hydration mismatch even though the site is fine. `<body>` carries
+`suppressHydrationWarning` to absorb that.
+
+It applies **only to that element's own attributes and text**; a genuine
+mismatch anywhere inside the tree is still reported. Both halves of that were
+checked: with the attribute injected before hydration the warning is gone, and
+with a heading tampered with before hydration React still raises
+"Hydration failed because the server rendered HTML didn't match the client."
+
+If you see a hydration error, reproduce it in an incognito window with
+extensions disabled before treating it as a bug in the code.
+
 ## Accessibility & SEO
 
 - Per-page `<title>`, description and canonical URL via the Metadata API.

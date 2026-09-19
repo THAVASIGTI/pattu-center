@@ -86,7 +86,12 @@ const jsonLd = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${marcellus.variable} ${inter.variable} ${tamil.variable}`}>
-      <body className="font-sans antialiased pb-[58px] xl:pb-0">
+      {/* suppressHydrationWarning covers attributes that browser extensions
+          inject into <body> before React hydrates (ColorZilla's
+          cz-shortcut-listen, Grammarly's data-gr-*, and similar). It applies
+          only to this element's own attributes and text — mismatches anywhere
+          in the tree below are still reported. */}
+      <body suppressHydrationWarning className="font-sans antialiased pb-[58px] xl:pb-0">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
