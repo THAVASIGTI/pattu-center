@@ -7,12 +7,13 @@ export type Slide = { src: string; alt: string; caption: string; captionTa: stri
 
 /**
  * How long each slide holds, in ms — one second, as specified.
- * Slides swap cleanly rather than sliding across: at this cadence any drift
- * reads as a smear, so FADE is kept short and there is no transform.
+ * Images dissolve into one another rather than sliding: there is no transform,
+ * so nothing drifts, but the crossfade is long enough to read as a smooth
+ * change rather than a cut. FADE must stay below INTERVAL.
  * Raise INTERVAL to ~3500 if you ever want the captions to be readable.
  */
 const INTERVAL = 1000;
-const FADE = 200;
+const FADE = 620;
 
 /**
  * Auto-advancing hero slideshow. Each image swaps for the next once a second;
@@ -73,7 +74,7 @@ export default function HeroSlider({
             <div
               key={s.src}
               style={{ transitionDuration: `${FADE}ms` }}
-              className={`hero-slide absolute inset-0 transition-opacity ease-linear ${
+              className={`hero-slide absolute inset-0 transition-opacity [transition-timing-function:cubic-bezier(.4,0,.2,1)] ${
                 active ? "z-10 opacity-100" : "z-0 opacity-0"
               }`}
               aria-hidden={!active}

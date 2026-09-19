@@ -24,7 +24,7 @@ function Brand({ dark = false }: { dark?: boolean }) {
   return (
     <Link href="/" className="flex min-w-0 items-center gap-3" aria-label={`${business.name} — home`}>
       <span className="grad-green grid size-[42px] shrink-0 place-items-center rounded-full border-[1.5px] border-yellow shadow-[0_3px_14px_rgba(10,46,26,.34)]">
-        <span className="font-serif text-[1.05rem] tracking-wide text-yellow-light">{business.initials}</span>
+        <span className="font-serif text-[0.82rem] tracking-tight text-yellow-light">{business.initials}</span>
       </span>
       <span className={`min-w-0 font-serif text-[1.02rem] leading-tight lg:whitespace-nowrap lg:text-[1.08rem] ${dark ? "text-white" : "text-green-deep"}`}>
         {business.name}

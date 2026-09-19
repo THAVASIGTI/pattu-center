@@ -1,4 +1,4 @@
-# Sri Kamatchi Pattu Center
+# Old Silver Zari
 
 Multi-page marketing site for an old silk / pattu saree buying business, built
 with **Next.js 16 (App Router) + TypeScript + Tailwind CSS 4**.
@@ -93,10 +93,11 @@ Three moving parts, all in `app/page.tsx`:
 - **`HeroSlider`** swaps four images, one per second.
 
 **Slide speed:** `INTERVAL` at the top of `components/HeroSlider.tsx` is
-`1000` (one second per image), with `FADE` at `200`. Images swap cleanly with
-no sideways motion — at a one-second cadence any drift reads as a smear. A foil
-progress bar drains over each hold so the rhythm is visible. At this speed the
-captions flash by; raise `INTERVAL` to around `3500` if you want them readable.
+`1000` (one second per image), with `FADE` at `620`. Images dissolve into one
+another — there is no transform, so nothing drifts sideways, but the crossfade
+is long enough to read as a smooth change rather than a cut. A foil progress
+bar drains over each hold so the rhythm is visible. At this speed the captions
+flash by; raise `INTERVAL` to around `3500` if you want them readable.
 
 The slider pauses on hover and keyboard focus, and has dot controls. Reduced
 motion disables the rotation, the heading animation and the line rotation.
@@ -158,8 +159,8 @@ Mobile was the priority:
 | Statistics counters | `app/page.tsx`, the `Counter` block | `4,205+ / 245+ / 3,550+ / 6,545+` are illustrative, **not** this shop's real numbers. |
 | Customer reviews | `config/content.ts` → `testimonials` | Three placeholder quotes. Replace with real reviews. |
 | "Four decades" / "40+ years" | `config/business.ts` → `foundedText`, and the hero chip in `app/page.tsx` | Confirm the real founding year. |
-| Business name | `config/business.ts` → `name` | Carried over from the previous site. Change this one line if the trading name differs. |
-| `siteUrl` | `config/business.ts` | Set to the real domain so canonical URLs and Open Graph tags resolve correctly. |
+| Social links | `config/business.ts` → `social` | The YouTube, Instagram and Facebook handles still belong to the previous brand. Replace or remove them. |
+| `siteUrl` | `config/business.ts` | Currently `oldsilverzari.com`, a placeholder matching the new name. Point it at the real domain — it drives canonical URLs and Open Graph. |
 | Photography | `public/img/` + `config/content.ts` | Pexels stock of real Indian silk. Swap in your own shop photos — see below. |
 
 ### Replacing the images

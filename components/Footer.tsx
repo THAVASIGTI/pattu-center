@@ -21,7 +21,7 @@ export default function Footer() {
           <div>
             <Link href="/" className="flex items-center gap-3">
               <span className="grad-green grid size-[42px] shrink-0 place-items-center rounded-full border-[1.5px] border-yellow">
-                <span className="font-serif text-[1.05rem] text-yellow-light">{business.initials}</span>
+                <span className="font-serif text-[0.82rem] tracking-tight text-yellow-light">{business.initials}</span>
               </span>
               <span className="font-serif text-[1.02rem] leading-tight text-white">
                 {business.name}
