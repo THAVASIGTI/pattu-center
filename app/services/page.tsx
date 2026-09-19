@@ -4,7 +4,7 @@ import { serviceIcons } from "@/components/Icons";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import { Button, Section, SectionHead, Wrap } from "@/components/ui";
-import { services } from "@/config/content";
+import { img, services } from "@/config/content";
 
 export const metadata: Metadata = {
   title: "Services",
@@ -21,7 +21,7 @@ export default function ServicesPage() {
         eyebrow="Our services"
         title={<>More than one way to turn <span className="foil-text">silk into value</span>.</>}
         lead="Sell outright, trade towards new silk, or have the zari melted and the silver recovered."
-        image="https://images.unsplash.com/photo-1606259457945-67dc66271ee6"
+        image={img(6167463)}
       />
 
       <Section>

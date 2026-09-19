@@ -3,6 +3,7 @@ import BranchCard from "@/components/BranchCard";
 import CtaBand from "@/components/CtaBand";
 import { WhatsApp } from "@/components/Icons";
 import PageHero from "@/components/PageHero";
+import { img } from "@/config/content";
 import Reveal from "@/components/Reveal";
 import { Section, SectionHead, Wrap } from "@/components/ui";
 import { branches, waLink } from "@/config/business";
@@ -28,7 +29,7 @@ export default function BranchesPage() {
         eyebrow="Find us"
         title={<>Seven branches across <span className="foil-text">Tamil Nadu</span>.</>}
         lead="Walk in during shop hours, or call the nearest branch and we will come to your door."
-        image="https://images.unsplash.com/photo-1779470703519-05af825e87cd"
+        image={img(18728089)}
       />
 
       <Section>

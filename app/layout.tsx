@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileActionBar from "@/components/MobileActionBar";
 import { branches, business } from "@/config/business";
+import { img } from "@/config/content";
 import "./globals.css";
 
 const marcellus = Marcellus({
@@ -46,7 +47,7 @@ export const metadata: Metadata = {
     siteName: business.name,
     title: `${business.name} — Old Silk Saree Buyers`,
     description: `${business.tagline} — sell your old pattu sarees, silk vetti and zari at a fair price. Instant cash across Tamil Nadu.`,
-    images: ["https://images.unsplash.com/photo-1606941060060-3d317be9947c?w=1200&q=80"],
+    images: [`${business.siteUrl}${img(38890438)}`],
   },
   twitter: { card: "summary_large_image" },
   alternates: { canonical: "/" },

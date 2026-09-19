@@ -7,7 +7,7 @@ import { ArrowRight, Check, Phone, WhatsApp, serviceIcons } from "@/components/I
 import Reveal from "@/components/Reveal";
 import { Button, Card, Section, SectionHead, Wrap } from "@/components/ui";
 import { branches, business, waLink } from "@/config/business";
-import { processSteps, sareeTypes, services, testimonials, whyChooseUs } from "@/config/content";
+import { processSteps, img, sareeTypes, services, testimonials, whyChooseUs } from "@/config/content";
 
 export default function HomePage() {
   return (
@@ -16,7 +16,7 @@ export default function HomePage() {
       <section className="relative overflow-hidden bg-royal-deep text-cream">
         <div className="absolute inset-0">
           <Image
-            src="https://images.unsplash.com/photo-1686212164366-b25166623992?w=1400&q=70"
+            src={img(7676340)}
             alt=""
             aria-hidden
             fill
@@ -69,8 +69,8 @@ export default function HomePage() {
               className="absolute inset-y-0 -right-3.5 left-3.5 -z-10 translate-y-3.5 rounded-[30px] border border-gold/40"
             />
             <Image
-              src="https://images.unsplash.com/photo-1606941060060-3d317be9947c?w=900&q=80"
-              alt="Close-up of vivid royal blue silk with a soft lustrous sheen"
+              src={img(38890438)}
+              alt="Blue Banarasi silk saree with golden peacock brocade laid out on a wooden table"
               width={900}
               height={1125}
               priority
@@ -136,16 +136,16 @@ export default function HomePage() {
             <Reveal delay={120}>
               <div className="relative pb-12">
                 <Image
-                  src="https://images.unsplash.com/photo-1773847099342-33b0381cbe0d?w=800&q=80"
-                  alt="Close-up of golden zari threads hanging on a weaving loom"
+                  src={img(32655889)}
+                  alt="Close-up of a weaving loom strung with fine silk threads"
                   width={800}
                   height={1000}
                   sizes="(max-width: 1024px) 90vw, 540px"
                   className="aspect-4/5 w-full rounded-[22px] border border-line-gold object-cover shadow-mid"
                 />
                 <Image
-                  src="https://images.unsplash.com/photo-1786871204247-60f342ae81a8?w=500&q=80"
-                  alt="A wooden handloom strung with colourful woven silk"
+                  src={img(6876952)}
+                  alt="Golden silk threads drying beside a traditional spinning wheel"
                   width={500}
                   height={500}
                   sizes="220px"
@@ -174,7 +174,7 @@ export default function HomePage() {
                 <Card key={t.slug}>
                   <div className="aspect-4/3 overflow-hidden bg-cream-2">
                     <Image
-                      src={`${t.image}?w=640&q=80`}
+                      src={img(t.imageId)}
                       alt={t.alt}
                       width={640}
                       height={480}

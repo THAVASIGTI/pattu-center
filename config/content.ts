@@ -3,12 +3,24 @@
  * Kept out of the components so copy can be edited without touching markup.
  */
 
+/**
+ * Resolves a photo id to its self-hosted file in `public/img`.
+ *
+ * Photography is Pexels-licensed: free for commercial use, modification
+ * allowed, no attribution required. https://www.pexels.com/license/
+ *
+ * The files are served from this repo rather than hot-linked, so the site has
+ * no runtime dependency on an external CDN and next/image can optimise them
+ * locally. Swap them for real shop photographs when you have them.
+ */
+export const img = (id: number) => `/img/silk-${id}.jpg`;
+
 export type SareeType = {
   slug: string;
   name: string;
   ta?: string;
   blurb: string;
-  image: string;
+  imageId: number;
   alt: string;
 };
 
@@ -19,8 +31,8 @@ export const sareeTypes: SareeType[] = [
     ta: "காஞ்சிபுரம் பட்டு புடவை",
     blurb:
       "Pure mulberry silk with heavy contrast borders. Wedding sarees, temple sarees and everyday pattu of any age or condition.",
-    image: "https://images.unsplash.com/photo-1612744192242-35cd7a7d35e6",
-    alt: "Rich red silk fabric folded over white cloth",
+    imageId: 10317113,
+    alt: "Close-up of a Kanchipuram silk saree showing its woven gold zari border and paisley motifs",
   },
   {
     slug: "mysore-silk",
@@ -28,8 +40,8 @@ export const sareeTypes: SareeType[] = [
     ta: "மைசூர் பட்டு புடவை",
     blurb:
       "Crepe and pure Mysore silk with genuine gold zari borders, valued on both silk weight and metal content.",
-    image: "https://images.unsplash.com/photo-1676696706907-0e04665b80bd",
-    alt: "Close-up of teal coloured silk fabric",
+    imageId: 6167463,
+    alt: "Teal silk saree with intricate golden paisley brocade, folded on a woven tray",
   },
   {
     slug: "banarasi",
@@ -37,8 +49,8 @@ export const sareeTypes: SareeType[] = [
     ta: "பனாரஸ் மற்றும் டிஷ்யூ பட்டு",
     blurb:
       "Banarasi brocade, tissue sarees and dense zari work. The heavier the weave, the better the price we can offer.",
-    image: "https://images.unsplash.com/photo-1588140686379-1b76a52103dc",
-    alt: "Red, white and blue woven textile with fine detail",
+    imageId: 20181020,
+    alt: "Close-up of gold and silver brocade fabric showing dense woven patterning",
   },
   {
     slug: "pattu-vetti",
@@ -46,8 +58,8 @@ export const sareeTypes: SareeType[] = [
     ta: "பட்டு வேட்டி & அங்கவஸ்திரம்",
     blurb:
       "Men's silk dhotis, panchakacham, shoulder cloths and zari-bordered angavastram, bought by the pair or singly.",
-    image: "https://images.unsplash.com/photo-1606259457945-67dc66271ee6",
-    alt: "Soft folds of cream coloured satin silk",
+    imageId: 5439054,
+    alt: "Red and black silk with gold patterning and a contrasting woven border",
   },
   {
     slug: "ravikai",
@@ -55,8 +67,8 @@ export const sareeTypes: SareeType[] = [
     ta: "ரவிக்கை & பட்டு பாவாடை",
     blurb:
       "Silk blouse bits, pattu pavadai, cut pieces and leftover border strips. Even small quantities are weighed and paid for.",
-    image: "https://images.unsplash.com/photo-1617055407123-3d7130c1f940",
-    alt: "Pink silk textile photographed close up",
+    imageId: 8886933,
+    alt: "Hands holding a finely embroidered red silk piece",
   },
   {
     slug: "zari",
@@ -64,8 +76,8 @@ export const sareeTypes: SareeType[] = [
     ta: "ஜரிகை & பழுதான பட்டு",
     blurb:
       "Loose zari, cut borders, pallu panels and sarees that are torn or moth eaten. Silver-gilt thread holds value even when the saree does not.",
-    image: "https://images.unsplash.com/photo-1618434958571-459c9c972ae8",
-    alt: "Rich brown and gold textile in close up",
+    imageId: 37892693,
+    alt: "Detail of fine golden threads stretched across a weaving loom",
   },
   {
     slug: "nine-yard",
@@ -73,8 +85,8 @@ export const sareeTypes: SareeType[] = [
     ta: "ஒன்பது கஜ புடவை",
     blurb:
       "Traditional madisar, koorai and nine-yard wedding sarees — often the heaviest silk and zari a household owns.",
-    image: "https://images.unsplash.com/photo-1779470703519-05af825e87cd",
-    alt: "Colourful patterned textiles and shawls stacked together",
+    imageId: 33433875,
+    alt: "Long silk sarees laid out to dry on the ghats at Varanasi",
   },
   {
     slug: "regional-silks",
@@ -82,8 +94,8 @@ export const sareeTypes: SareeType[] = [
     ta: "ஆரணி & திருபுவனம் பட்டு",
     blurb:
       "Arani, Thirubuvanam, Dharmapuram, Gadwal and Venkatagiri weaves — every regional silk tradition is accepted.",
-    image: "https://images.unsplash.com/photo-1619043599439-9b750b7b2623",
-    alt: "Pink silk resting on white silk",
+    imageId: 18728089,
+    alt: "Traditional Indian textiles stacked and displayed at a fabric shop",
   },
   {
     slug: "silver",
@@ -91,8 +103,8 @@ export const sareeTypes: SareeType[] = [
     ta: "வெள்ளி பொருட்கள்",
     blurb:
       "Old silver articles, lamps and brass bought alongside your sarees at the day's metal rate.",
-    image: "https://images.unsplash.com/photo-1773847099342-33b0381cbe0d",
-    alt: "Close-up of golden metallic threads on a loom",
+    imageId: 33322987,
+    alt: "Traditional brass vessels and a tall oil lamp arranged with banana leaves",
   },
 ];
 
@@ -243,16 +255,16 @@ export const faqs = [
   },
 ];
 
-export const galleryImages = [
-  { src: "https://images.unsplash.com/photo-1717585679395-bbe39b5fb6bc", alt: "A pile of folded cloths on a table" },
-  { src: "https://images.unsplash.com/photo-1779470703519-05af825e87cd", alt: "Colourful patterned textiles stacked for sale" },
-  { src: "https://images.unsplash.com/photo-1619043518800-7f14be467dca", alt: "Soft folds of lustrous white silk fabric" },
-  { src: "https://images.unsplash.com/photo-1606941060060-3d317be9947c", alt: "Vivid royal blue silk with a lustrous sheen" },
-  { src: "https://images.unsplash.com/photo-1759738099669-d64b0656f6cf", alt: "Weavers working fabric on a traditional loom" },
-  { src: "https://images.unsplash.com/photo-1775669954897-8ed90ca9f0fa", alt: "Bundled scraps of fabric tied together" },
-  { src: "https://images.unsplash.com/photo-1786871204247-60f342ae81a8", alt: "A wooden handloom strung with coloured silk" },
-  { src: "https://images.unsplash.com/photo-1773847099342-33b0381cbe0d", alt: "Close-up of golden zari threads on a loom" },
-  { src: "https://images.unsplash.com/photo-1612744234160-9ff642a02d19", alt: "Black silk resting on deep blue silk" },
+export const galleryImages: { id: number; alt: string }[] = [
+  { id: 33433875, alt: "Long silk sarees laid out to dry on the ghats at Varanasi" },
+  { id: 17777833, alt: "A weaver working silk on a traditional loom in Varanasi" },
+  { id: 14695808, alt: "An artisan weaving vibrant silk threads on a handloom" },
+  { id: 6876952,  alt: "Golden silk threads drying beside a traditional spinning wheel" },
+  { id: 32655889, alt: "Close-up of a weaving loom strung with fine threads" },
+  { id: 18728089, alt: "Traditional Indian textiles stacked and displayed at a fabric shop" },
+  { id: 29389864, alt: "Colourful textile stalls in a busy Indian market" },
+  { id: 37892693, alt: "Detail of fine golden threads stretched across a weaving loom" },
+  { id: 10317113, alt: "Close-up of a Kanchipuram silk saree showing its gold zari border" },
 ];
 
 /** Placeholder reviews — replace with real customer feedback before launch. */

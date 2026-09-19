@@ -84,16 +84,42 @@ Mobile was the priority:
 | "Four decades" / "40+ years" | `config/business.ts` → `foundedText`, and the hero chip in `app/page.tsx` | Confirm the real founding year. |
 | Business name | `config/business.ts` → `name` | Carried over from the previous site. Change this one line if the trading name differs. |
 | `siteUrl` | `config/business.ts` | Set to the real domain so canonical URLs and Open Graph tags resolve correctly. |
-| Photography | `config/content.ts` | Currently Unsplash silk/zari stock. Swap in real shop photos — see below. |
+| Photography | `public/img/` + `config/content.ts` | Pexels stock of real Indian silk. Swap in your own shop photos — see below. |
 
 ### Replacing the images
 
-Images are hot-linked from Unsplash (free, no attribution required) and show
-silk, zari and handloom rather than people. To use your own:
+All photography comes from **Pexels** under the
+[Pexels License](https://www.pexels.com/license/) — free for commercial use,
+modification allowed, **no attribution required**. The images show real Indian
+silk: Kanchipuram zari borders, Banarasi brocade, handlooms, Varanasi ghats and
+brass ware, rather than generic fabric close-ups.
 
-1. Put files in `public/img/`.
-2. Change the URLs in `config/content.ts` to `/img/your-photo.jpg`.
-3. Remove `images.remotePatterns` from `next.config.ts` once no remote images remain.
+The 17 files are **self-hosted** in `public/img/` (5.6 MB total, capped at
+1600px, re-encoded at quality 82) rather than hot-linked. Hot-linking them was
+measurably worse: a cold `next/image` fetch from the Pexels CDN took ~2.4s and
+several timed out under load, versus ~0.08s served locally.
+
+One helper in `config/content.ts` resolves a photo id to its file:
+
+```ts
+export const img = (id: number) => `/img/silk-${id}.jpg`;
+```
+
+To change a picture, drop a new file into `public/img/` and change the numeric
+`imageId` (saree cards) or `id` (gallery) in `config/content.ts`. Nothing else
+needs editing.
+
+**Do not source images from Pinterest.** It is an aggregator of other people's
+copyrighted photos, not a stock library, so republishing them on a commercial
+site is infringement. It is also technically impossible here: Pinterest's
+`robots.txt` is `Disallow: /` for all crawlers, and `i.pinimg.com` returns HTTP
+403 to any external referer, so hotlinked images render as broken.
+
+To use your own shop photographs instead — strongly recommended once you have
+them:
+
+1. Put the files in `public/img/`.
+2. Point `img()` at them, or replace the `img(...)` calls with your own paths.
 
 `next/image` handles sizing, lazy loading and modern formats automatically.
 

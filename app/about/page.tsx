@@ -6,7 +6,7 @@ import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import { Section, SectionHead, Wrap } from "@/components/ui";
 import { business } from "@/config/business";
-import { whyChooseUs } from "@/config/content";
+import { img, whyChooseUs } from "@/config/content";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -31,7 +31,7 @@ export default function AboutPage() {
         eyebrow="About us"
         title={<>Four decades of reading <span className="foil-text">silk by hand</span>.</>}
         lead="We buy old silk directly from households across Tamil Nadu — no middlemen, no commission, no waiting for payment."
-        image="https://images.unsplash.com/photo-1773847099342-33b0381cbe0d"
+        image={img(17777833)}
       />
 
       <Section>
@@ -61,16 +61,16 @@ export default function AboutPage() {
             <Reveal delay={120}>
               <div className="relative pb-12">
                 <Image
-                  src="https://images.unsplash.com/photo-1786871204247-60f342ae81a8?w=800&q=80"
-                  alt="A wooden handloom strung with colourful woven silk and yarn"
+                  src={img(17777833)}
+                  alt="A weaver working silk on a traditional loom in Varanasi"
                   width={800}
                   height={1000}
                   sizes="(max-width: 1024px) 90vw, 540px"
                   className="aspect-4/5 w-full rounded-[22px] border border-line-gold object-cover shadow-mid"
                 />
                 <Image
-                  src="https://images.unsplash.com/photo-1759738099669-d64b0656f6cf?w=500&q=80"
-                  alt="Weavers working fabric on a traditional loom"
+                  src={img(14695808)}
+                  alt="An artisan weaving vibrant silk threads on a handloom"
                   width={500}
                   height={500}
                   sizes="220px"

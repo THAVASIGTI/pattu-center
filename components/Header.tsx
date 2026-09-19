@@ -120,7 +120,7 @@ export default function Header() {
               href={waLink()}
               target="_blank"
               rel="noopener noreferrer"
-              className="foil hidden min-h-12 items-center gap-2 rounded-full px-6 text-[0.93rem] font-semibold text-[#3a2a06] shadow-[0_6px_20px_rgba(192,145,47,.36)] transition-transform hover:-translate-y-0.5 xl:inline-flex"
+              className="foil hidden min-h-12 items-center gap-2 rounded-full px-6 text-[0.93rem] font-semibold whitespace-nowrap text-[#3a2a06] shadow-[0_6px_20px_rgba(192,145,47,.36)] transition-transform hover:-translate-y-0.5 xl:inline-flex"
             >
               Get a Price
             </a>

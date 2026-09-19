@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import CtaBand from "@/components/CtaBand";
 import { Clock, Mail, Phone, Pin, WhatsApp } from "@/components/Icons";
 import PageHero from "@/components/PageHero";
+import { img } from "@/config/content";
 import Reveal from "@/components/Reveal";
 import { Button, Section, SectionHead, Wrap } from "@/components/ui";
 import { branches, business, waLink } from "@/config/business";
@@ -22,7 +23,7 @@ export default function ContactPage() {
         eyebrow="Contact us"
         title={<>Talk to us <span className="foil-text">today</span>.</>}
         lead="Call, WhatsApp photos of your sarees, or email us. We reply the same day, six days a week."
-        image="https://images.unsplash.com/photo-1606941060060-3d317be9947c"
+        image={img(7676340)}
       >
         <Button href={business.phones[0].href} variant="gold">
           <Phone className="size-[17px]" />

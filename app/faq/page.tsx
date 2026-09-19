@@ -4,7 +4,7 @@ import Faq from "@/components/Faq";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import { Section, Wrap } from "@/components/ui";
-import { faqs } from "@/config/content";
+import { img, faqs } from "@/config/content";
 
 export const metadata: Metadata = {
   title: "FAQ",
@@ -36,7 +36,7 @@ export default function FaqPage() {
         eyebrow="Questions"
         title={<>Everything people ask <span className="foil-text">before they sell</span>.</>}
         lead="If your question isn't here, call or send a WhatsApp message — we answer the same day."
-        image="https://images.unsplash.com/photo-1619043518800-7f14be467dca"
+        image={img(37892693)}
       />
 
       <Section>

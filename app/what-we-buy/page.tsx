@@ -4,7 +4,7 @@ import CtaBand from "@/components/CtaBand";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import { Button, Card, Section, SectionHead, Wrap } from "@/components/ui";
-import { sareeTypes } from "@/config/content";
+import { img, sareeTypes } from "@/config/content";
 
 export const metadata: Metadata = {
   title: "What We Buy",
@@ -21,7 +21,7 @@ export default function WhatWeBuyPage() {
         eyebrow="What we buy"
         title={<>If it carries <span className="foil-text">silk and zari</span>, bring it to us.</>}
         lead="We take the whole saree — body, border and pallu — and pay by weight, silk purity and the amount of zari woven into it."
-        image="https://images.unsplash.com/photo-1612744192242-35cd7a7d35e6"
+        image={img(5439054)}
       />
 
       <Section>
@@ -32,7 +32,7 @@ export default function WhatWeBuyPage() {
                 <Card className="h-full">
                   <div className="aspect-4/3 overflow-hidden bg-cream-2">
                     <Image
-                      src={`${t.image}?w=640&q=80`}
+                      src={img(t.imageId)}
                       alt={t.alt}
                       width={640}
                       height={480}

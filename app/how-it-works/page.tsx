@@ -4,7 +4,7 @@ import { Check } from "@/components/Icons";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import { Button, Section, SectionHead, Wrap } from "@/components/ui";
-import { processSteps } from "@/config/content";
+import { img, processSteps } from "@/config/content";
 
 export const metadata: Metadata = {
   title: "How It Works",
@@ -21,7 +21,7 @@ export default function HowItWorksPage() {
         eyebrow="How it works"
         title={<>Four steps, <span className="foil-text">one visit</span>.</>}
         lead="Most customers are finished in under twenty minutes, cash in hand."
-        image="https://images.unsplash.com/photo-1759738099669-d64b0656f6cf"
+        image={img(14695808)}
       />
 
       <Section>

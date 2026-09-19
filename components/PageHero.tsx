@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
+import { img } from "@/config/content";
 import { Crumbs, Ornament, Wrap } from "./ui";
 
 /** Shared hero band for every inner page. */
@@ -7,7 +8,7 @@ export default function PageHero({
   eyebrow,
   title,
   lead,
-  image = "https://images.unsplash.com/photo-1686212164366-b25166623992",
+  image = img(7676347),
   crumbs,
   children,
 }: {
@@ -22,7 +23,7 @@ export default function PageHero({
     <section className="relative overflow-hidden bg-royal-deep text-cream">
       <div className="absolute inset-0">
         <Image
-          src={`${image}?w=1400&q=70`}
+          src={image}
           alt=""
           aria-hidden
           fill
