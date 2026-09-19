@@ -61,9 +61,15 @@ The site then lives at `https://<user>.github.io/pattu-center/`.
 ### Why the basePath exists
 
 A GitHub Pages *project* site is served from `/<repo>/`, not from the domain
-root, so every asset needs that prefix or it 404s. `next.config.ts` applies
-`basePath` and `assetPrefix` only when `GITHUB_PAGES=true`, which the workflow
-sets — so `npm run dev` still works at `localhost:3000/`.
+root, so every asset needs that prefix or it 404s.
+
+One variable carries it: **`NEXT_PUBLIC_BASE_PATH`**. `next.config.ts` derives
+`basePath`/`assetPrefix` from it and `config/content.ts` uses it to prefix image
+paths, so the two cannot drift. The workflow fills it from
+`actions/configure-pages`, which reports the real path for this repo — so a
+project site, a user site and local dev all work without the repo name being
+hardcoded anywhere. `"/"` and trailing slashes normalise to empty, since Next
+rejects a `basePath` of `"/"`.
 
 Two things basePath does **not** cover on its own, both handled explicitly:
 

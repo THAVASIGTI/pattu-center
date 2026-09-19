@@ -27,29 +27,47 @@ jobs:
           node-version: 22
           cache: npm
 
+      # Must come before the build: it reports the path this repo is served
+      # from, which the build needs baked into every asset URL. For a project
+      # site that is "/pattu-center"; for a user site it is empty.
+      - name: Resolve Pages base path
+        id: pages
+        uses: actions/configure-pages@v5
+
       - name: Install dependencies
         run: npm ci
 
-      - name: Lint and type-check
+      - name: Type-check and lint
         run: |
           npx tsc --noEmit
-          npx eslint .
+          npm run lint
 
       - name: Build static export
         env:
-          # Project site lives under /<repo>/, so assets need that prefix.
-          GITHUB_PAGES: "true"
-          NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
+          # Single source of truth: next.config.ts derives basePath from this,
+          # and config/content.ts uses it to prefix image paths.
+          NEXT_PUBLIC_BASE_PATH: ${{ steps.pages.outputs.base_path }}
         run: npm run build
 
-      - name: Confirm the export looks right
+      - name: Verify the export
+        env:
+          BASE: ${{ steps.pages.outputs.base_path }}
         run: |
-          test -f out/index.html          || { echo "no index.html"; exit 1; }
-          test -f out/.nojekyll           || { echo "no .nojekyll — Jekyll would eat _next/"; exit 1; }
-          test -d out/_next               || { echo "no _next/ assets"; exit 1; }
-          echo "pages built: $(find out -name '*.html' | wc -l)"
+          set -euo pipefail
+          test -f out/index.html || { echo "::error::no index.html"; exit 1; }
+          test -d out/_next      || { echo "::error::no _next/ assets"; exit 1; }
+          # Without .nojekyll, Pages runs Jekyll and drops _next/ entirely,
+          # taking every stylesheet and script with it.
+          test -f out/.nojekyll  || { echo "::error::no .nojekyll"; exit 1; }
 
-      - uses: actions/configure-pages@v5
+          # Assets must carry the base path, or they 404 once deployed.
+          if [ -n "$BASE" ] && grep -q 'src="/img/' out/index.html; then
+            echo "::error::image paths are missing the $BASE prefix"
+            exit 1
+          fi
+
+          echo "pages built: $(find out -name '*.html' | wc -l)"
+          echo "images:      $(find out/img -type f | wc -l)"
 
       - uses: actions/upload-pages-artifact@v3
         with:
