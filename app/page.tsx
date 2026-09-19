@@ -50,35 +50,33 @@ export default function HomePage() {
               <i className="size-1.5 animate-pulse-ring rounded-full bg-yellow-light" />
               {business.foundedText}
               <span className="font-tamil text-[0.78rem] normal-case tracking-normal text-yellow-light/80">
-                · நாற்பது ஆண்டு அனுபவம்
+                · {business.foundedTextTa}
               </span>
             </span>
 
             <AnimatedHeading
               className="font-serif text-[clamp(2rem,7.4vw,3.95rem)] leading-[1.14] text-white"
               segments={[
-                { text: "Sell your old" },
-                { text: " silk sarees ", foil: true },
-                { text: "for what they are truly worth." },
+                { text: "Sell your old silk at a" },
+                { text: " fair price.", foil: true },
               ]}
             />
 
             <p className="mt-3 font-tamil text-[clamp(1rem,4vw,1.35rem)] leading-snug text-cream/85">
-              உங்கள் பழைய பட்டு புடவைகளை நியாயமான விலைக்கு விற்கலாம்.
+              பழைய பட்டுக்கு நல்ல விலை.
             </p>
 
             <RotatingLines
               lines={[
-                { ta: "பழைய பட்டு வீணாகாது", en: "Old silk should never go to waste" },
-                { ta: "உங்கள் கண் முன்னே எடை போடப்படும்", en: "Weighed in front of your own eyes" },
-                { ta: "அன்றைக்கே பணம் கையில்", en: "Cash in your hand the very same day" },
-                { ta: "வீட்டிற்கே வந்து வாங்குகிறோம்", en: "We come to your home and collect" },
+                { ta: "பழைய பட்டு வீணாகாது", en: "Old silk is never waste" },
+                { ta: "கண் முன்னே எடை", en: "Weighed in front of you" },
+                { ta: "அன்றே பணம்", en: "Cash the same day" },
+                { ta: "வீட்டிற்கே வருவோம்", en: "We come to your home" },
               ]}
             />
 
             <p className="mt-4 max-w-[48ch] text-[clamp(.97rem,2.6vw,1.07rem)] text-cream/80">
-              Old pattu sarees, Kanchipuram and Mysore silk, silk vetti, zari and silver — weighed
-              in front of you, valued honestly, and paid for in cash the same day.
+              Pattu sarees, silk vetti, zari and silver. Weighed in front of you, paid the same day.
             </p>
 
             <div className="mt-7 flex flex-wrap gap-2.5">
@@ -93,10 +91,10 @@ export default function HomePage() {
             </div>
 
             <p className="mt-4 text-[0.84rem] text-cream/55">
-              Free doorstep pickup · Instant cash · No obligation to sell
+              Free pickup · Cash same day · No obligation
             </p>
             <p className="mt-1 font-tamil text-[0.86rem] text-cream/50">
-              இலவச வீட்டு சேவை · உடனடி பணம் · விற்றே ஆக வேண்டும் என்பதில்லை
+              இலவச வரவு · அன்றே பணம் · கட்டாயம் இல்லை
             </p>
           </div>
 

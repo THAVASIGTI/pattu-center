@@ -12,7 +12,8 @@ export const business = {
   tagline: "பழைய பட்டு வீணாகாது",
   taglineEn: "Old silk should never go to waste",
   owner: "M. Sarathkumar",
-  foundedText: "Four decades in the silk trade",
+  foundedText: "40 years in silk",
+  foundedTextTa: "40 ஆண்டு அனுபவம்",
   siteUrl: "https://www.srikamatchipattucenter.in",
 
   phones: [

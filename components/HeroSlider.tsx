@@ -6,16 +6,17 @@ import { useCallback, useEffect, useRef, useState } from "react";
 export type Slide = { src: string; alt: string; caption: string; captionTa: string };
 
 /**
- * How long each slide holds, in ms. At 1000ms the rotation is deliberately
- * brisk — raise this to ~3500 if you want the captions to be readable.
- * TRANSITION must stay comfortably below INTERVAL or slides overlap.
+ * How long each slide holds, in ms — one second, as specified.
+ * Slides swap cleanly rather than sliding across: at this cadence any drift
+ * reads as a smear, so FADE is kept short and there is no transform.
+ * Raise INTERVAL to ~3500 if you ever want the captions to be readable.
  */
 const INTERVAL = 1000;
-const TRANSITION = 550;
+const FADE = 200;
 
 /**
- * Auto-advancing hero slideshow. Slides cross-fade and drift sideways one at a
- * time; the rotation pauses on hover/focus and is disabled entirely for
+ * Auto-advancing hero slideshow. Each image swaps for the next once a second;
+ * the rotation pauses on hover/focus and is disabled entirely for
  * reduced-motion users, who simply get the first image.
  */
 export default function HeroSlider({ slides }: { slides: Slide[] }) {
@@ -64,9 +65,9 @@ export default function HeroSlider({ slides }: { slides: Slide[] }) {
           return (
             <div
               key={s.src}
-              style={{ transitionDuration: `${TRANSITION}ms` }}
-              className={`hero-slide absolute inset-0 transition-[opacity,transform] ease-out ${
-                active ? "z-10 translate-x-0 opacity-100" : "z-0 translate-x-6 opacity-0"
+              style={{ transitionDuration: `${FADE}ms` }}
+              className={`hero-slide absolute inset-0 transition-opacity ease-linear ${
+                active ? "z-10 opacity-100" : "z-0 opacity-0"
               }`}
               aria-hidden={!active}
             >

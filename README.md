@@ -87,14 +87,16 @@ Three moving parts, all in `app/page.tsx`:
   text` does not reach through the `inline-block` wrappers from a parent.
 - **`RotatingLines`** cycles a Tamil promise with its English translation every
   3.2s. Height is reserved for the tallest line so swapping never shifts the
-  page.
-- **`HeroSlider`** cross-fades four images, drifting leftwards.
+  page. The lines are stacked, so the outgoing one fades out fully (220ms)
+  before the incoming one starts — a plain crossfade showed both at once and
+  the text collided.
+- **`HeroSlider`** swaps four images, one per second.
 
 **Slide speed:** `INTERVAL` at the top of `components/HeroSlider.tsx` is
-`1000` (one second per slide) as requested, with `TRANSITION` at `550` so each
-crossfade finishes before the next begins. At this speed the captions flash by
-— raise `INTERVAL` to around `3500` if you want them readable. A foil progress
-bar drains over each slide's hold so the cadence is visible.
+`1000` (one second per image), with `FADE` at `200`. Images swap cleanly with
+no sideways motion — at a one-second cadence any drift reads as a smear. A foil
+progress bar drains over each hold so the rhythm is visible. At this speed the
+captions flash by; raise `INTERVAL` to around `3500` if you want them readable.
 
 The slider pauses on hover and keyboard focus, and has dot controls. Reduced
 motion disables the rotation, the heading animation and the line rotation.

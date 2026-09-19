@@ -4,6 +4,9 @@ import { useEffect, useState } from "react";
 
 export type Line = { ta: string; en: string };
 
+const FADE_OUT = 220;
+const FADE_IN = 380;
+
 /**
  * Cycles a promise line, showing the Tamil and the English together and
  * swapping to the next pair on a timer. Height is reserved so nothing shifts.
@@ -36,7 +39,14 @@ export default function RotatingLines({
           <div
             key={l.en}
             aria-hidden={!active}
-            className={`absolute inset-0 transition-all duration-700 ease-out ${
+            // The lines are stacked, so a plain crossfade shows both at once and
+            // the text collides. The outgoing line clears first, then the
+            // incoming one starts after that delay.
+            style={{
+              transitionDuration: active ? `${FADE_IN}ms` : `${FADE_OUT}ms`,
+              transitionDelay: active ? `${FADE_OUT}ms` : "0ms",
+            }}
+            className={`absolute inset-0 transition-all ease-out ${
               active ? "translate-y-0 opacity-100" : "pointer-events-none -translate-y-2 opacity-0"
             }`}
           >
