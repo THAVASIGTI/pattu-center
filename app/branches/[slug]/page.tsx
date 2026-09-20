@@ -10,6 +10,10 @@ import { sareeTypes } from "@/config/content";
 
 type Params = { params: Promise<{ slug: string }> };
 
+/** Silver and brass are not offered at the counters, so the branch pages list
+ *  only the silk. The category still appears on /what-we-buy. */
+const BRANCH_EXCLUDES = new Set(["silver"]);
+
 /** One static route per branch — /branches/madurai, /branches/thanjavur, … */
 export function generateStaticParams() {
   return branches.map((b) => ({ slug: b.slug }));
@@ -175,15 +179,20 @@ export default async function BranchPage({ params }: Params) {
           </Reveal>
           <Reveal>
             <div className="grid gap-3.5 md:grid-cols-2 lg:grid-cols-3">
-              {sareeTypes.map((t) => (
-                <article key={t.slug} className="flex items-start gap-3.5 rounded-[22px] border border-line bg-white p-5 shadow-soft">
-                  <Check className="mt-0.5 size-5 shrink-0 text-yellow" />
-                  <div>
-                    <h3 className="mb-1 font-serif text-[1.08rem] text-green-deep">{t.name}</h3>
-                    <p className="text-[0.9rem] text-ink-soft">{t.blurb}</p>
-                  </div>
-                </article>
-              ))}
+              {sareeTypes
+                .filter((t) => !BRANCH_EXCLUDES.has(t.slug))
+                .map((t) => (
+                  <article
+                    key={t.slug}
+                    className="flex items-start gap-3.5 rounded-[22px] border border-line bg-white p-5 shadow-soft"
+                  >
+                    <Check className="mt-0.5 size-5 shrink-0 text-yellow" />
+                    <div>
+                      <h3 className="mb-1 font-serif text-[1.08rem] text-green-deep">{t.name}</h3>
+                      <p className="text-[0.9rem] text-ink-soft">{t.blurb}</p>
+                    </div>
+                  </article>
+                ))}
             </div>
           </Reveal>
         </Wrap>
