@@ -6,12 +6,12 @@ import PageHero from "@/components/PageHero";
 import { img } from "@/config/content";
 import Reveal from "@/components/Reveal";
 import { Section, SectionHead, Wrap } from "@/components/ui";
-import { branches, waLink } from "@/config/business";
+import { branchCount, branchCountWord, branches, waLink } from "@/config/business";
 
 export const metadata: Metadata = {
   title: "Branches",
   description:
-    "Seven branches across Tamil Nadu: Madurai head office, Thoothukudi (two counters), Thanjavur, Villupuram, Tiruppur and Coimbatore.",
+    `${branchCount} branches across Tamil Nadu: Madurai head office, two in Thoothukudi, two in Thanjavur, plus Villupuram, Tiruppur and Coimbatore.`,
   alternates: { canonical: "/branches" },
 };
 
@@ -27,7 +27,7 @@ export default function BranchesPage() {
       <PageHero
         crumbs={[{ label: "Home", href: "/" }, { label: "Branches" }]}
         eyebrow="Find us"
-        title={<>Seven branches across <span className="foil-text">Tamil Nadu</span>.</>}
+        title={<>{branchCountWord.charAt(0).toUpperCase() + branchCountWord.slice(1)} branches across <span className="foil-text">Tamil Nadu</span>.</>}
         lead="Walk in during shop hours, or call the nearest branch and we will come to your door."
         image={img(18728089)}
       />
@@ -44,7 +44,7 @@ export default function BranchesPage() {
               <article className="grad-green flex h-full flex-col rounded-[22px] p-6 text-cream">
                 <h2 className="mb-3 font-serif text-[1.25rem] text-white">Not near a branch?</h2>
                 <p className="flex-1 text-[0.92rem] text-cream/80">
-                  We run collection routes across the state for ten sarees or more. Send photos on
+                  We run collection routes across the state and will come for even one or two sarees. Send photos on
                   WhatsApp and we will tell you when we are next in your area.
                 </p>
                 <div className="mt-4 border-t border-yellow/30 pt-4">

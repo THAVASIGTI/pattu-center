@@ -8,8 +8,8 @@ export const business = {
   name: "Silver Zari",
   shortName: "Silver Zari",
   legalName: "Silver Zari",
-  tagline: "பழைய பட்டு வீணாகாது",
-  taglineEn: "Old silk should never go to waste",
+  tagline: "உங்கள் பழைய பட்டுக்கு அதிக விலை பெறுங்கள்",
+  taglineEn: "Get a higher price for your old silk",
   // Run as a partnership by two brothers.
   owners: ["M. Rasukutti", "M. Sarathkumar"],
   ownersLabel: "M. Rasukutti & M. Sarathkumar",
@@ -31,7 +31,17 @@ export const business = {
   ],
 
   email: "srichenu84@gmail.com",
-  hours: "Monday to Saturday, 9:30 am – 8:30 pm",
+  hours: "Open all days, 10:00 am – 8:00 pm",
+  /** Rendered as a table on each branch page. */
+  hoursTable: [
+    { day: "Monday", open: "10:00 am – 8:00 pm" },
+    { day: "Tuesday", open: "10:00 am – 8:00 pm" },
+    { day: "Wednesday", open: "10:00 am – 8:00 pm" },
+    { day: "Thursday", open: "10:00 am – 8:00 pm" },
+    { day: "Friday", open: "10:00 am – 8:00 pm" },
+    { day: "Saturday", open: "10:00 am – 8:00 pm" },
+    { day: "Sunday", open: "10:00 am – 8:00 pm" },
+  ],
 
   // Share-link tracking parameters (?si=, ?stkn=) were stripped: both forms
   // resolve identically, and stkn is a session-scoped share token that does
@@ -90,8 +100,8 @@ export const branches: Branch[] = [
   {
     slug: "thoothukudi",
     city: "Thoothukudi",
-    title: "Thoothukudi — Shivan Kovil Street",
-    shortLabel: "Thoothukudi — Shivan Kovil St",
+    title: "Thoothukudi — Branch 1, Shivan Kovil Street",
+    shortLabel: "Thoothukudi Branch 1",
     lines: ["Shivan Kovil Street", "EP Kavitha Marriage Hall", "Thoothukudi"],
     mapQuery: "Shivan+Kovil+Street+EP+Kavitha+Marriage+Hall+Thoothukudi",
     phoneIndex: 0,
@@ -107,7 +117,7 @@ export const branches: Branch[] = [
     slug: "thoothukudi-jn-pattu-mahal",
     city: "Thoothukudi",
     title: "Thoothukudi — Branch 2, near JN Pattu Mahal",
-    shortLabel: "Thoothukudi — JN Pattu Mahal",
+    shortLabel: "Thoothukudi Branch 2",
     lines: ["Chinnathurai & Co", "Near JN Pattu Mahal", "Thoothukudi"],
     mapQuery: "JN+Pattu+Mahal+Thoothukudi",
     phoneIndex: 1,
@@ -121,13 +131,15 @@ export const branches: Branch[] = [
   {
     slug: "thanjavur",
     city: "Thanjavur",
-    title: "Thanjavur",
+    title: "Thanjavur — Branch 1, South Street",
+    shortLabel: "Thanjavur Branch 1",
     lines: [
       "Opposite Reliance Digital",
       "Ramasamy Bhakther Marriage Hall",
+      "South Street",
       "Thanjavur",
     ],
-    mapQuery: "Ramasamy+Bhakther+Marriage+Hall+Opposite+Reliance+Digital+Thanjavur",
+    mapQuery: "South+Street+Ramasamy+Bhakther+Marriage+Hall+Opposite+Reliance+Digital+Thanjavur",
     phoneIndex: 0,
     intro:
       "Thanjavur households hold some of the oldest silk in the state — temple sarees and nine-yard pattu passed down for generations. We are opposite Reliance Digital at Ramasamy Bhakther Marriage Hall.",
@@ -138,6 +150,27 @@ export const branches: Branch[] = [
     ],
   },
   {
+    slug: "thanjavur-mela-veedhi",
+    city: "Thanjavur",
+    title: "Thanjavur — Branch 2, Mela Veedhi",
+    shortLabel: "Thanjavur Branch 2",
+    lines: [
+      "Opposite Thaeradi",
+      "Near Micle Tea Shop",
+      "Mela Veedhi",
+      "Thanjavur",
+    ],
+    mapQuery: "Mela+Veedhi+Thaeradi+Thanjavur",
+    phoneIndex: 1,
+    intro:
+      "Our second Thanjavur counter on Mela Veedhi, opposite Thaeradi and beside Micle Tea Shop — handy if you are already near the temple end of town.",
+    areas: [
+      "Mela Veedhi", "Thaeradi", "Big Temple area", "South Street",
+      "Karanthai", "Vilar Road", "Nanjikottai Road", "Kumbakonam",
+      "Thiruvaiyaru", "Papanasam",
+    ],
+  },
+  {
     slug: "villupuram",
     city: "Villupuram",
     title: "Villupuram",
@@ -145,7 +178,7 @@ export const branches: Branch[] = [
     mapQuery: "Veeravaliyamman+Kovil+Opposite+SBI+Bank+Villupuram",
     phoneIndex: 1,
     intro:
-      "Find us near Veeravaliyamman Kovil, directly opposite the SBI branch. Free home collection across Villupuram district for ten sarees or more.",
+      "Find us near Veeravaliyamman Kovil, directly opposite the SBI branch. Free home collection across Villupuram district, even for one or two sarees.",
     areas: [
       "Villupuram Town", "Kakkan Nagar", "Vikravandi", "Tindivanam",
       "Gingee", "Ulundurpet", "Kandachipuram", "Mailam",
@@ -187,3 +220,13 @@ export const branches: Branch[] = [
 ];
 
 export const branchBySlug = (slug: string) => branches.find((b) => b.slug === slug);
+
+/** Derived from the list above so prose cannot drift when a branch is added. */
+const NUMBER_WORDS = [
+  "zero", "one", "two", "three", "four", "five", "six",
+  "seven", "eight", "nine", "ten", "eleven", "twelve",
+];
+export const branchCount = branches.length;
+export const branchCountWord = NUMBER_WORDS[branchCount] ?? String(branchCount);
+export const branchCountWordCap =
+  branchCountWord.charAt(0).toUpperCase() + branchCountWord.slice(1);

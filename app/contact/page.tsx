@@ -5,7 +5,7 @@ import PageHero from "@/components/PageHero";
 import { img } from "@/config/content";
 import Reveal from "@/components/Reveal";
 import { Button, Section, SectionHead, Wrap } from "@/components/ui";
-import { branches, business, waLink } from "@/config/business";
+import { branchCountWordCap, branches, business, waLink } from "@/config/business";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -147,7 +147,7 @@ export default function ContactPage() {
       <Section tone="cream">
         <Wrap>
           <Reveal>
-            <SectionHead eyebrow="All branches" title="Seven places to find us." />
+            <SectionHead eyebrow="All branches" title={`${branchCountWordCap} places to find us.`} />
           </Reveal>
           <Reveal>
             <div className="grid gap-3.5 md:grid-cols-2 lg:grid-cols-3">

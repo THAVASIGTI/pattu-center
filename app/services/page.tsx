@@ -63,7 +63,7 @@ export default function ServicesPage() {
                 "Instant payment, never in instalments",
                 "Quick evaluation — usually under twenty minutes",
                 "Professional, women-friendly staff",
-                "Free doorstep collection on ten sarees or more",
+                "Free doorstep collection, even for one or two sarees",
                 "No obligation to sell once we have quoted",
               ].map((p) => (
                 <div key={p} className="rounded-[14px] border border-yellow/25 bg-cream/[0.055] p-5 text-cream/80">

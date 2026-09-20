@@ -70,10 +70,9 @@ export default async function BranchPage({ params }: Params) {
               <ul className="grid gap-3">
                 {[
                   "Weighed openly on a calibrated scale — you watch every reading.",
-                  `Free doorstep pickup across ${branch.city} for ten sarees or more.`,
+                  `Free doorstep pickup across ${branch.city} — even for one or two sarees.`,
                   "Cash, UPI or bank transfer the moment you accept the price.",
                   "Torn, faded and stained silk still bought for its zari.",
-                  "Silver articles and brass valued on the same visit.",
                 ].map((p) => (
                   <li key={p} className="flex items-start gap-3 text-[0.96rem] text-ink-soft">
                     <Check className="mt-0.5 size-5 shrink-0 text-yellow" />
@@ -113,8 +112,30 @@ export default async function BranchPage({ params }: Params) {
                   <a href={`mailto:${business.email}`} className="inline-flex items-center gap-2.5 break-all font-semibold text-green hover:text-yellow">
                     <Mail className="size-4" /> {business.email}
                   </a>
-                  <p className="mt-1 flex items-center gap-2.5 text-[0.9rem] text-ink-mute">
-                    <Clock className="size-4" /> {business.hours}
+                </div>
+
+                {/* Opening hours — the same every day, but shown in full so
+                    nobody has to guess whether Sunday is included. */}
+                <div className="mt-5 border-t border-line pt-5">
+                  <h4 className="mb-3 flex items-center gap-2.5 font-serif text-[1.05rem] text-green-deep">
+                    <Clock className="size-4 text-yellow" />
+                    Opening hours
+                  </h4>
+                  <table className="w-full text-[0.92rem]">
+                    <tbody>
+                      {business.hoursTable.map((row) => (
+                        <tr key={row.day} className="border-b border-line last:border-b-0">
+                          <th scope="row" className="py-2 text-left font-medium text-ink-soft">
+                            {row.day}
+                          </th>
+                          <td className="py-2 text-right text-ink">{row.open}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                  <p className="mt-3 inline-flex items-center gap-2 rounded-full bg-green-soft/10 px-3 py-1.5 text-[0.82rem] font-semibold text-green">
+                    <span aria-hidden className="size-1.5 rounded-full bg-green-soft" />
+                    Open all seven days
                   </p>
                 </div>
               </article>
@@ -131,7 +152,7 @@ export default async function BranchPage({ params }: Params) {
               tone="dark"
               eyebrow="Areas covered"
               title={`We collect right across ${branch.city}.`}
-              lead="Free pickup for ten sarees or more. Call ahead and we will fix a time that suits your household."
+              lead="Free pickup even for one or two sarees. Call ahead and we will fix a time that suits your household."
             />
           </Reveal>
           <Reveal>

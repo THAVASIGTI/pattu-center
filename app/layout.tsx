@@ -72,7 +72,7 @@ const jsonLd = {
   email: business.email,
   url: business.siteUrl,
   priceRange: "₹₹",
-  openingHours: "Mo-Sa 09:30-20:30",
+  openingHours: "Mo-Su 10:00-20:00",
   founder: business.owners.map((name) => ({ "@type": "Person", name })),
   address: {
     "@type": "PostalAddress",

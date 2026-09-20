@@ -202,7 +202,7 @@ export const whyChooseUs = [
       "Most of our customers are women selling family silk. Our staff are trained to make that comfortable.",
   },
   {
-    title: "Seven branches",
+    title: "Branches across Tamil Nadu",
     blurb:
       "Madurai, Thoothukudi, Thanjavur, Villupuram, Tiruppur and Coimbatore, with collection runs in between.",
   },
@@ -246,7 +246,7 @@ export const faqs = [
   },
   {
     q: "Is doorstep pickup really free?",
-    a: "It is free for collections of ten sarees or more, anywhere we operate. There is no travel charge and no obligation to sell — if our price doesn't suit you we leave, and nothing is owed.",
+    a: "Yes, and there is no minimum — we will come for even one or two sarees, anywhere we operate. There is no travel charge and no obligation to sell; if our price doesn't suit you we leave, and nothing is owed.",
   },
   {
     q: "Can I exchange my old sarees instead of selling them?",
@@ -319,7 +319,7 @@ export const roadmap = [
     stop: "Pick how we meet",
     when: "You choose",
     blurb:
-      "Walk into any of our seven branches, or ask for a free home visit if you have ten sarees or more. We work around your timing.",
+      "Walk into any of our branches, or ask for a free home visit — we come for even one or two sarees. We work around your timing.",
   },
   {
     stop: "Open weighing",

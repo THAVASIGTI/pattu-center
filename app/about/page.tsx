@@ -49,7 +49,7 @@ export default function AboutPage() {
                 {business.name} has been in that trade for over forty years. It is run today by
                 two brothers in partnership — {business.owners[0]} and {business.owners[1]} — who
                 between them handle every branch, every valuation and every payment. Working side by
-                side means the same pair of standards travels to all seven counters: whichever of
+                side means the same pair of standards travels to every counter: whichever of
                 them you meet, the saree is unfolded on the counter, weighed openly, and the price
                 explained before you are asked to decide anything.
               </p>

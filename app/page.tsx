@@ -13,7 +13,7 @@ import StepStair from "@/components/StepStair";
 import { ArrowRight, Check, Phone, WhatsApp, serviceIcons } from "@/components/Icons";
 import Reveal from "@/components/Reveal";
 import { Button, Section, SectionHead, Wrap } from "@/components/ui";
-import { branches, business, waLink } from "@/config/business";
+import { branchCount, branchCountWordCap, branches, business, waLink } from "@/config/business";
 import {
   img,
   priceLedger,
@@ -134,7 +134,7 @@ export default function HomePage() {
       <section className="border-y border-line-yellow bg-[linear-gradient(90deg,#e6f2e9_0%,#f4faf5_50%,#e6f2e9_100%)]">
         <div className="grid grid-cols-2 gap-px bg-yellow/30 sm:grid-cols-4">
           {[
-            { n: "7", l: "Branches" },
+            { n: String(branchCount), l: "Branches" },
             { n: "40+", l: "Years" },
             { n: "Cash", l: "Same day" },
             { n: "Free", l: "Pickup" },
@@ -423,7 +423,7 @@ export default function HomePage() {
           <Reveal>
             <SectionHead
               eyebrow="Find us"
-              title="Seven branches across Tamil Nadu."
+              title={`${branchCountWordCap} branches across Tamil Nadu.`}
               lead="Walk in during shop hours, or call the nearest branch and we will come to you."
             />
           </Reveal>
@@ -435,7 +435,7 @@ export default function HomePage() {
               <article className="grad-green flex flex-col rounded-[22px] p-6 text-cream">
                 <h3 className="mb-3 font-serif text-[1.25rem] text-white">Not near a branch?</h3>
                 <p className="flex-1 text-[0.92rem] text-cream/80">
-                  We travel across Tamil Nadu for collections of ten sarees or more. Send photos on
+                  We travel across Tamil Nadu, and we will come for even one or two sarees. Send photos on
                   WhatsApp and we will tell you when we are next in your area.
                 </p>
                 <div className="mt-4 border-t border-yellow/30 pt-4">
