@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 /**
  * Counts up to `value` once scrolled into view. With reduced motion the final
- * figure is set straight away — the decision happens inside the observer
+ * figure is set straight away, the decision happens inside the observer
  * callback so no state is written during the effect body.
  */
 export default function Counter({ value, suffix = "+" }: { value: number; suffix?: string }) {

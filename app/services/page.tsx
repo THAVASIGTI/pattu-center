@@ -61,7 +61,7 @@ export default function ServicesPage() {
               {[
                 "Fair market value for every saree",
                 "Instant payment, never in instalments",
-                "Quick evaluation — usually under twenty minutes",
+                "Quick evaluation, usually under twenty minutes",
                 "Professional, women-friendly staff",
                 "Free doorstep collection, even for one or two sarees",
                 "No obligation to sell once we have quoted",

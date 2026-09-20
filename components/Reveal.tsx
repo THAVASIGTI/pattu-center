@@ -14,7 +14,7 @@ const HIDDEN: Record<From, string> = {
 
 /**
  * Fades content in as it scrolls into view, from a chosen direction.
- * Reduced-motion users get the content immediately — handled in CSS via
+ * Reduced-motion users get the content immediately, handled in CSS via
  * [data-reveal], so no state is written during the effect body.
  */
 export default function Reveal({

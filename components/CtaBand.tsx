@@ -17,7 +17,7 @@ export default function CtaBand({
               {title}
             </h2>
             <p className="mt-3 font-tamil text-yellow-light">
-              {business.tagline} — இன்றே அழையுங்கள்
+              {business.tagline}. இன்றே அழையுங்கள்
             </p>
           </div>
           <div className="flex flex-wrap gap-2.5">

@@ -51,7 +51,7 @@ export default function AnimatedHeading({
         <span key={gi}>
           {group.words.map(({ word, idx }) => (
             <span key={idx} className="inline-block overflow-hidden align-bottom">
-              {/* The gradient sits on the word itself — background-clip:text does
+              {/* The gradient sits on the word itself, background-clip:text does
                   not reach through these inline-block wrappers from a parent. */}
               <span
                 data-word

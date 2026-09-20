@@ -9,7 +9,7 @@ import { logoMark } from "@/config/content";
 import { Close, Menu, Phone, WhatsApp } from "./Icons";
 import { Wrap } from "./ui";
 
-/** Every entry is a real route — navigation is a page load, never an anchor jump. */
+/** Every entry is a real route, navigation is a page load, never an anchor jump. */
 export const navLinks = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About Us" },
@@ -24,7 +24,7 @@ export const navLinks = [
 
 function Brand({ dark = false }: { dark?: boolean }) {
   return (
-    <Link href="/" className="flex min-w-0 items-center gap-3" aria-label={`${business.name} — home`}>
+    <Link href="/" className="flex min-w-0 items-center gap-3" aria-label={`${business.name} home`}>
       <Image
         src={logoMark}
         alt=""

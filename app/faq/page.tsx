@@ -35,7 +35,7 @@ export default function FaqPage() {
         crumbs={[{ label: "Home", href: "/" }, { label: "FAQ" }]}
         eyebrow="Questions"
         title={<>Everything people ask <span className="foil-text">before they sell</span>.</>}
-        lead="If your question isn't here, call or send a WhatsApp message — we answer the same day."
+        lead="If your question isn't here, call or send a WhatsApp message. We answer the same day."
         image={img(37892693)}
       />
 

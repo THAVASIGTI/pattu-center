@@ -1,7 +1,7 @@
 import Reveal from "./Reveal";
 
 /**
- * Balance-scale layout for the valuation factors — apt for a trade that prices
+ * Balance-scale layout for the valuation factors, apt for a trade that prices
  * by weight. The factor sits on a central pivot with what raises the price
  * weighing out to one side and what lowers it to the other; both arms grow
  * outward from the pivot as the row scrolls into view.
@@ -16,7 +16,7 @@ export default function PriceScale({
       {rows.map((row, i) => (
         <Reveal key={row.factor} from="scale" delay={i * 110} duration={800}>
           <article className="group grid items-stretch gap-0 overflow-hidden rounded-[22px] border border-line bg-white shadow-soft transition-shadow duration-500 hover:shadow-mid lg:grid-cols-[1fr_auto_1fr]">
-            {/* raises — weighs the price up */}
+            {/* raises, weighs the price up */}
             <div className="order-2 flex items-center gap-3 border-t border-line bg-green-soft/[0.07] px-5 py-4 lg:order-1 lg:justify-end lg:border-t-0 lg:border-r lg:px-6 lg:py-6 lg:text-right">
               <span className="order-2 text-[0.92rem] text-ink-soft lg:order-1">
                 <span className="mb-0.5 block text-[0.66rem] font-semibold uppercase tracking-[0.16em] text-green">
@@ -46,7 +46,7 @@ export default function PriceScale({
               </span>
             </div>
 
-            {/* lowers — weighs it down */}
+            {/* lowers, weighs it down */}
             <div className="order-3 flex items-center gap-3 border-t border-line bg-yellow/[0.07] px-5 py-4 lg:border-t-0 lg:border-l lg:px-6 lg:py-6">
               <span
                 aria-hidden

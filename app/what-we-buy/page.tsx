@@ -9,7 +9,7 @@ import { img, sareeTypes } from "@/config/content";
 export const metadata: Metadata = {
   title: "What We Buy",
   description:
-    "Kanchipuram, Mysore, Banarasi and tissue silk, nine-yard sarees, silk vetti, ravikai, loose zari, damaged silk and silver — everything we buy and how it is valued.",
+    "Kanchipuram, Mysore, Banarasi and tissue silk, nine-yard sarees, silk vetti, ravikai, loose zari, damaged silk and silver. Everything we buy and how it is valued.",
   alternates: { canonical: "/what-we-buy" },
 };
 
@@ -20,7 +20,7 @@ export default function WhatWeBuyPage() {
         crumbs={[{ label: "Home", href: "/" }, { label: "What We Buy" }]}
         eyebrow="What we buy"
         title={<>If it carries <span className="foil-text">silk and zari</span>, bring it to us.</>}
-        lead="We take the whole saree — body, border and pallu — and pay by weight, silk purity and the amount of zari woven into it."
+        lead="We take the whole saree: body, border and pallu. The price follows weight, silk purity and the amount of zari woven into it."
         image={img(5439054)}
       />
 

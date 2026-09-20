@@ -16,7 +16,7 @@ export const business = {
   foundedText: "40 years in silk",
   foundedTextTa: "40 ஆண்டு அனுபவம்",
   // Drives canonical URLs and Open Graph. Currently the GitHub Pages address
-  // this deploys to — change it (and basePath in next.config.ts) when a real
+  // this deploys to, change it (and basePath in next.config.ts) when a real
   // domain is pointed at the site.
   siteUrl: "https://thavasigti.github.io/pattu-center",
 
@@ -31,16 +31,16 @@ export const business = {
   ],
 
   email: "srichenu84@gmail.com",
-  hours: "Open all days, 10:00 am – 8:00 pm",
+  hours: "Open all days, 10:00 am to 8:00 pm",
   /** Rendered as a table on each branch page. */
   hoursTable: [
-    { day: "Monday", open: "10:00 am – 8:00 pm" },
-    { day: "Tuesday", open: "10:00 am – 8:00 pm" },
-    { day: "Wednesday", open: "10:00 am – 8:00 pm" },
-    { day: "Thursday", open: "10:00 am – 8:00 pm" },
-    { day: "Friday", open: "10:00 am – 8:00 pm" },
-    { day: "Saturday", open: "10:00 am – 8:00 pm" },
-    { day: "Sunday", open: "10:00 am – 8:00 pm" },
+    { day: "Monday", open: "10:00 am to 8:00 pm" },
+    { day: "Tuesday", open: "10:00 am to 8:00 pm" },
+    { day: "Wednesday", open: "10:00 am to 8:00 pm" },
+    { day: "Thursday", open: "10:00 am to 8:00 pm" },
+    { day: "Friday", open: "10:00 am to 8:00 pm" },
+    { day: "Saturday", open: "10:00 am to 8:00 pm" },
+    { day: "Sunday", open: "10:00 am to 8:00 pm" },
   ],
 
   // Share-link tracking parameters (?si=, ?stkn=) were stripped: both forms
@@ -82,7 +82,7 @@ export const branches: Branch[] = [
   {
     slug: "madurai",
     city: "Madurai",
-    title: "Madurai — Head Office",
+    title: "Madurai Head Office",
     isHeadOffice: true,
     lines: [
       "Near The Chennai Silks",
@@ -102,7 +102,7 @@ export const branches: Branch[] = [
   {
     slug: "thoothukudi",
     city: "Thoothukudi",
-    title: "Thoothukudi — Branch 1, Shivan Kovil Street",
+    title: "Thoothukudi Branch 1, Shivan Kovil Street",
     shortLabel: "Thoothukudi Branch 1",
     badge: "Branch 1",
     lines: ["Shivan Kovil Street", "EP Kavitha Marriage Hall", "Thoothukudi"],
@@ -119,14 +119,14 @@ export const branches: Branch[] = [
   {
     slug: "thoothukudi-jn-pattu-mahal",
     city: "Thoothukudi",
-    title: "Thoothukudi — Branch 2, near JN Pattu Mahal",
+    title: "Thoothukudi Branch 2, near JN Pattu Mahal",
     shortLabel: "Thoothukudi Branch 2",
     badge: "Branch 2",
     lines: ["Chinnathurai & Co", "Near JN Pattu Mahal", "Thoothukudi"],
     mapQuery: "JN+Pattu+Mahal+Thoothukudi",
     phoneIndex: 1,
     intro:
-      "Our second Thoothukudi counter at Chinnathurai & Co, next to JN Pattu Mahal — convenient if you are already in the market area.",
+      "Our second Thoothukudi counter at Chinnathurai & Co, next to JN Pattu Mahal. Convenient if you are already in the market area.",
     areas: [
       "JN Pattu Mahal", "Old Bus Stand", "New Bus Stand", "Harbour Road",
       "Thermal Nagar", "Pudukottai Road", "Korampallam", "Mappillaiyurani",
@@ -135,7 +135,7 @@ export const branches: Branch[] = [
   {
     slug: "thanjavur",
     city: "Thanjavur",
-    title: "Thanjavur — Branch 1, South Street",
+    title: "Thanjavur Branch 1, South Street",
     shortLabel: "Thanjavur Branch 1",
     badge: "Branch 1",
     lines: [
@@ -147,7 +147,7 @@ export const branches: Branch[] = [
     mapQuery: "South+Street+Ramasamy+Bhakther+Marriage+Hall+Opposite+Reliance+Digital+Thanjavur",
     phoneIndex: 0,
     intro:
-      "Thanjavur households hold some of the oldest silk in the state — temple sarees and nine-yard pattu passed down for generations. We are opposite Reliance Digital at Ramasamy Bhakther Marriage Hall.",
+      "Thanjavur households hold some of the oldest silk in the state: temple sarees and nine-yard pattu passed down for generations. We are opposite Reliance Digital at Ramasamy Bhakther Marriage Hall.",
     areas: [
       "Thanjavur Town", "Big Temple area", "Medical College Road", "Karanthai",
       "Vilar Road", "Nanjikottai Road", "Kumbakonam", "Thiruvaiyaru",
@@ -157,7 +157,7 @@ export const branches: Branch[] = [
   {
     slug: "thanjavur-mela-veedhi",
     city: "Thanjavur",
-    title: "Thanjavur — Branch 2, Mela Veedhi",
+    title: "Thanjavur Branch 2, Mela Veedhi",
     shortLabel: "Thanjavur Branch 2",
     badge: "Branch 2",
     lines: [
@@ -169,7 +169,7 @@ export const branches: Branch[] = [
     mapQuery: "Mela+Veedhi+Thaeradi+Thanjavur",
     phoneIndex: 1,
     intro:
-      "Our second Thanjavur counter on Mela Veedhi, opposite Thaeradi and beside Micle Tea Shop — handy if you are already near the temple end of town.",
+      "Our second Thanjavur counter on Mela Veedhi, opposite Thaeradi and beside Micle Tea Shop. Handy if you are already near the temple end of town.",
     areas: [
       "Mela Veedhi", "Thaeradi", "Big Temple area", "South Street",
       "Karanthai", "Vilar Road", "Nanjikottai Road", "Kumbakonam",
@@ -216,7 +216,7 @@ export const branches: Branch[] = [
     mapQuery: "Iyyapan+Kovil+GP+Signal+Sidhapudhur+Gandhipuram+Coimbatore",
     phoneIndex: 1,
     intro:
-      "In Gandhipuram near Iyyapan Kovil at GP Signal, Sidhapudhur. Coimbatore is our busiest collection route — we run doorstep pickups across the city most days of the week.",
+      "In Gandhipuram near Iyyapan Kovil at GP Signal, Sidhapudhur. Coimbatore is our busiest collection route. We run doorstep pickups across the city most days of the week.",
     areas: [
       "Gandhipuram", "Sidhapudhur", "R.S. Puram", "Peelamedu", "Saibaba Colony",
       "Ganapathy", "Singanallur", "Ukkadam", "Vadavalli", "Kuniamuthur",

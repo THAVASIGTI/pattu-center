@@ -6,7 +6,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 export type Slide = { src: string; alt: string; caption: string; captionTa: string };
 
 /**
- * How long each slide holds, in ms — one second, as specified.
+ * How long each slide holds, in ms, one second, as specified.
  * Images dissolve into one another rather than sliding: there is no transform,
  * so nothing drifts, but the crossfade is long enough to read as a smooth
  * change rather than a cut. FADE must stay below INTERVAL.
@@ -18,7 +18,7 @@ const FADE = 620;
 /**
  * Auto-advancing hero slideshow. Each image swaps for the next once a second;
  * the rotation pauses on hover/focus. Reduced-motion users still get all four
- * images — the crossfade is removed rather than the rotation.
+ * images, the crossfade is removed rather than the rotation.
  */
 export default function HeroSlider({
   slides,

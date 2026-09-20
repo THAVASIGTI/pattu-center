@@ -29,8 +29,8 @@ const tamil = Noto_Sans_Tamil({
 export const metadata: Metadata = {
   metadataBase: new URL(business.siteUrl),
   title: {
-    default: `${business.name} — Old Silk & Pattu Saree Buyers in Tamil Nadu`,
-    template: `%s — ${business.name}`,
+    default: `${business.name} | Old Silk & Pattu Saree Buyers in Tamil Nadu`,
+    template: `%s | ${business.name}`,
   },
   description:
     "We buy old pattu sarees, Kanchipuram and Mysore silk, silk vetti, zari and silver at the best price. Instant cash, free doorstep pickup and saree exchange across Tamil Nadu.",
@@ -45,8 +45,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: business.name,
-    title: `${business.name} — Old Silk Saree Buyers`,
-    description: `${business.tagline} — sell your old pattu sarees, silk vetti and zari at a fair price. Instant cash across Tamil Nadu.`,
+    title: `${business.name} | Old Silk Saree Buyers`,
+    description: `${business.tagline}. Sell your old pattu sarees, silk vetti and zari at a fair price. Instant cash across Tamil Nadu.`,
     // img() already includes basePath, so join it to the bare origin rather
     // than to siteUrl (which also ends in the repo path) to avoid doubling it.
     images: [`${new URL(business.siteUrl).origin}${img(38890438)}`],
@@ -91,7 +91,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       {/* suppressHydrationWarning covers attributes that browser extensions
           inject into <body> before React hydrates (ColorZilla's
           cz-shortcut-listen, Grammarly's data-gr-*, and similar). It applies
-          only to this element's own attributes and text — mismatches anywhere
+          only to this element's own attributes and text. Mismatches anywhere
           in the tree below are still reported. */}
       <body suppressHydrationWarning className="font-sans antialiased pb-[58px] xl:pb-0">
         <script

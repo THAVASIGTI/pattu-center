@@ -16,9 +16,9 @@ export const metadata: Metadata = {
 };
 
 const points = [
-  "Weighed on a calibrated scale in front of you — never behind a counter.",
+  "Weighed on a calibrated scale in front of you, never behind a counter.",
   "Zari tested by sampling, without damaging the border or pallu.",
-  "Torn, stained and faded sarees are still bought — condition affects the price, not our acceptance.",
+  "Torn, stained and faded sarees are still bought. Condition affects the price, not our acceptance.",
   "Cash in hand the same day, or a bank transfer if you prefer it.",
   "Silver articles and brass valued at the day's metal rate on the same visit.",
 ];
@@ -30,7 +30,7 @@ export default function AboutPage() {
         crumbs={[{ label: "Home", href: "/" }, { label: "About Us" }]}
         eyebrow="About us"
         title={<>Four decades of reading <span className="foil-text">silk by hand</span>.</>}
-        lead="We buy old silk directly from households across Tamil Nadu — no middlemen, no commission, no waiting for payment."
+        lead="We buy old silk directly from households across Tamil Nadu. No middlemen, no commission, no waiting for payment."
         image={img(17777833)}
       />
 
@@ -42,12 +42,12 @@ export default function AboutPage() {
               <p className="mb-4 text-ink-soft">
                 A pattu saree does not lose its value the day it stops being worn. The silk is still
                 silk, and the zari woven through its border and pallu is still real metal thread.
-                Most families simply have no idea who to take it to — so the saree sits in a trunk
+                Most families simply have no idea who to take it to, so the saree sits in a trunk
                 for thirty years, or worse, gets thrown away.
               </p>
               <p className="mb-4 text-ink-soft">
                 {business.name} has been in that trade for over forty years. It is run today by
-                two brothers in partnership — {business.owners[0]} and {business.owners[1]} — who
+                two brothers in partnership, {business.owners[0]} and {business.owners[1]}, who
                 between them handle every branch, every valuation and every payment. Working side by
                 side means the same pair of standards travels to every counter: whichever of
                 them you meet, the saree is unfolded on the counter, weighed openly, and the price

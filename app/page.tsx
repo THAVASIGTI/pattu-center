@@ -168,7 +168,7 @@ export default function HomePage() {
               </p>
               <p className="mb-5 text-ink-soft">
                 We buy old silk sarees, silk vetti, shawls, ravikai and silver directly from
-                households across Tamil Nadu — no middlemen, no commission, no waiting for payment.
+                households across Tamil Nadu. No middlemen, no commission, no waiting for payment.
               </p>
               <Button href="/about" variant="outline">
                 Read our story
@@ -207,7 +207,7 @@ export default function HomePage() {
             <SectionHead
               eyebrow="What we buy"
               title="If it carries silk and zari, bring it to us."
-              lead="We take the whole saree — body, border and pallu — and pay by weight, silk purity and the amount of zari woven into it."
+              lead="We take the whole saree: body, border and pallu. The price follows weight, silk purity and the amount of zari woven into it."
             />
           </Reveal>
 
@@ -277,7 +277,7 @@ export default function HomePage() {
 
           <StepStair steps={processSteps} />
 
-          {/* Placeholder figures — replace with the real numbers before launch. */}
+          {/* Placeholder figures, replace with the real numbers before launch. */}
           <Reveal>
             <div className="mt-8 grid grid-cols-2 gap-3.5 sm:grid-cols-4">
               {[
@@ -312,7 +312,7 @@ export default function HomePage() {
               tone="dark"
               eyebrow="The road to a fair price"
               title="Where your saree goes, step by step."
-              lead="From the first photo you send to the cash in your hand — six stops, no surprises in between."
+              lead="From the first photo you send to the cash in your hand. Six stops, no surprises in between."
             />
           </Reveal>
           <Roadmap stops={roadmap} />

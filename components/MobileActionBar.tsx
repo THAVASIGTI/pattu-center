@@ -2,7 +2,7 @@ import Link from "next/link";
 import { business, waLink } from "@/config/business";
 import { Phone, Pin, WhatsApp } from "./Icons";
 
-/** Fixed bottom bar on small screens — call, WhatsApp and branches always reachable. */
+/** Fixed bottom bar on small screens, call, WhatsApp and branches always reachable. */
 export default function MobileActionBar() {
   const cell =
     "flex min-h-[58px] flex-col items-center justify-center gap-1 px-1.5 py-2 text-[0.71rem] font-semibold tracking-wide text-yellow-pale active:bg-yellow/15";

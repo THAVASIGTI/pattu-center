@@ -14,18 +14,18 @@
  * locally. Swap them for real shop photographs when you have them.
  */
 /**
- * next/image with `unoptimized` emits `src` verbatim — basePath is only applied
+ * next/image with `unoptimized` emits `src` verbatim, basePath is only applied
  * to the /_next/image optimiser URL, which a static export does not have. So
  * the prefix has to be baked in here or every image 404s on GitHub Pages.
  * Empty locally, "/pattu-center" in the Pages build. Must match basePath in
- * next.config.ts — both read this one variable so they cannot drift.
+ * next.config.ts, both read this one variable so they cannot drift.
  */
 const RAW_BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 export const BASE_PATH = RAW_BASE === "/" ? "" : RAW_BASE.replace(/\/+$/, "");
 
 export const img = (id: number) => `${BASE_PATH}/img/silk-${id}.jpg`;
 
-/** Brand marks. `logoMark` is the emblem alone — the wordmark in the full
+/** Brand marks. `logoMark` is the emblem alone, the wordmark in the full
  *  lockup is illegible below about 120px, so small placements use the mark. */
 export const logoMark = `${BASE_PATH}/img/logo-mark.png`;
 export const logoFull = `${BASE_PATH}/img/logo.png`;
@@ -99,7 +99,7 @@ export const sareeTypes: SareeType[] = [
     name: "Nine Yard & Koorai Sarees",
     ta: "ஒன்பது கஜ புடவை",
     blurb:
-      "Traditional madisar, koorai and nine-yard wedding sarees — often the heaviest silk and zari a household owns.",
+      "Traditional madisar, koorai and nine-yard wedding sarees, often the heaviest silk and zari a household owns.",
     imageId: 33433875,
     alt: "Long silk sarees laid out to dry on the ghats at Varanasi",
   },
@@ -108,7 +108,7 @@ export const sareeTypes: SareeType[] = [
     name: "Arani, Thirubuvanam & Venkatagiri",
     ta: "ஆரணி & திருபுவனம் பட்டு",
     blurb:
-      "Arani, Thirubuvanam, Dharmapuram, Gadwal and Venkatagiri weaves — every regional silk tradition is accepted.",
+      "Arani, Thirubuvanam, Dharmapuram, Gadwal and Venkatagiri weaves. Every regional silk tradition is accepted.",
     imageId: 18728089,
     alt: "Traditional Indian textiles stacked and displayed at a fabric shop",
   },
@@ -149,7 +149,7 @@ export const services: Service[] = [
     slug: "instant-cash",
     title: "Instant Cash Payment",
     blurb:
-      "Agree the price and you are paid on the spot — cash in hand, UPI or a bank transfer, whichever suits you.",
+      "Agree the price and you are paid on the spot: cash in hand, UPI or a bank transfer, whichever suits you.",
     icon: "rupee",
   },
   {
@@ -189,7 +189,7 @@ export const whyChooseUs = [
   {
     title: "Any condition accepted",
     blurb:
-      "Torn, faded, stained or moth eaten — condition affects the price, never whether we will buy it.",
+      "Torn, faded, stained or moth eaten. Condition affects the price, never whether we will buy it.",
   },
   {
     title: "Respectful handling",
@@ -227,7 +227,7 @@ export const processSteps = [
   {
     title: "On-the-spot cash",
     blurb:
-      "Agree and you are paid immediately — cash, UPI or transfer. Walk away at any point if it doesn't suit you.",
+      "Agree and you are paid immediately: cash, UPI or transfer. Walk away at any point if it doesn't suit you.",
   },
 ];
 
@@ -246,7 +246,7 @@ export const faqs = [
   },
   {
     q: "Is doorstep pickup really free?",
-    a: "Yes, and there is no minimum — we will come for even one or two sarees, anywhere we operate. There is no travel charge and no obligation to sell; if our price doesn't suit you we leave, and nothing is owed.",
+    a: "Yes, and there is no minimum. We will come for even one or two sarees, anywhere we operate. There is no travel charge and no obligation to sell; if our price doesn't suit you we leave, and nothing is owed.",
   },
   {
     q: "Can I exchange my old sarees instead of selling them?",
@@ -254,11 +254,11 @@ export const faqs = [
   },
   {
     q: "How quickly do I get paid?",
-    a: "Immediately. As soon as you accept the price you are paid in full — cash in hand, UPI or a bank transfer. We do not take goods on consignment or pay in instalments.",
+    a: "Immediately. As soon as you accept the price you are paid in full: cash in hand, UPI or a bank transfer. We do not take goods on consignment or pay in instalments.",
   },
   {
     q: "Can I get a price without visiting a branch?",
-    a: "Send photos on WhatsApp — the saree spread out fully, plus a close-up of the border and pallu. We reply with an indicative range. The final figure is confirmed once the saree has been weighed in person.",
+    a: "Send photos on WhatsApp: the saree spread out fully, plus a close-up of the border and pallu. We reply with an indicative range. The final figure is confirmed once the saree has been weighed in person.",
   },
   {
     q: "What is zari melting?",
@@ -282,7 +282,7 @@ export const galleryImages: { id: number; alt: string }[] = [
   { id: 10317113, alt: "Close-up of a Kanchipuram silk saree showing its gold zari border" },
 ];
 
-/** Placeholder reviews — replace with real customer feedback before launch. */
+/** Placeholder reviews, replace with real customer feedback before launch. */
 export const testimonials = [
   {
     quote:
@@ -305,7 +305,7 @@ export const testimonials = [
 ];
 
 /* ------------------------------------------------------------------ */
-/* Roadmap — the customer's journey, start to payment                  */
+/* Roadmap, the customer's journey, start to payment                  */
 /* ------------------------------------------------------------------ */
 
 export const roadmap = [
@@ -313,13 +313,13 @@ export const roadmap = [
     stop: "Send photos",
     when: "Day one, any hour",
     blurb:
-      "WhatsApp pictures of each saree spread out, plus a close-up of the border. We reply with an indicative range — no visit needed yet.",
+      "WhatsApp pictures of each saree spread out, plus a close-up of the border. We reply with an indicative range. No visit needed yet.",
   },
   {
     stop: "Pick how we meet",
     when: "You choose",
     blurb:
-      "Walk into any of our branches, or ask for a free home visit — we come for even one or two sarees. We work around your timing.",
+      "Walk into any of our branches, or ask for a free home visit. We come for even one or two sarees. We work around your timing.",
   },
   {
     stop: "Open weighing",
@@ -337,7 +337,7 @@ export const roadmap = [
     stop: "One clear price",
     when: "Before you decide",
     blurb:
-      "You get a single figure with the arithmetic behind it — silk weight, purity, zari and condition. Questions answered before anything is agreed.",
+      "You get a single figure with the arithmetic behind it: silk weight, purity, zari and condition. Questions answered before anything is agreed.",
   },
   {
     stop: "Paid on the spot",
@@ -348,7 +348,7 @@ export const roadmap = [
 ];
 
 /* ------------------------------------------------------------------ */
-/* How the number is reached — ledger of what moves the price          */
+/* How the number is reached, ledger of what moves the price          */
 /* ------------------------------------------------------------------ */
 
 export const priceLedger = [
@@ -372,28 +372,28 @@ export const priceLedger = [
   },
   {
     factor: "Condition",
-    detail: "Adjusts the figure — never disqualifies.",
+    detail: "Adjusts the figure, never disqualifies.",
     raises: "Clean, unfaded sarees stored folded in cotton",
     lowers: "Water stains, moth holes, cuts through the border",
   },
 ];
 
 /* ------------------------------------------------------------------ */
-/* Before you sell — practical do's and don'ts                         */
+/* Before you sell, practical do's and don'ts                         */
 /* ------------------------------------------------------------------ */
 
 export const sellingTips = {
   dos: [
     "Photograph each saree spread out flat in daylight.",
-    "Include one close-up of the border and pallu — that is where the zari is.",
+    "Include one close-up of the border and pallu. That is where the zari is.",
     "Keep sarees of the same type stacked together to speed up weighing.",
     "Set loose zari, cut borders and blouse bits aside; they are weighed separately.",
     "Bring silver articles and brass along for valuation on the same visit.",
   ],
   donts: [
-    "Don't throw away torn or moth-eaten sarees — the zari still holds value.",
+    "Don't throw away torn or moth-eaten sarees. The zari still holds value.",
     "Don't cut the border off before bringing it in; it is worth more attached.",
-    "Don't wash or dry-clean old silk first — it can weaken the thread.",
+    "Don't wash or dry-clean old silk first. It can weaken the thread.",
     "Don't accept a price that hasn't been explained to you, from anyone.",
     "Don't hand over sarees before a figure has been agreed in writing or in person.",
   ],

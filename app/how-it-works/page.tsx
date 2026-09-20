@@ -57,7 +57,7 @@ export default function HowItWorksPage() {
             <ul className="mx-auto grid max-w-[820px] gap-3.5">
               {[
                 "Photograph each saree spread out flat in daylight, plus a close-up of the border and pallu.",
-                "Keep sarees of the same type together — it speeds up weighing considerably.",
+                "Keep sarees of the same type together. It speeds up weighing considerably.",
                 "Set aside any loose zari, cut borders or blouse pieces; they are weighed separately.",
                 "Bring silver articles or brass along on the same visit if you want them valued too.",
                 "Have ten or more pieces? Ask for a free home visit instead of travelling to us.",

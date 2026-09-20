@@ -14,7 +14,7 @@ type Params = { params: Promise<{ slug: string }> };
  *  only the silk. The category still appears on /what-we-buy. */
 const BRANCH_EXCLUDES = new Set(["silver"]);
 
-/** One static route per branch — /branches/madurai, /branches/thanjavur, … */
+/** One static route per branch, /branches/madurai, /branches/thanjavur, … */
 export function generateStaticParams() {
   return branches.map((b) => ({ slug: b.slug }));
 }
@@ -73,8 +73,8 @@ export default async function BranchPage({ params }: Params) {
               <SectionHead align="left" eyebrow={`${branch.city} branch`} title={branch.title} />
               <ul className="grid gap-3">
                 {[
-                  "Weighed openly on a calibrated scale — you watch every reading.",
-                  `Free doorstep pickup across ${branch.city} — even for one or two sarees.`,
+                  "Weighed openly on a calibrated scale, so you watch every reading.",
+                  `Free doorstep pickup across ${branch.city}, even for one or two sarees.`,
                   "Cash, UPI or bank transfer the moment you accept the price.",
                   "Torn, faded and stained silk still bought for its zari.",
                 ].map((p) => (
@@ -118,7 +118,7 @@ export default async function BranchPage({ params }: Params) {
                   </a>
                 </div>
 
-                {/* Opening hours — the same every day, but shown in full so
+                {/* Opening hours, the same every day, but shown in full so
                     nobody has to guess whether Sunday is included. */}
                 <div className="mt-5 border-t border-line pt-5">
                   <h4 className="mb-3 flex items-center gap-2.5 font-serif text-[1.05rem] text-green-deep">
