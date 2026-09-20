@@ -25,6 +25,11 @@ export const BASE_PATH = RAW_BASE === "/" ? "" : RAW_BASE.replace(/\/+$/, "");
 
 export const img = (id: number) => `${BASE_PATH}/img/silk-${id}.jpg`;
 
+/** Brand marks. `logoMark` is the emblem alone — the wordmark in the full
+ *  lockup is illegible below about 120px, so small placements use the mark. */
+export const logoMark = `${BASE_PATH}/img/logo-mark.png`;
+export const logoFull = `${BASE_PATH}/img/logo.png`;
+
 export type SareeType = {
   slug: string;
   name: string;

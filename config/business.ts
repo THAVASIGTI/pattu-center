@@ -7,7 +7,6 @@
 export const business = {
   name: "Silver Zari",
   shortName: "Silver Zari",
-  initials: "SZ",
   legalName: "Silver Zari",
   tagline: "பழைய பட்டு வீணாகாது",
   taglineEn: "Old silk should never go to waste",
@@ -58,6 +57,8 @@ export type Branch = {
   city: string;
   title: string;
   isHeadOffice?: boolean;
+  /** Used where branches are listed by name and two share a city. */
+  shortLabel?: string;
   lines: string[];
   mapQuery: string;
   phoneIndex: number;
@@ -90,6 +91,7 @@ export const branches: Branch[] = [
     slug: "thoothukudi",
     city: "Thoothukudi",
     title: "Thoothukudi — Shivan Kovil Street",
+    shortLabel: "Thoothukudi — Shivan Kovil St",
     lines: ["Shivan Kovil Street", "EP Kavitha Marriage Hall", "Thoothukudi"],
     mapQuery: "Shivan+Kovil+Street+EP+Kavitha+Marriage+Hall+Thoothukudi",
     phoneIndex: 0,
@@ -105,6 +107,7 @@ export const branches: Branch[] = [
     slug: "thoothukudi-jn-pattu-mahal",
     city: "Thoothukudi",
     title: "Thoothukudi — Branch 2, near JN Pattu Mahal",
+    shortLabel: "Thoothukudi — JN Pattu Mahal",
     lines: ["Chinnathurai & Co", "Near JN Pattu Mahal", "Thoothukudi"],
     mapQuery: "JN+Pattu+Mahal+Thoothukudi",
     phoneIndex: 1,

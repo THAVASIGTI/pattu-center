@@ -187,6 +187,28 @@ Everything the business says about itself lives in two files — no markup to to
 The business name appears in one place (`business.name`) and flows through every
 page title, the header, the footer and the structured data.
 
+## Brand assets
+
+`public/img/logo.png` is the supplied lockup: peacock emblem over a
+SILVER ZARI wordmark. Three derivatives are generated from it:
+
+| File | Size | Used for |
+|---|---|---|
+| `public/img/logo.png` | 321×385 | full lockup, margins trimmed |
+| `public/img/logo-mark.png` | 192px | header and footer brand |
+| `app/icon.png` | 256px | favicon (Next generates the sizes) |
+| `app/apple-icon.png` | 180px | iOS home screen, flattened onto cream |
+
+The header and footer use the **emblem alone**, not the full lockup: the
+wordmark is illegible below roughly 120px, and the site already prints
+"Silver Zari" in text beside it. Same reason the favicon uses the mark.
+
+The Apple icon is flattened onto the cream background because iOS squares off
+touch icons and renders transparency as black.
+
+`app/favicon.ico` from create-next-app was removed — it takes precedence over
+`app/icon.png`, so leaving it would have kept the default Next.js icon.
+
 ## Theme
 
 Emerald green with zari yellow, defined as Tailwind v4 tokens in

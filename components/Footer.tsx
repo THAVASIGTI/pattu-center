@@ -1,5 +1,7 @@
+import Image from "next/image";
 import Link from "next/link";
 import { branches, business, waLink } from "@/config/business";
+import { logoMark } from "@/config/content";
 import { Clock, Facebook, Instagram, Mail, Phone, WhatsApp, YouTube } from "./Icons";
 import { Wrap } from "./ui";
 
@@ -20,9 +22,14 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <Link href="/" className="flex items-center gap-3">
-              <span className="grad-green grid size-[42px] shrink-0 place-items-center rounded-full border-[1.5px] border-yellow">
-                <span className="font-serif text-[0.82rem] tracking-tight text-yellow-light">{business.initials}</span>
-              </span>
+              <Image
+                src={logoMark}
+                alt=""
+                aria-hidden
+                width={192}
+                height={192}
+                className="size-[52px] shrink-0 object-contain"
+              />
               <span className="font-serif text-[1.02rem] leading-tight text-white">
                 {business.name}
                 <span className="mt-0.5 block font-sans text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-yellow">
@@ -83,7 +90,7 @@ export default function Footer() {
                     href={`/branches/${b.slug}`}
                     className="inline-flex min-h-9 items-center transition-colors hover:text-yellow-light"
                   >
-                    {b.isHeadOffice ? `${b.city} (HO)` : b.title.replace(/ — .*/, "")}
+                    {b.shortLabel ?? (b.isHeadOffice ? `${b.city} (HO)` : b.city)}
                   </Link>
                 </li>
               ))}

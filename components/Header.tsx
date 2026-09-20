@@ -1,9 +1,11 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { business, waLink } from "@/config/business";
+import { logoMark } from "@/config/content";
 import { Close, Menu, Phone, WhatsApp } from "./Icons";
 import { Wrap } from "./ui";
 
@@ -23,9 +25,15 @@ export const navLinks = [
 function Brand({ dark = false }: { dark?: boolean }) {
   return (
     <Link href="/" className="flex min-w-0 items-center gap-3" aria-label={`${business.name} — home`}>
-      <span className="grad-green grid size-[42px] shrink-0 place-items-center rounded-full border-[1.5px] border-yellow shadow-[0_3px_14px_rgba(10,46,26,.34)]">
-        <span className="font-serif text-[0.82rem] tracking-tight text-yellow-light">{business.initials}</span>
-      </span>
+      <Image
+        src={logoMark}
+        alt=""
+        aria-hidden
+        width={192}
+        height={192}
+        priority
+        className="size-[44px] shrink-0 object-contain lg:size-[56px]"
+      />
       <span className={`min-w-0 font-serif text-[1.02rem] leading-tight lg:whitespace-nowrap lg:text-[1.08rem] ${dark ? "text-white" : "text-green-deep"}`}>
         {business.name}
         <span className="mt-0.5 block font-sans text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-yellow">
