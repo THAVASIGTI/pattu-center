@@ -5,13 +5,15 @@
  */
 
 export const business = {
-  name: "Old Silver Zari",
-  shortName: "Old Silver Zari",
-  initials: "OSZ",
-  legalName: "Old Silver Zari",
+  name: "Silver Zari",
+  shortName: "Silver Zari",
+  initials: "SZ",
+  legalName: "Silver Zari",
   tagline: "பழைய பட்டு வீணாகாது",
   taglineEn: "Old silk should never go to waste",
-  owner: "M. Sarathkumar",
+  // Run as a partnership by two brothers.
+  owners: ["M. Rasukutti", "M. Sarathkumar"],
+  ownersLabel: "M. Rasukutti & M. Sarathkumar",
   foundedText: "40 years in silk",
   foundedTextTa: "40 ஆண்டு அனுபவம்",
   // Drives canonical URLs and Open Graph. Currently the GitHub Pages address
@@ -32,12 +34,13 @@ export const business = {
   email: "srichenu84@gmail.com",
   hours: "Monday to Saturday, 9:30 am – 8:30 pm",
 
-  // TODO: these handles still belong to the previous brand. Replace them with
-  // the Old Silver Zari accounts, or remove any that do not exist yet.
+  // Share-link tracking parameters (?si=, ?stkn=) were stripped: both forms
+  // resolve identically, and stkn is a session-scoped share token that does
+  // not belong in a public page.
   social: {
-    youtube: "https://www.youtube.com/@Srikamatchipattucenter",
-    instagram: "https://www.instagram.com/sri_kamatchi_pattu_center",
-    facebook: "https://www.facebook.com/oldpattusareesbuyer9787070503",
+    youtube: "https://youtube.com/@sarathm4337",
+    instagram: "https://www.instagram.com/sri_kamatchi_pattucenter_",
+    facebook: "https://www.facebook.com/share/1DzkEuUH2B/",
   },
 } as const;
 

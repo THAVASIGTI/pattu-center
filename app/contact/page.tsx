@@ -9,7 +9,7 @@ import { branches, business, waLink } from "@/config/business";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: `Call ${business.owner} on ${business.phones[0].label} or ${business.phones[1].label}, WhatsApp us, or email ${business.email}. Head office in ${branches[0].city}.`,
+  description: `Call ${business.ownersLabel} on ${business.phones[0].label} or ${business.phones[1].label}, WhatsApp us, or email ${business.email}. Head office in ${branches[0].city}.`,
   alternates: { canonical: "/contact" },
 };
 
@@ -54,7 +54,7 @@ export default function ContactPage() {
                           {p.label}
                         </a>
                       ))}
-                      <span className="mt-1 text-[0.88rem] text-ink-mute">Ask for {business.owner}</span>
+                      <span className="mt-1 text-[0.88rem] text-ink-mute">Ask for {business.ownersLabel}</span>
                     </dd>
                   </div>
                 </div>

@@ -73,7 +73,7 @@ const jsonLd = {
   url: business.siteUrl,
   priceRange: "₹₹",
   openingHours: "Mo-Sa 09:30-20:30",
-  founder: { "@type": "Person", name: business.owner },
+  founder: business.owners.map((name) => ({ "@type": "Person", name })),
   address: {
     "@type": "PostalAddress",
     streetAddress: branches[0].lines.join(", "),

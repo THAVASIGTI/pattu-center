@@ -96,7 +96,7 @@ export default function Footer() {
               Talk to us
             </h2>
             <ul className="grid gap-1">
-              <li className="py-1 text-cream/85">{business.owner}</li>
+              <li className="py-1 text-cream/85">{business.ownersLabel}</li>
               {business.phones.map((p) => (
                 <li key={p.href}>
                   <a href={p.href} className="inline-flex min-h-9 items-center gap-2 transition-colors hover:text-yellow-light">

@@ -46,11 +46,12 @@ export default function AboutPage() {
                 for thirty years, or worse, gets thrown away.
               </p>
               <p className="mb-4 text-ink-soft">
-                {business.name} has been in that trade for over forty years, and is run today by{" "}
-                {business.owner}. We buy old silk sarees, silk vetti, shawls, ravikai, loose zari and
-                silver directly from households, and we do it the same way in every branch: the
-                saree is unfolded on the counter, weighed openly, and the price explained before you
-                are asked to decide anything.
+                {business.name} has been in that trade for over forty years. It is run today by
+                two brothers in partnership — {business.owners[0]} and {business.owners[1]} — who
+                between them handle every branch, every valuation and every payment. Working side by
+                side means the same pair of standards travels to all seven counters: whichever of
+                them you meet, the saree is unfolded on the counter, weighed openly, and the price
+                explained before you are asked to decide anything.
               </p>
               <p className="text-ink-soft">
                 Most of our customers are women selling silk that belonged to their mother or

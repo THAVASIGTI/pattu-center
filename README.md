@@ -1,4 +1,4 @@
-# Old Silver Zari
+# Silver Zari
 
 Multi-page marketing site for an old silk / pattu saree buying business, built
 with **Next.js 16 (App Router) + TypeScript + Tailwind CSS 4**.
@@ -213,7 +213,7 @@ Mobile was the priority:
 | Statistics counters | `app/page.tsx`, the `Counter` block | `4,205+ / 245+ / 3,550+ / 6,545+` are illustrative, **not** this shop's real numbers. |
 | Customer reviews | `config/content.ts` → `testimonials` | Three placeholder quotes. Replace with real reviews. |
 | "Four decades" / "40+ years" | `config/business.ts` → `foundedText`, and the hero chip in `app/page.tsx` | Confirm the real founding year. |
-| Social links | `config/business.ts` → `social` | The YouTube, Instagram and Facebook handles still belong to the previous brand. Replace or remove them. |
+| Social links | `config/business.ts` → `social` | Live handles are set. Share-link tracking parameters (`?si=`, `?stkn=`) were stripped — both forms resolve the same, and `stkn` is a session-scoped token. |
 | `siteUrl` | `config/business.ts` | Currently `oldsilverzari.com`, a placeholder matching the new name. Point it at the real domain — it drives canonical URLs and Open Graph. |
 | Photography | `public/img/` + `config/content.ts` | Pexels stock of real Indian silk. Swap in your own shop photos — see below. |
 
