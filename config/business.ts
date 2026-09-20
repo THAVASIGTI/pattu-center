@@ -69,6 +69,8 @@ export type Branch = {
   isHeadOffice?: boolean;
   /** Used where branches are listed by name and two share a city. */
   shortLabel?: string;
+  /** Short chip shown on branch cards to tell same-city counters apart. */
+  badge?: string;
   lines: string[];
   mapQuery: string;
   phoneIndex: number;
@@ -102,6 +104,7 @@ export const branches: Branch[] = [
     city: "Thoothukudi",
     title: "Thoothukudi — Branch 1, Shivan Kovil Street",
     shortLabel: "Thoothukudi Branch 1",
+    badge: "Branch 1",
     lines: ["Shivan Kovil Street", "EP Kavitha Marriage Hall", "Thoothukudi"],
     mapQuery: "Shivan+Kovil+Street+EP+Kavitha+Marriage+Hall+Thoothukudi",
     phoneIndex: 0,
@@ -118,6 +121,7 @@ export const branches: Branch[] = [
     city: "Thoothukudi",
     title: "Thoothukudi — Branch 2, near JN Pattu Mahal",
     shortLabel: "Thoothukudi Branch 2",
+    badge: "Branch 2",
     lines: ["Chinnathurai & Co", "Near JN Pattu Mahal", "Thoothukudi"],
     mapQuery: "JN+Pattu+Mahal+Thoothukudi",
     phoneIndex: 1,
@@ -133,6 +137,7 @@ export const branches: Branch[] = [
     city: "Thanjavur",
     title: "Thanjavur — Branch 1, South Street",
     shortLabel: "Thanjavur Branch 1",
+    badge: "Branch 1",
     lines: [
       "Opposite Reliance Digital",
       "Ramasamy Bhakther Marriage Hall",
@@ -154,6 +159,7 @@ export const branches: Branch[] = [
     city: "Thanjavur",
     title: "Thanjavur — Branch 2, Mela Veedhi",
     shortLabel: "Thanjavur Branch 2",
+    badge: "Branch 2",
     lines: [
       "Opposite Thaeradi",
       "Near Micle Tea Shop",
