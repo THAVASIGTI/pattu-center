@@ -202,8 +202,14 @@ body {
   /* The hold bar would otherwise snap to empty, so show it filled. */
   .hero-progress { animation: none !important; transform: scaleX(1) !important; }
   .foil-shimmer { animation: none !important; }
-  /* the hero backdrop keeps its picture, just stops moving */
-  .hero-grid,
-  .hero-shape,
-  .hero-thread { animation: none !important; }
+  /* The hero backdrop is the one place motion is the point, so it is slowed
+     rather than stopped: "reduce" taken literally. Everything here is small,
+     low-contrast and far from the reading line, which is the kind of movement
+     vestibular guidance treats as low risk. */
+  .hero-grid { animation-duration: 18s !important; }
+  .hero-shape { animation-duration: 110s !important; }
+  .hero-thread {
+    animation-duration: 40s !important;
+    opacity: 0.22 !important;
+  }
 }
