@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "preview": "npx --yes serve@14 out -l 4173"
+    "preview": "npx --yes serve@14 out -l 4173",
+    "qr": "node scripts/generate-qr.mjs"
   },
   "dependencies": {
     "next": "16.3.5",
@@ -21,6 +22,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.3.5",
+    "qrcode": "^1.5.4",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

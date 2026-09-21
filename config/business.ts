@@ -204,6 +204,10 @@ export const branches: Branch[] = [
     city: "Tiruppur",
     title: "Tiruppur",
     lines: ["Opposite Tiruppur Thirupathi Kovil", "Tiruppur"],
+    // Recovered from the plus code 486X+597 in the supplied maps link, which
+    // carried no @lat,lng. Re-encoding these coordinates reproduces that code.
+    // Worth confirming against the shop's own pin.
+    coords: "11.110377,77.348377",
     mapQuery: "Tiruppur+Tirupathi+Sri+Venkatesa+Perumal+Temple+Uthukuli+Road+Valipalayam+Tiruppur",
     phoneIndex: 0,
     intro:

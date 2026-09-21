@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import CtaBand from "@/components/CtaBand";
 import { Check, Clock, Mail, Phone, Pin, WhatsApp } from "@/components/Icons";
@@ -6,7 +7,7 @@ import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import { Button, Section, SectionHead, Wrap } from "@/components/ui";
 import { branchBySlug, branches, business, mapEmbedUrl, mapLinkUrl, waLink } from "@/config/business";
-import { sareeTypes } from "@/config/content";
+import { qrImg, sareeTypes } from "@/config/content";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -71,6 +72,39 @@ export default async function BranchPage({ params }: Params) {
           <div className="grid items-start gap-8 lg:grid-cols-2 lg:gap-14">
             <Reveal>
               <SectionHead align="left" eyebrow={`${branch.city} branch`} title={branch.title} />
+              {/* Scan straight through to the pin, rather than retyping an
+                  address into Maps. */}
+              <div className="mb-6 flex items-center gap-4 rounded-[18px] border border-line bg-white p-4 shadow-soft">
+                {/* Padding and border sit on the wrapper, not the image: with
+                    border-box they would eat into the QR itself, and the
+                    densest code (Tiruppur, 49 modules) stops scanning. */}
+                <span className="shrink-0 rounded-[10px] border border-line-yellow bg-white p-1.5">
+                  <Image
+                    src={qrImg(branch.slug)}
+                    alt={`QR code opening our ${branch.city} branch in Google Maps`}
+                    width={112}
+                    height={112}
+                    className="block size-[112px]"
+                  />
+                </span>
+                <div>
+                  <p className="font-serif text-[1.08rem] text-green-deep">Scan for directions</p>
+                  <p className="mt-1 text-[0.88rem] text-ink-soft">
+                    Point your phone camera at this code to open the {branch.city} counter in
+                    Google Maps.
+                  </p>
+                  <a
+                    href={mapLinkUrl(branch)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-2 inline-flex items-center gap-1.5 text-[0.85rem] font-semibold text-green underline-offset-4 hover:underline"
+                  >
+                    <Pin className="size-3.5" />
+                    Or open it here
+                  </a>
+                </div>
+              </div>
+
               <ul className="grid gap-3">
                 {[
                   "Weighed openly on a calibrated scale, so you watch every reading.",
