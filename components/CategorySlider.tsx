@@ -66,11 +66,15 @@ export default function CategorySlider() {
                 src={t.boardShop ? shopImg(t.boardShop) : img(t.imageId)}
                 alt={active ? `${t.name}: a saree border from our own stock` : ""}
                 fill
-                priority={i === 0}
-                // Slides two steps out are hidden, so a lazy one could arrive
-                // blank as it slides in. Load the near neighbours eagerly and
-                // leave the far ones lazy so the hero is not 1.5MB on open.
-                loading={Math.abs(offset) <= 2 ? "eager" : "lazy"}
+                // next/image rejects priority together with loading, and the
+                // first slide's offset grows past 2 as the frame advances,
+                // which would have set both. Priority covers the opening slide;
+                // every other slide uses loading alone. Near neighbours load
+                // eagerly so none arrives blank as it slides in, while the far
+                // ones stay lazy to keep the hero off 1.5MB on open.
+                {...(i === 0
+                  ? { priority: true as const }
+                  : { loading: (Math.abs(offset) <= 2 ? "eager" : "lazy") as "eager" | "lazy" })}
                 sizes="100vw"
                 className="object-cover"
               />
