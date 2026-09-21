@@ -5,7 +5,7 @@ import PageHero from "@/components/PageHero";
 import { img } from "@/config/content";
 import Reveal from "@/components/Reveal";
 import { Button, Section, SectionHead, Wrap } from "@/components/ui";
-import { branchCountWordCap, branches, business, waLink } from "@/config/business";
+import { branchCountWordCap, branches, business, mapEmbedUrl, waLink } from "@/config/business";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -125,7 +125,7 @@ export default function ContactPage() {
                 </address>
                 <div className="mt-5 overflow-hidden rounded-[14px] border border-line-yellow">
                   <iframe
-                    src={`https://maps.google.com/maps?q=${ho.mapQuery}&output=embed`}
+                    src={mapEmbedUrl(ho)}
                     title={`Map showing our ${ho.city} head office`}
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"

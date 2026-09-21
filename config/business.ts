@@ -72,6 +72,9 @@ export type Branch = {
   /** Short chip shown on branch cards to tell same-city counters apart. */
   badge?: string;
   lines: string[];
+  /** "lat,lng" from the shop's own Google Maps pin. Preferred over mapQuery,
+   *  which only searches for a nearby landmark. */
+  coords?: string;
   mapQuery: string;
   phoneIndex: number;
   intro: string;
@@ -89,6 +92,7 @@ export const branches: Branch[] = [
       "No. 37, Merku Perumal Mesthri Street",
       "Madurai",
     ],
+    coords: "9.9206465,78.1125167",
     mapQuery: "Merku+Perumal+Mesthri+Street+Near+The+Chennai+Silks+Madurai",
     phoneIndex: 0,
     intro:
@@ -106,6 +110,7 @@ export const branches: Branch[] = [
     shortLabel: "Thoothukudi Branch 1",
     badge: "Branch 1",
     lines: ["Shivan Kovil Street", "EP Kavitha Marriage Hall", "Thoothukudi"],
+    coords: "8.80611409,78.14765511",
     mapQuery: "Shivan+Kovil+Street+EP+Kavitha+Marriage+Hall+Thoothukudi",
     phoneIndex: 0,
     intro:
@@ -123,6 +128,7 @@ export const branches: Branch[] = [
     shortLabel: "Thoothukudi Branch 2",
     badge: "Branch 2",
     lines: ["Chinnathurai & Co", "Near JN Pattu Mahal", "Thoothukudi"],
+    coords: "8.801034,78.1359863",
     mapQuery: "JN+Pattu+Mahal+Thoothukudi",
     phoneIndex: 1,
     intro:
@@ -144,6 +150,7 @@ export const branches: Branch[] = [
       "South Street",
       "Thanjavur",
     ],
+    coords: "10.788726,79.135291",
     mapQuery: "South+Street+Ramasamy+Bhakther+Marriage+Hall+Opposite+Reliance+Digital+Thanjavur",
     phoneIndex: 0,
     intro:
@@ -166,6 +173,7 @@ export const branches: Branch[] = [
       "Mela Veedhi",
       "Thanjavur",
     ],
+    coords: "10.7877122,79.1312847",
     mapQuery: "Mela+Veedhi+Thaeradi+Thanjavur",
     phoneIndex: 1,
     intro:
@@ -181,6 +189,7 @@ export const branches: Branch[] = [
     city: "Villupuram",
     title: "Villupuram",
     lines: ["Near Veeravaliyamman Kovil", "Opposite SBI Bank", "Villupuram"],
+    coords: "11.9408393,79.4927494",
     mapQuery: "Veeravaliyamman+Kovil+Opposite+SBI+Bank+Villupuram",
     phoneIndex: 1,
     intro:
@@ -195,7 +204,7 @@ export const branches: Branch[] = [
     city: "Tiruppur",
     title: "Tiruppur",
     lines: ["Opposite Tiruppur Thirupathi Kovil", "Tiruppur"],
-    mapQuery: "Thirupathi+Kovil+Tiruppur",
+    mapQuery: "Tiruppur+Tirupathi+Sri+Venkatesa+Perumal+Temple+Uthukuli+Road+Valipalayam+Tiruppur",
     phoneIndex: 0,
     intro:
       "Our Tiruppur counter sits opposite Thirupathi Kovil. Bring your sarees in, or send photos on WhatsApp first and we will give you an indicative price before you travel.",
@@ -213,6 +222,7 @@ export const branches: Branch[] = [
       "GP Signal, Sidhapudhur",
       "Gandhipuram, Coimbatore",
     ],
+    coords: "11.02091316,76.97286452",
     mapQuery: "Iyyapan+Kovil+GP+Signal+Sidhapudhur+Gandhipuram+Coimbatore",
     phoneIndex: 1,
     intro:
@@ -224,6 +234,17 @@ export const branches: Branch[] = [
     ],
   },
 ];
+
+/** Exact pin where we have one, otherwise a landmark search. */
+export const mapTarget = (b: Branch) => b.coords ?? b.mapQuery;
+
+/** Embedded map for a branch page. */
+export const mapEmbedUrl = (b: Branch) =>
+  `https://maps.google.com/maps?q=${encodeURIComponent(mapTarget(b))}&z=17&hl=en&output=embed`;
+
+/** "Directions" link that opens Google Maps proper. */
+export const mapLinkUrl = (b: Branch) =>
+  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapTarget(b))}`;
 
 export const branchBySlug = (slug: string) => branches.find((b) => b.slug === slug);
 

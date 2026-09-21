@@ -5,7 +5,7 @@ import { Check, Clock, Mail, Phone, Pin, WhatsApp } from "@/components/Icons";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import { Button, Section, SectionHead, Wrap } from "@/components/ui";
-import { branchBySlug, branches, business, waLink } from "@/config/business";
+import { branchBySlug, branches, business, mapEmbedUrl, mapLinkUrl, waLink } from "@/config/business";
 import { sareeTypes } from "@/config/content";
 
 type Params = { params: Promise<{ slug: string }> };
@@ -36,7 +36,7 @@ export default async function BranchPage({ params }: Params) {
   if (!branch) notFound();
 
   const phone = business.phones[branch.phoneIndex] ?? business.phones[0];
-  const mapSrc = `https://maps.google.com/maps?q=${branch.mapQuery}&output=embed`;
+  const mapSrc = mapEmbedUrl(branch);
   const others = branches.filter((b) => b.slug !== branch.slug).slice(0, 3);
 
   return (
@@ -214,6 +214,12 @@ export default async function BranchPage({ params }: Params) {
                 allowFullScreen
                 className="block h-[300px] w-full border-0 lg:h-[420px]"
               />
+            </div>
+            <div className="mt-5 text-center">
+              <Button href={mapLinkUrl(branch)} variant="outline" external>
+                <Pin className="size-[17px]" />
+                Open in Google Maps
+              </Button>
             </div>
           </Reveal>
         </Wrap>

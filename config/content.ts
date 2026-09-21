@@ -30,6 +30,10 @@ export const img = (id: number) => `${BASE_PATH}/img/silk-${id}.jpg`;
 export const logoMark = `${BASE_PATH}/img/logo-mark.png`;
 export const logoFull = `${BASE_PATH}/img/logo.png`;
 
+/** Photographs of our own stock, in public/img/shop. */
+export const shopImg = (n: number) =>
+  `${BASE_PATH}/img/shop/shop-${String(n).padStart(2, "0")}.jpg`;
+
 export type SareeType = {
   slug: string;
   name: string;
@@ -268,6 +272,36 @@ export const faqs = [
     q: "Do you buy silver items as well?",
     a: "Yes. Old silver articles, lamps and brass are bought alongside your sarees at the day's metal rate. Bring them along on the same visit.",
   },
+];
+
+/** Our own stock, photographed at the counters. Shown first in the gallery. */
+export const shopGallery: { n: number; alt: string }[] = [
+  { n: 1, alt: "Pink silk saree with a gold zari border and woven butta motifs" },
+  { n: 2, alt: "Teal checked silk saree with a broad gold zari border" },
+  { n: 3, alt: "Blue-grey silk saree with gold zari border and small butta" },
+  { n: 4, alt: "Gold zari pallu against a deep blue border" },
+  { n: 5, alt: "Pink silk saree with gold zari stripes and a magenta border" },
+  { n: 6, alt: "Magenta silk saree with dense gold zari weaving" },
+  { n: 7, alt: "Magenta silk saree with a wide gold zari border" },
+  { n: 8, alt: "Green silk saree with a gold zari border" },
+  { n: 9, alt: "Green silk saree with fine gold zari checks" },
+  { n: 10, alt: "Pink silk saree with a gold zari pallu" },
+  { n: 11, alt: "Magenta silk saree with an ornate gold zari pallu" },
+  { n: 12, alt: "Pink silk saree with magenta and gold zari borders" },
+  { n: 13, alt: "Lavender silk saree with gold butta and a red border" },
+  { n: 14, alt: "Purple silk saree with a gold zari border" },
+  { n: 15, alt: "Purple silk saree laid out to show its gold zari border" },
+  { n: 16, alt: "Purple and gold zari pallu in close detail" },
+  { n: 17, alt: "Teal silk saree with a multicoloured border" },
+  { n: 18, alt: "Gold tissue saree with woven zari bands" },
+  { n: 19, alt: "Orange and gold silk saree folded for display" },
+  { n: 20, alt: "Copper-orange tissue saree folded for display" },
+  { n: 21, alt: "Teal silk saree with magenta and gold zari borders" },
+  { n: 22, alt: "Teal silk saree with a gold zari border and magenta edge" },
+  { n: 23, alt: "Magenta silk saree with a gold zari border" },
+  { n: 24, alt: "Close detail of a magenta saree's gold zari border" },
+  { n: 25, alt: "Pink silk saree with a gold zari pallu" },
+  { n: 26, alt: "Blue and gold zari saree with a dark border" },
 ];
 
 export const galleryImages: { id: number; alt: string }[] = [
