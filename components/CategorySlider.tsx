@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { ArrowRight } from "./Icons";
-import { img, sareeTypes, shopImg } from "@/config/content";
+import { img, sareeTypes } from "@/config/content";
 
 /**
  * One full-width frame that advances through the saree categories on its own,
@@ -75,8 +75,8 @@ export default function CategorySlider() {
                 className="cat-slide absolute inset-0 transition-transform [transition-timing-function:cubic-bezier(.4,0,.2,1)]"
               >
                 <Image
-                  src={t.boardShop ? shopImg(t.boardShop) : img(t.imageId)}
-                  alt={active ? `${t.name}: a saree border from our own stock` : ""}
+                  src={img(t.imageId)}
+                  alt={active ? `${t.name} silk` : ""}
                   fill
                   // next/image rejects priority together with loading, and the
                   // first slide's offset grows past 2 as the frame advances,
