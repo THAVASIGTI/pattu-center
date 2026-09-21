@@ -5,7 +5,7 @@ import Counter from "@/components/Counter";
 import CtaBand from "@/components/CtaBand";
 import AnimatedHeading from "@/components/AnimatedHeading";
 import ArchCard from "@/components/ArchCard";
-import CategoryBoard from "@/components/CategoryBoard";
+import CategorySlider from "@/components/CategorySlider";
 import HeroBackdrop from "@/components/HeroBackdrop";
 import PriceScale from "@/components/PriceScale";
 import Roadmap from "@/components/Roadmap";
@@ -76,9 +76,9 @@ export default function HomePage() {
             Free pickup · Cash same day · No obligation
           </p>
 
-          {/* Full-bleed board of what we take in */}
+          {/* Full-width frame cycling through what we take in */}
           <div className="mt-10 sm:mt-12">
-            <CategoryBoard />
+            <CategorySlider />
           </div>
         </Wrap>
       </section>

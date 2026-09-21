@@ -206,6 +206,9 @@ body {
      rather than stopped: "reduce" taken literally. Everything here is small,
      low-contrast and far from the reading line, which is the kind of movement
      vestibular guidance treats as low risk. */
+  /* The frame keeps advancing so every category is still seen; it just cuts
+     instead of sliding. */
+  .cat-slide { transition: none !important; }
   .hero-grid { animation-duration: 18s !important; }
   .hero-shape { animation-duration: 110s !important; }
   .hero-thread {
