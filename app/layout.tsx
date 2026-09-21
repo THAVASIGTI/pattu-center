@@ -19,7 +19,7 @@ const marcellus = Marcellus({
 // rather than body copy. Marcellus is a display face and gets thin at
 // paragraph size, so this carries the running text instead.
 const cormorant = Cormorant_Garamond({
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
   style: ["normal", "italic"],
   subsets: ["latin"],
   variable: "--font-cormorant",

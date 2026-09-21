@@ -15,9 +15,12 @@ import { img, sareeTypes } from "@/config/content";
  */
 const INTERVAL = 2600;
 const SLIDE = 620;
+const SHOWN = 5;
 
 export default function CategorySlider() {
-  const slides = sareeTypes.filter((t) => t.slug !== "silver");
+  // The frame shows the first few categories rather than every one, so a
+  // visitor sees the whole cycle without waiting through eight slides.
+  const slides = sareeTypes.filter((t) => t.slug !== "silver").slice(0, SHOWN);
   const count = slides.length;
 
   const [index, setIndex] = useState(0);

@@ -54,7 +54,7 @@ export default function HomePage() {
             {/* The count comes from the branch list so the sentence cannot
                 drift when a counter is added, and it says "counters" rather
                 than "branches" because Chennai is a pickup area with none. */}
-            <p className="mx-auto mb-7 max-w-[46ch] font-display text-[clamp(1.22rem,3.1vw,1.55rem)] leading-[1.6] italic text-ink-soft lg:mx-0">
+            <p className="mx-auto mb-7 max-w-[46ch] font-display text-[clamp(1.22rem,3.1vw,1.55rem)] leading-[1.6] font-bold text-ink-soft lg:mx-0">
               For forty years families across Tamil Nadu have brought us the silk they no longer
               wear. Bring yours to any of our {counterCountWord} counters, or ask us to collect it
               free from your door, and find out what it is really worth.
