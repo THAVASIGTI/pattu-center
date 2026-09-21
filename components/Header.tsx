@@ -25,15 +25,18 @@ export const navLinks = [
 function Brand({ dark = false }: { dark?: boolean }) {
   return (
     <Link href="/" className="flex min-w-0 items-center gap-3" aria-label={`${business.name} home`}>
-      <Image
-        src={logoMark}
-        alt=""
-        aria-hidden
-        width={192}
-        height={192}
-        priority
-        className="size-[44px] shrink-0 object-contain lg:size-[56px]"
-      />
+      {/* Ring sits on the wrapper so the padding does not shrink the mark. */}
+      <span className="grid size-[50px] shrink-0 place-items-center rounded-full border border-yellow/55 bg-white/70 p-[3px] shadow-[0_1px_6px_rgba(10,46,26,.08)] lg:size-[62px]">
+        <Image
+          src={logoMark}
+          alt=""
+          aria-hidden
+          width={192}
+          height={192}
+          priority
+          className="size-full object-contain"
+        />
+      </span>
       <span className={`min-w-0 font-serif text-[1.02rem] leading-tight lg:whitespace-nowrap lg:text-[1.08rem] ${dark ? "text-white" : "text-green-deep"}`}>
         {business.name}
         <span className="mt-0.5 block font-sans text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-yellow-ink">
