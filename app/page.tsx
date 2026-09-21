@@ -8,7 +8,6 @@ import ArchCard from "@/components/ArchCard";
 import CategoryBoard from "@/components/CategoryBoard";
 import PriceScale from "@/components/PriceScale";
 import Roadmap from "@/components/Roadmap";
-import RotatingLines from "@/components/RotatingLines";
 import StepStair from "@/components/StepStair";
 import { ArrowRight, Check, Phone, WhatsApp, serviceIcons } from "@/components/Icons";
 import Reveal from "@/components/Reveal";
@@ -31,40 +30,26 @@ export default function HomePage() {
     <>
       {/* ---------------- Hero ---------------- */}
       <section className="relative overflow-hidden bg-cream text-ink">
-        {/* Full-bleed silk backdrop, washed almost white so the section reads
-            light and the copy stays legible over it. */}
-        <div className="absolute inset-0">
-          <Image
-            src={img(20181020)}
-            alt=""
-            aria-hidden
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover opacity-[0.42]"
-          />
-          <div className="absolute inset-0 bg-[radial-gradient(1100px_600px_at_50%_-10%,rgba(254,249,195,.72),transparent_62%),radial-gradient(900px_700px_at_50%_110%,rgba(232,244,234,.88),transparent_64%),linear-gradient(180deg,rgba(251,253,249,.90),rgba(251,253,249,.80)_42%,rgba(238,244,234,.93))]" />
-        </div>
+        {/* Light gradient ground: white falling to a soft golden yellow. */}
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-[radial-gradient(1000px_520px_at_50%_-8%,#fffdf4,transparent_65%),linear-gradient(180deg,#ffffff_0%,#fffcef_38%,#fdf3d6_100%)]"
+        />
         {/* zari rule along the foot of the section */}
         <span aria-hidden className="foil absolute inset-x-0 bottom-0 h-[3px]" />
 
         <Wrap className="relative z-10 py-12 text-center sm:py-16 lg:py-20">
-          <p className="mb-2 flex items-center justify-center gap-2.5 text-[0.74rem] font-semibold uppercase tracking-[0.2em] text-yellow">
+          <p className="mb-4 flex items-center justify-center gap-2.5 text-[0.74rem] font-semibold uppercase tracking-[0.2em] text-yellow">
             <span aria-hidden className="foil h-px w-8" />
             Welcome to {business.name}
             <span aria-hidden className="foil h-px w-8" />
           </p>
-          <p className="mb-5 font-tamil text-[0.95rem] text-green">
-            {business.name} வரவேற்கிறது
-          </p>
 
-          <span className="mb-5 inline-flex flex-wrap items-center justify-center gap-2 rounded-full border border-yellow/45 bg-yellow-pale/70 px-4 py-1.5 text-[0.71rem] font-semibold uppercase tracking-[0.13em] text-green-deep">
-            <i className="size-1.5 animate-pulse-ring rounded-full bg-yellow" />
-            {business.foundedText}
-            <span className="font-tamil text-[0.78rem] normal-case tracking-normal text-green">
-              · {business.foundedTextTa}
-            </span>
-          </span>
+          <p className="mx-auto mb-7 max-w-[58ch] text-[clamp(1rem,2.7vw,1.12rem)] leading-relaxed text-ink-soft">
+            For forty years families across Tamil Nadu have brought us the silk they no longer
+            wear. Bring yours to any counter, or send a photo, and find out what it is really
+            worth.
+          </p>
 
           <AnimatedHeading
             foilTone="deep"
@@ -75,32 +60,7 @@ export default function HomePage() {
             ]}
           />
 
-          <p className="mt-3 font-tamil text-[clamp(1rem,4vw,1.35rem)] leading-snug text-green">
-            பழைய பட்டுக்கு நல்ல விலை.
-          </p>
-
-          <div className="mx-auto max-w-[36rem]">
-            <RotatingLines
-              lines={[
-                { ta: "பழைய பட்டு வீணாகாது", en: "Old silk is never waste" },
-                { ta: "கண் முன்னே எடை", en: "Weighed in front of you" },
-                { ta: "அன்றே பணம்", en: "Cash the same day" },
-                { ta: "வீட்டிற்கே வருவோம்", en: "We come to your home" },
-              ]}
-            />
-          </div>
-
-          <p className="mx-auto mt-5 max-w-[58ch] text-[clamp(1rem,2.7vw,1.12rem)] leading-relaxed text-ink-soft">
-            For forty years families across Tamil Nadu have brought us the silk they no longer
-            wear. Bring yours to any counter, or send a photo, and find out what it is really
-            worth.
-          </p>
-          <p className="mx-auto mt-2 max-w-[52ch] font-tamil text-[0.95rem] leading-relaxed text-green">
-            நாற்பது ஆண்டுகளாக தமிழ்நாடு முழுவதும் உள்ள குடும்பங்கள் தங்கள் பழைய பட்டை
-            எங்களிடம் கொண்டு வருகிறார்கள். உங்கள் பட்டையும் கொண்டு வாருங்கள்.
-          </p>
-
-          <p className="mx-auto mt-4 max-w-[52ch] text-[0.95rem] text-ink-mute">
+          <p className="mx-auto mt-4 max-w-[52ch] text-[clamp(.97rem,2.6vw,1.07rem)] text-ink-soft">
             Pattu sarees, silk vetti, zari and silver. Weighed in front of you, paid the same day.
           </p>
 
@@ -117,9 +77,6 @@ export default function HomePage() {
 
           <p className="mt-4 text-[0.84rem] text-ink-mute">
             Free pickup · Cash same day · No obligation
-          </p>
-          <p className="mt-1 font-tamil text-[0.86rem] text-ink-mute">
-            இலவச வரவு · அன்றே பணம் · கட்டாயம் இல்லை
           </p>
 
           {/* Full-bleed board of what we take in */}
