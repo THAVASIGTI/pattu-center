@@ -35,49 +35,50 @@ export default function HomePage() {
         {/* zari rule along the foot of the section */}
         <span aria-hidden className="foil absolute inset-x-0 bottom-0 h-[3px]" />
 
-        <Wrap className="relative z-10 py-12 text-center sm:py-16 lg:py-20">
-          <p className="mb-4 flex items-center justify-center gap-2.5 text-[0.74rem] font-semibold uppercase tracking-[0.2em] text-yellow">
-            <span aria-hidden className="foil h-px w-8" />
-            Welcome to {business.name}
-            <span aria-hidden className="foil h-px w-8" />
-          </p>
+        <Wrap className="relative z-10 grid items-center gap-10 py-12 sm:py-16 lg:grid-cols-[1.05fr_.95fr] lg:gap-14 lg:py-20">
+          <div className="order-1 text-center lg:text-left">
+            <p className="mb-4 flex items-center justify-center gap-2.5 text-[0.74rem] font-semibold uppercase tracking-[0.2em] text-yellow lg:justify-start">
+              <span aria-hidden className="foil h-px w-8" />
+              Welcome to {business.name}
+            </p>
 
-          <p className="mx-auto mb-7 max-w-[58ch] text-[clamp(1rem,2.7vw,1.12rem)] leading-relaxed text-ink-soft">
-            For forty years families across Tamil Nadu have brought us the silk they no longer
-            wear. Bring yours to any counter, or send a photo, and find out what it is really
-            worth.
-          </p>
+            <p className="mx-auto mb-7 max-w-[54ch] text-[clamp(1rem,2.7vw,1.12rem)] leading-relaxed text-ink-soft lg:mx-0">
+              For forty years families across Tamil Nadu have brought us the silk they no longer
+              wear. Bring yours to any counter, or send a photo, and find out what it is really
+              worth.
+            </p>
 
-          <AnimatedHeading
-            foilTone="deep"
-            className="mx-auto max-w-[18ch] font-serif text-[clamp(2rem,6.6vw,3.6rem)] leading-[1.14] text-green-deep"
-            segments={[
-              { text: "Sell your old silk at a" },
-              { text: " fair price.", foil: true },
-            ]}
-          />
+            <AnimatedHeading
+              foilTone="deep"
+              className="mx-auto max-w-[18ch] font-serif text-[clamp(2rem,6vw,3.4rem)] leading-[1.14] text-green-deep lg:mx-0"
+              segments={[
+                { text: "Sell your old silk at a" },
+                { text: " fair price.", foil: true },
+              ]}
+            />
 
-          <p className="mx-auto mt-4 max-w-[52ch] text-[clamp(.97rem,2.6vw,1.07rem)] text-ink-soft">
-            Pattu sarees, silk vetti, zari and silver. Weighed in front of you, paid the same day.
-          </p>
+            <p className="mx-auto mt-4 max-w-[48ch] text-[clamp(.97rem,2.6vw,1.07rem)] text-ink-soft lg:mx-0">
+              Pattu sarees, silk vetti, zari and silver. Weighed in front of you, paid the same day.
+            </p>
 
-          <div className="mt-7 flex flex-wrap justify-center gap-2.5">
-            <Button href={business.phones[0].href} variant="yellow" className="flex-1 sm:flex-none">
-              <Phone className="size-[17px]" />
-              Call {business.phones[0].label}
-            </Button>
-            <Button href={waLink()} variant="whatsapp" external className="flex-1 sm:flex-none">
-              <WhatsApp className="size-[17px]" />
-              Send Photos on WhatsApp
-            </Button>
+            <div className="mt-7 flex flex-wrap justify-center gap-2.5 lg:justify-start">
+              <Button href={business.phones[0].href} variant="yellow" className="flex-1 sm:flex-none">
+                <Phone className="size-[17px]" />
+                Call {business.phones[0].label}
+              </Button>
+              <Button href={waLink()} variant="whatsapp" external className="flex-1 sm:flex-none">
+                <WhatsApp className="size-[17px]" />
+                Send Photos on WhatsApp
+              </Button>
+            </div>
+
+            <p className="mt-4 text-[0.84rem] text-ink-mute">
+              Free pickup · Cash same day · No obligation
+            </p>
           </div>
 
-          <p className="mt-4 text-[0.84rem] text-ink-mute">
-            Free pickup · Cash same day · No obligation
-          </p>
-
-          {/* Full-width frame cycling through what we take in */}
-          <div className="mt-10 sm:mt-12">
+          {/* auto-swapping frame beside the copy */}
+          <div className="order-2">
             <CategorySlider />
           </div>
         </Wrap>

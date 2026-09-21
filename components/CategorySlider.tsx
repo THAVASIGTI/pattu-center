@@ -33,66 +33,79 @@ export default function CategorySlider() {
 
   return (
     <div
-      className="relative left-1/2 w-screen -translate-x-1/2"
+      className="relative mx-auto w-full max-w-[440px] lg:mr-0 lg:ml-auto"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocusCapture={() => setPaused(true)}
       onBlurCapture={() => setPaused(false)}
     >
-      <div
-        className="relative h-[280px] overflow-hidden border-y border-yellow/40 bg-green-deep sm:h-[360px] lg:h-[440px]"
-        aria-roledescription="carousel"
-        aria-label="Silk we buy"
-      >
-        {slides.map((t, i) => {
-          // shortest way round, so wrapping still travels one step sideways
-          let offset = i - index;
-          if (offset > count / 2) offset -= count;
-          if (offset < -count / 2) offset += count;
-          const active = offset === 0;
+      {/* zari-style frame: gold plate, cream gap, inset hairline */}
+      <div className="relative">
+        <span
+          aria-hidden
+          className="foil absolute -inset-2.5 rounded-[34px] shadow-[0_18px_50px_rgba(10,46,26,.18)]"
+        />
+        <span aria-hidden className="absolute -inset-[3px] rounded-[31px] bg-cream" />
+        <span
+          aria-hidden
+          className="pointer-events-none absolute inset-1.5 z-20 rounded-[24px] border border-yellow-pale/70"
+        />
 
-          return (
-            <div
-              key={t.slug}
-              aria-hidden={!active}
-              style={{
-                transform: `translate3d(${offset * 100}%, 0, 0)`,
-                transitionDuration: `${SLIDE}ms`,
-                visibility: Math.abs(offset) <= 1 ? "visible" : "hidden",
-              }}
-              className="cat-slide absolute inset-0 transition-transform [transition-timing-function:cubic-bezier(.4,0,.2,1)]"
-            >
-              <Image
-                src={t.boardShop ? shopImg(t.boardShop) : img(t.imageId)}
-                alt={active ? `${t.name}: a saree border from our own stock` : ""}
-                fill
-                // next/image rejects priority together with loading, and the
-                // first slide's offset grows past 2 as the frame advances,
-                // which would have set both. Priority covers the opening slide;
-                // every other slide uses loading alone. Near neighbours load
-                // eagerly so none arrives blank as it slides in, while the far
-                // ones stay lazy to keep the hero off 1.5MB on open.
-                {...(i === 0
-                  ? { priority: true as const }
-                  : { loading: (Math.abs(offset) <= 2 ? "eager" : "lazy") as "eager" | "lazy" })}
-                sizes="100vw"
-                className="object-cover"
-              />
-              <span
-                aria-hidden
-                className="absolute inset-0 bg-[linear-gradient(0deg,rgba(10,46,26,.88)_0%,rgba(10,46,26,.35)_42%,transparent_72%)]"
-              />
-              <div className="absolute inset-x-0 bottom-0 px-6 pb-6 text-center">
-                {t.ta && (
-                  <p className="font-tamil text-[0.95rem] text-yellow-light">{t.ta}</p>
-                )}
-                <p className="mt-0.5 font-serif text-[clamp(1.2rem,3.4vw,1.9rem)] text-white">
-                  {t.name}
-                </p>
+        <div
+          className="relative aspect-4/5 w-full overflow-hidden rounded-[28px] bg-green-deep"
+          aria-roledescription="carousel"
+          aria-label="Silk we buy"
+        >
+          {slides.map((t, i) => {
+            // shortest way round, so wrapping still travels one step sideways
+            let offset = i - index;
+            if (offset > count / 2) offset -= count;
+            if (offset < -count / 2) offset += count;
+            const active = offset === 0;
+
+            return (
+              <div
+                key={t.slug}
+                aria-hidden={!active}
+                style={{
+                  transform: `translate3d(${offset * 100}%, 0, 0)`,
+                  transitionDuration: `${SLIDE}ms`,
+                  visibility: Math.abs(offset) <= 1 ? "visible" : "hidden",
+                }}
+                className="cat-slide absolute inset-0 transition-transform [transition-timing-function:cubic-bezier(.4,0,.2,1)]"
+              >
+                <Image
+                  src={t.boardShop ? shopImg(t.boardShop) : img(t.imageId)}
+                  alt={active ? `${t.name}: a saree border from our own stock` : ""}
+                  fill
+                  // next/image rejects priority together with loading, and the
+                  // first slide's offset grows past 2 as the frame advances,
+                  // which would have set both. Priority covers the opening slide;
+                  // every other slide uses loading alone. Near neighbours load
+                  // eagerly so none arrives blank as it slides in, while the far
+                  // ones stay lazy to keep the hero off 1.5MB on open.
+                  {...(i === 0
+                    ? { priority: true as const }
+                    : { loading: (Math.abs(offset) <= 2 ? "eager" : "lazy") as "eager" | "lazy" })}
+                  sizes="100vw"
+                  className="object-cover"
+                />
+                <span
+                  aria-hidden
+                  className="absolute inset-0 bg-[linear-gradient(0deg,rgba(10,46,26,.88)_0%,rgba(10,46,26,.35)_42%,transparent_72%)]"
+                />
+                <div className="absolute inset-x-0 bottom-0 px-6 pb-6 text-center">
+                  {t.ta && (
+                    <p className="font-tamil text-[0.95rem] text-yellow-light">{t.ta}</p>
+                  )}
+                  <p className="mt-0.5 font-serif text-[clamp(1.2rem,3.4vw,1.9rem)] text-white">
+                    {t.name}
+                  </p>
+                </div>
               </div>
-            </div>
-          );
-        })}
+              );
+            })}
+        </div>
       </div>
 
       {/* dots */}
