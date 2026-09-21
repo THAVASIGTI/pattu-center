@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { branches, business, waLink } from "@/config/business";
+import { branchCities, business, waLink } from "@/config/business";
 import { logoMark } from "@/config/content";
 import { Clock, Facebook, Instagram, Mail, Phone, WhatsApp, YouTube } from "./Icons";
 import { Wrap } from "./ui";
@@ -84,13 +84,13 @@ export default function Footer() {
               Branches
             </h2>
             <ul className="grid gap-1">
-              {branches.map((b) => (
-                <li key={b.slug}>
+              {branchCities.map((b) => (
+                <li key={b.city}>
                   <Link
                     href={`/branches/${b.slug}`}
                     className="inline-flex min-h-9 items-center transition-colors hover:text-yellow-light"
                   >
-                    {b.shortLabel ?? (b.isHeadOffice ? `${b.city} (HO)` : b.city)}
+                    {b.city}
                   </Link>
                 </li>
               ))}

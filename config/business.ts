@@ -253,6 +253,13 @@ const NUMBER_WORDS = [
   "zero", "one", "two", "three", "four", "five", "six",
   "seven", "eight", "nine", "ten", "eleven", "twelve",
 ];
+/** One branch per city, keeping the first listed, which is the head office or
+ *  branch 1. Used where a plain list of places reads better than every
+ *  counter, such as the footer. */
+export const branchCities = branches.filter(
+  (b, i) => branches.findIndex((o) => o.city === b.city) === i,
+);
+
 export const branchCount = branches.length;
 export const branchCountWord = NUMBER_WORDS[branchCount] ?? String(branchCount);
 export const branchCountWordCap =
