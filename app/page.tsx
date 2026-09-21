@@ -30,19 +30,23 @@ export default function HomePage() {
   return (
     <>
       {/* ---------------- Hero ---------------- */}
-      <section className="relative overflow-hidden bg-green-deep text-cream">
+      <section className="relative overflow-hidden bg-cream text-ink">
+        {/* Full-bleed silk backdrop, washed almost white so the section reads
+            light and the copy stays legible over it. */}
         <div className="absolute inset-0">
           <Image
-            src={img(7676340)}
+            src={img(20181020)}
             alt=""
             aria-hidden
             fill
             priority
             sizes="100vw"
-            className="object-cover opacity-[0.34]"
+            className="object-cover opacity-25"
           />
-          <div className="absolute inset-0 bg-[radial-gradient(780px_440px_at_10%_2%,rgba(202,154,4,.24),transparent_58%),radial-gradient(680px_560px_at_92%_96%,rgba(34,197,94,.46),transparent_64%),linear-gradient(172deg,rgba(10,46,26,.82),rgba(10,46,26,.95))]" />
+          <div className="absolute inset-0 bg-[radial-gradient(900px_520px_at_8%_0%,rgba(254,249,195,.85),transparent_60%),radial-gradient(760px_600px_at_95%_100%,rgba(232,244,234,.9),transparent_62%),linear-gradient(175deg,rgba(251,253,249,.93),rgba(238,244,234,.95))]" />
         </div>
+        {/* zari rule along the foot of the section */}
+        <span aria-hidden className="foil absolute inset-x-0 bottom-0 h-[3px]" />
 
         <Wrap className="relative z-10 grid items-center gap-8 py-12 sm:py-16 lg:grid-cols-[1.05fr_.95fr] lg:gap-14 lg:py-24">
           <HeroSlider
@@ -75,23 +79,31 @@ export default function HomePage() {
             ]}
           />
           <div className="order-1">
-            <span className="mb-4 inline-flex flex-wrap items-center gap-2 rounded-full border border-yellow/40 bg-yellow/15 px-4 py-1.5 text-[0.71rem] font-semibold uppercase tracking-[0.13em] text-yellow-light">
-              <i className="size-1.5 animate-pulse-ring rounded-full bg-yellow-light" />
+            <p className="mb-2 flex items-center gap-2.5 text-[0.74rem] font-semibold uppercase tracking-[0.2em] text-yellow">
+              <span aria-hidden className="foil h-px w-8" />
+              Welcome to {business.name}
+            </p>
+            <p className="mb-5 font-tamil text-[0.95rem] text-green">
+              {business.name} வரவேற்கிறது
+            </p>
+            <span className="mb-5 inline-flex flex-wrap items-center gap-2 rounded-full border border-yellow/45 bg-yellow-pale/70 px-4 py-1.5 text-[0.71rem] font-semibold uppercase tracking-[0.13em] text-green-deep">
+              <i className="size-1.5 animate-pulse-ring rounded-full bg-yellow" />
               {business.foundedText}
-              <span className="font-tamil text-[0.78rem] normal-case tracking-normal text-yellow-light/80">
+              <span className="font-tamil text-[0.78rem] normal-case tracking-normal text-green">
                 · {business.foundedTextTa}
               </span>
             </span>
 
             <AnimatedHeading
-              className="font-serif text-[clamp(2rem,7.4vw,3.95rem)] leading-[1.14] text-white"
+              foilTone="deep"
+              className="font-serif text-[clamp(2rem,7.4vw,3.95rem)] leading-[1.14] text-green-deep"
               segments={[
                 { text: "Sell your old silk at a" },
                 { text: " fair price.", foil: true },
               ]}
             />
 
-            <p className="mt-3 font-tamil text-[clamp(1rem,4vw,1.35rem)] leading-snug text-cream/85">
+            <p className="mt-3 font-tamil text-[clamp(1rem,4vw,1.35rem)] leading-snug text-green">
               பழைய பட்டுக்கு நல்ல விலை.
             </p>
 
@@ -104,7 +116,7 @@ export default function HomePage() {
               ]}
             />
 
-            <p className="mt-4 max-w-[48ch] text-[clamp(.97rem,2.6vw,1.07rem)] text-cream/80">
+            <p className="mt-4 max-w-[48ch] text-[clamp(.97rem,2.6vw,1.07rem)] text-ink-soft">
               Pattu sarees, silk vetti, zari and silver. Weighed in front of you, paid the same day.
             </p>
 
@@ -119,10 +131,10 @@ export default function HomePage() {
               </Button>
             </div>
 
-            <p className="mt-4 text-[0.84rem] text-cream/55">
+            <p className="mt-4 text-[0.84rem] text-ink-mute">
               Free pickup · Cash same day · No obligation
             </p>
-            <p className="mt-1 font-tamil text-[0.86rem] text-cream/50">
+            <p className="mt-1 font-tamil text-[0.86rem] text-ink-mute">
               இலவச வரவு · அன்றே பணம் · கட்டாயம் இல்லை
             </p>
           </div>

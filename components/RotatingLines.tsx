@@ -51,10 +51,10 @@ export default function RotatingLines({
               active ? "translate-y-0 opacity-100" : "pointer-events-none -translate-y-2 opacity-0"
             }`}
           >
-            <p className="font-tamil text-[clamp(1.05rem,4vw,1.45rem)] leading-snug text-yellow-light">
+            <p className="font-tamil text-[clamp(1.05rem,4vw,1.45rem)] leading-snug text-green">
               {l.ta}
             </p>
-            <p className="mt-1 text-[0.92rem] tracking-wide text-cream/60">{l.en}</p>
+            <p className="mt-1 text-[0.92rem] tracking-wide text-ink-mute">{l.en}</p>
           </div>
         );
       })}

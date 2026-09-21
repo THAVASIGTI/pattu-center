@@ -64,50 +64,57 @@ export default function HeroSlider({
       onFocusCapture={() => setPaused(true)}
       onBlurCapture={() => setPaused(false)}
     >
-      <span
-        aria-hidden
-        className={`absolute inset-y-0 -z-10 translate-y-3.5 rounded-[30px] border border-yellow/40 ${
-          side === "left" ? "right-3.5 -left-3.5" : "-right-3.5 left-3.5"
-        }`}
-      />
+      {/* Zari-style frame around the image only, so it does not swallow the
+          progress bar and dots below. */}
+      <div className="relative">
+        <span
+          aria-hidden
+          className="foil absolute -inset-2.5 rounded-[34px] shadow-[0_18px_50px_rgba(10,46,26,.18)]"
+        />
+        <span aria-hidden className="absolute -inset-[3px] rounded-[31px] bg-cream" />
+        <span
+          aria-hidden
+          className="pointer-events-none absolute inset-1.5 z-20 rounded-[24px] border border-yellow-pale/70"
+        />
 
-      <div
-        className="relative aspect-4/5 w-full overflow-hidden rounded-[30px] border border-yellow/40 shadow-deep"
-        aria-roledescription="carousel"
-        aria-label="Silk we buy"
-      >
-        {slides.map((s, i) => {
-          const active = i === index;
-          return (
-            <div
-              key={s.src}
-              style={{ transitionDuration: `${FADE}ms` }}
-              className={`hero-slide absolute inset-0 transition-opacity [transition-timing-function:cubic-bezier(.4,0,.2,1)] ${
-                active ? "z-10 opacity-100" : "z-0 opacity-0"
-              }`}
-              aria-hidden={!active}
-            >
-              <Image
-                src={s.src}
-                alt={active ? s.alt : ""}
-                fill
-                priority={i === 0}
-                sizes="(max-width: 1024px) 90vw, 440px"
-                className="object-cover"
-              />
-              <div className="absolute inset-x-0 bottom-0 bg-[linear-gradient(0deg,rgba(10,46,26,.9),transparent)] px-5 pt-12 pb-4">
-                <p className="font-tamil text-[0.95rem] leading-tight text-yellow-light">
-                  {s.captionTa}
-                </p>
-                <p className="mt-0.5 font-serif text-[1.05rem] text-white">{s.caption}</p>
+        <div
+          className="relative aspect-4/5 w-full overflow-hidden rounded-[28px] shadow-[0_10px_30px_rgba(10,46,26,.14)]"
+          aria-roledescription="carousel"
+          aria-label="Silk we buy"
+        >
+          {slides.map((s, i) => {
+            const active = i === index;
+            return (
+              <div
+                key={s.src}
+                style={{ transitionDuration: `${FADE}ms` }}
+                className={`hero-slide absolute inset-0 transition-opacity [transition-timing-function:cubic-bezier(.4,0,.2,1)] ${
+                  active ? "z-10 opacity-100" : "z-0 opacity-0"
+                }`}
+                aria-hidden={!active}
+              >
+                <Image
+                  src={s.src}
+                  alt={active ? s.alt : ""}
+                  fill
+                  priority={i === 0}
+                  sizes="(max-width: 1024px) 90vw, 440px"
+                  className="object-cover"
+                />
+                <div className="absolute inset-x-0 bottom-0 bg-[linear-gradient(0deg,rgba(10,46,26,.9),transparent)] px-5 pt-12 pb-4">
+                  <p className="font-tamil text-[0.95rem] leading-tight text-yellow-light">
+                    {s.captionTa}
+                  </p>
+                  <p className="mt-0.5 font-serif text-[1.05rem] text-white">{s.caption}</p>
+                </div>
               </div>
-            </div>
-          );
-        })}
+              );
+            })}
+        </div>
       </div>
 
       {/* Hold indicator */}
-      <div aria-hidden className="mt-3 h-[3px] overflow-hidden rounded-full bg-cream/15">
+      <div aria-hidden className="mt-4 h-[3px] overflow-hidden rounded-full bg-green/15">
         <span
           key={`${index}-${paused}`}
           className="hero-progress foil block h-full w-full origin-left"
@@ -131,8 +138,8 @@ export default function HeroSlider({
             <span
               className={`block h-1.5 rounded-full transition-all duration-500 ${
                 i === index
-                  ? "w-7 bg-yellow-light"
-                  : "w-1.5 bg-cream/40 group-hover:bg-cream/70"
+                  ? "w-7 bg-yellow"
+                  : "w-1.5 bg-green/25 group-hover:bg-green/50"
               }`}
             />
           </button>

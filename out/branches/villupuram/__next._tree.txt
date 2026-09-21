@@ -1,5 +1,5 @@
-:HL["/pattu-center/_next/static/chunks/3qycjxysx5kjg.css","style"]
+:HL["/pattu-center/_next/static/chunks/3mjfkb5hhhq2t.css","style"]
 :HL["/pattu-center/_next/static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/pattu-center/_next/static/media/e396318016d6db5b-s.p.02vhix9bl52i8.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/pattu-center/_next/static/media/ec2f4458eb06f74e-s.p.0waiv1vizwwb5.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
-0:{"tree":{"name":"","param":null,"prefetchHints":4112,"slots":{"children":{"name":"branches","param":null,"prefetchHints":4160,"slots":{"children":{"name":"slug","param":{"type":"d","key":"villupuram","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}},"staleTime":300,"buildId":"xpECrbzt41ChHtuFP3d8j"}
+0:{"tree":{"name":"","param":null,"prefetchHints":4112,"slots":{"children":{"name":"branches","param":null,"prefetchHints":4160,"slots":{"children":{"name":"slug","param":{"type":"d","key":"villupuram","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}},"staleTime":300,"buildId":"qc368lj-TzmA-7LLEY7CD"}

@@ -4,6 +4,9 @@ import { useEffect, useState } from "react";
 
 export type Segment = { text: string; foil?: boolean };
 
+/** Which gold to use: the bright foil on dark grounds, the deep one on light. */
+export type FoilTone = "light" | "deep";
+
 type Word = { word: string; idx: number };
 
 /** Splits segments into words, numbering them across the whole heading. */
@@ -31,10 +34,12 @@ export default function AnimatedHeading({
   segments,
   className = "",
   stagger = 55,
+  foilTone = "light",
 }: {
   segments: Segment[];
   className?: string;
   stagger?: number;
+  foilTone?: FoilTone;
 }) {
   const [ready, setReady] = useState(false);
 
@@ -58,7 +63,7 @@ export default function AnimatedHeading({
                 style={{ transitionDelay: `${idx * stagger}ms` }}
                 className={`inline-block transition-all duration-700 ease-out ${
                   ready ? "translate-y-0 opacity-100" : "translate-y-[110%] opacity-0"
-                } ${group.foil ? "foil-text foil-shimmer" : ""}`}
+                } ${group.foil ? `${foilTone === "deep" ? "foil-text-deep" : "foil-text"} foil-shimmer` : ""}`}
               >
                 {word}
               </span>

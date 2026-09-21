@@ -99,6 +99,18 @@
   animation: shimmer 6s linear infinite;
 }
 
+/* Foil for light backgrounds. The standard --foil peaks at #fffbe6, which
+   disappears on cream, so this one stays in the darker half of the gold. */
+@utility foil-text-deep {
+  background-image: linear-gradient(
+    100deg, #6b4f06 0%, #8f6a09 26%, #ad800d 46%, #8f6a09 66%, #6b4f06 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
 @utility green-text {
   background-image: linear-gradient(120deg, #22c55e, #0a2e1a);
   background-clip: text;
