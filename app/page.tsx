@@ -13,7 +13,7 @@ import StepStair from "@/components/StepStair";
 import { ArrowRight, Check, Phone, WhatsApp, serviceIcons } from "@/components/Icons";
 import Reveal from "@/components/Reveal";
 import { Button, Section, SectionHead, Wrap } from "@/components/ui";
-import { branchCount, branchCountWordCap, branches, business, waLink } from "@/config/business";
+import { branchCount, branchCountWordCap, branches, business, counterCountWord, waLink } from "@/config/business";
 import {
   img,
   priceLedger,
@@ -42,10 +42,18 @@ export default function HomePage() {
               Welcome to {business.name}
             </p>
 
-            <p className="mx-auto mb-7 max-w-[46ch] font-display text-[clamp(1.2rem,3vw,1.5rem)] leading-[1.55] text-ink-soft lg:mx-0">
+            {/* The count comes from the branch list so the sentence cannot
+                drift when a counter is added, and it says "counters" rather
+                than "branches" because Chennai is a pickup area with none. */}
+            <p className="mx-auto mb-3 max-w-[48ch] font-display text-[clamp(1.2rem,3vw,1.5rem)] leading-[1.55] text-ink-soft lg:mx-0">
               For forty years families across Tamil Nadu have brought us the silk they no longer
-              wear. Bring yours to any counter, or send a photo, and find out what it is really
-              worth.
+              wear. Bring yours to any of our {counterCountWord} counters, or ask us to collect it
+              free from your door, and find out what it is really worth.
+            </p>
+
+            <p className="mx-auto mb-7 max-w-[46ch] font-tamil text-[clamp(.95rem,2.5vw,1.08rem)] leading-[1.9] text-green lg:mx-0">
+              உங்கள் பழைய பட்டுச் சேலைகளை எங்கள் கிளைகளுக்குக் கொண்டு வாருங்கள், அல்லது
+              இலவசமாக உங்கள் வீட்டிற்கே வந்து பெற்றுக்கொள்கிறோம்.
             </p>
 
             <AnimatedHeading

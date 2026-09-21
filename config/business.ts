@@ -296,6 +296,12 @@ export const branchCities = branches.filter(
   (b, i) => branches.findIndex((o) => o.city === b.city) === i,
 );
 
+/** Counters you can walk into, which is fewer than `branchCount` now that
+ *  some entries are pickup areas. Prose about "our N counters" must use this. */
+export const counterBranches = branches.filter((b) => !b.pickupOnly);
+export const counterCount = counterBranches.length;
+export const counterCountWord = NUMBER_WORDS[counterCount] ?? String(counterCount);
+
 export const branchCount = branches.length;
 export const branchCountWord = NUMBER_WORDS[branchCount] ?? String(branchCount);
 export const branchCountWordCap =
