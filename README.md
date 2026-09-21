@@ -46,6 +46,20 @@ npm run lint
 `next.config.ts` sets `output: "export"`, so `npm run build` writes a plain
 static site to `out/` — HTML, CSS, JS and images, no Node server needed.
 
+## Changing dependencies
+
+The deploy runs `npm ci`, which installs strictly from `package-lock.json` and
+fails if it disagrees with `package.json`. npm 10 and 11 record optional
+platform packages differently, so a lockfile written by one can be rejected by
+the other, and a local `npm install` + `npm run build` will not catch it.
+
+The workflow pins npm 10. Use the same version when the lockfile changes:
+
+```bash
+npx npm@10 install       # add or update a dependency
+npx npm@10 ci            # confirm CI will accept the result
+```
+
 ## Deployment
 
 Pushing to `master` deploys automatically via

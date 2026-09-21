@@ -34,6 +34,14 @@ jobs:
         id: pages
         uses: actions/configure-pages@v5
 
+      # Pinned so the lockfile and CI always agree. npm 10 and 11 record
+      # optional platform packages differently, and a lockfile written by one
+      # can be rejected by the other, which fails npm ci here while every
+      # local check still passes. Regenerate the lockfile with the same
+      # version: npx npm@10 install
+      - name: Pin npm
+        run: npm install -g npm@10
+
       - name: Install dependencies
         run: npm ci
 
