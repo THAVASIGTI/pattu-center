@@ -34,6 +34,7 @@
   --font-serif: var(--font-marcellus), Georgia, "Times New Roman", serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-cormorant), Georgia, "Times New Roman", serif;
+  --font-royal: var(--font-cinzel), Georgia, "Times New Roman", serif;
   --font-tamil: var(--font-tamil), "Noto Sans Tamil", sans-serif;
 
   --radius-xl2: 22px;
