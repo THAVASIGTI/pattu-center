@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { business, waLink } from "@/config/business";
-import { logoMark } from "@/config/content";
+import { logoNav } from "@/config/content";
 import { Close, Menu, Phone, WhatsApp } from "./Icons";
 import { Wrap } from "./ui";
 
@@ -24,17 +24,21 @@ export const navLinks = [
 
 function Brand({ dark = false }: { dark?: boolean }) {
   return (
-    <Link href="/" className="flex min-w-0 items-center gap-3" aria-label={`${business.name} home`}>
-      {/* Ring sits on the wrapper so the padding does not shrink the mark. */}
-      <span className="grid size-[50px] shrink-0 place-items-center rounded-full border border-yellow/55 bg-white/70 p-[3px] shadow-[0_1px_6px_rgba(10,46,26,.08)] lg:size-[62px]">
+    <Link href="/" className="flex min-w-0 items-center gap-3 lg:gap-4" aria-label={`${business.name} home`}>
+      {/* The badge is deliberately taller than the bar, because the zari swash
+          stops reading much below 70px. The negative bottom margin lets it hang
+          past the header edge instead of stretching the header. The two rings
+          are box-shadows rather than border plus padding, so nothing eats into
+          the mark. */}
+      <span className="-mb-[14px] grid size-[72px] shrink-0 place-items-center rounded-full bg-white shadow-[0_0_0_1px_rgba(202,154,4,.5),0_0_0_4px_#fffdf7,0_0_0_5px_rgba(202,154,4,.3),0_7px_18px_rgba(10,46,26,.13)] lg:-mb-[20px] lg:size-[90px]">
         <Image
-          src={logoMark}
+          src={logoNav}
           alt=""
           aria-hidden
-          width={192}
-          height={192}
+          width={256}
+          height={256}
           priority
-          className="size-full object-contain"
+          className="size-[58px] object-contain lg:size-[74px]"
         />
       </span>
       <span className={`min-w-0 font-serif text-[1.02rem] leading-tight lg:whitespace-nowrap lg:text-[1.08rem] ${dark ? "text-white" : "text-green-deep"}`}>
