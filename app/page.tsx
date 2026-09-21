@@ -3,9 +3,9 @@ import Link from "next/link";
 import BranchCard from "@/components/BranchCard";
 import Counter from "@/components/Counter";
 import CtaBand from "@/components/CtaBand";
-import HeroSlider from "@/components/HeroSlider";
 import AnimatedHeading from "@/components/AnimatedHeading";
 import ArchCard from "@/components/ArchCard";
+import CategoryBoard from "@/components/CategoryBoard";
 import PriceScale from "@/components/PriceScale";
 import Roadmap from "@/components/Roadmap";
 import RotatingLines from "@/components/RotatingLines";
@@ -48,65 +48,38 @@ export default function HomePage() {
         {/* zari rule along the foot of the section */}
         <span aria-hidden className="foil absolute inset-x-0 bottom-0 h-[3px]" />
 
-        <Wrap className="relative z-10 grid items-center gap-8 py-12 sm:py-16 lg:grid-cols-[1.05fr_.95fr] lg:gap-14 lg:py-24">
-          <HeroSlider
-            className="order-2"
-            slides={[
-              {
-                src: img(16239658),
-                alt: "Green silk saree with a woven gold zari border and traditional jewellery",
-                caption: "Kanchipuram pattu",
-                captionTa: "காஞ்சிபுரம் பட்டு",
-              },
-              {
-                src: img(6167463),
-                alt: "Teal silk saree with intricate golden paisley brocade",
-                caption: "Mysore & Banarasi silk",
-                captionTa: "மைசூர் & பனாரஸ் பட்டு",
-              },
-              {
-                src: img(10317113),
-                alt: "Close-up of a silk saree showing its woven gold zari border",
-                caption: "Zari borders & pallu",
-                captionTa: "ஜரிகை கரை & முந்தானை",
-              },
-              {
-                src: img(20181020),
-                alt: "Close-up of gold and silver brocade fabric",
-                caption: "Gold & silver zari",
-                captionTa: "தங்கம் & வெள்ளி ஜரிகை",
-              },
+        <Wrap className="relative z-10 py-12 text-center sm:py-16 lg:py-20">
+          <p className="mb-2 flex items-center justify-center gap-2.5 text-[0.74rem] font-semibold uppercase tracking-[0.2em] text-yellow">
+            <span aria-hidden className="foil h-px w-8" />
+            Welcome to {business.name}
+            <span aria-hidden className="foil h-px w-8" />
+          </p>
+          <p className="mb-5 font-tamil text-[0.95rem] text-green">
+            {business.name} வரவேற்கிறது
+          </p>
+
+          <span className="mb-5 inline-flex flex-wrap items-center justify-center gap-2 rounded-full border border-yellow/45 bg-yellow-pale/70 px-4 py-1.5 text-[0.71rem] font-semibold uppercase tracking-[0.13em] text-green-deep">
+            <i className="size-1.5 animate-pulse-ring rounded-full bg-yellow" />
+            {business.foundedText}
+            <span className="font-tamil text-[0.78rem] normal-case tracking-normal text-green">
+              · {business.foundedTextTa}
+            </span>
+          </span>
+
+          <AnimatedHeading
+            foilTone="deep"
+            className="mx-auto max-w-[18ch] font-serif text-[clamp(2rem,6.6vw,3.6rem)] leading-[1.14] text-green-deep"
+            segments={[
+              { text: "Sell your old silk at a" },
+              { text: " fair price.", foil: true },
             ]}
           />
-          <div className="order-1">
-            <p className="mb-2 flex items-center gap-2.5 text-[0.74rem] font-semibold uppercase tracking-[0.2em] text-yellow">
-              <span aria-hidden className="foil h-px w-8" />
-              Welcome to {business.name}
-            </p>
-            <p className="mb-5 font-tamil text-[0.95rem] text-green">
-              {business.name} வரவேற்கிறது
-            </p>
-            <span className="mb-5 inline-flex flex-wrap items-center gap-2 rounded-full border border-yellow/45 bg-yellow-pale/70 px-4 py-1.5 text-[0.71rem] font-semibold uppercase tracking-[0.13em] text-green-deep">
-              <i className="size-1.5 animate-pulse-ring rounded-full bg-yellow" />
-              {business.foundedText}
-              <span className="font-tamil text-[0.78rem] normal-case tracking-normal text-green">
-                · {business.foundedTextTa}
-              </span>
-            </span>
 
-            <AnimatedHeading
-              foilTone="deep"
-              className="font-serif text-[clamp(2rem,7.4vw,3.95rem)] leading-[1.14] text-green-deep"
-              segments={[
-                { text: "Sell your old silk at a" },
-                { text: " fair price.", foil: true },
-              ]}
-            />
+          <p className="mt-3 font-tamil text-[clamp(1rem,4vw,1.35rem)] leading-snug text-green">
+            பழைய பட்டுக்கு நல்ல விலை.
+          </p>
 
-            <p className="mt-3 font-tamil text-[clamp(1rem,4vw,1.35rem)] leading-snug text-green">
-              பழைய பட்டுக்கு நல்ல விலை.
-            </p>
-
+          <div className="mx-auto max-w-[36rem]">
             <RotatingLines
               lines={[
                 { ta: "பழைய பட்டு வீணாகாது", en: "Old silk is never waste" },
@@ -115,30 +88,34 @@ export default function HomePage() {
                 { ta: "வீட்டிற்கே வருவோம்", en: "We come to your home" },
               ]}
             />
-
-            <p className="mt-4 max-w-[48ch] text-[clamp(.97rem,2.6vw,1.07rem)] text-ink-soft">
-              Pattu sarees, silk vetti, zari and silver. Weighed in front of you, paid the same day.
-            </p>
-
-            <div className="mt-7 flex flex-wrap gap-2.5">
-              <Button href={business.phones[0].href} variant="yellow" className="flex-1 sm:flex-none">
-                <Phone className="size-[17px]" />
-                Call {business.phones[0].label}
-              </Button>
-              <Button href={waLink()} variant="whatsapp" external className="flex-1 sm:flex-none">
-                <WhatsApp className="size-[17px]" />
-                Send Photos on WhatsApp
-              </Button>
-            </div>
-
-            <p className="mt-4 text-[0.84rem] text-ink-mute">
-              Free pickup · Cash same day · No obligation
-            </p>
-            <p className="mt-1 font-tamil text-[0.86rem] text-ink-mute">
-              இலவச வரவு · அன்றே பணம் · கட்டாயம் இல்லை
-            </p>
           </div>
 
+          <p className="mx-auto mt-4 max-w-[52ch] text-[clamp(.97rem,2.6vw,1.07rem)] text-ink-soft">
+            Pattu sarees, silk vetti, zari and silver. Weighed in front of you, paid the same day.
+          </p>
+
+          <div className="mt-7 flex flex-wrap justify-center gap-2.5">
+            <Button href={business.phones[0].href} variant="yellow" className="flex-1 sm:flex-none">
+              <Phone className="size-[17px]" />
+              Call {business.phones[0].label}
+            </Button>
+            <Button href={waLink()} variant="whatsapp" external className="flex-1 sm:flex-none">
+              <WhatsApp className="size-[17px]" />
+              Send Photos on WhatsApp
+            </Button>
+          </div>
+
+          <p className="mt-4 text-[0.84rem] text-ink-mute">
+            Free pickup · Cash same day · No obligation
+          </p>
+          <p className="mt-1 font-tamil text-[0.86rem] text-ink-mute">
+            இலவச வரவு · அன்றே பணம் · கட்டாயம் இல்லை
+          </p>
+
+          {/* Full-bleed board of what we take in */}
+          <div className="mt-10 sm:mt-12">
+            <CategoryBoard />
+          </div>
         </Wrap>
       </section>
 

@@ -314,6 +314,7 @@ export const galleryImages: { id: number; alt: string }[] = [
   { id: 29389864, alt: "Colourful textile stalls in a busy Indian market" },
   { id: 37892693, alt: "Detail of fine golden threads stretched across a weaving loom" },
   { id: 10317113, alt: "Close-up of a Kanchipuram silk saree showing its gold zari border" },
+  { id: 16239658, alt: "Green silk saree with a woven gold zari border and traditional jewellery" },
 ];
 
 /** Placeholder reviews, replace with real customer feedback before launch. */
