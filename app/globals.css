@@ -51,6 +51,28 @@
   100% { background-position: 200% 50%; }
 }
 
+/* Hero backdrop: zari threads drifting across, and soft shapes wandering
+   behind them. Slow and low-contrast so they never compete with the copy. */
+@keyframes thread-drift {
+  from { transform: translate3d(-120%, 0, 0); }
+  to   { transform: translate3d(120%, 0, 0); }
+}
+
+@keyframes shape-a {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50%      { transform: translate3d(6%, -8%, 0) scale(1.12); }
+}
+
+@keyframes shape-b {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1.08); }
+  50%      { transform: translate3d(-7%, 6%, 0) scale(0.94); }
+}
+
+@keyframes weave-pan {
+  from { background-position: 0 0; }
+  to   { background-position: 120px 120px; }
+}
+
 @keyframes drain {
   from { transform: scaleX(1); }
   to   { transform: scaleX(0); }
@@ -103,7 +125,7 @@
    disappears on cream, so this one stays in the darker half of the gold. */
 @utility foil-text-deep {
   background-image: linear-gradient(
-    100deg, #6b4f06 0%, #8f6a09 26%, #ad800d 46%, #8f6a09 66%, #6b4f06 100%
+    100deg, #55400a 0%, #78590b 26%, #9a7208 46%, #78590b 66%, #55400a 100%
   );
   background-clip: text;
   -webkit-background-clip: text;
@@ -165,4 +187,8 @@ body {
   /* The hold bar would otherwise snap to empty, so show it filled. */
   .hero-progress { animation: none !important; transform: scaleX(1) !important; }
   .foil-shimmer { animation: none !important; }
+  /* the hero backdrop keeps its picture, just stops moving */
+  .hero-weave,
+  .hero-shape,
+  .hero-thread { animation: none !important; }
 }

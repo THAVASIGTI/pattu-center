@@ -6,6 +6,7 @@ import CtaBand from "@/components/CtaBand";
 import AnimatedHeading from "@/components/AnimatedHeading";
 import ArchCard from "@/components/ArchCard";
 import CategoryBoard from "@/components/CategoryBoard";
+import HeroBackdrop from "@/components/HeroBackdrop";
 import PriceScale from "@/components/PriceScale";
 import Roadmap from "@/components/Roadmap";
 import StepStair from "@/components/StepStair";
@@ -30,11 +31,7 @@ export default function HomePage() {
     <>
       {/* ---------------- Hero ---------------- */}
       <section className="relative overflow-hidden bg-cream text-ink">
-        {/* Light gradient ground: white falling to a soft golden yellow. */}
-        <div
-          aria-hidden
-          className="absolute inset-0 bg-[radial-gradient(1000px_520px_at_50%_-8%,#fffdf4,transparent_65%),linear-gradient(180deg,#ffffff_0%,#fffcef_38%,#fdf3d6_100%)]"
-        />
+        <HeroBackdrop />
         {/* zari rule along the foot of the section */}
         <span aria-hidden className="foil absolute inset-x-0 bottom-0 h-[3px]" />
 
