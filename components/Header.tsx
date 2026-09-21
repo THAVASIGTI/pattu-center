@@ -25,18 +25,21 @@ export const navLinks = [
 function Brand({ dark = false }: { dark?: boolean }) {
   return (
     <Link href="/" className="flex min-w-0 items-center gap-3" aria-label={`${business.name} home`}>
-      {/* Flush in the bar, no frame. What carries the detail at this size is
-          the tight crop and deepened gold in logo-nav.png, not a ring: a ring
-          only spends pixels that the mark needs. */}
-      <Image
-        src={logoNav}
-        alt=""
-        aria-hidden
-        width={256}
-        height={256}
-        priority
-        className="h-[56px] w-auto shrink-0 object-contain lg:h-[64px]"
-      />
+      {/* A tinted disc behind the mark, so the green and gold read against the
+          cream bar instead of dissolving into it. Two hairline rings, gold with
+          a white gap between them. The padding lives on the disc rather than on
+          the image, so framing it costs the mark nothing. */}
+      <span className="grid size-[68px] shrink-0 place-items-center rounded-full bg-[radial-gradient(circle_at_50%_40%,#fffef9_0%,#fdf5e0_60%,#f6e6c4_100%)] shadow-[0_0_0_1px_rgba(202,154,4,.55),0_0_0_4px_#fffdf7,0_0_0_5px_rgba(202,154,4,.25),0_2px_8px_rgba(10,46,26,.07)] lg:size-[80px]">
+        <Image
+          src={logoNav}
+          alt=""
+          aria-hidden
+          width={256}
+          height={256}
+          priority
+          className="h-[54px] w-auto object-contain lg:h-[64px]"
+        />
+      </span>
       <span className={`min-w-0 font-serif text-[1.02rem] leading-tight lg:whitespace-nowrap lg:text-[1.08rem] ${dark ? "text-white" : "text-green-deep"}`}>
         {business.name}
         <span className="mt-0.5 block font-sans text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-yellow-ink">
@@ -105,7 +108,7 @@ export default function Header() {
           stuck ? "shadow-[0_6px_24px_rgba(10,46,26,.11)]" : ""
         }`}
       >
-        <Wrap className="flex min-h-[62px] items-center justify-between gap-3.5 lg:min-h-[72px]">
+        <Wrap className="flex min-h-[78px] items-center justify-between gap-3.5 lg:min-h-[90px]">
           <Brand />
 
           {/* Desktop nav */}
