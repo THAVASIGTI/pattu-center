@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "./Icons";
-import { img, sareeTypes } from "@/config/content";
+import { img, sareeTypes, shopImg } from "@/config/content";
 
 /**
  * Full-bleed board of saree categories sitting under the hero copy. Tiles run
@@ -21,8 +21,8 @@ export default function CategoryBoard() {
             className="group relative block aspect-3/4 overflow-hidden rounded-[14px] border border-yellow/35 shadow-[0_6px_18px_rgba(10,46,26,.12)] transition-transform duration-300 hover:-translate-y-1"
           >
             <Image
-              src={img(t.imageId)}
-              alt={t.alt}
+              src={t.boardShop ? shopImg(t.boardShop) : img(t.imageId)}
+              alt={t.boardShop ? `${t.name}: a saree border from our own stock` : t.alt}
               fill
               sizes="(max-width: 768px) 60vw, (max-width: 1024px) 25vw, 12vw"
               className="object-cover transition-transform duration-[900ms] group-hover:scale-110"

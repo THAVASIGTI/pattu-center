@@ -41,9 +41,9 @@ export default function HomePage() {
             fill
             priority
             sizes="100vw"
-            className="object-cover opacity-25"
+            className="object-cover opacity-[0.42]"
           />
-          <div className="absolute inset-0 bg-[radial-gradient(900px_520px_at_8%_0%,rgba(254,249,195,.85),transparent_60%),radial-gradient(760px_600px_at_95%_100%,rgba(232,244,234,.9),transparent_62%),linear-gradient(175deg,rgba(251,253,249,.93),rgba(238,244,234,.95))]" />
+          <div className="absolute inset-0 bg-[radial-gradient(1100px_600px_at_50%_-10%,rgba(254,249,195,.72),transparent_62%),radial-gradient(900px_700px_at_50%_110%,rgba(232,244,234,.88),transparent_64%),linear-gradient(180deg,rgba(251,253,249,.90),rgba(251,253,249,.80)_42%,rgba(238,244,234,.93))]" />
         </div>
         {/* zari rule along the foot of the section */}
         <span aria-hidden className="foil absolute inset-x-0 bottom-0 h-[3px]" />
@@ -90,7 +90,17 @@ export default function HomePage() {
             />
           </div>
 
-          <p className="mx-auto mt-4 max-w-[52ch] text-[clamp(.97rem,2.6vw,1.07rem)] text-ink-soft">
+          <p className="mx-auto mt-5 max-w-[58ch] text-[clamp(1rem,2.7vw,1.12rem)] leading-relaxed text-ink-soft">
+            For forty years families across Tamil Nadu have brought us the silk they no longer
+            wear. Bring yours to any counter, or send a photo, and find out what it is really
+            worth.
+          </p>
+          <p className="mx-auto mt-2 max-w-[52ch] font-tamil text-[0.95rem] leading-relaxed text-green">
+            நாற்பது ஆண்டுகளாக தமிழ்நாடு முழுவதும் உள்ள குடும்பங்கள் தங்கள் பழைய பட்டை
+            எங்களிடம் கொண்டு வருகிறார்கள். உங்கள் பட்டையும் கொண்டு வாருங்கள்.
+          </p>
+
+          <p className="mx-auto mt-4 max-w-[52ch] text-[0.95rem] text-ink-mute">
             Pattu sarees, silk vetti, zari and silver. Weighed in front of you, paid the same day.
           </p>
 

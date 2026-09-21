@@ -40,6 +40,8 @@ export type SareeType = {
   ta?: string;
   blurb: string;
   imageId: number;
+  /** Our own photo for the hero board, where a real border shot beats stock. */
+  boardShop?: number;
   alt: string;
 };
 
@@ -51,6 +53,7 @@ export const sareeTypes: SareeType[] = [
     blurb:
       "Pure mulberry silk with heavy contrast borders. Wedding sarees, temple sarees and everyday pattu of any age or condition.",
     imageId: 10317113,
+    boardShop: 7,
     alt: "Close-up of a Kanchipuram silk saree showing its woven gold zari border and paisley motifs",
   },
   {
@@ -60,6 +63,7 @@ export const sareeTypes: SareeType[] = [
     blurb:
       "Crepe and pure Mysore silk with genuine gold zari borders, valued on both silk weight and metal content.",
     imageId: 6167463,
+    boardShop: 9,
     alt: "Teal silk saree with intricate golden paisley brocade, folded on a woven tray",
   },
   {
@@ -69,6 +73,7 @@ export const sareeTypes: SareeType[] = [
     blurb:
       "Banarasi brocade, tissue sarees and dense zari work. The heavier the weave, the better the price we can offer.",
     imageId: 20181020,
+    boardShop: 18,
     alt: "Close-up of gold and silver brocade fabric showing dense woven patterning",
   },
   {
@@ -78,6 +83,7 @@ export const sareeTypes: SareeType[] = [
     blurb:
       "Men's silk dhotis, panchakacham, shoulder cloths and zari-bordered angavastram, bought by the pair or singly.",
     imageId: 5439054,
+    boardShop: 19,
     alt: "Red and black silk with gold patterning and a contrasting woven border",
   },
   {
@@ -87,6 +93,7 @@ export const sareeTypes: SareeType[] = [
     blurb:
       "Silk blouse bits, pattu pavadai, cut pieces and leftover border strips. Even small quantities are weighed and paid for.",
     imageId: 8886933,
+    boardShop: 13,
     alt: "Hands holding a finely embroidered red silk piece",
   },
   {
@@ -96,6 +103,7 @@ export const sareeTypes: SareeType[] = [
     blurb:
       "Loose zari, cut borders, pallu panels and sarees that are torn or moth eaten. Silver-gilt thread holds value even when the saree does not.",
     imageId: 37892693,
+    boardShop: 24,
     alt: "Detail of fine golden threads stretched across a weaving loom",
   },
   {
@@ -105,6 +113,7 @@ export const sareeTypes: SareeType[] = [
     blurb:
       "Traditional madisar, koorai and nine-yard wedding sarees, often the heaviest silk and zari a household owns.",
     imageId: 33433875,
+    boardShop: 26,
     alt: "Long silk sarees laid out to dry on the ghats at Varanasi",
   },
   {
@@ -114,6 +123,7 @@ export const sareeTypes: SareeType[] = [
     blurb:
       "Arani, Thirubuvanam, Dharmapuram, Gadwal and Venkatagiri weaves. Every regional silk tradition is accepted.",
     imageId: 18728089,
+    boardShop: 22,
     alt: "Traditional Indian textiles stacked and displayed at a fabric shop",
   },
   {
