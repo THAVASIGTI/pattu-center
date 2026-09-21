@@ -362,36 +362,42 @@ export const testimonials = [
 
 export const roadmap = [
   {
+    icon: "camera",
     stop: "Send photos",
     when: "Day one, any hour",
     blurb:
       "WhatsApp pictures of each saree spread out, plus a close-up of the border. We reply with an indicative range. No visit needed yet.",
   },
   {
+    icon: "shopfront",
     stop: "Pick how we meet",
     when: "You choose",
     blurb:
       "Walk into any of our branches, or ask for a free home visit. We come for even one or two sarees. We work around your timing.",
   },
   {
+    icon: "scale",
     stop: "Open weighing",
     when: "About 10 minutes",
     blurb:
       "Each piece goes on a calibrated scale in front of you. Nothing is taken to a back room, and nothing is weighed out of your sight.",
   },
   {
+    icon: "loupe",
     stop: "Zari tested",
     when: "Same visit",
     blurb:
       "We sample the border thread to check whether the zari is real silver-gilt. The test takes a moment and does not damage the saree.",
   },
   {
+    icon: "tag",
     stop: "One clear price",
     when: "Before you decide",
     blurb:
       "You get a single figure with the arithmetic behind it: silk weight, purity, zari and condition. Questions answered before anything is agreed.",
   },
   {
+    icon: "rupee",
     stop: "Paid on the spot",
     when: "Immediately",
     blurb:

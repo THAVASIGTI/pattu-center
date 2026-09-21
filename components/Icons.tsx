@@ -110,6 +110,46 @@ export const serviceIcons: Record<string, (p: P) => React.ReactElement> = {
   whatsapp: (p) => <WhatsApp {...p} />,
 };
 
+/** One per stop on the roadmap, in the order the stops appear. */
+export const stepIcons: Record<string, (p: P) => React.ReactElement> = {
+  camera: (p) => (
+    <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.7} {...p}>
+      <path d="M3 8.5h3.2l1.4-2.2h8.8l1.4 2.2H21v10H3z" />
+      <circle cx="12" cy="13.2" r="3.4" />
+    </svg>
+  ),
+  shopfront: (p) => (
+    <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.7} {...p}>
+      <path d="M4 9.5V20h16V9.5M2.5 9.5 4.6 4h14.8l2.1 5.5a3 3 0 0 1-5.8 0 3 3 0 0 1-5.8 0 3 3 0 0 1-5.8 0z" />
+      <path d="M10 20v-5.2h4V20" />
+    </svg>
+  ),
+  scale: (p) => (
+    <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.7} {...p}>
+      <path d="M12 4v16M8 20h8M5 8h14M12 8 8.2 8 5 14.5a3.6 3.6 0 0 0 6.4 0zM12 8l3.8 0 3.2 6.5a3.6 3.6 0 0 1-6.4 0z" />
+      <circle cx="12" cy="4.4" r="1.4" />
+    </svg>
+  ),
+  loupe: (p) => (
+    <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.7} {...p}>
+      <circle cx="10.5" cy="10.5" r="6" />
+      <path d="M15 15l5 5M8 10.5h5M8.7 8.2h3.6M8.7 12.8h3.6" />
+    </svg>
+  ),
+  tag: (p) => (
+    <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.7} {...p}>
+      <path d="M11.6 3H20a1 1 0 0 1 1 1v8.4a1 1 0 0 1-.3.7l-8 8a1 1 0 0 1-1.4 0l-7.4-7.4a1 1 0 0 1 0-1.4l8-8a1 1 0 0 1 .7-.3z" />
+      <circle cx="16.6" cy="7.4" r="1.5" />
+    </svg>
+  ),
+  rupee: (p) => (
+    <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.7} {...p}>
+      <circle cx="12" cy="12" r="8.6" />
+      <path d="M9 7.6h6M9 10.4h6M13.9 7.6c1.4 0 2.2 1 2.2 2.2s-.8 2.2-2.2 2.2H9.6l4.3 4.4" />
+    </svg>
+  ),
+};
+
 export const YouTube = (p: P) => (
   <svg viewBox="0 0 24 24" fill="currentColor" {...p}>
     <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8M9.5 15.6V8.4l6.3 3.6z" />

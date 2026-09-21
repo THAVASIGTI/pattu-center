@@ -1,46 +1,59 @@
+import { stepIcons } from "./Icons";
 import Reveal from "./Reveal";
 
 /**
- * Vertical roadmap. On small screens the spine sits on the left with every
- * stop beside it; from `lg` up the spine centres and stops alternate sides.
+ * The stops laid out as a row of steps: icon, numbered heading, blurb. One
+ * column on phones so the blurbs keep a readable measure, widening to the full
+ * six-across row from `xl`, where a hairline runs behind the icons to tie the
+ * stops together as one journey.
  */
 export default function Roadmap({
   stops,
 }: {
-  stops: { stop: string; when: string; blurb: string }[];
+  stops: { icon: string; stop: string; when: string; blurb: string }[];
 }) {
   return (
-    <div className="relative mx-auto max-w-[980px]">
-      {/* the spine */}
+    <div className="relative mx-auto max-w-[1120px]">
+      {/* The connector sits level with the middle of the icon discs, and stops
+          short at both ends so it reads as a path rather than a rule. */}
       <span
         aria-hidden
-        className="absolute top-2 bottom-2 left-[19px] w-px bg-[linear-gradient(180deg,transparent,rgba(253,224,71,.55)_8%,rgba(253,224,71,.55)_92%,transparent)] lg:left-1/2 lg:-translate-x-1/2"
+        className="absolute top-[38px] right-[8%] left-[8%] hidden h-px bg-[linear-gradient(90deg,transparent,rgba(202,154,4,.42)_12%,rgba(202,154,4,.42)_88%,transparent)] xl:block"
       />
 
-      <ol className="grid gap-6 lg:gap-0">
+      <ol className="grid gap-x-6 gap-y-7 sm:gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
         {stops.map((s, i) => {
-          const right = i % 2 === 1;
+          const Icon = stepIcons[s.icon];
           return (
-            <li key={s.stop} className="relative lg:grid lg:grid-cols-2 lg:items-center lg:gap-10">
-              {/* node */}
-              <span
-                aria-hidden
-                className="absolute top-1 left-0 z-10 grid size-10 place-items-center rounded-full border border-yellow/45 bg-green-deep font-serif text-[0.95rem] text-yellow-light shadow-[0_0_0_6px_rgba(10,46,26,1)] lg:top-1/2 lg:left-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2"
-              >
-                {String(i + 1).padStart(2, "0")}
-              </span>
-
+            <li key={s.stop} className="relative">
+              {/* Phones get the icon beside the text, which halves the height
+                  of a six-stop list. The centred column starts at `sm`. */}
               <Reveal
                 delay={i * 70}
-                className={`pl-16 lg:pl-0 lg:py-7 ${
-                  right ? "lg:col-start-2 lg:pl-12" : "lg:col-start-1 lg:pr-12 lg:text-right"
-                }`}
+                className="flex items-start gap-4 text-left sm:block sm:text-center"
               >
-                <p className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-yellow-light">
-                  {s.when}
-                </p>
-                <h3 className="mt-1.5 font-serif text-[1.3rem] text-white">{s.stop}</h3>
-                <p className="mt-2 text-[0.93rem] text-cream/72">{s.blurb}</p>
+                <span
+                  aria-hidden
+                  className="grid size-[58px] shrink-0 place-items-center rounded-full border border-line-yellow bg-white text-green shadow-[0_2px_10px_rgba(10,46,26,.07)] sm:mx-auto sm:size-[76px]"
+                >
+                  <Icon className="size-[26px] sm:size-[34px]" />
+                </span>
+
+                {/* The text needs its own box, or the flex row on phones would
+                    set heading, caption and blurb side by side. */}
+                <div className="min-w-0 sm:contents">
+                  <h3 className="mt-0 font-serif text-[1.15rem] leading-tight text-green-deep sm:mt-5 sm:text-[1.22rem] xl:min-h-[2.5em]">
+                    <span className="text-yellow-ink">{i + 1}</span> {s.stop}
+                  </h3>
+
+                  <p className="mt-1.5 text-[0.67rem] font-semibold uppercase tracking-[0.16em] text-yellow-ink">
+                    {s.when}
+                  </p>
+
+                  <p className="mt-2.5 text-[0.9rem] leading-relaxed text-ink-soft sm:mx-auto sm:max-w-[30ch]">
+                    {s.blurb}
+                  </p>
+                </div>
               </Reveal>
             </li>
           );

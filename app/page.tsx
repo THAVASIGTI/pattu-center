@@ -259,11 +259,10 @@ export default function HomePage() {
 
 
       {/* ---------------- Roadmap: the journey ---------------- */}
-      <Section tone="green">
+      <Section tone="cream">
         <Wrap>
           <Reveal>
             <SectionHead
-              tone="dark"
               eyebrow="The road to a fair price"
               title="Where your saree goes, step by step."
               lead="From the first photo you send to the cash in your hand. Six stops, no surprises in between."
