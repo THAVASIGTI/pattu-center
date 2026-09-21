@@ -15,6 +15,7 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   const ho = branches[0];
+  const hoMap = mapEmbedUrl(ho);
 
   return (
     <>
@@ -123,9 +124,12 @@ export default function ContactPage() {
                     <span key={l} className="block">{l}</span>
                   ))}
                 </address>
+                {/* The head office always has a pin, but the helper is nullable
+                    now that pickup-only areas exist, so guard rather than assert. */}
+                {hoMap && (
                 <div className="mt-5 overflow-hidden rounded-[14px] border border-line-yellow">
                   <iframe
-                    src={mapEmbedUrl(ho)}
+                    src={hoMap}
                     title={`Map showing our ${ho.city} head office`}
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
@@ -133,6 +137,7 @@ export default function ContactPage() {
                     className="block h-[280px] w-full border-0"
                   />
                 </div>
+                )}
                 <div className="mt-5">
                   <Button href={`/branches/${ho.slug}`} variant="outline" className="w-full">
                     View {ho.city} branch page

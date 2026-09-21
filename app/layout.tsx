@@ -3,6 +3,7 @@ import { Cormorant_Garamond, Inter, Marcellus, Noto_Sans_Tamil } from "next/font
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileActionBar from "@/components/MobileActionBar";
+import SocialDock from "@/components/SocialDock";
 import { branches, business } from "@/config/business";
 import { img } from "@/config/content";
 import "./globals.css";
@@ -112,6 +113,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <main>{children}</main>
         <Footer />
+        <SocialDock />
         <MobileActionBar />
       </body>
     </html>

@@ -75,7 +75,10 @@ export type Branch = {
   /** "lat,lng" from the shop's own Google Maps pin. Preferred over mapQuery,
    *  which only searches for a nearby landmark. */
   coords?: string;
-  mapQuery: string;
+  mapQuery?: string;
+  /** A service area we collect from rather than a counter you can walk into.
+   *  It has no address to pin, so no map, no QR and no directions link. */
+  pickupOnly?: boolean;
   phoneIndex: number;
   intro: string;
   areas: string[];
@@ -237,18 +240,47 @@ export const branches: Branch[] = [
       "Pollachi", "Mettupalayam",
     ],
   },
+  {
+    slug: "chennai",
+    city: "Chennai",
+    title: "Chennai Doorstep Pickup",
+    pickupOnly: true,
+    lines: [
+      "All over Chennai",
+      "Doorstep pickup available",
+    ],
+    // Shares the head office number, so Chennai pickups are booked by the
+    // same people who set the valuations.
+    phoneIndex: 0,
+    intro:
+      "We have no counter in Chennai, we come to you. Call or WhatsApp photos of your sarees and we fix a time to collect them from your door, anywhere in the city, with no travel charge and no minimum.",
+    areas: [
+      "T. Nagar", "Mylapore", "Adyar", "Anna Nagar", "Velachery",
+      "Tambaram", "Chromepet", "Porur", "Ambattur", "Avadi",
+      "Perambur", "Purasawalkam", "Royapettah", "Triplicane", "Guindy",
+      "Saidapet", "Nungambakkam", "Kodambakkam", "Ashok Nagar", "Vadapalani",
+      "Thiruvanmiyur", "Sholinganallur", "Medavakkam", "Pallikaranai", "Madipakkam",
+    ],
+  },
 ];
 
 /** Exact pin where we have one, otherwise a landmark search. */
 export const mapTarget = (b: Branch) => b.coords ?? b.mapQuery;
 
-/** Embedded map for a branch page. */
-export const mapEmbedUrl = (b: Branch) =>
-  `https://maps.google.com/maps?q=${encodeURIComponent(mapTarget(b))}&z=17&hl=en&output=embed`;
+/** False for a pickup-only area, which has no address to point a map at. */
+export const hasMap = (b: Branch) => Boolean(mapTarget(b));
 
-/** "Directions" link that opens Google Maps proper. */
-export const mapLinkUrl = (b: Branch) =>
-  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapTarget(b))}`;
+/** Embedded map for a branch page, null where there is nothing to pin. */
+export const mapEmbedUrl = (b: Branch) => {
+  const t = mapTarget(b);
+  return t ? `https://maps.google.com/maps?q=${encodeURIComponent(t)}&z=17&hl=en&output=embed` : null;
+};
+
+/** "Directions" link that opens Google Maps proper, null where there is none. */
+export const mapLinkUrl = (b: Branch) => {
+  const t = mapTarget(b);
+  return t ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(t)}` : null;
+};
 
 export const branchBySlug = (slug: string) => branches.find((b) => b.slug === slug);
 

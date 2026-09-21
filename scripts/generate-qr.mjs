@@ -23,6 +23,7 @@ const branches = [...src.matchAll(/\{\s*slug: "([^"]+)",([\s\S]*?)\n  \},/g)].ma
     slug,
     coords: body.match(/coords: "([^"]+)"/)?.[1],
     mapQuery: body.match(/mapQuery: "([^"]+)"/)?.[1],
+    pickupOnly: /pickupOnly: true/.test(body),
   }),
 );
 
@@ -32,9 +33,15 @@ const OUT = join("public", "img", "qr");
 await mkdir(OUT, { recursive: true });
 for (const f of await readdir(OUT).catch(() => [])) await unlink(join(OUT, f));
 
+let written = 0;
 for (const b of branches) {
   const target = b.coords ?? b.mapQuery;
-  if (!target) throw new Error(`branch ${b.slug} has neither coords nor mapQuery`);
+  // A pickup-only area has no address to pin, so there is nothing to encode.
+  if (!target) {
+    if (!b.pickupOnly) throw new Error(`branch ${b.slug} has neither coords nor mapQuery`);
+    console.log(`  ${b.slug.padEnd(28)} skipped, pickup area with no pin`);
+    continue;
+  }
 
   const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(target)}`;
   const svg = await QRCode.toString(url, {
@@ -46,5 +53,6 @@ for (const b of branches) {
 
   await writeFile(join(OUT, `${b.slug}.svg`), svg);
   console.log(`  ${b.slug.padEnd(28)} ${target}`);
+  written += 1;
 }
-console.log(`\n${branches.length} QR codes written to ${OUT}`);
+console.log(`\n${written} QR codes written to ${OUT}`);

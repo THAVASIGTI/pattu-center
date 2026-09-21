@@ -38,6 +38,7 @@ export default async function BranchPage({ params }: Params) {
 
   const phone = business.phones[branch.phoneIndex] ?? business.phones[0];
   const mapSrc = mapEmbedUrl(branch);
+  const mapHref = mapLinkUrl(branch);
   const others = branches.filter((b) => b.slug !== branch.slug).slice(0, 3);
 
   return (
@@ -48,7 +49,7 @@ export default async function BranchPage({ params }: Params) {
           { label: "Branches", href: "/branches" },
           { label: branch.city },
         ]}
-        eyebrow={branch.isHeadOffice ? "Head office" : "Branch"}
+        eyebrow={branch.isHeadOffice ? "Head office" : branch.pickupOnly ? "Doorstep pickup" : "Branch"}
         title={<>Old Silk Saree Buyers in <span className="foil-text">{branch.city}</span></>}
         lead={branch.intro}
       >
@@ -74,7 +75,9 @@ export default async function BranchPage({ params }: Params) {
               <SectionHead align="left" eyebrow={`${branch.city} branch`} title={branch.title} />
               <ul className="grid gap-3">
                 {[
-                  "Weighed openly on a calibrated scale, so you watch every reading.",
+                  branch.pickupOnly
+                    ? `We come to your door anywhere in ${branch.city}, at a time you pick.`
+                    : "Weighed openly on a calibrated scale, so you watch every reading.",
                   `Free doorstep pickup across ${branch.city}, even for one or two sarees.`,
                   "Cash, UPI or bank transfer the moment you accept the price.",
                   "Torn, faded and stained silk still bought for its zari.",
@@ -89,7 +92,9 @@ export default async function BranchPage({ params }: Params) {
               {/* Scan straight through to the pin, rather than retyping an
                   address into Maps. Padding and border sit on the wrapper: with
                   border-box they would eat into the QR itself and the densest
-                  code stops scanning. */}
+                  code stops scanning. A pickup area has no pin, so it gets a
+                  booking prompt in place of the code. */}
+              {mapHref ? (
               <div className="mt-8 flex flex-col items-center rounded-[20px] border border-line bg-white p-6 text-center shadow-soft">
                 <span className="rounded-[12px] border border-line-yellow bg-white p-2">
                   <Image
@@ -106,7 +111,7 @@ export default async function BranchPage({ params }: Params) {
                   Google Maps.
                 </p>
                 <a
-                  href={mapLinkUrl(branch)}
+                  href={mapHref}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-3 inline-flex items-center gap-1.5 text-[0.88rem] font-semibold text-green underline-offset-4 hover:underline"
@@ -115,6 +120,32 @@ export default async function BranchPage({ params }: Params) {
                   Or open it here
                 </a>
               </div>
+              ) : (
+                <div className="mt-8 rounded-[20px] border border-line bg-white p-6 shadow-soft">
+                  <h3 className="font-serif text-[1.15rem] text-green-deep">
+                    No counter here, we come to you
+                  </h3>
+                  <p className="mt-1.5 text-[0.93rem] leading-relaxed text-ink-soft">
+                    Send photos on WhatsApp and we will reply with an indicative range, then
+                    collect from your door at a time that suits your household. There is no
+                    travel charge and no minimum number of sarees.
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-2.5">
+                    <Button href={phone.href} variant="yellow">
+                      <Phone className="size-[17px]" />
+                      Book a pickup
+                    </Button>
+                    <Button
+                      href={waLink(`Hello, I want a doorstep pickup in ${branch.city}.`)}
+                      variant="whatsapp"
+                      external
+                    >
+                      <WhatsApp className="size-[17px]" />
+                      Send photos
+                    </Button>
+                  </div>
+                </div>
+              )}
             </Reveal>
 
             <Reveal delay={120}>
@@ -229,7 +260,8 @@ export default async function BranchPage({ params }: Params) {
         </Wrap>
       </Section>
 
-      {/* Map */}
+      {/* Map, skipped for a pickup area with no address to show */}
+      {mapSrc && mapHref && (
       <Section>
         <Wrap>
           <Reveal>
@@ -247,7 +279,7 @@ export default async function BranchPage({ params }: Params) {
               />
             </div>
             <div className="mt-5 text-center">
-              <Button href={mapLinkUrl(branch)} variant="outline" external>
+              <Button href={mapHref} variant="outline" external>
                 <Pin className="size-[17px]" />
                 Open in Google Maps
               </Button>
@@ -255,6 +287,7 @@ export default async function BranchPage({ params }: Params) {
           </Reveal>
         </Wrap>
       </Section>
+      )}
 
       {/* Other branches */}
       <Section tone="cream">
