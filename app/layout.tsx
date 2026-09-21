@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Marcellus, Noto_Sans_Tamil } from "next/font/google";
+import { Cormorant_Garamond, Inter, Marcellus, Noto_Sans_Tamil } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileActionBar from "@/components/MobileActionBar";
@@ -11,6 +11,17 @@ const marcellus = Marcellus({
   weight: "400",
   subsets: ["latin"],
   variable: "--font-marcellus",
+  display: "swap",
+});
+
+// Text serif for the welcome note, which wants to read as an introduction
+// rather than body copy. Marcellus is a display face and gets thin at
+// paragraph size, so this carries the running text instead.
+const cormorant = Cormorant_Garamond({
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  variable: "--font-cormorant",
   display: "swap",
 });
 
@@ -87,7 +98,7 @@ const jsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${marcellus.variable} ${inter.variable} ${tamil.variable}`}>
+    <html lang="en" className={`${marcellus.variable} ${cormorant.variable} ${inter.variable} ${tamil.variable}`}>
       {/* suppressHydrationWarning covers attributes that browser extensions
           inject into <body> before React hydrates (ColorZilla's
           cz-shortcut-listen, Grammarly's data-gr-*, and similar). It applies

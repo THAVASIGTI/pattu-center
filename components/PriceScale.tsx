@@ -53,7 +53,7 @@ export default function PriceScale({
                 className="h-6 w-1 shrink-0 origin-top scale-y-50 rounded-full bg-yellow transition-transform duration-700 group-hover:scale-y-100"
               />
               <span className="text-[0.92rem] text-ink-soft">
-                <span className="mb-0.5 block text-[0.66rem] font-semibold uppercase tracking-[0.16em] text-yellow">
+                <span className="mb-0.5 block text-[0.66rem] font-semibold uppercase tracking-[0.16em] text-yellow-ink">
                   Lowers
                 </span>
                 {row.lowers}

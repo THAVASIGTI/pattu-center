@@ -36,7 +36,7 @@ function Brand({ dark = false }: { dark?: boolean }) {
       />
       <span className={`min-w-0 font-serif text-[1.02rem] leading-tight lg:whitespace-nowrap lg:text-[1.08rem] ${dark ? "text-white" : "text-green-deep"}`}>
         {business.name}
-        <span className="mt-0.5 block font-sans text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-yellow">
+        <span className="mt-0.5 block font-sans text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-yellow-ink">
           Old Silk Saree Buyers
         </span>
       </span>

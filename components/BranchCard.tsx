@@ -23,7 +23,7 @@ export default function BranchCard({ branch }: { branch: Branch }) {
           )}
           {/* Tells the two Thoothukudi and two Thanjavur counters apart. */}
           {branch.badge && (
-            <span className="ml-2 rounded-full bg-yellow/15 px-2 py-0.5 align-middle font-sans text-[0.6rem] font-semibold uppercase tracking-[0.12em] text-yellow">
+            <span className="ml-2 rounded-full bg-yellow/15 px-2 py-0.5 align-middle font-sans text-[0.6rem] font-semibold uppercase tracking-[0.12em] text-yellow-ink">
               {branch.badge}
             </span>
           )}

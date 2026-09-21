@@ -12,6 +12,11 @@
   --color-green-soft: #22c55e;
 
   --color-yellow: #ca9a04;
+  /* Gold for TEXT on light grounds. --color-yellow is tuned for borders,
+     icons and fills; as type it measures 2.52:1 on cream and 1.96:1 on the
+     hero gradient, both under the 4.5:1 body-text minimum. This clears it at
+     6.02:1 and 4.67:1. On dark sections --color-yellow-light is used instead. */
+  --color-yellow-ink: #7d5c07;
   --color-yellow-light: #fde047;
   --color-yellow-bright: #fef08a;
   --color-yellow-pale: #fef9c3;
@@ -28,6 +33,7 @@
 
   --font-serif: var(--font-marcellus), Georgia, "Times New Roman", serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-cormorant), Georgia, "Times New Roman", serif;
   --font-tamil: var(--font-tamil), "Noto Sans Tamil", sans-serif;
 
   --radius-xl2: 22px;

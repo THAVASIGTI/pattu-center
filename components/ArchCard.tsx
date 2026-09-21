@@ -53,7 +53,7 @@ export default function ArchCard({ item }: { item: SareeType }) {
       <div className="mx-auto mt-8 max-w-[320px] px-1">
         <h3 className="font-serif text-[1.18rem] text-green-deep">{item.name}</h3>
         {item.ta && (
-          <p className="mt-1.5 font-tamil text-[0.83rem] text-yellow transition-opacity duration-500 sm:opacity-80 sm:group-hover:opacity-100">
+          <p className="mt-1.5 font-tamil text-[0.83rem] text-yellow-ink transition-opacity duration-500 sm:opacity-80 sm:group-hover:opacity-100">
             {item.ta}
           </p>
         )}

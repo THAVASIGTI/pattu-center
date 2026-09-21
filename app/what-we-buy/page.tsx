@@ -43,7 +43,7 @@ export default function WhatWeBuyPage() {
                   <div className="flex-1 p-5 pb-6">
                     <h2 className="mb-2 font-serif text-[1.22rem] text-green-deep">{t.name}</h2>
                     <p className="text-[0.92rem] text-ink-soft">{t.blurb}</p>
-                    {t.ta && <p className="mt-2.5 font-tamil text-[0.85rem] text-yellow">{t.ta}</p>}
+                    {t.ta && <p className="mt-2.5 font-tamil text-[0.85rem] text-yellow-ink">{t.ta}</p>}
                   </div>
                 </Card>
               </Reveal>

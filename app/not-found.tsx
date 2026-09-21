@@ -4,7 +4,7 @@ export default function NotFound() {
   return (
     <Section>
       <Wrap className="py-10 text-center">
-        <p className="text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-yellow">404</p>
+        <p className="text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-yellow-ink">404</p>
         <h1 className="mt-3 font-serif text-[clamp(1.8rem,6vw,3rem)] text-green-deep">
           That page has been folded away.
         </h1>

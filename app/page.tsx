@@ -37,12 +37,12 @@ export default function HomePage() {
 
         <Wrap className="relative z-10 grid items-center gap-10 py-12 sm:py-16 lg:grid-cols-[1.05fr_.95fr] lg:gap-14 lg:py-20">
           <div className="order-1 text-center lg:text-left">
-            <p className="mb-4 flex items-center justify-center gap-2.5 text-[0.74rem] font-semibold uppercase tracking-[0.2em] text-yellow lg:justify-start">
+            <p className="mb-3 flex items-center justify-center gap-3 font-display text-[clamp(1.15rem,2.6vw,1.45rem)] italic text-yellow-ink lg:justify-start">
               <span aria-hidden className="foil h-px w-8" />
               Welcome to {business.name}
             </p>
 
-            <p className="mx-auto mb-7 max-w-[54ch] text-[clamp(1rem,2.7vw,1.12rem)] leading-relaxed text-ink-soft lg:mx-0">
+            <p className="mx-auto mb-7 max-w-[46ch] font-display text-[clamp(1.2rem,3vw,1.5rem)] leading-[1.55] text-ink-soft lg:mx-0">
               For forty years families across Tamil Nadu have brought us the silk they no longer
               wear. Bring yours to any counter, or send a photo, and find out what it is really
               worth.
@@ -323,7 +323,7 @@ export default function HomePage() {
               <div className="h-full rounded-[22px] border-t-4 border-yellow bg-white p-6 shadow-soft sm:p-7">
                 <h3 className="mb-4 flex items-center gap-2.5 font-serif text-[1.3rem] text-green-deep">
                   <span className="grid size-8 place-items-center rounded-full bg-yellow/15">
-                    <span aria-hidden className="font-serif text-[1.1rem] leading-none text-yellow">!</span>
+                    <span aria-hidden className="font-serif text-[1.1rem] leading-none text-yellow-ink">!</span>
                   </span>
                   Please don&apos;t
                 </h3>
