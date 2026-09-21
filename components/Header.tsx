@@ -24,23 +24,19 @@ export const navLinks = [
 
 function Brand({ dark = false }: { dark?: boolean }) {
   return (
-    <Link href="/" className="flex min-w-0 items-center gap-3 lg:gap-4" aria-label={`${business.name} home`}>
-      {/* The badge is deliberately taller than the bar, because the zari swash
-          stops reading much below 70px. The negative bottom margin lets it hang
-          past the header edge instead of stretching the header. The two rings
-          are box-shadows rather than border plus padding, so nothing eats into
-          the mark. */}
-      <span className="-mb-[14px] grid size-[72px] shrink-0 place-items-center rounded-full bg-white shadow-[0_0_0_1px_rgba(202,154,4,.5),0_0_0_4px_#fffdf7,0_0_0_5px_rgba(202,154,4,.3),0_7px_18px_rgba(10,46,26,.13)] lg:-mb-[20px] lg:size-[90px]">
-        <Image
-          src={logoNav}
-          alt=""
-          aria-hidden
-          width={256}
-          height={256}
-          priority
-          className="size-[58px] object-contain lg:size-[74px]"
-        />
-      </span>
+    <Link href="/" className="flex min-w-0 items-center gap-3" aria-label={`${business.name} home`}>
+      {/* Flush in the bar, no frame. What carries the detail at this size is
+          the tight crop and deepened gold in logo-nav.png, not a ring: a ring
+          only spends pixels that the mark needs. */}
+      <Image
+        src={logoNav}
+        alt=""
+        aria-hidden
+        width={256}
+        height={256}
+        priority
+        className="h-[56px] w-auto shrink-0 object-contain lg:h-[64px]"
+      />
       <span className={`min-w-0 font-serif text-[1.02rem] leading-tight lg:whitespace-nowrap lg:text-[1.08rem] ${dark ? "text-white" : "text-green-deep"}`}>
         {business.name}
         <span className="mt-0.5 block font-sans text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-yellow-ink">
