@@ -1,73 +1,98 @@
 /**
- * Animated hero ground. Three layers, all decorative and all pure CSS so the
- * static export needs no JavaScript for them:
+ * Animated hero ground, built to read as a loom: a square grid whose warp and
+ * weft drift in opposite directions, with brighter shuttle threads running
+ * across and down over it. All pure CSS, so the static export needs no
+ * JavaScript for any of it.
  *
- *   1. a white-to-gold gradient base
- *   2. a faint woven lattice that pans diagonally
- *   3. zari threads drifting across, over soft shapes wandering behind
- *
- * Everything is low-contrast by design; the copy has to stay the loudest thing
- * in the section. Reduced-motion users get the same picture, held still.
+ * Reduced-motion users get the same picture, held still.
  */
-export default function HeroBackdrop() {
-  // left offset, vertical position, thickness, duration, delay
-  const threads: [string, string, string, string, string][] = [
-    ["0%", "18%", "1px", "26s", "0s"],
-    ["0%", "34%", "2px", "34s", "-8s"],
-    ["0%", "52%", "1px", "30s", "-18s"],
-    ["0%", "68%", "1.5px", "38s", "-4s"],
-    ["0%", "84%", "1px", "28s", "-22s"],
-  ];
 
+// [position along the axis, thickness, duration, delay]
+const ACROSS: [string, string, string, string][] = [
+  ["12%", "1px", "13s", "0s"],
+  ["29%", "2px", "17s", "-6s"],
+  ["47%", "1px", "15s", "-11s"],
+  ["66%", "2px", "19s", "-3s"],
+  ["83%", "1px", "14s", "-9s"],
+];
+
+const DOWN: [string, string, string, string][] = [
+  ["16%", "1px", "16s", "-2s"],
+  ["34%", "2px", "21s", "-12s"],
+  ["58%", "1px", "18s", "-7s"],
+  ["78%", "2px", "23s", "-15s"],
+];
+
+export default function HeroBackdrop() {
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-      {/* 1. gradient base */}
+      {/* gradient base */}
       <div className="absolute inset-0 bg-[radial-gradient(1000px_520px_at_50%_-8%,#fffdf4,transparent_65%),linear-gradient(180deg,#ffffff_0%,#fffcef_38%,#fdf3d6_100%)]" />
 
-      {/* 2. woven lattice */}
+      {/* warp: vertical grid lines creeping sideways */}
       <div
-        className="hero-weave absolute inset-0 opacity-[0.4]"
+        className="hero-grid absolute inset-0"
         style={{
           backgroundImage:
-            "repeating-linear-gradient(45deg, rgba(202,154,4,.07) 0 1px, transparent 1px 12px), repeating-linear-gradient(-45deg, rgba(21,128,61,.05) 0 1px, transparent 1px 12px)",
-          backgroundSize: "120px 120px",
-          animation: "weave-pan 40s linear infinite",
+            "repeating-linear-gradient(90deg, rgba(202,154,4,.16) 0 1px, transparent 1px 64px)",
+          backgroundSize: "64px 64px",
+          animation: "grid-pan-x 6s linear infinite",
         }}
       />
 
-      {/* 3a. soft shapes */}
+      {/* weft: horizontal grid lines creeping the other way */}
+      <div
+        className="hero-grid absolute inset-0"
+        style={{
+          backgroundImage:
+            "repeating-linear-gradient(0deg, rgba(21,128,61,.14) 0 1px, transparent 1px 64px)",
+          backgroundSize: "64px 64px",
+          animation: "grid-pan-y 8s linear infinite reverse",
+        }}
+      />
+
+      {/* soft colour behind it all */}
       <span
-        className="hero-shape absolute -top-24 -left-16 size-[420px] rounded-full bg-[radial-gradient(circle,rgba(253,224,71,.32),transparent_70%)] blur-2xl"
+        className="hero-shape absolute -top-24 -left-16 size-[420px] rounded-full bg-[radial-gradient(circle,rgba(253,224,71,.30),transparent_70%)] blur-2xl"
         style={{ animation: "shape-a 22s ease-in-out infinite" }}
       />
       <span
-        className="hero-shape absolute -right-20 top-1/3 size-[360px] rounded-full bg-[radial-gradient(circle,rgba(34,197,94,.20),transparent_70%)] blur-2xl"
+        className="hero-shape absolute -right-20 top-1/3 size-[360px] rounded-full bg-[radial-gradient(circle,rgba(34,197,94,.18),transparent_70%)] blur-2xl"
         style={{ animation: "shape-b 27s ease-in-out infinite" }}
       />
-      <span
-        className="hero-shape absolute bottom-[-9rem] left-1/3 size-[480px] rounded-full bg-[radial-gradient(circle,rgba(202,154,4,.22),transparent_72%)] blur-2xl"
-        style={{ animation: "shape-a 31s ease-in-out infinite reverse" }}
-      />
 
-      {/* 3b. zari threads */}
-      {threads.map(([left, top, height, duration, delay], i) => (
+      {/* shuttle threads running across */}
+      {ACROSS.map(([top, height, duration, delay], i) => (
         <span
-          key={i}
-          className="hero-thread absolute w-[60%] rounded-full opacity-40"
+          key={`a${i}`}
+          className="hero-thread absolute w-[45%] rounded-full opacity-55"
           style={{
-            left,
             top,
             height,
             background:
-              "linear-gradient(90deg, transparent, rgba(202,154,4,.55) 18%, rgba(253,224,71,.85) 50%, rgba(202,154,4,.55) 82%, transparent)",
+              "linear-gradient(90deg, transparent, rgba(202,154,4,.8) 20%, #fde047 50%, rgba(202,154,4,.8) 80%, transparent)",
             animation: `thread-drift ${duration} linear ${delay} infinite`,
           }}
         />
       ))}
 
-      {/* a soft veil over the centre so the copy always sits on calm ground
-          while the motion stays visible towards the edges */}
-      <div className="absolute inset-0 bg-[radial-gradient(60%_58%_at_50%_46%,rgba(255,255,255,.82)_0%,rgba(255,255,255,.55)_45%,transparent_78%)]" />
+      {/* and running down, so the two sets visibly cross */}
+      {DOWN.map(([left, width, duration, delay], i) => (
+        <span
+          key={`d${i}`}
+          className="hero-thread absolute h-[55%] rounded-full opacity-40"
+          style={{
+            left,
+            width,
+            background:
+              "linear-gradient(180deg, transparent, rgba(21,128,61,.7) 20%, rgba(34,197,94,.95) 50%, rgba(21,128,61,.7) 80%, transparent)",
+            animation: `thread-fall ${duration} linear ${delay} infinite`,
+          }}
+        />
+      ))}
+
+      {/* keeps the copy readable without hiding the weave behind it */}
+      <div className="absolute inset-0 bg-[radial-gradient(62%_58%_at_50%_46%,rgba(255,255,255,.93)_0%,rgba(255,255,255,.78)_42%,rgba(255,255,255,.30)_70%,transparent_88%)]" />
     </div>
   );
 }

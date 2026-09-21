@@ -58,6 +58,21 @@
   to   { transform: translate3d(120%, 0, 0); }
 }
 
+@keyframes thread-fall {
+  from { transform: translate3d(0, -130%, 0); }
+  to   { transform: translate3d(0, 130%, 0); }
+}
+
+@keyframes grid-pan-x {
+  from { background-position: 0 0; }
+  to   { background-position: 64px 0; }
+}
+
+@keyframes grid-pan-y {
+  from { background-position: 0 0; }
+  to   { background-position: 0 64px; }
+}
+
 @keyframes shape-a {
   0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
   50%      { transform: translate3d(6%, -8%, 0) scale(1.12); }
@@ -188,7 +203,7 @@ body {
   .hero-progress { animation: none !important; transform: scaleX(1) !important; }
   .foil-shimmer { animation: none !important; }
   /* the hero backdrop keeps its picture, just stops moving */
-  .hero-weave,
+  .hero-grid,
   .hero-shape,
   .hero-thread { animation: none !important; }
 }
