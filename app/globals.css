@@ -60,34 +60,20 @@
 
 /* Hero backdrop: zari threads drifting across, and soft shapes wandering
    behind them. Slow and low-contrast so they never compete with the copy. */
-@keyframes thread-drift {
-  from { transform: translate3d(-120%, 0, 0); }
-  to   { transform: translate3d(120%, 0, 0); }
-}
-
-@keyframes thread-fall {
-  from { transform: translate3d(0, -130%, 0); }
-  to   { transform: translate3d(0, 130%, 0); }
-}
-
-@keyframes grid-pan-x {
-  from { background-position: 0 0; }
-  to   { background-position: 64px 0; }
-}
-
-@keyframes grid-pan-y {
-  from { background-position: 0 0; }
-  to   { background-position: 0 64px; }
-}
-
-@keyframes shape-a {
+/* Hero rings wander and breathe, never travelling far enough to cross the
+   copy in the middle of the section. */
+@keyframes ring-drift {
   0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-  50%      { transform: translate3d(6%, -8%, 0) scale(1.12); }
+  33%      { transform: translate3d(5%, -7%, 0) scale(1.07); }
+  66%      { transform: translate3d(-4%, 5%, 0) scale(0.95); }
 }
 
-@keyframes shape-b {
-  0%, 100% { transform: translate3d(0, 0, 0) scale(1.08); }
-  50%      { transform: translate3d(-7%, 6%, 0) scale(0.94); }
+/* Motes rise the height of the section and fade out at the top. */
+@keyframes mote-rise {
+  0%       { transform: translate3d(0, 0, 0); opacity: 0; }
+  12%      { opacity: 1; }
+  82%      { opacity: 1; }
+  100%     { transform: translate3d(14px, -560px, 0); opacity: 0; }
 }
 
 @keyframes weave-pan {
@@ -216,10 +202,9 @@ body {
   /* The frame keeps advancing so every category is still seen; it just cuts
      instead of sliding. */
   .cat-slide { transition: none !important; }
-  .hero-grid { animation-duration: 18s !important; }
-  .hero-shape { animation-duration: 110s !important; }
-  .hero-thread {
-    animation-duration: 40s !important;
-    opacity: 0.22 !important;
+  .hero-ring { animation-duration: 150s !important; }
+  .hero-mote {
+    animation-duration: 90s !important;
+    opacity: 0.3 !important;
   }
 }

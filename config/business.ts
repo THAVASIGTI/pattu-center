@@ -5,9 +5,9 @@
  */
 
 export const business = {
-  name: "Silver Zari",
-  shortName: "Silver Zari",
-  legalName: "Silver Zari",
+  name: "Kamatchi Pattu Center",
+  shortName: "Kamatchi Pattu Center",
+  legalName: "Kamatchi Pattu Center",
   tagline: "உங்கள் பழைய பட்டுக்கு அதிக விலை பெறுங்கள்",
   taglineEn: "Get a higher price for your old silk",
   // Run as a partnership by two brothers.

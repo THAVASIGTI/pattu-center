@@ -66,9 +66,12 @@ export default function CategorySlider() {
           // to the back, so the jump is never seen.
           const parked = offset < -1 || offset > 2;
 
+          // The cards behind rise and lean right, so they never hang down over
+          // the dots. The front card lifts off the top of the pile rather than
+          // flying left, which on a wide screen would cross the copy.
           const slot = leaving
-            ? "translate3d(-124%,-4%,0) rotate(-7deg) scale(.92)"
-            : `translate3d(${offset * 7}%, ${offset * 4.5}%, 0) rotate(${offset * 2.4}deg) scale(${1 - offset * 0.055})`;
+            ? "translate3d(-6%,-18%,0) rotate(-5deg) scale(.98)"
+            : `translate3d(${offset * 6.5}%, ${offset * -3}%, 0) rotate(${offset * 2.2}deg) scale(${1 - offset * 0.05})`;
 
           return (
             <div
@@ -81,7 +84,7 @@ export default function CategorySlider() {
                 visibility: parked ? "hidden" : "visible",
                 transitionDuration: parked ? "0ms" : `${SLIDE}ms`,
               }}
-              className="cat-slide absolute inset-0 origin-bottom-left transition-[transform,opacity] [transition-timing-function:cubic-bezier(.34,.9,.3,1)]"
+              className="cat-slide absolute inset-0 origin-bottom transition-[transform,opacity] [transition-timing-function:cubic-bezier(.34,.9,.3,1)]"
             >
               {/* every card carries its own zari edge, so the layers read as
                   boxes stacked on each other rather than one framed window */}
