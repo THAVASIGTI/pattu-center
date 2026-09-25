@@ -13,7 +13,7 @@ import StepStair from "@/components/StepStair";
 import { ArrowRight, Check, Phone, WhatsApp, serviceIcons } from "@/components/Icons";
 import Reveal from "@/components/Reveal";
 import { Button, Section, SectionHead, Wrap } from "@/components/ui";
-import { branchCount, branchCountWordCap, branches, business, counterCountWord, waLink } from "@/config/business";
+import { branchCount, branchCountWordCap, branches, business, waLink } from "@/config/business";
 import {
   img,
   priceLedger,
@@ -51,13 +51,13 @@ export default function HomePage() {
               <span aria-hidden className="foil h-px w-7 shrink-0 sm:w-10 lg:hidden" />
             </p>
 
-            {/* The count comes from the branch list so the sentence cannot
-                drift when a counter is added, and it says "counters" rather
-                than "branches" because Chennai is a pickup area with none. */}
-            <p className="mx-auto mb-7 max-w-[46ch] font-display text-[clamp(1.22rem,3.1vw,1.55rem)] leading-[1.6] font-bold text-ink-soft lg:mx-0">
-              For forty years families across Tamil Nadu have brought us the silk they no longer
-              wear. Bring yours to any of our {counterCountWord} counters, or ask us to collect it
-              free from your door, and find out what it is really worth.
+            {/* Says what the business is and what it is for, in two lines. The
+                sans face keeps it plain against the display serif above and
+                the headline below, so it reads as a statement rather than more
+                ornament. */}
+            <p className="mx-auto mb-7 max-w-[34ch] font-sans text-[clamp(1.05rem,2.8vw,1.22rem)] leading-[1.65] font-semibold text-ink lg:mx-0">
+              We buy the silk your family no longer wears, and pay what it is
+              genuinely worth. To the gram, on the day.
             </p>
 
             <AnimatedHeading
@@ -80,7 +80,7 @@ export default function HomePage() {
               </Button>
               <Button href={waLink()} variant="whatsapp" external className="flex-1 sm:flex-none">
                 <WhatsApp className="size-[17px]" />
-                Send Photos on WhatsApp
+                Sell Your Silk on WhatsApp
               </Button>
             </div>
 

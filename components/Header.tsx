@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { business, waLink } from "@/config/business";
-import { logoNav } from "@/config/content";
+import { logoNavLight } from "@/config/content";
 import { Close, Menu, Phone, WhatsApp } from "./Icons";
 import { Wrap } from "./ui";
 
@@ -25,13 +25,14 @@ export const navLinks = [
 function Brand({ dark = false }: { dark?: boolean }) {
   return (
     <Link href="/" className="flex min-w-0 items-center gap-3" aria-label={`${business.name} home`}>
-      {/* A tinted disc behind the mark, so the green and gold read against the
-          cream bar instead of dissolving into it. Two hairline rings, gold with
-          a white gap between them. The padding lives on the disc rather than on
-          the image, so framing it costs the mark nothing. */}
-      <span className="grid size-[68px] shrink-0 place-items-center rounded-full bg-[radial-gradient(circle_at_50%_40%,#fffef9_0%,#fdf5e0_60%,#f6e6c4_100%)] shadow-[0_0_0_1px_rgba(202,154,4,.55),0_0_0_4px_#fffdf7,0_0_0_5px_rgba(202,154,4,.25),0_2px_8px_rgba(10,46,26,.07)] lg:size-[80px]">
+      {/* A deep green disc behind the mark. Pale grounds were the problem: the
+          gold swash had nothing to push against on a cream bar, so the mark
+          read as a smudge. Against the green it carries. Two hairline rings,
+          gold with a white gap between them, and the padding lives on the disc
+          rather than on the image so framing it costs the mark nothing. */}
+      <span className="grid size-[68px] shrink-0 place-items-center rounded-full bg-[linear-gradient(150deg,#14532d_0%,#0a2e1a_100%)] shadow-[0_0_0_1px_rgba(202,154,4,.6),0_0_0_4px_#fffdf7,0_0_0_5px_rgba(202,154,4,.3),0_3px_10px_rgba(10,46,26,.18)] lg:size-[80px]">
         <Image
-          src={logoNav}
+          src={logoNavLight}
           alt=""
           aria-hidden
           width={256}

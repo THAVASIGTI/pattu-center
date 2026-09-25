@@ -42,73 +42,86 @@ export default function CategorySlider() {
       onFocusCapture={() => setPaused(true)}
       onBlurCapture={() => setPaused(false)}
     >
-      {/* zari-style frame: gold plate, cream gap, inset hairline */}
-      <div className="relative">
-        <span
-          aria-hidden
-          className="foil absolute -inset-2.5 rounded-[34px] shadow-[0_18px_50px_rgba(10,46,26,.18)]"
-        />
-        <span aria-hidden className="absolute -inset-[3px] rounded-[31px] bg-cream" />
-        <span
-          aria-hidden
-          className="pointer-events-none absolute inset-1.5 z-20 rounded-[24px] border border-yellow-pale/70"
-        />
+      {/* A stack of framed boxes rather than one window. The front card holds
+          the image; behind it the next two sit offset and tilted, so their
+          gold edges show as layers. On each tick the front card lifts away to
+          the left and every card behind it steps forward one slot. */}
+      {/* The cards behind lean out to the right, so on a phone the front card
+          gives up that width rather than letting the stack run off screen. */}
+      <div
+        className="relative aspect-4/5 w-[84%] [perspective:1200px] sm:w-full"
+        aria-roledescription="carousel"
+        aria-label="Silk we buy"
+      >
+        {slides.map((t, i) => {
+          // shortest way round, so a wrapping card still travels one step
+          let offset = i - index;
+          if (offset > count / 2) offset -= count;
+          if (offset < -count / 2) offset += count;
 
-        <div
-          className="relative aspect-4/5 w-full overflow-hidden rounded-[28px] bg-green-deep"
-          aria-roledescription="carousel"
-          aria-label="Silk we buy"
-        >
-          {slides.map((t, i) => {
-            // shortest way round, so wrapping still travels one step sideways
-            let offset = i - index;
-            if (offset > count / 2) offset -= count;
-            if (offset < -count / 2) offset += count;
-            const active = offset === 0;
+          const active = offset === 0;
+          const leaving = offset === -1;
+          // Anything further back than the third card is parked out of sight,
+          // which is also where a card is recycled from the front of the stack
+          // to the back, so the jump is never seen.
+          const parked = offset < -1 || offset > 2;
 
-            return (
-              <div
-                key={t.slug}
-                aria-hidden={!active}
-                style={{
-                  transform: `translate3d(${offset * 100}%, 0, 0)`,
-                  transitionDuration: `${SLIDE}ms`,
-                  visibility: Math.abs(offset) <= 1 ? "visible" : "hidden",
-                }}
-                className="cat-slide absolute inset-0 transition-transform [transition-timing-function:cubic-bezier(.4,0,.2,1)]"
-              >
+          const slot = leaving
+            ? "translate3d(-124%,-4%,0) rotate(-7deg) scale(.92)"
+            : `translate3d(${offset * 7}%, ${offset * 4.5}%, 0) rotate(${offset * 2.4}deg) scale(${1 - offset * 0.055})`;
+
+          return (
+            <div
+              key={t.slug}
+              aria-hidden={!active}
+              style={{
+                transform: slot,
+                zIndex: 30 - offset,
+                opacity: parked ? 0 : leaving ? 0 : 1,
+                visibility: parked ? "hidden" : "visible",
+                transitionDuration: parked ? "0ms" : `${SLIDE}ms`,
+              }}
+              className="cat-slide absolute inset-0 origin-bottom-left transition-[transform,opacity] [transition-timing-function:cubic-bezier(.34,.9,.3,1)]"
+            >
+              {/* every card carries its own zari edge, so the layers read as
+                  boxes stacked on each other rather than one framed window */}
+              <span aria-hidden className="foil absolute -inset-2 rounded-[32px] shadow-[0_18px_44px_rgba(10,46,26,.2)]" />
+              <span aria-hidden className="absolute -inset-[3px] rounded-[30px] bg-cream" />
+
+              <div className="relative size-full overflow-hidden rounded-[27px] bg-green-deep">
                 <Image
                   src={img(t.imageId)}
                   alt={active ? `${t.name} silk` : ""}
                   fill
                   // next/image rejects priority together with loading, and the
-                  // first slide's offset grows past 2 as the frame advances,
-                  // which would have set both. Priority covers the opening slide;
-                  // every other slide uses loading alone. Near neighbours load
-                  // eagerly so none arrives blank as it slides in, while the far
-                  // ones stay lazy to keep the hero off 1.5MB on open.
+                  // first card's offset grows past 2 as the stack advances,
+                  // which would have set both. Priority covers the opening
+                  // card; the rest use loading alone, eager while they are in
+                  // or near the stack so none arrives blank.
                   {...(i === 0
                     ? { priority: true as const }
                     : { loading: (Math.abs(offset) <= 2 ? "eager" : "lazy") as "eager" | "lazy" })}
-                  sizes="100vw"
+                  sizes="(max-width: 1024px) 100vw, 440px"
                   className="object-cover"
                 />
                 <span
                   aria-hidden
                   className="absolute inset-0 bg-[linear-gradient(0deg,rgba(10,46,26,.88)_0%,rgba(10,46,26,.35)_42%,transparent_72%)]"
                 />
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute inset-1.5 rounded-[22px] border border-yellow-pale/70"
+                />
                 <div className="absolute inset-x-0 bottom-0 px-6 pb-6 text-center">
-                  {t.ta && (
-                    <p className="font-tamil text-[0.95rem] text-yellow-light">{t.ta}</p>
-                  )}
+                  {t.ta && <p className="font-tamil text-[0.95rem] text-yellow-light">{t.ta}</p>}
                   <p className="mt-0.5 font-serif text-[clamp(1.2rem,3.4vw,1.9rem)] text-white">
                     {t.name}
                   </p>
                 </div>
               </div>
-              );
-            })}
-        </div>
+            </div>
+          );
+        })}
       </div>
 
       {/* dots */}
