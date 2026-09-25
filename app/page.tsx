@@ -51,13 +51,15 @@ export default function HomePage() {
               <span aria-hidden className="foil h-px w-7 shrink-0 sm:w-10 lg:hidden" />
             </p>
 
-            {/* Says what the business is and what it is for, in two lines. The
+            {/* The note that silk put away is not silk wasted, which is what
+                sends people to look in the almirah in the first place. The
                 sans face keeps it plain against the display serif above and
-                the headline below, so it reads as a statement rather than more
-                ornament. */}
-            <p className="mx-auto mb-7 max-w-[34ch] font-sans text-[clamp(1.05rem,2.8vw,1.22rem)] leading-[1.65] font-semibold text-ink lg:mx-0">
-              We buy the silk your family no longer wears, and pay what it is
-              genuinely worth. To the gram, on the day.
+                the headline below, so it reads as a statement rather than
+                more ornament. */}
+            <p className="mx-auto mb-7 max-w-[36ch] font-sans text-[clamp(1.05rem,2.8vw,1.22rem)] leading-[1.65] font-semibold text-ink lg:mx-0">
+              A saree folded away for twenty years has not lost its worth. The
+              silk is still silk, the zari is still silver, and we will pay you
+              for both.
             </p>
 
             <AnimatedHeading
