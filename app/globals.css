@@ -68,6 +68,17 @@
   66%      { transform: translate3d(-4%, 5%, 0) scale(0.95); }
 }
 
+/* The branch band travels one copy of its list. Paired with REPEATS in
+   BranchMarquee: three copies, so one copy is a third of the track. */
+@keyframes marquee-x {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-33.3333%, 0, 0); }
+}
+
+@utility marquee {
+  animation: marquee-x 28s linear infinite;
+}
+
 /* Motes rise the height of the section and fade out at the top. */
 @keyframes mote-rise {
   0%       { transform: translate3d(0, 0, 0); opacity: 0; }
@@ -204,6 +215,9 @@ body {
      travel is one slot, small and well away from the reading line. */
   .cat-slide { transition-duration: 1500ms !important; }
   .hero-watermark { animation-duration: 180s !important; }
+  /* Names still need to come past, or two thirds of the branches would never
+     be seen, so the band crawls rather than stopping. */
+  .marquee { animation-duration: 150s !important; }
   .hero-ring { animation-duration: 150s !important; }
   .hero-mote {
     animation-duration: 90s !important;

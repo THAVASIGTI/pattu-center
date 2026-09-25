@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import BranchCard from "@/components/BranchCard";
+import BranchMarquee from "@/components/BranchMarquee";
 import Counter from "@/components/Counter";
 import CtaBand from "@/components/CtaBand";
 import AnimatedHeading from "@/components/AnimatedHeading";
@@ -97,6 +98,9 @@ export default function HomePage() {
           </div>
         </Wrap>
       </section>
+
+      {/* ---------------- Where we buy, scrolling past ---------------- */}
+      <BranchMarquee />
 
       {/* ---------------- Trust strip ---------------- */}
       <section className="border-y border-line-yellow bg-[linear-gradient(90deg,#e6f2e9_0%,#f4faf5_50%,#e6f2e9_100%)]">
