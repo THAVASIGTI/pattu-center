@@ -223,6 +223,18 @@ export const whyChooseUs = [
   },
 ];
 
+/* ------------------------------------------------------------------ */
+/* Hero slogans, cycled by the headline                                */
+/* ------------------------------------------------------------------ */
+
+/** Each slogan is split so the closing phrase can carry the gold. */
+export const heroSlogans = [
+  [{ text: "Sell your old silk at a" }, { text: " fair price.", foil: true }],
+  [{ text: "Sell silk easily," }, { text: " get paid quickly.", foil: true }],
+  [{ text: "Old silk," }, { text: " new life.", foil: true }],
+  [{ text: "Resell. Revalue." }, { text: " Renew.", foil: true }],
+] as const;
+
 export const processSteps = [
   {
     title: "Contact us",

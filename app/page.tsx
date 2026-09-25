@@ -4,7 +4,7 @@ import BranchCard from "@/components/BranchCard";
 import BranchMarquee from "@/components/BranchMarquee";
 import Counter from "@/components/Counter";
 import CtaBand from "@/components/CtaBand";
-import AnimatedHeading from "@/components/AnimatedHeading";
+import RotatingHeadline from "@/components/RotatingHeadline";
 import ArchCard from "@/components/ArchCard";
 import CategorySlider from "@/components/CategorySlider";
 import HeroBackdrop from "@/components/HeroBackdrop";
@@ -16,6 +16,7 @@ import Reveal from "@/components/Reveal";
 import { Button, Section, SectionHead, Wrap } from "@/components/ui";
 import { branchCount, branchCountWordCap, branches, business, waLink } from "@/config/business";
 import {
+  heroSlogans,
   img,
   priceLedger,
   processSteps,
@@ -63,13 +64,10 @@ export default function HomePage() {
               for both.
             </p>
 
-            <AnimatedHeading
+            <RotatingHeadline
               foilTone="deep"
               className="mx-auto max-w-[18ch] font-serif text-[clamp(2rem,6vw,3.4rem)] leading-[1.14] text-green-deep lg:mx-0"
-              segments={[
-                { text: "Sell your old silk at a" },
-                { text: " fair price.", foil: true },
-              ]}
+              slogans={heroSlogans}
             />
 
             <p className="mx-auto mt-4 max-w-[48ch] text-[clamp(.97rem,2.6vw,1.07rem)] text-ink-soft lg:mx-0">
