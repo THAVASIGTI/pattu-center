@@ -199,9 +199,11 @@ body {
      rather than stopped: "reduce" taken literally. Everything here is small,
      low-contrast and far from the reading line, which is the kind of movement
      vestibular guidance treats as low risk. */
-  /* The frame keeps advancing so every category is still seen; it just cuts
-     instead of sliding. */
-  .cat-slide { transition: none !important; }
+  /* The frame keeps advancing, and the swap is the point of it, so it is
+     slowed rather than cut: a card that teleports reads as a glitch. The
+     travel is one slot, small and well away from the reading line. */
+  .cat-slide { transition-duration: 1500ms !important; }
+  .hero-watermark { animation-duration: 180s !important; }
   .hero-ring { animation-duration: 150s !important; }
   .hero-mote {
     animation-duration: 90s !important;

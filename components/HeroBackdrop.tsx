@@ -1,6 +1,9 @@
+import Image from "next/image";
+import { logoNav } from "@/config/content";
+
 /**
- * Animated hero ground: zari rings and gold motes drifting over a flat cream
- * field. No grid and no gradient wash, so what moves is the only thing there
+ * Animated hero ground: the mark as a faint watermark, with zari rings and
+ * gold motes drifting over a flat cream field. No grid and no gradient wash, so what moves is the only thing there
  * is to see. All pure CSS, so the static export needs no JavaScript for it.
  *
  * Everything is parked away from the middle, because the copy sits there and
@@ -34,6 +37,19 @@ const MOTES: [string, string, string, string, string][] = [
 export default function HeroBackdrop() {
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+      {/* The mark, printed into the ground rather than placed on it. Kept far
+          enough down in opacity that the copy over it is unaffected, with a
+          soft shadow so it reads as pressed into the paper. */}
+      <Image
+        src={logoNav}
+        alt=""
+        aria-hidden
+        width={256}
+        height={256}
+        className="hero-watermark absolute top-1/2 left-[4%] w-[clamp(200px,30vw,420px)] -translate-y-1/2 opacity-[0.07] [filter:drop-shadow(0_12px_26px_rgba(10,46,26,.45))]"
+        style={{ animation: "ring-drift 96s ease-in-out infinite" }}
+      />
+
       {RINGS.map(([top, left, size, border, colour, duration, delay], i) => (
         <span
           key={`r${i}`}
