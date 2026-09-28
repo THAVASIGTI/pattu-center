@@ -9,7 +9,7 @@ export default function BranchCard({ branch }: { branch: Branch }) {
     "inline-flex min-h-10 items-center gap-1.5 rounded-full bg-cream-2 px-3.5 py-1.5 text-[0.83rem] font-semibold text-green transition-colors hover:bg-green hover:text-cream";
 
   return (
-    <article className="flex flex-col rounded-[22px] border border-line bg-white p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-line-yellow hover:shadow-mid">
+    <article className="flex flex-col rounded-[22px] border border-line glass-soft p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-line-yellow hover:shadow-mid">
       <div className="mb-3 flex items-center gap-2.5">
         <span className="grid size-[34px] shrink-0 place-items-center rounded-full bg-yellow-pale">
           <Pin className="size-[15px] text-green" />

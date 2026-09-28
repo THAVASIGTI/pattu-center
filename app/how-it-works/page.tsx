@@ -29,7 +29,7 @@ export default function HowItWorksPage() {
           <div className="mx-auto grid max-w-[900px] gap-5">
             {processSteps.map((s, i) => (
               <Reveal key={s.title} delay={i * 80}>
-                <article className="flex items-start gap-5 rounded-[22px] border border-line bg-white p-6 shadow-soft sm:gap-7 sm:p-8">
+                <article className="flex items-start gap-5 rounded-[22px] border border-line glass-soft p-6 shadow-soft sm:gap-7 sm:p-8">
                   <span className="green-text shrink-0 font-serif text-[2.6rem] leading-none sm:text-[3.2rem]">
                     0{i + 1}
                   </span>
@@ -62,7 +62,7 @@ export default function HowItWorksPage() {
                 "Bring silver articles or brass along on the same visit if you want them valued too.",
                 "Have ten or more pieces? Ask for a free home visit instead of travelling to us.",
               ].map((tip) => (
-                <li key={tip} className="flex items-start gap-3.5 rounded-[14px] border border-line bg-white p-4 shadow-soft">
+                <li key={tip} className="flex items-start gap-3.5 rounded-[14px] border border-line glass-soft p-4 shadow-soft">
                   <Check className="mt-0.5 size-5 shrink-0 text-yellow" />
                   <span className="text-ink-soft">{tip}</span>
                 </li>

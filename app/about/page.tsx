@@ -112,7 +112,7 @@ export default function AboutPage() {
           <Reveal>
             <div className="grid gap-3.5 md:grid-cols-2 lg:grid-cols-3">
               {whyChooseUs.map((w) => (
-                <article key={w.title} className="rounded-[22px] border border-line bg-white p-6 shadow-soft">
+                <article key={w.title} className="rounded-[22px] border border-line glass-soft p-6 shadow-soft">
                   <h3 className="mb-2 font-serif text-[1.22rem] text-green-deep">{w.title}</h3>
                   <p className="text-[0.92rem] text-ink-soft">{w.blurb}</p>
                 </article>

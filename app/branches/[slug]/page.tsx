@@ -95,7 +95,7 @@ export default async function BranchPage({ params }: Params) {
                   code stops scanning. A pickup area has no pin, so it gets a
                   booking prompt in place of the code. */}
               {mapHref ? (
-              <div className="mt-8 flex flex-col items-center rounded-[20px] border border-line bg-white p-6 text-center shadow-soft">
+              <div className="mt-8 flex flex-col items-center rounded-[20px] border border-line glass-soft p-6 text-center shadow-soft">
                 <span className="rounded-[12px] border border-line-yellow bg-white p-2">
                   <Image
                     src={qrImg(branch.slug)}
@@ -121,7 +121,7 @@ export default async function BranchPage({ params }: Params) {
                 </a>
               </div>
               ) : (
-                <div className="mt-8 rounded-[20px] border border-line bg-white p-6 shadow-soft">
+                <div className="mt-8 rounded-[20px] border border-line glass-soft p-6 shadow-soft">
                   <h3 className="font-serif text-[1.15rem] text-green-deep">
                     No counter here, we come to you
                   </h3>
@@ -149,7 +149,7 @@ export default async function BranchPage({ params }: Params) {
             </Reveal>
 
             <Reveal delay={120}>
-              <article className="rounded-[22px] border border-line bg-white p-6 shadow-soft sm:p-7">
+              <article className="rounded-[22px] border border-line glass-soft p-6 shadow-soft sm:p-7">
                 <div className="mb-4 flex items-center gap-2.5">
                   <span className="grid size-[34px] shrink-0 place-items-center rounded-full bg-yellow-pale">
                     <Pin className="size-[15px] text-green" />
@@ -246,7 +246,7 @@ export default async function BranchPage({ params }: Params) {
                 .map((t) => (
                   <article
                     key={t.slug}
-                    className="flex items-start gap-3.5 rounded-[22px] border border-line bg-white p-5 shadow-soft"
+                    className="flex items-start gap-3.5 rounded-[22px] border border-line glass-soft p-5 shadow-soft"
                   >
                     <Check className="mt-0.5 size-5 shrink-0 text-yellow" />
                     <div>

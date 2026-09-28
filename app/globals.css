@@ -26,7 +26,12 @@
 
   --color-ink: #14241a;
   --color-ink-soft: #46584c;
-  --color-ink-mute: #7d8f82;
+  /* Measured against every ground it lands on: the frosted panels, the cream
+     body gradient and the cream section tone. The old #7d8f82 ran 2.92:1 to
+     3.35:1 across those, under the 4.5:1 body-text minimum everywhere; this
+     is the same hue walked down in lightness until the worst case clears,
+     at 4.53:1. */
+  --color-ink-mute: #606f64;
 
   --color-line: rgba(21, 128, 61, 0.15);
   --color-line-yellow: rgba(202, 154, 4, 0.34);
@@ -158,6 +163,49 @@
   -webkit-background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
+}
+
+/* ------------------------------------------------------------------
+   Glass surfaces
+
+   Each of these sets background only, never border or box-shadow. Every
+   panel on the site already carries its own hairline and its own shadow,
+   including ones that change on hover or on open/closed state, and a
+   `border:` or `box-shadow:` here would land in the same cascade layer as
+   those utilities and silently win or lose depending on emit order. The
+   top highlight is painted as a background-image gradient for the same
+   reason: it is the one way to get the lit edge without touching box-shadow.
+
+   `glass-soft` carries no backdrop-filter, and that is deliberate. Every
+   light panel on this site sits on flat cream, so a blur would have nothing
+   to blur while still forcing the browser to re-composite everything behind
+   it on each frame, which is what makes twenty cards scrolling at once
+   stutter on a mid-range phone. A blur is only worth paying for where the
+   ground behind actually has something in it, which here means the dark
+   green sections, so `glass-dark` has one. The sticky bar and the fixed
+   bottom bar need their own tints and use Tailwind's backdrop-blur directly.
+
+   One trap worth recording: a backdrop-filter reads whatever is painted
+   behind the element, including an ancestor's own fill. The trust strip lays
+   its tiles on a grid whose background is bg-yellow/30 to draw the hairlines
+   between them, so a frosted tile there pulled that gold through and turned
+   the whole band beige.
+   ------------------------------------------------------------------ */
+@utility glass-soft {
+  background-color: rgba(255, 255, 255, 0.76);
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 46%);
+}
+
+/* The same pane for the dark green sections, where the ground is busy enough
+   that the blur is worth paying for. */
+@utility glass-dark {
+  background-color: rgba(255, 255, 255, 0.09);
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0) 52%);
+
+  @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    -webkit-backdrop-filter: blur(12px) saturate(1.3);
+    backdrop-filter: blur(12px) saturate(1.3);
+  }
 }
 
 /* Horizontal snap rail used for card carousels on small screens */

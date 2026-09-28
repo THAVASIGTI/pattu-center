@@ -69,7 +69,7 @@ export default function WhatWeBuyPage() {
                 { h: "Zari content", p: "Real silver-gilt zari is sampled and priced separately from the silk." },
                 { h: "Condition", p: "Tears and stains reduce the figure but never disqualify a saree." },
               ].map((x) => (
-                <article key={x.h} className="rounded-[22px] border border-line bg-white p-6 shadow-soft">
+                <article key={x.h} className="rounded-[22px] border border-line glass-soft p-6 shadow-soft">
                   <h3 className="mb-2 font-serif text-[1.15rem] text-green-deep">{x.h}</h3>
                   <p className="text-[0.92rem] text-ink-soft">{x.p}</p>
                 </article>

@@ -43,7 +43,7 @@ export default function ContactPage() {
               <SectionHead align="left" eyebrow="Get in touch" title="Every way to reach us." />
 
               <dl className="grid gap-4">
-                <div className="flex items-start gap-4 rounded-[22px] border border-line bg-white p-5 shadow-soft">
+                <div className="flex items-start gap-4 rounded-[22px] border border-line glass-soft p-5 shadow-soft">
                   <span className="grad-green grid size-12 shrink-0 place-items-center rounded-[14px] border border-line-yellow">
                     <Phone className="size-5 text-yellow-light" />
                   </span>
@@ -60,7 +60,7 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4 rounded-[22px] border border-line bg-white p-5 shadow-soft">
+                <div className="flex items-start gap-4 rounded-[22px] border border-line glass-soft p-5 shadow-soft">
                   <span className="grid size-12 shrink-0 place-items-center rounded-[14px] border border-line-yellow bg-[#25d366]">
                     <WhatsApp className="size-5 text-[#06301a]" />
                   </span>
@@ -85,7 +85,7 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4 rounded-[22px] border border-line bg-white p-5 shadow-soft">
+                <div className="flex items-start gap-4 rounded-[22px] border border-line glass-soft p-5 shadow-soft">
                   <span className="grad-green grid size-12 shrink-0 place-items-center rounded-[14px] border border-line-yellow">
                     <Mail className="size-5 text-yellow-light" />
                   </span>
@@ -99,7 +99,7 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4 rounded-[22px] border border-line bg-white p-5 shadow-soft">
+                <div className="flex items-start gap-4 rounded-[22px] border border-line glass-soft p-5 shadow-soft">
                   <span className="grad-green grid size-12 shrink-0 place-items-center rounded-[14px] border border-line-yellow">
                     <Clock className="size-5 text-yellow-light" />
                   </span>
@@ -112,7 +112,7 @@ export default function ContactPage() {
             </Reveal>
 
             <Reveal delay={120}>
-              <article className="rounded-[22px] border border-line bg-white p-6 shadow-soft sm:p-7">
+              <article className="rounded-[22px] border border-line glass-soft p-6 shadow-soft sm:p-7">
                 <div className="mb-4 flex items-center gap-2.5">
                   <span className="grid size-[34px] shrink-0 place-items-center rounded-full bg-yellow-pale">
                     <Pin className="size-[15px] text-green" />

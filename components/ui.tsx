@@ -133,7 +133,7 @@ export function Button({ href, variant = "yellow", external, className = "", chi
 export function Card({ children, className = "" }: { children: ReactNode; className?: string }) {
   return (
     <div
-      className={`group relative flex flex-col overflow-hidden rounded-[22px] border border-line bg-white shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:border-line-yellow hover:shadow-mid ${className}`}
+      className={`group relative flex flex-col overflow-hidden rounded-[22px] border border-line glass-soft shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:border-line-yellow hover:shadow-mid ${className}`}
     >
       <span className="foil absolute inset-x-0 top-0 h-[3px] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
       {children}

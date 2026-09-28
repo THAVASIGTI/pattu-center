@@ -216,7 +216,7 @@ export default function HomePage() {
                 return (
                   <article
                     key={s.slug}
-                    className="flex items-start gap-4 rounded-[22px] border border-line bg-white p-5 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-line-yellow hover:shadow-mid"
+                    className="flex items-start gap-4 rounded-[22px] border border-line glass-soft p-5 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-line-yellow hover:shadow-mid"
                   >
                     <span className="grad-green grid size-12 shrink-0 place-items-center rounded-[14px] border border-line-yellow shadow-[0_4px_14px_rgba(21,128,61,.3)]">
                       {Icon && <Icon className="size-[21px] text-yellow-light" />}
@@ -258,12 +258,12 @@ export default function HomePage() {
               ].map((c) => (
                 <div
                   key={c.l}
-                  className="rounded-[22px] border border-yellow/25 bg-cream/[0.055] px-3 py-6 text-center"
+                  className="glass-dark rounded-[22px] border border-yellow/25 px-3 py-6 text-center"
                 >
                   <b className="foil-text block font-serif text-[clamp(1.7rem,6.4vw,2.5rem)] leading-none">
                     <Counter value={c.v} />
                   </b>
-                  <span className="mt-2.5 block text-[0.74rem] font-semibold uppercase tracking-[0.1em] text-cream/65">
+                  <span className="mt-2.5 block text-[0.74rem] font-semibold uppercase tracking-[0.1em] text-cream/85">
                     {c.l}
                   </span>
                 </div>
@@ -316,7 +316,7 @@ export default function HomePage() {
 
           <div className="grid gap-5 lg:grid-cols-2 lg:gap-6">
             <Reveal>
-              <div className="h-full rounded-[22px] border-t-4 border-green bg-white p-6 shadow-soft sm:p-7">
+              <div className="h-full rounded-[22px] border-t-4 border-green glass-soft p-6 shadow-soft sm:p-7">
                 <h3 className="mb-4 flex items-center gap-2.5 font-serif text-[1.3rem] text-green-deep">
                   <span className="grid size-8 place-items-center rounded-full bg-green-soft/15">
                     <Check className="size-4 text-green" />
@@ -335,7 +335,7 @@ export default function HomePage() {
             </Reveal>
 
             <Reveal delay={100}>
-              <div className="h-full rounded-[22px] border-t-4 border-yellow bg-white p-6 shadow-soft sm:p-7">
+              <div className="h-full rounded-[22px] border-t-4 border-yellow glass-soft p-6 shadow-soft sm:p-7">
                 <h3 className="mb-4 flex items-center gap-2.5 font-serif text-[1.3rem] text-green-deep">
                   <span className="grid size-8 place-items-center rounded-full bg-yellow/15">
                     <span aria-hidden className="font-serif text-[1.1rem] leading-none text-yellow-ink">!</span>
@@ -370,7 +370,7 @@ export default function HomePage() {
               {whyChooseUs.map((w) => (
                 <article
                   key={w.title}
-                  className="flex items-start gap-4 rounded-[22px] border border-line bg-white p-5 shadow-soft"
+                  className="flex items-start gap-4 rounded-[22px] border border-line glass-soft p-5 shadow-soft"
                 >
                   <span className="grad-green grid size-12 shrink-0 place-items-center rounded-[14px] border border-line-yellow">
                     <Check className="size-[21px] text-yellow-light" />
@@ -435,7 +435,7 @@ export default function HomePage() {
               {testimonials.map((t) => (
                 <article
                   key={t.name}
-                  className="relative h-full rounded-[22px] border border-line bg-white p-6 shadow-soft"
+                  className="relative h-full rounded-[22px] border border-line glass-soft p-6 shadow-soft"
                 >
                   <span
                     aria-hidden

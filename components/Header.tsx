@@ -105,7 +105,7 @@ export default function Header() {
 
       {/* Header */}
       <header
-        className={`sticky top-0 z-50 border-b border-line bg-cream/95 backdrop-blur-md transition-shadow duration-300 ${
+        className={`sticky top-0 z-50 border-b border-line bg-cream/90 backdrop-blur-xl backdrop-saturate-150 transition-shadow duration-300 ${
           stuck ? "shadow-[0_6px_24px_rgba(10,46,26,.11)]" : ""
         }`}
       >
@@ -121,8 +121,8 @@ export default function Header() {
                 aria-current={isActive(l.href) ? "page" : undefined}
                 className={`whitespace-nowrap rounded-[9px] px-2.5 py-2 text-[0.85rem] transition-colors ${
                   isActive(l.href)
-                    ? "font-semibold text-green"
-                    : "font-medium text-ink-soft hover:bg-green/[0.07] hover:text-green"
+                    ? "font-semibold text-green-mid"
+                    : "font-medium text-ink-soft hover:bg-green/[0.07] hover:text-green-mid"
                 }`}
               >
                 {l.label}

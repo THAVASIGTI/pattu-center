@@ -31,7 +31,7 @@ export default function ServicesPage() {
               const Icon = serviceIcons[s.icon];
               return (
                 <Reveal key={s.slug} delay={(i % 2) * 90}>
-                  <article className="flex h-full items-start gap-5 rounded-[22px] border border-line bg-white p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-line-yellow hover:shadow-mid">
+                  <article className="flex h-full items-start gap-5 rounded-[22px] border border-line glass-soft p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-line-yellow hover:shadow-mid">
                     <span className="grad-green grid size-14 shrink-0 place-items-center rounded-[16px] border border-line-yellow shadow-[0_4px_14px_rgba(21,128,61,.3)]">
                       {Icon && <Icon className="size-6 text-yellow-light" />}
                     </span>

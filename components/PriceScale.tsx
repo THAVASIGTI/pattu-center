@@ -15,7 +15,7 @@ export default function PriceScale({
     <div className="grid gap-4">
       {rows.map((row, i) => (
         <Reveal key={row.factor} from="scale" delay={i * 110} duration={800}>
-          <article className="group grid items-stretch gap-0 overflow-hidden rounded-[22px] border border-line bg-white shadow-soft transition-shadow duration-500 hover:shadow-mid lg:grid-cols-[1fr_auto_1fr]">
+          <article className="group grid items-stretch gap-0 overflow-hidden rounded-[22px] border border-line glass-soft shadow-soft transition-shadow duration-500 hover:shadow-mid lg:grid-cols-[1fr_auto_1fr]">
             {/* raises, weighs the price up */}
             <div className="order-2 flex items-center gap-3 border-t border-line bg-green-soft/[0.07] px-5 py-4 lg:order-1 lg:justify-end lg:border-t-0 lg:border-r lg:px-6 lg:py-6 lg:text-right">
               <span className="order-2 text-[0.92rem] text-ink-soft lg:order-1">

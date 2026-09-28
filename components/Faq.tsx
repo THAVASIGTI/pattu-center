@@ -13,7 +13,7 @@ export default function Faq({ items }: { items: { q: string; a: string }[] }) {
         return (
           <div
             key={item.q}
-            className={`overflow-hidden rounded-[14px] border bg-white shadow-soft transition-colors ${
+            className={`overflow-hidden rounded-[14px] border glass-soft shadow-soft transition-colors ${
               isOpen ? "border-line-yellow" : "border-line"
             }`}
           >
