@@ -28,7 +28,7 @@ export default function HomePage() {
   return (
     <>
       {/* ---------------- Hero ---------------- */}
-      <section className="relative overflow-hidden bg-cream text-ink">
+      <section id="hero" className="relative overflow-hidden bg-cream text-ink">
         <HeroBackdrop />
         {/* zari rule along the foot of the section */}
         <span aria-hidden className="foil absolute inset-x-0 bottom-0 h-[3px]" />

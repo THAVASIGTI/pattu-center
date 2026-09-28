@@ -7,19 +7,30 @@ import { ArrowRight } from "./Icons";
 import { img, sareeTypes } from "@/config/content";
 
 /**
- * One full-width frame that advances through the saree categories on its own,
- * each slide entering from the right as the last leaves to the left.
+ * One large frame with the row of small ones under it: the big frame shows
+ * the silk that is currently up, and the small boxes are both the preview of
+ * what is coming and the way to jump straight to one.
  *
- * Change INTERVAL to alter the pace. It sits at 2600ms so the category name is
- * readable; 1000 gives the faster rhythm the hero slideshow used to have.
+ * The small boxes replace the dot row that used to sit here. They do the same
+ * job, so the frame still has exactly one set of controls, and they say which
+ * silk each one is rather than leaving it to a numbered position.
+ *
+ * Slides cross-fade in place rather than travelling. The frame no longer
+ * leans off its own edges, so there is no direction for a slide to come from,
+ * and a fade keeps the big frame still while the small boxes carry the
+ * movement.
+ *
+ * Change INTERVAL to alter the pace. It sits at 2600ms so the category name
+ * is readable before it changes.
  */
 const INTERVAL = 2600;
-const SLIDE = 620;
+const FADE = 620;
 const SHOWN = 5;
 
 export default function CategorySlider() {
   // The frame shows the first few categories rather than every one, so a
-  // visitor sees the whole cycle without waiting through eight slides.
+  // visitor sees the whole cycle without waiting through eight slides, and so
+  // the row of small boxes stays wide enough to press on a phone.
   const slides = sareeTypes.filter((t) => t.slug !== "silver").slice(0, SHOWN);
   const count = slides.length;
 
@@ -42,112 +53,113 @@ export default function CategorySlider() {
       onFocusCapture={() => setPaused(true)}
       onBlurCapture={() => setPaused(false)}
     >
-      {/* A stack of framed boxes rather than one window. The front card holds
-          the image; behind it the next two sit offset and tilted, so their
-          gold edges show as layers. On each tick the front card lifts away to
-          the left and every card behind it steps forward one slot. */}
-      {/* The cards behind lean out to the right, so on a phone the front card
-          gives up that width rather than letting the stack run off screen. */}
-      <div
-        className="relative aspect-4/5 w-[84%] [perspective:1200px] sm:w-full"
-        aria-roledescription="carousel"
-        aria-label="Silk we buy"
-      >
-        {slides.map((t, i) => {
-          // shortest way round, so a wrapping card still travels one step
-          let offset = i - index;
-          if (offset > count / 2) offset -= count;
-          if (offset < -count / 2) offset += count;
+      {/* The big frame. Its zari edge and cream gap sit outside the image, so
+          framing it costs the picture none of its own width. */}
+      <div className="relative">
+        <span
+          aria-hidden
+          className="foil absolute -inset-2 rounded-[32px] shadow-[0_18px_44px_rgba(10,46,26,.2)]"
+        />
+        <span aria-hidden className="absolute -inset-[3px] rounded-[30px] bg-cream" />
 
-          const active = offset === 0;
-          const leaving = offset === -1;
-          // Anything further back than the third card is parked out of sight,
-          // which is also where a card is recycled from the front of the stack
-          // to the back, so the jump is never seen.
-          const parked = offset < -1 || offset > 2;
-
-          // The cards behind rise and lean right, so they never hang down over
-          // the dots. The front card lifts off the top of the pile rather than
-          // flying left, which on a wide screen would cross the copy.
-          const slot = leaving
-            ? "translate3d(-6%,-18%,0) rotate(-5deg) scale(.98)"
-            : `translate3d(${offset * 6.5}%, ${offset * -3}%, 0) rotate(${offset * 2.2}deg) scale(${1 - offset * 0.05})`;
-
-          return (
-            <div
-              key={t.slug}
-              aria-hidden={!active}
-              style={{
-                transform: slot,
-                zIndex: 30 - offset,
-                opacity: parked ? 0 : leaving ? 0 : 1,
-                visibility: parked ? "hidden" : "visible",
-                transitionDuration: parked ? "0ms" : `${SLIDE}ms`,
-              }}
-              className="cat-slide absolute inset-0 origin-bottom transition-[transform,opacity] [transition-timing-function:cubic-bezier(.34,.9,.3,1)]"
-            >
-              {/* every card carries its own zari edge, so the layers read as
-                  boxes stacked on each other rather than one framed window */}
-              <span aria-hidden className="foil absolute -inset-2 rounded-[32px] shadow-[0_18px_44px_rgba(10,46,26,.2)]" />
-              <span aria-hidden className="absolute -inset-[3px] rounded-[30px] bg-cream" />
-
-              <div className="relative size-full overflow-hidden rounded-[27px] bg-green-deep">
+        <div
+          className="relative aspect-4/5 overflow-hidden rounded-[27px] bg-green-deep"
+          aria-roledescription="carousel"
+          aria-label="Silk we buy"
+        >
+          {slides.map((t, i) => {
+            const active = i === index;
+            return (
+              <div
+                key={t.slug}
+                aria-hidden={!active}
+                style={{ transitionDuration: `${FADE}ms` }}
+                className={`cat-slide absolute inset-0 transition-opacity ease-out ${
+                  active ? "opacity-100" : "opacity-0"
+                }`}
+              >
                 <Image
                   src={img(t.imageId)}
                   alt={active ? `${t.name} silk` : ""}
                   fill
-                  // next/image rejects priority together with loading, and the
-                  // first card's offset grows past 2 as the stack advances,
-                  // which would have set both. Priority covers the opening
-                  // card; the rest use loading alone, eager while they are in
-                  // or near the stack so none arrives blank.
+                  // next/image rejects priority together with loading, so the
+                  // opening slide takes priority and the rest take loading on
+                  // its own. They are eager because all five sit inside the
+                  // viewport already, only hidden by opacity, and a slide that
+                  // has not loaded fades up blank.
                   {...(i === 0
                     ? { priority: true as const }
-                    : { loading: (Math.abs(offset) <= 2 ? "eager" : "lazy") as "eager" | "lazy" })}
+                    : { loading: "eager" as const })}
                   sizes="(max-width: 1024px) 100vw, 440px"
                   className="object-cover"
                 />
-                <span
-                  aria-hidden
-                  className="absolute inset-0 bg-[linear-gradient(0deg,rgba(10,46,26,.88)_0%,rgba(10,46,26,.35)_42%,transparent_72%)]"
-                />
-                <span
-                  aria-hidden
-                  className="pointer-events-none absolute inset-1.5 rounded-[22px] border border-yellow-pale/70"
-                />
-                <div className="absolute inset-x-0 bottom-0 px-6 pb-6 text-center">
-                  {t.ta && <p className="font-tamil text-[0.95rem] text-yellow-light">{t.ta}</p>}
-                  <p className="mt-0.5 font-serif text-[clamp(1.2rem,3.4vw,1.9rem)] text-white">
-                    {t.name}
-                  </p>
-                </div>
               </div>
-            </div>
+            );
+          })}
+
+          <span
+            aria-hidden
+            className="pointer-events-none absolute inset-0 bg-[linear-gradient(0deg,rgba(10,46,26,.88)_0%,rgba(10,46,26,.35)_42%,transparent_72%)]"
+          />
+          <span
+            aria-hidden
+            className="pointer-events-none absolute inset-1.5 rounded-[22px] border border-yellow-pale/70"
+          />
+
+          {/* The caption sits outside the fading slides, so the name changes
+              once, cleanly, instead of two names crossing over each other. */}
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 px-6 pb-6 text-center">
+            {slides[index].ta && (
+              <p className="font-tamil text-[0.95rem] text-yellow-light">{slides[index].ta}</p>
+            )}
+            <p className="mt-0.5 font-serif text-[clamp(1.2rem,3.4vw,1.9rem)] text-white">
+              {slides[index].name}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* The row of small frames. Wider than tall, so five of them fit across
+          the frame above without dropping under the 44px a finger needs. */}
+      <div className="mt-6 flex items-stretch gap-2 sm:gap-2.5">
+        {slides.map((t, i) => {
+          const active = i === index;
+          return (
+            <button
+              key={t.slug}
+              type="button"
+              onClick={() => go(i)}
+              aria-label={`Show ${t.name}`}
+              aria-current={active}
+              className={`group relative min-h-11 flex-1 cursor-pointer overflow-hidden rounded-[13px] transition-all duration-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green ${
+                active
+                  ? "ring-2 ring-yellow ring-offset-2 ring-offset-cream"
+                  : "opacity-60 hover:opacity-100"
+              }`}
+            >
+              <span className="relative block aspect-4/5">
+                <Image
+                  src={img(t.imageId)}
+                  alt=""
+                  fill
+                  sizes="90px"
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+              </span>
+              {/* Holds the small frames to the same green as the big one, so
+                  the row reads as part of it rather than five loose photos. */}
+              <span
+                aria-hidden
+                className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ${
+                  active ? "opacity-0" : "bg-[rgba(10,46,26,.34)] opacity-100"
+                }`}
+              />
+            </button>
           );
         })}
       </div>
 
-      {/* dots */}
-      <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
-        {slides.map((t, i) => (
-          <button
-            key={t.slug}
-            type="button"
-            onClick={() => go(i)}
-            aria-label={`Show ${t.name}`}
-            aria-current={i === index}
-            className="group cursor-pointer p-2"
-          >
-            <span
-              className={`block h-1.5 rounded-full transition-all duration-500 ${
-                i === index ? "w-7 bg-yellow" : "w-1.5 bg-green/25 group-hover:bg-green/50"
-              }`}
-            />
-          </button>
-        ))}
-      </div>
-
-      <p className="mt-2 text-center">
+      <p className="mt-4 text-center">
         <Link
           href="/what-we-buy"
           className="inline-flex items-center gap-2 text-[0.9rem] font-semibold text-green underline-offset-4 hover:underline"

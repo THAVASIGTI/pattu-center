@@ -44,8 +44,21 @@ function subscribeScroll(onChange: () => void) {
   };
 }
 
-/** Past the hero, roughly. Keeps the dock off the opening call to action. */
-const isPastHero = () => window.scrollY > window.innerHeight * 0.45;
+/**
+ * True once the hero has scrolled off the top, measured off the section
+ * itself rather than guessed from the viewport height.
+ *
+ * A fraction of the viewport was close enough while the frame's only control
+ * was a short row of centred dots. The row of small frames that replaced them
+ * runs the full width of the frame, and on a phone the dock came down on the
+ * last one, taking a third of it with it: the dock sits above, so the taps
+ * landed on Facebook instead of on the silk.
+ */
+const isPastHero = () => {
+  const hero = document.getElementById("hero");
+  if (!hero) return window.scrollY > window.innerHeight * 0.45;
+  return hero.getBoundingClientRect().bottom <= 0;
+};
 
 /**
  * Floating social buttons, pinned to the right edge and vertically centred.
