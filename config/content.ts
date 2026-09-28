@@ -403,7 +403,7 @@ export const roadmap = [
       "You get a single figure with the arithmetic behind it: silk weight, purity, zari and condition. Questions answered before anything is agreed.",
   },
   {
-    icon: "rupee",
+    icon: "cash",
     stop: "Paid on the spot",
     when: "Immediately",
     blurb:

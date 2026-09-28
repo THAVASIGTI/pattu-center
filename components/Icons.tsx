@@ -110,42 +110,67 @@ export const serviceIcons: Record<string, (p: P) => React.ReactElement> = {
   whatsapp: (p) => <WhatsApp {...p} />,
 };
 
-/** One per stop on the roadmap, in the order the stops appear. */
+/**
+ * One per stop on the roadmap, in the order the stops appear.
+ *
+ * Drawn for 26px, which is the only size they are used at. That governs
+ * everything about them: one dominant shape each, no detail smaller than
+ * about 2 units on the 24 grid, and a lighter 1.6 stroke so the lines do not
+ * thicken into each other. The earlier set packed scallops, hatching and a
+ * rupee glyph into the same box and they turned to mush at this size.
+ */
 export const stepIcons: Record<string, (p: P) => React.ReactElement> = {
+  // Send photos
   camera: (p) => (
-    <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.7} {...p}>
-      <path d="M3 8.5h3.2l1.4-2.2h8.8l1.4 2.2H21v10H3z" />
-      <circle cx="12" cy="13.2" r="3.4" />
+    <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.6} {...p}>
+      <rect x="2.5" y="6.8" width="19" height="13.4" rx="3" />
+      <path d="M8.6 6.8 10.1 4h3.8l1.5 2.8" />
+      <circle cx="12" cy="13.5" r="3.7" />
     </svg>
   ),
+  // Pick how we meet: counter or doorstep
   shopfront: (p) => (
-    <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.7} {...p}>
-      <path d="M4 9.5V20h16V9.5M2.5 9.5 4.6 4h14.8l2.1 5.5a3 3 0 0 1-5.8 0 3 3 0 0 1-5.8 0 3 3 0 0 1-5.8 0z" />
-      <path d="M10 20v-5.2h4V20" />
+    <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.6} {...p}>
+      <path d="M2 9.2 4.3 3.8h15.4L22 9.2z" />
+      <path d="M4 9.2V20.2h16V9.2" />
+      <path d="M9.4 20.2v-6.2h5.2v6.2" />
     </svg>
   ),
+  // Open weighing
   scale: (p) => (
-    <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.7} {...p}>
-      <path d="M12 4v16M8 20h8M5 8h14M12 8 8.2 8 5 14.5a3.6 3.6 0 0 0 6.4 0zM12 8l3.8 0 3.2 6.5a3.6 3.6 0 0 1-6.4 0z" />
-      <circle cx="12" cy="4.4" r="1.4" />
+    <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.6} {...p}>
+      <path d="M12 6.2v14M8.4 20.2h7.2" />
+      <path d="M4.6 8.4h14.8" />
+      <path d="M4.6 8.4v2.9M19.4 8.4v2.9" />
+      <path d="M1.9 11.3h5.4a2.7 2.7 0 0 1-5.4 0z" />
+      <path d="M16.7 11.3h5.4a2.7 2.7 0 0 1-5.4 0z" />
+      <circle cx="12" cy="4.4" r="1.6" />
     </svg>
   ),
+  // Zari tested: a loupe over the weave
   loupe: (p) => (
-    <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.7} {...p}>
-      <circle cx="10.5" cy="10.5" r="6" />
-      <path d="M15 15l5 5M8 10.5h5M8.7 8.2h3.6M8.7 12.8h3.6" />
+    <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.6} {...p}>
+      <circle cx="10.4" cy="10.4" r="6.6" />
+      <path d="M15.3 15.3 20.6 20.6" />
+      {/* A diagonal grain rather than horizontal rules: stacked horizontals
+          inside a circle read as a menu glyph, and these say woven cloth. */}
+      <path d="M7.4 11.9 11.9 7.4M9.3 13.3 13.3 9.3" />
     </svg>
   ),
+  // One clear price
   tag: (p) => (
-    <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.7} {...p}>
-      <path d="M11.6 3H20a1 1 0 0 1 1 1v8.4a1 1 0 0 1-.3.7l-8 8a1 1 0 0 1-1.4 0l-7.4-7.4a1 1 0 0 1 0-1.4l8-8a1 1 0 0 1 .7-.3z" />
-      <circle cx="16.6" cy="7.4" r="1.5" />
+    <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.6} {...p}>
+      <path d="M12.4 3.2h7.2a1.2 1.2 0 0 1 1.2 1.2v7.2a1.2 1.2 0 0 1-.35.85l-8 8a1.2 1.2 0 0 1-1.7 0l-7.2-7.2a1.2 1.2 0 0 1 0-1.7l8-8a1.2 1.2 0 0 1 .85-.35z" />
+      <circle cx="16.7" cy="7.3" r="1.5" />
     </svg>
   ),
-  rupee: (p) => (
-    <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.7} {...p}>
-      <circle cx="12" cy="12" r="8.6" />
-      <path d="M9 7.6h6M9 10.4h6M13.9 7.6c1.4 0 2.2 1 2.2 2.2s-.8 2.2-2.2 2.2H9.6l4.3 4.4" />
+  // Paid on the spot. A note rather than a rupee glyph, which at this size
+  // reads as an indistinct squiggle and is too close to the tag above it.
+  cash: (p) => (
+    <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.6} {...p}>
+      <rect x="2" y="6" width="20" height="12" rx="2.4" />
+      <circle cx="12" cy="12" r="2.8" />
+      <path d="M5.6 9.4v5.2M18.4 9.4v5.2" />
     </svg>
   ),
 };

@@ -8,23 +8,25 @@ import Reveal from "./Reveal";
  *
  * From `xl` the six stops share the width equally. Below that they become a
  * snap rail that scrolls sideways, because six columns at 1024px leaves each
- * blurb around eighteen characters of measure. In the rail every card sits below
- * the line: alternating only reads as a path when several stops are in view
- * at once, and a rail shows barely more than one.
+ * blurb around eighteen characters of measure. In the rail every card sits
+ * below the line: alternating only reads as a path when several stops are
+ * in view at once, and a rail shows barely more than one.
  *
- * The cards are taken out of flow and positioned off the centre line, so a
- * long blurb lengthens its own card without shifting the node it belongs to.
- * That is the whole reason for the fixed track height: with the cards in
- * flow, one stop running to four lines would drag its node out of line with
- * the other five.
+ * The cards are taken out of flow and given the exact height of their half
+ * of the track, so all six are the same size whatever their blurb runs to.
+ * Sizing them to their content instead left the row ragged along the top,
+ * because a card hung above the line is anchored by its bottom edge, and it
+ * also let a long blurb drag its own node out of line with the other five.
  *
- * TRACK therefore has to stay at least twice CLEAR plus the tallest card in
- * `roadmap`. At 1280px and up that tallest card measures 313px, so 718px is
- * the floor and this leaves about 80px of headroom. Lengthen a blurb in
- * `roadmap` past roughly two extra lines and this number has to go up with
- * it, or that card will run over the spine.
+ * TRACK therefore has to stay at least twice CLEAR plus the tallest content
+ * in `roadmap`. At 1280px and up the six stops need between 261px and 285px,
+ * so 662px is the floor and this leaves about 24px of headroom. It is kept
+ * close to that floor on purpose: every pixel above it is empty space at the
+ * foot of the five cards that are not the tallest. Lengthen a blurb by more
+ * than a line or so and this number has to go up with it, or that stop will
+ * overflow its card.
  */
-const TRACK = 800; // px, the full height of the desktop track
+const TRACK = 710; // px, the full height of the desktop track
 const CLEAR = 46; // px from the centre line to the nearest card edge
 
 export default function Roadmap({
@@ -67,22 +69,29 @@ export default function Roadmap({
               <Reveal
                 delay={i * 80}
                 from={above ? "up" : "scale"}
-                className={`xl:absolute xl:inset-x-0 ${
+                className={`xl:absolute xl:inset-x-0 xl:h-[calc(50%-var(--clear))] ${
                   above ? "xl:bottom-[calc(50%+var(--clear))]" : "xl:top-[calc(50%+var(--clear))]"
                 }`}
               >
                 <div className="glass-soft h-full rounded-[22px] border border-line p-4 shadow-soft xl:p-[18px] transition-colors duration-300 hover:border-line-yellow">
-                  <p className="flex items-center gap-2.5 text-[0.67rem] font-semibold tracking-[0.16em] text-yellow-ink uppercase">
-                    <span className="font-serif text-[0.95rem] tracking-normal">
+                  {/* The timing sits under the heading rather than beside the
+                      numeral. On the line with it, a label like "Before you
+                      decide" had about ten characters of room in a 186px
+                      column and broke across three lines. */}
+                  <p className="flex items-center gap-2.5">
+                    <span className="font-serif text-[0.95rem] leading-none text-yellow-ink">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <span aria-hidden className="foil h-px w-5 shrink-0" />
-                    {s.when}
+                    <span aria-hidden className="foil h-px w-6 shrink-0" />
                   </p>
 
-                  <h3 className="mt-2 font-serif text-[1.18rem] leading-tight text-green-deep">
+                  <h3 className="mt-2.5 font-serif text-[1.18rem] leading-tight text-green-deep">
                     {s.stop}
                   </h3>
+
+                  <p className="mt-1.5 text-[0.65rem] font-semibold tracking-[0.14em] text-yellow-ink uppercase">
+                    {s.when}
+                  </p>
 
                   <p className="mt-2 text-[0.86rem] leading-[1.5] text-ink-soft">{s.blurb}</p>
                 </div>
