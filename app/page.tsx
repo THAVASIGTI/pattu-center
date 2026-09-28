@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import BranchCard from "@/components/BranchCard";
 import BranchMarquee from "@/components/BranchMarquee";
@@ -16,7 +15,6 @@ import { Button, Section, SectionHead, Wrap } from "@/components/ui";
 import { branchCount, branchCountWordCap, branches, business, waLink } from "@/config/business";
 import {
   heroSlogans,
-  img,
   priceLedger,
   reels,
   sareeTypes,
@@ -119,55 +117,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ---------------- About teaser ---------------- */}
-      <Section>
-        <Wrap>
-          <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-14">
-            <Reveal>
-              <SectionHead
-                align="left"
-                eyebrow="About us"
-                title="Four decades of reading silk by hand."
-              />
-              <p className="mb-4 text-ink-soft">
-                A pattu saree does not lose its value the day it stops being worn. The silk is still
-                silk, and the zari woven through its border and pallu is still real metal thread.
-                Most families simply have no idea who to take it to.
-              </p>
-              <p className="mb-5 text-ink-soft">
-                We buy old silk sarees, silk vetti, shawls, ravikai and silver directly from
-                households across Tamil Nadu. No middlemen, no commission, no waiting for payment.
-              </p>
-              <Button href="/about" variant="outline">
-                Read our story
-                <ArrowRight className="size-[17px]" />
-              </Button>
-            </Reveal>
-
-            <Reveal delay={120}>
-              <div className="relative pb-12">
-                <Image
-                  src={img(30834841)}
-                  alt="A buyer inspecting patterned silk closely through a magnifying loupe"
-                  width={800}
-                  height={1000}
-                  sizes="(max-width: 1024px) 90vw, 540px"
-                  className="aspect-4/5 w-full rounded-[22px] border border-line-yellow object-cover shadow-mid"
-                />
-                <Image
-                  src={img(5447529)}
-                  alt="Gold bangles resting on folded, brightly coloured silk"
-                  width={500}
-                  height={500}
-                  sizes="220px"
-                  className="absolute right-3.5 bottom-0 aspect-square w-[46%] max-w-[220px] rounded-[22px] border-[5px] border-cream object-cover shadow-deep"
-                />
-              </div>
-            </Reveal>
-          </div>
-        </Wrap>
-      </Section>
-
       {/* ---------------- What we buy ---------------- */}
       <Section tone="cream">
         <Wrap>
@@ -191,6 +140,31 @@ export default function HomePage() {
             <Button href="/what-we-buy" variant="outline">
               See everything we buy
               <ArrowRight className="size-[17px]" />
+            </Button>
+          </div>
+        </Wrap>
+      </Section>
+
+      {/* ---------------- Videos from our own pages ---------------- */}
+      <Section>
+        <Wrap>
+          <Reveal>
+            <SectionHead
+              eyebrow="Watch us"
+              title="From our Facebook and YouTube."
+              lead="Clips from our own page and channel, of the work as it happens. Tap any one to play it here."
+            />
+          </Reveal>
+          <ReelWall />
+
+          <div className="mt-8 flex flex-wrap justify-center gap-2.5">
+            <Button href={business.social.facebook} variant="outline" external>
+              <Facebook className="size-[17px]" />
+              Follow on Facebook
+            </Button>
+            <Button href={business.social.youtube} variant="outline" external>
+              <YouTube className="size-[17px]" />
+              Subscribe on YouTube
             </Button>
           </div>
         </Wrap>
@@ -260,31 +234,6 @@ export default function HomePage() {
         </Wrap>
       </Section>
 
-
-      {/* ---------------- Videos from our own pages ---------------- */}
-      <Section tone="cream">
-        <Wrap>
-          <Reveal>
-            <SectionHead
-              eyebrow="Watch us"
-              title="From our Facebook and YouTube."
-              lead="Clips from our own page and channel, of the work as it happens. Tap any one to play it here."
-            />
-          </Reveal>
-          <ReelWall />
-
-          <div className="mt-8 flex flex-wrap justify-center gap-2.5">
-            <Button href={business.social.facebook} variant="outline" external>
-              <Facebook className="size-[17px]" />
-              Follow on Facebook
-            </Button>
-            <Button href={business.social.youtube} variant="outline" external>
-              <YouTube className="size-[17px]" />
-              Subscribe on YouTube
-            </Button>
-          </div>
-        </Wrap>
-      </Section>
 
       {/* ---------------- Price ledger ---------------- */}
       <Section>
