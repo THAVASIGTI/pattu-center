@@ -5,7 +5,7 @@ import BranchMarquee from "@/components/BranchMarquee";
 import Counter from "@/components/Counter";
 import CtaBand from "@/components/CtaBand";
 import RotatingHeadline from "@/components/RotatingHeadline";
-import ArchCard from "@/components/ArchCard";
+import SilkTile from "@/components/SilkTile";
 import CategorySlider from "@/components/CategorySlider";
 import HeroBackdrop from "@/components/HeroBackdrop";
 import PriceScale from "@/components/PriceScale";
@@ -181,10 +181,10 @@ export default function HomePage() {
             />
           </Reveal>
 
-          <div className="grid gap-10 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 lg:grid-cols-3">
+          <div className="grid gap-7 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-9 lg:grid-cols-3">
             {sareeTypes.slice(0, 6).map((t, i) => (
-              <Reveal key={t.slug} from="arch" delay={(i % 3) * 110} duration={850}>
-                <ArchCard item={t} />
+              <Reveal key={t.slug} from="scale" delay={(i % 3) * 110} duration={850}>
+                <SilkTile item={t} />
               </Reveal>
             ))}
           </div>
