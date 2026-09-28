@@ -363,54 +363,74 @@ export const testimonials = [
 ];
 
 /* ------------------------------------------------------------------ */
-/* Roadmap, the customer's journey, start to payment                  */
+/* Videos from the shop's own Facebook page and YouTube channel         */
 /* ------------------------------------------------------------------ */
 
-export const roadmap = [
+/**
+ * The share links the shop gave us are redirects. Facebook's video plugin
+ * needs the canonical post URL, so each `embed` below was resolved from the
+ * share link once and is pinned here; `href` keeps the original share link,
+ * which is what a visitor should land on if the embed is blocked.
+ *
+ * Posters are local copies under `public/img/reels`, not hotlinks. YouTube
+ * serves the upright frame of a Short as `oardefault.jpg`, and Facebook's
+ * own embed markup carries its poster, but the Facebook URL is signed and
+ * expires, so neither could be linked to directly from a page that has to
+ * keep working.
+ */
+export type Reel = {
+  slug: string;
+  platform: "youtube" | "facebook";
+  /** Plays in a panel on the page. */
+  embed: string;
+  /** Opens the post it came from, for anyone the embed does not load for. */
+  href: string;
+  poster: string;
+};
+
+const fbEmbed = (canonical: string) =>
+  `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(canonical)}&show_text=false&autoplay=true&width=540`;
+
+const ytEmbed = (id: string) =>
+  `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&playsinline=1&modestbranding=1`;
+
+export const reels: Reel[] = [
   {
-    icon: "camera",
-    stop: "Send photos",
-    when: "Day one, any hour",
-    blurb:
-      "WhatsApp pictures of each saree spread out, plus a close-up of the border. We reply with an indicative range. No visit needed yet.",
+    slug: "yt-1",
+    platform: "youtube",
+    embed: ytEmbed("-i2rglp6mls"),
+    href: "https://youtube.com/shorts/-i2rglp6mls",
+    poster: `${BASE_PATH}/img/reels/yt-1.jpg`,
   },
   {
-    icon: "shopfront",
-    stop: "Pick how we meet",
-    when: "You choose",
-    blurb:
-      "Walk into any of our branches, or ask for a free home visit. We come for even one or two sarees. We work around your timing.",
+    slug: "fb-1",
+    platform: "facebook",
+    embed: fbEmbed("https://www.facebook.com/61550571246499/videos/1822491558940398/"),
+    href: "https://www.facebook.com/share/v/1bkffWfewq/",
+    poster: `${BASE_PATH}/img/reels/fb-1.jpg`,
   },
   {
-    icon: "scale",
-    stop: "Open weighing",
-    when: "About 10 minutes",
-    blurb:
-      "Each piece goes on a calibrated scale in front of you. Nothing is taken to a back room, and nothing is weighed out of your sight.",
+    slug: "yt-2",
+    platform: "youtube",
+    embed: ytEmbed("e7NmP8oAHZk"),
+    href: "https://youtube.com/shorts/e7NmP8oAHZk",
+    poster: `${BASE_PATH}/img/reels/yt-2.jpg`,
   },
   {
-    icon: "loupe",
-    stop: "Zari tested",
-    when: "Same visit",
-    blurb:
-      "We sample the border thread to check whether the zari is real silver-gilt. The test takes a moment and does not damage the saree.",
+    slug: "fb-2",
+    platform: "facebook",
+    embed: fbEmbed("https://www.facebook.com/61550571246499/videos/2523710791452582/"),
+    href: "https://www.facebook.com/share/v/18ZYVSaLeg/",
+    poster: `${BASE_PATH}/img/reels/fb-2.jpg`,
   },
   {
-    icon: "tag",
-    stop: "One clear price",
-    when: "Before you decide",
-    blurb:
-      "You get a single figure with the arithmetic behind it: silk weight, purity, zari and condition. Questions answered before anything is agreed.",
-  },
-  {
-    icon: "cash",
-    stop: "Paid on the spot",
-    when: "Immediately",
-    blurb:
-      "Accept and you are paid in full: cash, UPI or bank transfer. Decline and you take your sarees home. Nothing is owed either way.",
+    slug: "fb-3",
+    platform: "facebook",
+    embed: fbEmbed("https://www.facebook.com/61550571246499/videos/2158578522202090/"),
+    href: "https://www.facebook.com/share/r/1MiBdXiBmj/",
+    poster: `${BASE_PATH}/img/reels/fb-3.jpg`,
   },
 ];
-
 /* ------------------------------------------------------------------ */
 /* How the number is reached, ledger of what moves the price          */
 /* ------------------------------------------------------------------ */

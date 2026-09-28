@@ -9,9 +9,8 @@ import SilkTile from "@/components/SilkTile";
 import CategorySlider from "@/components/CategorySlider";
 import HeroBackdrop from "@/components/HeroBackdrop";
 import PriceScale from "@/components/PriceScale";
-import Roadmap from "@/components/Roadmap";
-import StepStair from "@/components/StepStair";
-import { ArrowRight, Check, Phone, WhatsApp, serviceIcons } from "@/components/Icons";
+import ReelWall from "@/components/ReelWall";
+import { ArrowRight, Check, Facebook, Phone, WhatsApp, YouTube, serviceIcons } from "@/components/Icons";
 import Reveal from "@/components/Reveal";
 import { Button, Section, SectionHead, Wrap } from "@/components/ui";
 import { branchCount, branchCountWordCap, branches, business, waLink } from "@/config/business";
@@ -19,8 +18,7 @@ import {
   heroSlogans,
   img,
   priceLedger,
-  processSteps,
-  roadmap,
+  reels,
   sareeTypes,
   sellingTips,
   services,
@@ -233,23 +231,12 @@ export default function HomePage() {
         </Wrap>
       </Section>
 
-      {/* ---------------- Process + counters ---------------- */}
+      {/* ---------------- Counters ---------------- */}
       <Section tone="green">
         <Wrap>
-          <Reveal>
-            <SectionHead
-              tone="dark"
-              eyebrow="How it works"
-              title="Four steps, one visit."
-              lead="Most customers are finished in under twenty minutes, cash in hand."
-            />
-          </Reveal>
-
-          <StepStair steps={processSteps} />
-
           {/* Placeholder figures, replace with the real numbers before launch. */}
           <Reveal>
-            <div className="mt-8 grid grid-cols-2 gap-3.5 sm:grid-cols-4">
+            <div className="grid grid-cols-2 gap-3.5 sm:grid-cols-4">
               {[
                 { v: 4205, l: "Sarees bought" },
                 { v: 245, l: "Sarees exchanged" },
@@ -274,17 +261,28 @@ export default function HomePage() {
       </Section>
 
 
-      {/* ---------------- Roadmap: the journey ---------------- */}
+      {/* ---------------- Videos from our own pages ---------------- */}
       <Section tone="cream">
         <Wrap>
           <Reveal>
             <SectionHead
-              eyebrow="The road to a fair price"
-              title="Where your saree goes, step by step."
-              lead="From the first photo you send to the cash in your hand. Six stops, no surprises in between."
+              eyebrow="Watch us"
+              title="From our Facebook and YouTube."
+              lead="Clips from our own page and channel, of the work as it happens. Tap any one to play it here."
             />
           </Reveal>
-          <Roadmap stops={roadmap} />
+          <ReelWall />
+
+          <div className="mt-8 flex flex-wrap justify-center gap-2.5">
+            <Button href={business.social.facebook} variant="outline" external>
+              <Facebook className="size-[17px]" />
+              Follow on Facebook
+            </Button>
+            <Button href={business.social.youtube} variant="outline" external>
+              <YouTube className="size-[17px]" />
+              Subscribe on YouTube
+            </Button>
+          </div>
         </Wrap>
       </Section>
 

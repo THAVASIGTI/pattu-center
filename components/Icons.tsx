@@ -68,6 +68,13 @@ export const Menu = (p: P) => (
   </svg>
 );
 
+/** Solid triangle, because a stroked one reads as an arrowhead at 20px. */
+export const Play = (p: P) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" {...p}>
+    <path d="M8.4 5.2a1 1 0 0 1 1.52-.85l9 6.8a1 1 0 0 1 0 1.7l-9 6.8a1 1 0 0 1-1.52-.85z" />
+  </svg>
+);
+
 export const Close = (p: P) => (
   <svg viewBox="0 0 24 24" {...stroke} {...p}>
     <path d="M18 6 6 18M6 6l12 12" />
@@ -108,71 +115,6 @@ export const serviceIcons: Record<string, (p: P) => React.ReactElement> = {
     </svg>
   ),
   whatsapp: (p) => <WhatsApp {...p} />,
-};
-
-/**
- * One per stop on the roadmap, in the order the stops appear.
- *
- * Drawn for 26px, which is the only size they are used at. That governs
- * everything about them: one dominant shape each, no detail smaller than
- * about 2 units on the 24 grid, and a lighter 1.6 stroke so the lines do not
- * thicken into each other. The earlier set packed scallops, hatching and a
- * rupee glyph into the same box and they turned to mush at this size.
- */
-export const stepIcons: Record<string, (p: P) => React.ReactElement> = {
-  // Send photos
-  camera: (p) => (
-    <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.6} {...p}>
-      <rect x="2.5" y="6.8" width="19" height="13.4" rx="3" />
-      <path d="M8.6 6.8 10.1 4h3.8l1.5 2.8" />
-      <circle cx="12" cy="13.5" r="3.7" />
-    </svg>
-  ),
-  // Pick how we meet: counter or doorstep
-  shopfront: (p) => (
-    <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.6} {...p}>
-      <path d="M2 9.2 4.3 3.8h15.4L22 9.2z" />
-      <path d="M4 9.2V20.2h16V9.2" />
-      <path d="M9.4 20.2v-6.2h5.2v6.2" />
-    </svg>
-  ),
-  // Open weighing
-  scale: (p) => (
-    <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.6} {...p}>
-      <path d="M12 6.2v14M8.4 20.2h7.2" />
-      <path d="M4.6 8.4h14.8" />
-      <path d="M4.6 8.4v2.9M19.4 8.4v2.9" />
-      <path d="M1.9 11.3h5.4a2.7 2.7 0 0 1-5.4 0z" />
-      <path d="M16.7 11.3h5.4a2.7 2.7 0 0 1-5.4 0z" />
-      <circle cx="12" cy="4.4" r="1.6" />
-    </svg>
-  ),
-  // Zari tested: a loupe over the weave
-  loupe: (p) => (
-    <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.6} {...p}>
-      <circle cx="10.4" cy="10.4" r="6.6" />
-      <path d="M15.3 15.3 20.6 20.6" />
-      {/* A diagonal grain rather than horizontal rules: stacked horizontals
-          inside a circle read as a menu glyph, and these say woven cloth. */}
-      <path d="M7.4 11.9 11.9 7.4M9.3 13.3 13.3 9.3" />
-    </svg>
-  ),
-  // One clear price
-  tag: (p) => (
-    <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.6} {...p}>
-      <path d="M12.4 3.2h7.2a1.2 1.2 0 0 1 1.2 1.2v7.2a1.2 1.2 0 0 1-.35.85l-8 8a1.2 1.2 0 0 1-1.7 0l-7.2-7.2a1.2 1.2 0 0 1 0-1.7l8-8a1.2 1.2 0 0 1 .85-.35z" />
-      <circle cx="16.7" cy="7.3" r="1.5" />
-    </svg>
-  ),
-  // Paid on the spot. A note rather than a rupee glyph, which at this size
-  // reads as an indistinct squiggle and is too close to the tag above it.
-  cash: (p) => (
-    <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.6} {...p}>
-      <rect x="2" y="6" width="20" height="12" rx="2.4" />
-      <circle cx="12" cy="12" r="2.8" />
-      <path d="M5.6 9.4v5.2M18.4 9.4v5.2" />
-    </svg>
-  ),
 };
 
 export const YouTube = (p: P) => (
