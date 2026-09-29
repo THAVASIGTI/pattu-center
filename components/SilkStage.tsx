@@ -20,11 +20,16 @@ import { img, sareeTypes } from "@/config/content";
  * photograph sliding behind the reading line is movement across most of the
  * viewport rather than inside a 440px box.
  *
- * The name, the row of small frames and the link all sit on one pale plate.
- * Over a photograph that changes every few seconds there is no ground a piece
- * of loose text can be trusted on: five images means five different things
- * under the same words, and the greens and golds this site writes in fail
- * against at least one of them.
+ * The name, the row of small frames and the link sit ON the photograph, with
+ * no plate under them. What holds them is the picture darkening where they
+ * are: one soft ellipse per text block, faded to nothing inside its own box,
+ * so it reads as depth in the image rather than a panel laid over it. Below
+ * lg there is no scrim, because the ground there is 88 to 94% cream and a
+ * dark patch would be a bruise on a pale section, so the copy stays dark.
+ *
+ * Either way the colours are measured, not chosen by eye. A photograph that
+ * changes every few seconds is five different grounds under the same words,
+ * and scratchpad/probe.py checks every one of them.
  *
  * Change INTERVAL to alter the pace. It sits at 2600ms so the name is
  * readable before it changes, and because five photographs at this size
@@ -103,26 +108,56 @@ export default function SilkStage({ children }: { children: ReactNode }) {
         {children}
 
         <div
-          className="order-2 mx-auto w-full max-w-[440px] lg:mr-0 lg:ml-auto"
+          className="relative order-2 mx-auto w-full max-w-[440px] lg:mr-0 lg:ml-auto"
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
           onFocusCapture={() => setPaused(true)}
           onBlurCapture={() => setPaused(false)}
         >
-          <div className="glass-soft rounded-[22px] border border-white/60 p-3.5 shadow-mid">
+          <div className="relative">
             {/* The name of whatever is behind, which is the only thing that
-                says the ground is not wallpaper. */}
-            <div className="px-1 pb-3.5 text-center">
+                says the ground is not wallpaper.
+
+                No plate: the words go on the photograph and what keeps them
+                readable is the photograph darkening under them. Each text
+                block carries its OWN ellipse rather than sharing one over the
+                whole column, because one gradient cannot serve text at
+                different heights: centred on the row of frames it left the
+                name 90px out in its falloff, at 1.77:1 against the palest of
+                the five. Held tight to the words it is 7:1 and the fade is
+                shorter, so it reads less like a panel, not more.
+
+                The 50%/50% ending shape is the part that has to be right. It
+                puts the zero stop exactly on the span's own edge. Sized past
+                100% the gradient is cut off mid-tone and what lands is a hard
+                dark rectangle, which is the thing this replaced.
+
+                Only from lg, where the photograph is at full strength. Below
+                that the ground is 88 to 94% cream, a dark patch would be a
+                bruise on a pale section, and the copy simply stays dark,
+                which is also where it measures best. */}
+            <div className="relative px-1 pb-3.5 text-center">
+              <span
+                aria-hidden
+                className="pointer-events-none absolute -inset-x-16 -inset-y-9 hidden bg-[radial-gradient(50%_50%_at_50%_46%,rgba(10,46,26,.96)_0%,rgba(10,46,26,.93)_52%,rgba(10,46,26,0)_100%)] lg:block"
+              />
               {current.ta && (
-                <p className="font-tamil text-[0.88rem] text-yellow-ink">{current.ta}</p>
+                <p className="relative font-tamil text-[0.88rem] text-yellow-ink lg:text-yellow-light">
+                  {current.ta}
+                </p>
               )}
-              <p className="mt-0.5 font-serif text-[clamp(1.15rem,3vw,1.5rem)] leading-tight text-green-deep">
+              <p className="relative mt-0.5 font-serif text-[clamp(1.15rem,3vw,1.5rem)] leading-tight text-green-deep lg:text-white">
                 {current.name}
               </p>
             </div>
 
-            {/* Wider than tall, so five fit across the plate without dropping
-                under the 44px a finger needs. */}
+            {/* Wider than tall, so five fit across without dropping under the
+                44px a finger needs.
+
+                Each carries a hairline and a drop shadow because there is no
+                plate any more: five photographs laid on a sixth have no edge
+                of their own, and a pale one at 60% opacity, which is what the
+                plate allowed, simply dissolved into whatever was behind it. */}
             <div className="flex items-stretch gap-2 sm:gap-2.5">
               {slides.map((t, i) => {
                 const active = i === index;
@@ -133,10 +168,10 @@ export default function SilkStage({ children }: { children: ReactNode }) {
                     onClick={() => go(i)}
                     aria-label={`Show ${t.name}`}
                     aria-current={active}
-                    className={`group relative min-h-11 flex-1 cursor-pointer overflow-hidden rounded-[13px] transition-all duration-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green ${
+                    className={`group relative min-h-11 flex-1 cursor-pointer overflow-hidden rounded-[13px] shadow-[0_8px_22px_rgba(10,46,26,.42)] transition-all duration-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green ${
                       active
-                        ? "ring-2 ring-yellow ring-offset-2 ring-offset-cream"
-                        : "opacity-60 hover:opacity-100"
+                        ? "ring-2 ring-yellow ring-offset-2 ring-offset-cream lg:ring-offset-0"
+                        : "opacity-75 ring-1 ring-white/45 hover:opacity-100"
                     }`}
                   >
                     <span className="relative block aspect-4/5">
@@ -161,10 +196,14 @@ export default function SilkStage({ children }: { children: ReactNode }) {
               })}
             </div>
 
-            <p className="mt-3.5 border-t border-line pt-3.5 text-center">
+            <p className="relative mt-3.5 text-center">
+              <span
+                aria-hidden
+                className="pointer-events-none absolute -inset-x-20 -inset-y-6 hidden bg-[radial-gradient(50%_50%_at_50%_50%,rgba(10,46,26,.95)_0%,rgba(10,46,26,.9)_46%,rgba(10,46,26,0)_100%)] lg:block"
+              />
               <Link
                 href="/what-we-buy"
-                className="inline-flex min-h-9 items-center gap-2 text-[0.9rem] font-semibold text-green underline-offset-4 hover:underline"
+                className="relative inline-flex min-h-9 items-center gap-2 text-[0.9rem] font-semibold text-green underline-offset-4 hover:underline lg:text-yellow-light"
               >
                 See everything we buy
                 <ArrowRight className="size-[16px]" />
