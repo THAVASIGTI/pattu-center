@@ -115,6 +115,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           only to this element's own attributes and text. Mismatches anywhere
           in the tree below are still reported. */}
       <body suppressHydrationWarning className="font-sans antialiased pb-[58px] xl:pb-0">
+        {/* Reveal renders its children at opacity 0 and only an
+            IntersectionObserver brings them back, so without JavaScript 25 of
+            these blocks and 8 of the 12 section headings on the home page are
+            invisible: the page is a static export whose content needs a
+            script to be seen at all. The reduced-motion rule in globals.css
+            already forces [data-reveal] visible; this does the same when
+            nothing is running to set it. */}
+        <noscript>
+          <style>{`[data-reveal],[data-word]{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

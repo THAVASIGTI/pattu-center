@@ -79,11 +79,26 @@ export default function SilkStage({ children }: { children: ReactNode }) {
           copy, shoots the bare ground under each of the five, and samples the
           real line boxes of every text run over it.
 
-          Below lg the photograph has nowhere of its own to be, so the scrim
-          gives it the foot of the section: 94% cream over the copy, opening
-          to 12% in the last 110px, where the banner sits. The saree is then
-          actually visible there, around and under the banner, instead of
-          being a texture nobody can make out.
+          Below lg it takes two layers, because one gradient cannot be open
+          at the sides and closed behind the words at the same time. A flat
+          base carries the foot of the section, and a radial over it puts the
+          cream back where the copy is, which is the upper middle. What is
+          left uncovered is the sides and the bottom corners, and that is
+          where the saree shows.
+
+          It has to be done that way round. The copy runs to within 20px of
+          both edges at 360, 390 and 430, so there is no side margin to open
+          up: the reveal can only widen as it goes down, past the buttons,
+          which are opaque and do not care what is behind them.
+
+          The flat band from 150 to 228px is the microcopy, the one line of
+          real text down in the open part. It is centred and short, so the
+          radial has faded out before it gets there, and on the base alone it
+          sat at 3.82:1 on the darkest silk. The band is set by measurement,
+          not taste: the line's own box is 165 to 181px off the foot at 390
+          and 190 at 768, and the ground under it resolves to a photograph at
+          luminance 0.11, which needs about 0.85 cream over it to clear the
+          4.5:1 body floor. It costs a 78px slice of the side reveal.
 
           Those stops are in px measured up from the bottom, not percentages.
           The copy rewraps at every width and the section changes height with
@@ -118,7 +133,8 @@ export default function SilkStage({ children }: { children: ReactNode }) {
           </div>
         ))}
 
-        <span className="absolute inset-0 bg-[linear-gradient(0deg,rgba(251,253,249,.12)_0px,rgba(251,253,249,.18)_110px,rgba(251,253,249,.88)_158px,rgba(251,253,249,.94)_180px,rgba(251,253,249,.94)_100%)] lg:hidden" />
+        <span className="absolute inset-0 bg-[linear-gradient(0deg,rgba(251,253,249,.10)_0px,rgba(251,253,249,.15)_122px,rgba(251,253,249,.86)_150px,rgba(251,253,249,.86)_228px,rgba(251,253,249,.54)_258px,rgba(251,253,249,.5)_100%)] lg:hidden" />
+        <span className="absolute inset-0 bg-[radial-gradient(78%_62%_at_50%_22%,rgba(251,253,249,.92)_0%,rgba(251,253,249,.86)_52%,rgba(251,253,249,.5)_88%,rgba(251,253,249,.16)_100%)] lg:hidden" />
         <span className="absolute inset-0 hidden bg-[linear-gradient(90deg,#fbfdf9_0%,rgba(251,253,249,.97)_24%,rgba(251,253,249,.55)_40%,rgba(237,246,239,.34)_58%,rgba(10,46,26,.48)_100%)] lg:block" />
       </div>
 
@@ -154,7 +170,7 @@ export default function SilkStage({ children }: { children: ReactNode }) {
             />
             <span
               aria-hidden
-              className="absolute inset-[2.5px] bg-[linear-gradient(180deg,#14532d_0%,#0a2e1a_100%)]"
+              className="absolute inset-[2.5px] bg-[linear-gradient(180deg,rgba(20,83,45,.86)_0%,rgba(10,46,26,.9)_100%)]"
               style={{ clipPath: BANNER }}
             />
 
