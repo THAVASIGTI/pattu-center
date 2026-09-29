@@ -8,9 +8,9 @@ import { img, sareeTypes } from "@/config/content";
 /**
  * The hero's ground: the silk itself, changing under the copy.
  *
- * Nothing is laid over it but the name of the silk that is up. No frame, no
- * plate, no row of small frames: the photograph fills the right of the section
- * and dissolves into the cream before it reaches the words.
+ * Over it sits one thing: a banner carrying the name of the silk that is up.
+ * The photograph fills the right of the section and dissolves into the cream
+ * before it reaches the words.
  * The copy stays in page.tsx and passes through as children.
  *
  * prefers-reduced-motion lengthens the dwell, it does not stop the cycle.
@@ -27,6 +27,12 @@ import { img, sareeTypes } from "@/config/content";
  * phone, and because a ground that changes faster than the eye settles reads
  * as a fault rather than a feature.
  */
+/* Swallowtail ends: the band runs full width and both edges are notched back
+   into it by NOTCH. Used twice, once for the zari edge and once for the green
+   inset over it, so the two silhouettes agree. */
+const NOTCH = "26px";
+const BANNER = `polygon(0% 0%, 100% 0%, calc(100% - ${NOTCH}) 50%, 100% 100%, 0% 100%, ${NOTCH} 50%)`;
+
 const INTERVAL = 2600;
 const SLOW_INTERVAL = 6000;
 const FADE = 620;
@@ -110,35 +116,50 @@ export default function SilkStage({ children }: { children: ReactNode }) {
       <Wrap className="relative z-10 grid items-center gap-10 py-12 sm:py-16 lg:grid-cols-[1.05fr_.95fr] lg:gap-14 lg:py-20">
         {children}
 
-        {/* The name of the silk that is up, laid on the picture rather than
-            in anything. What keeps it readable is the photograph darkening
-            under it: a soft ellipse faded to nothing inside its own box, so
-            it reads as depth in the image and not as a panel.
+        {/* The name of the silk that is up, on a banner.
 
-            The 50%/50% ending shape is the part that has to be right. It puts
-            the zero stop exactly on the span's edge; sized past 100% the
-            gradient is cut off mid-tone and what lands is a hard rectangle.
+            A ribbon, not a mask. The soft ellipse this replaces was doing the
+            same job by dimming the photograph under the words, which meant it
+            had to be strong enough for the palest silk in the set and so read
+            as a smudge on the picture. An opaque banner has no such problem:
+            it does not care what is behind it, so the white sits above 15:1
+            on every one of the five instead of scraping 5.7:1 on the worst.
 
-            Only from lg, where the photograph is at full strength. Below that
-            the ground is 88 to 94% cream, a dark patch would be a bruise on a
-            pale section, and the name stays green and gold instead.
+            The shape is a swallowtail, both ends notched back into the band,
+            which is what makes it a banner rather than a box. Two stacked
+            clips do it: a zari one behind and the green one inset 2.5px, so
+            the gold edge follows the notches instead of being cut square by
+            them. The horizontal padding clears the notch depth, or the first
+            letter would sit in the fold.
 
-            Not a live region. It changes on its own every 2.6s, and a live
-            region would read the whole list out to a screen reader on a
-            loop. The pictures are decorative and this is their caption. */}
-        <div className="relative order-2 mx-auto w-full max-w-[440px] text-center lg:mr-0 lg:ml-auto">
-          <span
-            aria-hidden
-            className="pointer-events-none absolute -inset-x-40 -inset-y-14 hidden bg-[radial-gradient(50%_50%_at_50%_48%,rgba(10,46,26,.94)_0%,rgba(10,46,26,.88)_44%,rgba(10,46,26,0)_100%)] lg:block"
-          />
-          {current.ta && (
-            <p className="relative font-tamil text-[0.95rem] text-yellow-ink lg:text-yellow-light">
-              {current.ta}
-            </p>
-          )}
-          <p className="relative mt-1 font-serif text-[clamp(1.4rem,3.4vw,2rem)] leading-tight text-green-deep lg:text-white">
-            {current.name}
-          </p>
+            The same at every width now. The old version had to swap to dark
+            text below lg because there was no scrim down there and the
+            ground was pale cream; the banner brings its own ground, so there
+            is one set of colours to reason about. */}
+        <div className="order-2 mx-auto w-full max-w-[440px] lg:mr-0 lg:ml-auto">
+          <div className="relative">
+            <span
+              aria-hidden
+              className="absolute inset-0 bg-[linear-gradient(100deg,#a87f0a_0%,#fde047_26%,#fffbe6_46%,#fde047_66%,#a87f0a_100%)] shadow-[0_14px_36px_rgba(10,46,26,.42)]"
+              style={{ clipPath: BANNER }}
+            />
+            <span
+              aria-hidden
+              className="absolute inset-[2.5px] bg-[linear-gradient(180deg,#14532d_0%,#0a2e1a_100%)]"
+              style={{ clipPath: BANNER }}
+            />
+
+            <div className="relative px-12 py-4 text-center sm:px-14">
+              {current.ta && (
+                <p className="font-tamil text-[0.95rem] leading-snug text-yellow-light">
+                  {current.ta}
+                </p>
+              )}
+              <p className="mt-0.5 font-serif text-[clamp(1.3rem,3.2vw,1.85rem)] leading-tight text-white">
+                {current.name}
+              </p>
+            </div>
+          </div>
         </div>
       </Wrap>
     </>
