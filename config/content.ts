@@ -25,13 +25,6 @@ export const BASE_PATH = RAW_BASE === "/" ? "" : RAW_BASE.replace(/\/+$/, "");
 
 export const img = (id: number) => `${BASE_PATH}/img/silk-${id}.jpg`;
 
-/** The silk photograph lying under the hero. It gets its own file rather than
- *  one of the silk-*.jpg, cropped wider and encoded harder (1100x948 from the top 820 rows, q64,
- *  138KB against the 339KB it came from): it is only ever seen through a
- *  heavy gradient, so detail spent on it is detail thrown away. Regenerate it
- *  from public/img/silk-6876952.jpg if the crop ever needs to change. */
-export const heroBackdrop = `${BASE_PATH}/img/hero-backdrop.jpg`;
-
 /** Brand marks. `logoMark` is the emblem alone, the wordmark in the full
  *  lockup is illegible below about 120px, so small placements use the mark. */
 export const logoMark = `${BASE_PATH}/img/logo-mark.png`;

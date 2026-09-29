@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import BranchCard from "@/components/BranchCard";
 import BranchMarquee from "@/components/BranchMarquee";
@@ -6,7 +5,7 @@ import Counter from "@/components/Counter";
 import CtaBand from "@/components/CtaBand";
 import RotatingHeadline from "@/components/RotatingHeadline";
 import SilkTile from "@/components/SilkTile";
-import CategorySlider from "@/components/CategorySlider";
+import SilkStage from "@/components/SilkStage";
 import HeroBackdrop from "@/components/HeroBackdrop";
 import PriceScale from "@/components/PriceScale";
 import ReelWall from "@/components/ReelWall";
@@ -15,7 +14,6 @@ import Reveal from "@/components/Reveal";
 import { Button, Section, SectionHead, Wrap } from "@/components/ui";
 import { branchCount, branchCountWordCap, branches, business, waLink } from "@/config/business";
 import {
-  heroBackdrop,
   heroSlogans,
   priceLedger,
   reels,
@@ -33,40 +31,13 @@ export default function HomePage() {
       <section id="hero" className="relative overflow-hidden bg-cream text-ink">
         <HeroBackdrop />
 
-        {/* A photograph of silk under the section, not beside it. From lg it
-            covers the right 64%, and its own gradient dissolves it into the
-            cream before it reaches the copy: solid cream to 17%, gone by
-            about a third, then deepening to green at the right edge so the
-            zari frame has something to stand against rather than floating on
-            a pale photo.
-
-            The dissolve is what makes it a backdrop rather than a second
-            column. It surfaces in the gap between the copy and the frame, so
-            the frame reads as laid ON the photo, and the eye never finds the
-            hard edge where the picture starts.
-
-            Below lg the copy is centred over the full width, so the photo
-            runs behind all of it at a near-flat 88 to 94% cream, where it is
-            a texture and nothing more. The rings and motes of HeroBackdrop
-            sit under this layer; the two on the right are covered by it,
-            which is the point. */}
-        <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 w-full lg:w-[64%]">
-          <Image
-            src={heroBackdrop}
-            alt=""
-            fill
-            priority
-            sizes="(max-width: 1024px) 100vw, 64vw"
-            className="object-cover"
-          />
-          <span className="absolute inset-0 bg-[linear-gradient(180deg,rgba(251,253,249,.94)_0%,rgba(251,253,249,.88)_45%,rgba(251,253,249,.93)_100%)] lg:hidden" />
-          <span className="absolute inset-0 hidden bg-[linear-gradient(90deg,#fbfdf9_0%,rgba(251,253,249,.95)_17%,rgba(251,253,249,.55)_34%,rgba(237,246,239,.34)_56%,rgba(10,46,26,.48)_100%)] lg:block" />
-        </div>
-
         {/* zari rule along the foot of the section */}
         <span aria-hidden className="foil absolute inset-x-0 bottom-0 h-[3px]" />
 
-        <Wrap className="relative z-10 grid items-center gap-10 py-12 sm:py-16 lg:grid-cols-[1.05fr_.95fr] lg:gap-14 lg:py-20">
+        {/* SilkStage lays the rotating photograph under the section and puts
+            the panel that names it beside the copy. The two share one index,
+            so they are one component; the copy stays here as its children. */}
+        <SilkStage>
           <div className="order-1 text-center lg:text-left">
             {/* Cinzel, carved Roman capitals, on the darker foil. It never
                 drops below 24px, which keeps it "large text" at 3:1 rather
@@ -118,12 +89,7 @@ export default function HomePage() {
               Free pickup · Cash same day · No obligation
             </p>
           </div>
-
-          {/* auto-swapping frame beside the copy */}
-          <div className="order-2">
-            <CategorySlider />
-          </div>
-        </Wrap>
+        </SilkStage>
       </section>
 
       {/* ---------------- Where we buy, scrolling past ---------------- */}
