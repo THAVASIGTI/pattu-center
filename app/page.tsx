@@ -6,6 +6,7 @@ import CtaBand from "@/components/CtaBand";
 import RotatingHeadline from "@/components/RotatingHeadline";
 import SilkTile from "@/components/SilkTile";
 import SilkStage from "@/components/SilkStage";
+import CulturalBanner from "@/components/CulturalBanner";
 import HeroBackdrop from "@/components/HeroBackdrop";
 import PriceScale from "@/components/PriceScale";
 import ReelWall from "@/components/ReelWall";
@@ -30,6 +31,10 @@ export default function HomePage() {
       {/* ---------------- Hero ---------------- */}
       <section id="hero" className="relative overflow-hidden bg-cream text-ink">
         <HeroBackdrop />
+        {/* Saree border and kolam under the copy. Sits above the rings and
+            motes and below the photograph, which covers whatever of it
+            reaches the right of the section. */}
+        <CulturalBanner />
 
         {/* zari rule along the foot of the section */}
         <span aria-hidden className="foil absolute inset-x-0 bottom-0 h-[3px]" />

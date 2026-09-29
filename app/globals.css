@@ -146,10 +146,22 @@
 }
 
 /* Foil for light backgrounds. The standard --foil peaks at #fffbe6, which
-   disappears on cream, so this one stays in the darker half of the gold. */
+   disappears on cream, so this one stays in the darker half of the gold.
+
+   The peak used to be #9a7208 and that was too bright to survive what the
+   hero became. Gold is the tightest colour on this site: as the ground under
+   it went from flat cream to a photograph, and then gained a kolam, the
+   eyebrow and the rotating headline sat between 2.94:1 and 3.29:1 against a
+   3:1 floor, moving with whichever silk was up and whichever slogan was
+   showing. #8a6607 is the same hue walked down until the worst case clears
+   with room to spare, around 3.5:1. Only foilTone="deep" uses this, and only
+   the hero passes it, so nothing else moves.
+
+   Anything new behind this text costs contrast. Re-run scratchpad/probe.py
+   rather than judging it by eye. */
 @utility foil-text-deep {
   background-image: linear-gradient(
-    100deg, #55400a 0%, #78590b 26%, #9a7208 46%, #78590b 66%, #55400a 100%
+    100deg, #4e3b09 0%, #6c5009 26%, #8a6607 46%, #6c5009 66%, #4e3b09 100%
   );
   background-clip: text;
   -webkit-background-clip: text;
