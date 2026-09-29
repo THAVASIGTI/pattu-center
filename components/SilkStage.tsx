@@ -79,9 +79,18 @@ export default function SilkStage({ children }: { children: ReactNode }) {
           copy, shoots the bare ground under each of the five, and samples the
           real line boxes of every text run over it.
 
-          Below lg the copy is centred over the full width, so the photograph
-          runs behind all of it at a near-flat 88 to 94% cream, where it is a
-          texture and nothing more. The rings and motes of HeroBackdrop sit
+          Below lg the photograph has nowhere of its own to be, so the scrim
+          gives it the foot of the section: 94% cream over the copy, opening
+          to 12% in the last 110px, where the banner sits. The saree is then
+          actually visible there, around and under the banner, instead of
+          being a texture nobody can make out.
+
+          Those stops are in px measured up from the bottom, not percentages.
+          The copy rewraps at every width and the section changes height with
+          it, so a percentage would slide the reveal up into the words. At 390
+          the microcopy's lowest glyph is 169px off the foot and the banner
+          spans 48 to 129; at 768 it is 190 and 64 to 150. The ramp is clear
+          of both. The rings and motes of HeroBackdrop sit
           under this layer; the two on the right are covered by it, which is
           the point. */}
       <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 w-full lg:w-[64%]">
@@ -109,7 +118,7 @@ export default function SilkStage({ children }: { children: ReactNode }) {
           </div>
         ))}
 
-        <span className="absolute inset-0 bg-[linear-gradient(180deg,rgba(251,253,249,.94)_0%,rgba(251,253,249,.88)_45%,rgba(251,253,249,.93)_100%)] lg:hidden" />
+        <span className="absolute inset-0 bg-[linear-gradient(0deg,rgba(251,253,249,.12)_0px,rgba(251,253,249,.18)_110px,rgba(251,253,249,.88)_158px,rgba(251,253,249,.94)_180px,rgba(251,253,249,.94)_100%)] lg:hidden" />
         <span className="absolute inset-0 hidden bg-[linear-gradient(90deg,#fbfdf9_0%,rgba(251,253,249,.97)_24%,rgba(251,253,249,.55)_40%,rgba(237,246,239,.34)_58%,rgba(10,46,26,.48)_100%)] lg:block" />
       </div>
 
@@ -136,7 +145,7 @@ export default function SilkStage({ children }: { children: ReactNode }) {
             text below lg because there was no scrim down there and the
             ground was pale cream; the banner brings its own ground, so there
             is one set of colours to reason about. */}
-        <div className="order-2 mx-auto w-full max-w-[440px] lg:mr-0 lg:ml-auto">
+        <div className="order-2 mx-auto w-full max-w-[310px] sm:max-w-[440px] lg:mr-0 lg:ml-auto">
           <div className="relative">
             <span
               aria-hidden
@@ -149,13 +158,13 @@ export default function SilkStage({ children }: { children: ReactNode }) {
               style={{ clipPath: BANNER }}
             />
 
-            <div className="relative px-12 py-4 text-center sm:px-14">
+            <div className="relative px-9 py-3.5 text-center sm:px-14 sm:py-4">
               {current.ta && (
                 <p className="font-tamil text-[0.95rem] leading-snug text-yellow-light">
                   {current.ta}
                 </p>
               )}
-              <p className="mt-0.5 font-serif text-[clamp(1.3rem,3.2vw,1.85rem)] leading-tight text-white">
+              <p className="mt-0.5 font-serif text-[clamp(1.2rem,3.2vw,1.85rem)] leading-tight text-white">
                 {current.name}
               </p>
             </div>

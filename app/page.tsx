@@ -90,7 +90,13 @@ export default function HomePage() {
               </Button>
             </div>
 
-            <p className="mt-4 text-[0.84rem] text-ink-mute">
+            {/* ink-soft, not ink-mute. One of HeroBackdrop's rings passes
+                under this line at rgba(21,128,61,.20), which paints the
+                ground there (207,230,214) and takes ink-mute to 4.02:1,
+                under the 4.5:1 body floor. The ring is decoration and the
+                line is a promise, so the line gets darker rather than the
+                ring getting fainter. 5.7:1 on the same ground. */}
+            <p className="mt-4 text-[0.84rem] text-ink-soft">
               Free pickup · Cash same day · No obligation
             </p>
           </div>
