@@ -8,17 +8,19 @@ import { img, sareeTypes } from "@/config/content";
 /**
  * The hero's ground: the silk itself, changing under the copy.
  *
- * Nothing is laid over it any more. No frame, no plate, no name, no row of
- * small frames. The photograph fills the right of the section and dissolves
- * into the cream before it reaches the words, and that is the whole of it.
+ * Nothing is laid over it but the name of the silk that is up. No frame, no
+ * plate, no row of small frames: the photograph fills the right of the section
+ * and dissolves into the cream before it reaches the words.
  * The copy stays in page.tsx and passes through as children.
  *
- * Because the controls are gone, so is the hover pause, and with it the only
- * way anyone had to stop the movement. So prefers-reduced-motion now stops
- * the cycle outright rather than slowing it: the globals.css rule easing
- * .cat-slide to 1500ms only ever governed how long a swap takes, never
- * whether one happens, and a ground that keeps changing with no control
- * anywhere on the page is the case that setting exists for.
+ * prefers-reduced-motion lengthens the dwell, it does not stop the cycle.
+ * Stopping it was tried and was wrong twice over: it left anyone with that
+ * setting on looking at one frozen photograph and no way to tell the page was
+ * not broken, and it contradicted the rule already in globals.css, which
+ * eases .cat-slide to 1500ms rather than killing it. A cross-fade is not the
+ * kind of motion that setting is aimed at; travel, parallax and zoom are.
+ * So the fade slows to 1500ms through that rule and the dwell goes to
+ * SLOW_INTERVAL here, which is the same picture at a calmer pace.
  *
  * Change INTERVAL to alter the pace. It sits at 2600ms because five
  * photographs at this size cross-fading is already real work for a mid-range
@@ -26,6 +28,7 @@ import { img, sareeTypes } from "@/config/content";
  * as a fault rather than a feature.
  */
 const INTERVAL = 2600;
+const SLOW_INTERVAL = 6000;
 const FADE = 620;
 const SHOWN = 5;
 
@@ -36,6 +39,7 @@ export default function SilkStage({ children }: { children: ReactNode }) {
   const count = slides.length;
 
   const [index, setIndex] = useState(0);
+  const current = slides[index];
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -43,9 +47,8 @@ export default function SilkStage({ children }: { children: ReactNode }) {
 
     const sync = () => {
       clearInterval(id);
-      id = mq.matches
-        ? undefined
-        : setInterval(() => setIndex((i) => (i + 1) % count), INTERVAL);
+      const every = mq.matches ? SLOW_INTERVAL : INTERVAL;
+      id = setInterval(() => setIndex((i) => (i + 1) % count), every);
     };
 
     sync();
@@ -104,11 +107,39 @@ export default function SilkStage({ children }: { children: ReactNode }) {
         <span className="absolute inset-0 hidden bg-[linear-gradient(90deg,#fbfdf9_0%,rgba(251,253,249,.97)_24%,rgba(251,253,249,.55)_40%,rgba(237,246,239,.34)_58%,rgba(10,46,26,.48)_100%)] lg:block" />
       </div>
 
-      {/* One column of copy in a two column grid. The second cell is left
-          empty on purpose, so the words keep to the left half and the
-          photograph has the right half to itself. */}
       <Wrap className="relative z-10 grid items-center gap-10 py-12 sm:py-16 lg:grid-cols-[1.05fr_.95fr] lg:gap-14 lg:py-20">
         {children}
+
+        {/* The name of the silk that is up, laid on the picture rather than
+            in anything. What keeps it readable is the photograph darkening
+            under it: a soft ellipse faded to nothing inside its own box, so
+            it reads as depth in the image and not as a panel.
+
+            The 50%/50% ending shape is the part that has to be right. It puts
+            the zero stop exactly on the span's edge; sized past 100% the
+            gradient is cut off mid-tone and what lands is a hard rectangle.
+
+            Only from lg, where the photograph is at full strength. Below that
+            the ground is 88 to 94% cream, a dark patch would be a bruise on a
+            pale section, and the name stays green and gold instead.
+
+            Not a live region. It changes on its own every 2.6s, and a live
+            region would read the whole list out to a screen reader on a
+            loop. The pictures are decorative and this is their caption. */}
+        <div className="relative order-2 mx-auto w-full max-w-[440px] text-center lg:mr-0 lg:ml-auto">
+          <span
+            aria-hidden
+            className="pointer-events-none absolute -inset-x-40 -inset-y-14 hidden bg-[radial-gradient(50%_50%_at_50%_48%,rgba(10,46,26,.94)_0%,rgba(10,46,26,.88)_44%,rgba(10,46,26,0)_100%)] lg:block"
+          />
+          {current.ta && (
+            <p className="relative font-tamil text-[0.95rem] text-yellow-ink lg:text-yellow-light">
+              {current.ta}
+            </p>
+          )}
+          <p className="relative mt-1 font-serif text-[clamp(1.4rem,3.4vw,2rem)] leading-tight text-green-deep lg:text-white">
+            {current.name}
+          </p>
+        </div>
       </Wrap>
     </>
   );
