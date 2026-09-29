@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import BranchCard from "@/components/BranchCard";
 import BranchMarquee from "@/components/BranchMarquee";
@@ -14,6 +15,7 @@ import Reveal from "@/components/Reveal";
 import { Button, Section, SectionHead, Wrap } from "@/components/ui";
 import { branchCount, branchCountWordCap, branches, business, waLink } from "@/config/business";
 import {
+  heroBackdrop,
   heroSlogans,
   priceLedger,
   reels,
@@ -30,6 +32,37 @@ export default function HomePage() {
       {/* ---------------- Hero ---------------- */}
       <section id="hero" className="relative overflow-hidden bg-cream text-ink">
         <HeroBackdrop />
+
+        {/* A photograph of silk under the section, not beside it. From lg it
+            covers the right 64%, and its own gradient dissolves it into the
+            cream before it reaches the copy: solid cream to 17%, gone by
+            about a third, then deepening to green at the right edge so the
+            zari frame has something to stand against rather than floating on
+            a pale photo.
+
+            The dissolve is what makes it a backdrop rather than a second
+            column. It surfaces in the gap between the copy and the frame, so
+            the frame reads as laid ON the photo, and the eye never finds the
+            hard edge where the picture starts.
+
+            Below lg the copy is centred over the full width, so the photo
+            runs behind all of it at a near-flat 88 to 94% cream, where it is
+            a texture and nothing more. The rings and motes of HeroBackdrop
+            sit under this layer; the two on the right are covered by it,
+            which is the point. */}
+        <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 w-full lg:w-[64%]">
+          <Image
+            src={heroBackdrop}
+            alt=""
+            fill
+            priority
+            sizes="(max-width: 1024px) 100vw, 64vw"
+            className="object-cover"
+          />
+          <span className="absolute inset-0 bg-[linear-gradient(180deg,rgba(251,253,249,.94)_0%,rgba(251,253,249,.88)_45%,rgba(251,253,249,.93)_100%)] lg:hidden" />
+          <span className="absolute inset-0 hidden bg-[linear-gradient(90deg,#fbfdf9_0%,rgba(251,253,249,.95)_17%,rgba(251,253,249,.55)_34%,rgba(237,246,239,.34)_56%,rgba(10,46,26,.48)_100%)] lg:block" />
+        </div>
+
         {/* zari rule along the foot of the section */}
         <span aria-hidden className="foil absolute inset-x-0 bottom-0 h-[3px]" />
 

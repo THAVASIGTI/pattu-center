@@ -120,54 +120,68 @@ export default function CategorySlider() {
       </div>
 
       {/* The row of small frames. Wider than tall, so five of them fit across
-          the frame above without dropping under the 44px a finger needs. */}
-      <div className="mt-6 flex items-stretch gap-2 sm:gap-2.5">
-        {slides.map((t, i) => {
-          const active = i === index;
-          return (
-            <button
-              key={t.slug}
-              type="button"
-              onClick={() => go(i)}
-              aria-label={`Show ${t.name}`}
-              aria-current={active}
-              className={`group relative min-h-11 flex-1 cursor-pointer overflow-hidden rounded-[13px] transition-all duration-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green ${
-                active
-                  ? "ring-2 ring-yellow ring-offset-2 ring-offset-cream"
-                  : "opacity-60 hover:opacity-100"
-              }`}
-            >
-              <span className="relative block aspect-4/5">
-                <Image
-                  src={img(t.imageId)}
-                  alt=""
-                  fill
-                  sizes="90px"
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-              </span>
-              {/* Holds the small frames to the same green as the big one, so
-                  the row reads as part of it rather than five loose photos. */}
-              <span
-                aria-hidden
-                className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ${
-                  active ? "opacity-0" : "bg-[rgba(10,46,26,.34)] opacity-100"
-                }`}
-              />
-            </button>
-          );
-        })}
-      </div>
+          the frame above without dropping under the 44px a finger needs.
 
-      <p className="mt-4 text-center">
-        <Link
-          href="/what-we-buy"
-          className="inline-flex items-center gap-2 text-[0.9rem] font-semibold text-green underline-offset-4 hover:underline"
-        >
-          See everything we buy
-          <ArrowRight className="size-[16px]" />
-        </Link>
-      </p>
+          They sit on a pale plate because the hero now has a photograph
+          behind it: five small pictures laid straight onto a sixth large one
+          read as one busy field, and the gold ring on the active thumbnail
+          disappears into whatever the photo happens to be doing there. The
+          plate is glass-soft, which is fill only. A backdrop-blur here would
+          be the fourth compositing layer in the section for a difference
+          nobody would name. */}
+      <div className="glass-soft mt-6 rounded-[20px] border border-white/60 p-2.5 shadow-mid">
+        <div className="flex items-stretch gap-2 sm:gap-2.5">
+          {slides.map((t, i) => {
+            const active = i === index;
+            return (
+              <button
+                key={t.slug}
+                type="button"
+                onClick={() => go(i)}
+                aria-label={`Show ${t.name}`}
+                aria-current={active}
+                className={`group relative min-h-11 flex-1 cursor-pointer overflow-hidden rounded-[13px] transition-all duration-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green ${
+                  active
+                    ? "ring-2 ring-yellow ring-offset-2 ring-offset-cream"
+                    : "opacity-60 hover:opacity-100"
+                }`}
+              >
+                <span className="relative block aspect-4/5">
+                  <Image
+                    src={img(t.imageId)}
+                    alt=""
+                    fill
+                    sizes="90px"
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                </span>
+                {/* Holds the small frames to the same green as the big one, so
+                    the row reads as part of it rather than five loose photos. */}
+                <span
+                  aria-hidden
+                  className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ${
+                    active ? "opacity-0" : "bg-[rgba(10,46,26,.34)] opacity-100"
+                  }`}
+                />
+              </button>
+            );
+          })}
+        </div>
+
+        {/* The link rides on the plate rather than under it. Loose on the
+            page it would land on whatever the hero photograph is doing at
+            that point, and green type on lit yellow silk measures about
+            3.3:1. On the plate the ground is settled and it clears 5.5:1. */}
+        <p className="mt-2.5 border-t border-line pt-2.5 text-center">
+          <Link
+            href="/what-we-buy"
+            className="inline-flex min-h-9 items-center gap-2 text-[0.9rem] font-semibold text-green underline-offset-4 hover:underline"
+          >
+            See everything we buy
+            <ArrowRight className="size-[16px]" />
+          </Link>
+        </p>
+      </div>
     </div>
   );
 }
