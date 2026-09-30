@@ -61,16 +61,16 @@ export default function SilkStage({ children }: { children: ReactNode }) {
           Those stops are measured; scratchpad/probe.py shoots the bare
           ground and samples the real line boxes over it. Widen the copy and
           they have to move. */}
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-7 mx-auto h-[440px] w-full max-w-[380px] overflow-hidden rounded-[26px] shadow-[0_18px_44px_rgba(10,46,26,.18)] sm:bottom-9 sm:h-[520px] sm:max-w-[430px] xl:bottom-0 xl:top-0 xl:left-auto xl:mx-0 xl:h-auto xl:max-w-[1040px] xl:w-[68%] xl:rounded-none xl:shadow-none">
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-7 mx-auto h-[440px] w-full max-w-[380px] overflow-hidden rounded-[26px] shadow-[0_18px_44px_rgba(10,46,26,.18)] sm:bottom-9 sm:h-[520px] sm:max-w-[430px] xl:bottom-0 xl:top-0 xl:left-auto xl:mx-0 xl:h-auto xl:max-w-[1000px] xl:w-[52%] xl:rounded-none xl:shadow-none">
         <Image
           src={heroScene}
           alt=""
           fill
           priority
           sizes="(max-width: 1279px) 100vw, 58vw"
-          className="object-cover object-[50%_30%] xl:object-[55%_18%]"
+          className="object-cover object-[50%_30%] xl:object-[15%_20%]"
         />
-        <span className="absolute inset-0 hidden bg-[linear-gradient(90deg,#fbfdf9_0%,rgba(251,253,249,.97)_20%,rgba(251,253,249,.4)_27%,rgba(251,253,249,.06)_32%,rgba(251,253,249,0)_36%)] xl:block" />
+        <span className="absolute inset-0 hidden bg-[linear-gradient(90deg,#fbfdf9_0%,rgba(251,253,249,.96)_4%,rgba(251,253,249,.3)_6%,rgba(251,253,249,0)_8.5%)] xl:block" />
         <span className="absolute inset-0 hidden bg-[linear-gradient(90deg,#fbfdf9_0%,rgba(251,253,249,.97)_24%,rgba(251,253,249,.5)_40%,rgba(251,253,249,.12)_62%,rgba(251,253,249,0)_100%)] xl:block" />
       </div>
 
