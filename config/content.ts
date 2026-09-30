@@ -27,16 +27,16 @@ export const img = (id: number) => `${BASE_PATH}/img/silk-${id}.jpg`;
 
 /** Brand marks. `logoMark` is the emblem alone, the wordmark in the full
  *  lockup is illegible below about 120px, so small placements use the mark. */
-/** The hero subject: a bride in Kanchipuram silk, which is the saree that
- *  ends up folded in an almirah for twenty years. One still photograph rather
- *  than the five that used to cross-fade here, and 186KB at 900px wide
- *  against the 304KB original. */
-export const heroSubject = `${BASE_PATH}/img/hero-subject.jpg`;
-
-/** The keepsake cards, which now carry the cycle the background used to.
- *  Cropped per silk: they render at 86x104 CSS, so the originals would have
- *  been about 1.4MB for five pictures the size of a thumbnail. */
-export const cardImg = (slug: string) => `${BASE_PATH}/img/card-${slug}.jpg`;
+/** The hero scene: the artwork the client supplied, cropped away from the
+ *  text that was baked into it. Everything in the picture is theirs, and the
+ *  copy over it is live HTML rather than pixels, so it can be read aloud,
+ *  selected, translated and clicked.
+ *
+ *  846x1024 native. That is the whole of what was supplied, and the panel it
+ *  fills is about 920 CSS px wide on a laptop, so it is already being
+ *  stretched slightly and will be soft on a 2x screen. A larger original
+ *  would fix that; nothing here can. */
+export const heroScene = `${BASE_PATH}/img/hero-scene.jpg`;
 
 export const logoMark = `${BASE_PATH}/img/logo-mark.png`;
 export const logoFull = `${BASE_PATH}/img/logo.png`;
