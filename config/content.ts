@@ -384,7 +384,12 @@ export const testimonials = [
  */
 export type Reel = {
   slug: string;
-  platform: "youtube" | "facebook";
+  platform: "youtube" | "facebook" | "instagram";
+  /** Instagram refuses to embed a reel whose audio is a licensed commercial
+   *  track: the embed renders the caption and never produces a <video>. Those
+   *  cards open the post instead of a dead player. Checked in a browser, not
+   *  assumed; two of the six are like this. */
+  linkOnly?: boolean;
   /** Plays in a panel on the page. */
   embed: string;
   /** Opens the post it came from, for anyone the embed does not load for. */
@@ -394,6 +399,9 @@ export type Reel = {
 
 const fbEmbed = (canonical: string) =>
   `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(canonical)}&show_text=false&autoplay=true&width=540`;
+
+const igEmbed = (id: string) =>
+  `https://www.instagram.com/reel/${id}/embed/captioned/`;
 
 const ytEmbed = (id: string) =>
   `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&playsinline=1&modestbranding=1`;
@@ -433,6 +441,50 @@ export const reels: Reel[] = [
     embed: fbEmbed("https://www.facebook.com/61550571246499/videos/2158578522202090/"),
     href: "https://www.facebook.com/share/r/1MiBdXiBmj/",
     poster: `${BASE_PATH}/img/reels/fb-3.jpg`,
+  },
+  {
+    slug: "ig-1",
+    platform: "instagram",
+    embed: igEmbed("DcYHc-bzUgz"),
+    href: "https://www.instagram.com/reel/DcYHc-bzUgz/",
+    poster: `${BASE_PATH}/img/reels/ig-1.jpg`,
+  },
+  {
+    slug: "ig-2",
+    platform: "instagram",
+    embed: igEmbed("DYXAEyzpFj8"),
+    href: "https://www.instagram.com/reel/DYXAEyzpFj8/",
+    poster: `${BASE_PATH}/img/reels/ig-2.jpg`,
+  },
+  {
+    slug: "ig-3",
+    platform: "instagram",
+    embed: igEmbed("DX_o1JPytVm"),
+    href: "https://www.instagram.com/reel/DX_o1JPytVm/",
+    linkOnly: true,
+    poster: `${BASE_PATH}/img/reels/ig-3.jpg`,
+  },
+  {
+    slug: "ig-4",
+    platform: "instagram",
+    embed: igEmbed("DWbXRm6kxY8"),
+    href: "https://www.instagram.com/reel/DWbXRm6kxY8/",
+    poster: `${BASE_PATH}/img/reels/ig-4.jpg`,
+  },
+  {
+    slug: "ig-5",
+    platform: "instagram",
+    embed: igEmbed("DV0vQUUkkp8"),
+    href: "https://www.instagram.com/reel/DV0vQUUkkp8/",
+    linkOnly: true,
+    poster: `${BASE_PATH}/img/reels/ig-5.jpg`,
+  },
+  {
+    slug: "ig-6",
+    platform: "instagram",
+    embed: igEmbed("DT2phY4kstR"),
+    href: "https://www.instagram.com/reel/DT2phY4kstR/",
+    poster: `${BASE_PATH}/img/reels/ig-6.jpg`,
   },
 ];
 /* ------------------------------------------------------------------ */

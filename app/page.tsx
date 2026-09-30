@@ -13,6 +13,7 @@ import {
   ArrowRight,
   Check,
   Facebook,
+  Instagram,
   Ledger,
   Phone,
   Scale,
@@ -200,8 +201,8 @@ export default function HomePage() {
           <Reveal>
             <SectionHead
               eyebrow="Watch us"
-              title="From our Facebook and YouTube."
-              lead="Clips from our own page and channel, of the work as it happens. Tap any one to play it here."
+              title="From our Instagram, Facebook and YouTube."
+              lead="Clips from our own pages and channel, of the work as it happens. Tap any one to play it here."
             />
           </Reveal>
           <ReelWall />
@@ -210,6 +211,10 @@ export default function HomePage() {
             <Button href={business.social.facebook} variant="outline" external>
               <Facebook className="size-[17px]" />
               Follow on Facebook
+            </Button>
+            <Button href={business.social.instagram} variant="outline" external>
+              <Instagram className="size-[17px]" />
+              Follow on Instagram
             </Button>
             <Button href={business.social.youtube} variant="outline" external>
               <YouTube className="size-[17px]" />

@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { reels } from "@/config/content";
-import { Close, Facebook, Play, YouTube } from "./Icons";
+import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
+import { reels, type Reel } from "@/config/content";
+import { ArrowRight, Close, Facebook, Instagram, Play, YouTube } from "./Icons";
 
 /**
  * The shop's own videos, played on the page.
@@ -25,7 +25,53 @@ import { Close, Facebook, Play, YouTube } from "./Icons";
 const PLATFORM = {
   youtube: { label: "YouTube", Icon: YouTube, tint: "bg-[#ff0000]" },
   facebook: { label: "Facebook", Icon: Facebook, tint: "bg-[#1877f2]" },
+  instagram: { label: "Instagram", Icon: Instagram, tint: "bg-[#d62976]" },
 } as const;
+
+/* Shared by the two kinds of card, because a reel that will not embed has to
+   be an <a> and one that will has to be a <button>, and they must look the
+   same. */
+const CARD =
+  "group relative block aspect-9/16 w-full cursor-pointer overflow-hidden rounded-[20px] border border-line-yellow bg-green-deep shadow-mid transition-all duration-500 hover:-translate-y-1.5 hover:border-yellow/60 hover:shadow-deep focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-green";
+
+function Card({
+  reel,
+  index,
+  label,
+  onOpen,
+  children,
+}: {
+  reel: Reel;
+  index: number;
+  label: string;
+  onOpen: (el: HTMLButtonElement) => void;
+  children: ReactNode;
+}) {
+  if (reel.linkOnly) {
+    return (
+      <a
+        href={reel.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`Open video ${index + 1} of ${reels.length} on ${label}, in a new tab`}
+        className={CARD}
+      >
+        {children}
+      </a>
+    );
+  }
+  return (
+    <button
+      type="button"
+      onClick={(e) => onOpen(e.currentTarget)}
+      aria-label={`Play video ${index + 1} of ${reels.length}, on ${label}`}
+      aria-haspopup="dialog"
+      className={CARD}
+    >
+      {children}
+    </button>
+  );
+}
 
 export default function ReelWall() {
   const [open, setOpen] = useState<number | null>(null);
@@ -80,20 +126,24 @@ export default function ReelWall() {
 
   return (
     <>
-      <ul className="grid grid-cols-2 gap-3.5 sm:grid-cols-3 sm:gap-4 lg:grid-cols-5">
+      {/* One card at a time on a phone, a grid from sm. Eleven of these in a
+          two-up grid is a wall of thumbnails nobody scrolls past; as a snap
+          carousel each one is nearly full width and the next is visibly
+          waiting. The negative margin lets it run to the screen edge while
+          the padding keeps the first and last card off it. */}
+      <ul className="-mx-7 flex snap-x snap-mandatory gap-3.5 overflow-x-auto px-7 pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:grid sm:snap-none sm:grid-cols-3 sm:gap-4 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-4">
         {reels.map((r, i) => {
           const { label, Icon, tint } = PLATFORM[r.platform];
           return (
-            <li key={r.slug}>
-              <button
-                type="button"
-                onClick={(e) => {
-                  openerRef.current = e.currentTarget;
+            <li key={r.slug} className="w-[76%] shrink-0 snap-center sm:w-auto sm:shrink">
+              <Card
+                reel={r}
+                index={i}
+                label={label}
+                onOpen={(el) => {
+                  openerRef.current = el;
                   setOpen(i);
                 }}
-                aria-label={`Play video ${i + 1} of ${reels.length}, on ${label}`}
-                aria-haspopup="dialog"
-                className="group relative block aspect-9/16 w-full cursor-pointer overflow-hidden rounded-[20px] border border-line-yellow bg-green-deep shadow-mid transition-all duration-500 hover:-translate-y-1.5 hover:border-yellow/60 hover:shadow-deep focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-green"
               >
                 <Image
                   src={r.poster}
@@ -117,13 +167,29 @@ export default function ReelWall() {
                   <Icon className="size-[14px]" />
                 </span>
 
+                {/* Said on the card, not just in the accessible name. A
+                    viewer should know which of these leave the site before
+                    they tap, not after. */}
+                {r.linkOnly && (
+                  <span
+                    aria-hidden
+                    className="absolute top-3 right-2.5 rounded-full bg-[rgba(10,46,26,.72)] px-2 py-0.5 text-[0.58rem] font-semibold tracking-[0.08em] text-yellow-light uppercase ring-1 ring-white/25"
+                  >
+                    Opens on {label}
+                  </span>
+                )}
+
                 <span
                   aria-hidden
                   className="absolute top-1/2 left-1/2 grid size-[52px] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-white/45 bg-[rgba(10,46,26,.52)] text-white backdrop-blur-sm transition-transform duration-500 group-hover:scale-110"
                 >
-                  <Play className="size-[20px] translate-x-[1px]" />
+                  {r.linkOnly ? (
+                    <ArrowRight className="size-[20px]" />
+                  ) : (
+                    <Play className="size-[20px] translate-x-[1px]" />
+                  )}
                 </span>
-              </button>
+              </Card>
             </li>
           );
         })}
