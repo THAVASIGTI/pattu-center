@@ -25,12 +25,12 @@ import { heroScene } from "@/config/content";
 export default function SilkStage({ children }: { children: ReactNode }) {
   return (
     <>
-      {/* From lg the scene covers the right 58% and its own gradient dissolves
+      {/* From xl the scene covers the right 58% and its own gradient dissolves
           it into the page before it reaches the copy: solid to 24%, gone by
           40%. The artwork's own left edge is a plain wall, so the two creams
           meet inside the dissolve rather than at a line.
 
-          Below lg it takes two layers, because one gradient cannot be open at
+          Below xl it takes two layers, because one gradient cannot be open at
           the sides and closed behind the words at once. A flat base carries
           the foot of the section and a radial over it puts the cream back
           where the copy is. What is left uncovered is the sides and the
@@ -42,6 +42,14 @@ export default function SilkStage({ children }: { children: ReactNode }) {
           whenever the section's height does, and they have already caught
           one regression that way, so re-measure rather than assume.
 
+          The two column split is xl, not lg. At exactly 1024 there is not
+          room for this copy beside a picture: the column hugged the page
+          edge and ran into the temple border, the category line broke after
+          "silk vetti", the four promises wrapped to three lines each, and
+          the dissolve had only 95px to happen in so it read as a hard edge
+          down the middle of the artwork. 1024 to 1279 now gets the same
+          centred layout as a tablet, which was already the best of them.
+
           58%, not 64%, and that is arithmetic rather than taste. The artwork
           is 824x1024; at 64% of 1440 the panel is 920x900, cover scales it to
           920x1144 and throws away 244px of height, which took the trunk of
@@ -51,32 +59,32 @@ export default function SilkStage({ children }: { children: ReactNode }) {
           object-position then sits at 38% rather than centred, because what
           is left to give up is at the top, where the wall is, not at the
           bottom, where the sarees are. */}
-      <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 w-full lg:w-[58%]">
+      <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 w-full xl:w-[58%]">
         <Image
           src={heroScene}
           alt=""
           fill
           priority
-          sizes="(max-width: 1024px) 100vw, 58vw"
-          className="object-cover object-[52%_26%] lg:object-[55%_38%]"
+          sizes="(max-width: 1279px) 100vw, 58vw"
+          className="object-cover object-[52%_26%] xl:object-[55%_38%]"
         />
-        <span className="absolute inset-0 bg-[linear-gradient(0deg,rgba(251,253,249,.10)_0px,rgba(251,253,249,.14)_150px,rgba(251,253,249,.88)_185px,rgba(251,253,249,.88)_425px,rgba(251,253,249,.55)_465px,rgba(251,253,249,.5)_100%)] lg:hidden" />
-        <span className="absolute inset-0 bg-[radial-gradient(78%_62%_at_50%_22%,rgba(251,253,249,.92)_0%,rgba(251,253,249,.86)_52%,rgba(251,253,249,.5)_88%,rgba(251,253,249,.16)_100%)] lg:hidden" />
-        <span className="absolute inset-0 hidden bg-[linear-gradient(90deg,#fbfdf9_0%,rgba(251,253,249,.97)_24%,rgba(251,253,249,.5)_40%,rgba(251,253,249,.12)_62%,rgba(251,253,249,0)_100%)] lg:block" />
+        <span className="absolute inset-0 bg-[linear-gradient(0deg,rgba(251,253,249,.10)_0px,rgba(251,253,249,.14)_150px,rgba(251,253,249,.88)_185px,rgba(251,253,249,.88)_425px,rgba(251,253,249,.55)_465px,rgba(251,253,249,.5)_100%)] xl:hidden" />
+        <span className="absolute inset-0 bg-[radial-gradient(78%_62%_at_50%_22%,rgba(251,253,249,.92)_0%,rgba(251,253,249,.86)_52%,rgba(251,253,249,.5)_88%,rgba(251,253,249,.16)_100%)] xl:hidden" />
+        <span className="absolute inset-0 hidden bg-[linear-gradient(90deg,#fbfdf9_0%,rgba(251,253,249,.97)_24%,rgba(251,253,249,.5)_40%,rgba(251,253,249,.12)_62%,rgba(251,253,249,0)_100%)] xl:block" />
       </div>
 
       {/* One column of copy in a two column grid. The second cell is left
           empty on purpose, so the words keep to the left half and the scene
           has the right half to itself.
 
-          The deep bottom padding below lg is the scene's only room. On a
+          The deep bottom padding below xl is the scene's only room. On a
           phone there is no second column, so without it the copy runs to the
           foot of the section and the picture has nowhere to be seen at all.
           It also keeps the text clear of the trunk, which is the darkest
           thing in the artwork: when the banner was removed the section got
           shorter, the promises slid down into the open part of the scrim and
           the bottom two measured 1.04:1 sitting on bare wood. */}
-      <Wrap className="relative z-10 grid items-center gap-10 pt-12 pb-[200px] sm:pt-16 sm:pb-[220px] lg:grid-cols-[1.05fr_.95fr] lg:gap-14 lg:py-20 lg:pb-20">
+      <Wrap className="relative z-10 grid items-center gap-10 pt-12 pb-[200px] sm:pt-16 sm:pb-[220px] xl:grid-cols-[1.05fr_.95fr] xl:gap-14 xl:py-20 xl:pb-20">
         {children}
       </Wrap>
     </>

@@ -53,13 +53,13 @@ export default function HomePage() {
             the panel that names it beside the copy. The two share one index,
             so they are one component; the copy stays here as its children. */}
         <SilkStage>
-          <div className="order-1 text-center lg:text-left">
+          <div className="order-1 text-center xl:text-left">
             {/* What we buy, said before anything else. The reference this was
                 rebuilt from opens on the goods rather than a greeting, which
                 is the right call: a visitor who has found this page already
                 knows whose site it is, and the header carries the name. */}
-            <p className="mb-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 lg:justify-start">
-              <span aria-hidden className="foil hidden h-px w-8 shrink-0 lg:block" />
+            <p className="mb-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 xl:justify-start">
+              <span aria-hidden className="foil hidden h-px w-8 shrink-0 xl:block" />
               {["Old pattu sarees", "Silk vetti", "Zari and silver"].map((t, i) => (
                 <span key={t} className="flex items-center gap-3">
                   {i > 0 && (
@@ -75,12 +75,12 @@ export default function HomePage() {
             {/* One headline, held still. The second line carries the claim and
                 takes the gold, so the eye lands on the promise rather than on
                 the noun. */}
-            <h1 className="mx-auto max-w-[15ch] font-serif text-[clamp(2.1rem,6.4vw,3.5rem)] leading-[1.12] text-green-deep lg:mx-0">
+            <h1 className="mx-auto max-w-[15ch] font-serif text-[clamp(2.1rem,6.4vw,3.5rem)] leading-[1.12] text-green-deep xl:mx-0">
               Your old silk is
               <span className="foil-text-deep foil-shimmer block">still worth money.</span>
             </h1>
 
-            <p className="mx-auto mt-5 max-w-[44ch] text-[clamp(1rem,2.7vw,1.1rem)] leading-[1.7] text-ink-soft lg:mx-0">
+            <p className="mx-auto mt-5 max-w-[44ch] text-[clamp(1rem,2.7vw,1.1rem)] leading-[1.7] text-ink-soft xl:mx-0">
               Pattu sarees, silk vetti, zari and silver. Weighed in front of you,
               the figure explained before anything changes hands.
             </p>
@@ -88,7 +88,7 @@ export default function HomePage() {
             {/* Solid then outlined, rather than two filled buttons. With the
                 gold now spent on the headline, a second gold button would
                 have been the third gold thing in a column of five. */}
-            <div className="mt-7 flex flex-wrap justify-center gap-3 lg:justify-start">
+            <div className="mt-7 flex flex-wrap justify-center gap-3 xl:justify-start">
               <Button href={business.phones[0].href} variant="green" className="flex-1 sm:flex-none">
                 <Phone className="size-[17px]" />
                 Call {business.phones[0].label}
@@ -102,8 +102,8 @@ export default function HomePage() {
             {/* Condition, said plainly. Every one of these is a state the
                 price ledger already says we still pay for: condition adjusts
                 the figure and never disqualifies. */}
-            <p className="mt-7 flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1.5 text-[0.7rem] font-semibold tracking-[0.16em] text-ink-soft uppercase lg:justify-start">
-              <span aria-hidden className="hidden h-px w-5 bg-line-yellow lg:block" />
+            <p className="mt-7 flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1.5 text-[0.7rem] font-semibold tracking-[0.16em] text-ink-soft uppercase xl:justify-start">
+              <span aria-hidden className="hidden h-px w-5 bg-line-yellow xl:block" />
               {["Old", "Faded", "Stained", "Moth-eaten"].map((t, i) => (
                 <span key={t} className="flex items-center gap-2.5">
                   {i > 0 && <span aria-hidden className="size-1 rounded-full bg-yellow" />}
@@ -118,7 +118,7 @@ export default function HomePage() {
                 branch count, the years, free pickup and same-day cash: two
                 rows of four saying the same four things would have been the
                 first thing a visitor scrolled past twice. */}
-            <ul className="mx-auto mt-9 grid max-w-[30rem] grid-cols-2 gap-y-7 border-t border-line pt-7 sm:max-w-none sm:grid-cols-4 sm:gap-y-0 sm:divide-x sm:divide-line lg:mx-0">
+            <ul className="mx-auto mt-9 grid max-w-[30rem] grid-cols-2 gap-y-7 border-t border-line pt-7 sm:max-w-none sm:grid-cols-4 sm:gap-y-0 sm:divide-x sm:divide-line xl:mx-0">
               {[
                 { Icon: Scale, a: "Weighed", b: "in front of you" },
                 { Icon: ZariBorder, a: "Zari priced", b: "separately" },

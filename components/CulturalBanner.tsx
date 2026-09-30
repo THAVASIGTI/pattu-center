@@ -30,7 +30,7 @@
  */
 export default function CulturalBanner() {
   return (
-    <div aria-hidden className="pointer-events-none absolute inset-0 z-[1] overflow-hidden lg:z-auto">
+    <div aria-hidden className="pointer-events-none absolute inset-0 z-[1] overflow-hidden xl:z-auto">
       <svg className="absolute inset-0 size-full" xmlns="http://www.w3.org/2000/svg">
         <defs>
           {/* Temple border: triangles stepping in from the edge, the band and
@@ -78,7 +78,7 @@ export default function CulturalBanner() {
 
         {/* The kolam keeps to the left of the section, so it never has to
             compete with the photograph for the same pixels. */}
-        <rect className="w-full lg:w-[56%]" height="100%" fill="url(#kpc-kolam)" />
+        <rect className="w-full xl:w-[56%]" height="100%" fill="url(#kpc-kolam)" />
 
         {/* The border runs down the very edge, in the gutter. */}
         <rect width="34" height="100%" fill="url(#kpc-temple)" />
@@ -88,7 +88,7 @@ export default function CulturalBanner() {
 
       {/* Feathers the kolam out before it reaches the photograph, so there is
           no line where the pattern stops. */}
-      <span className="absolute inset-y-0 right-0 hidden w-[52%] bg-[linear-gradient(90deg,rgba(251,253,249,0)_0%,#fbfdf9_42%)] lg:block" />
+      <span className="absolute inset-y-0 right-0 hidden w-[52%] bg-[linear-gradient(90deg,rgba(251,253,249,0)_0%,#fbfdf9_42%)] xl:block" />
     </div>
   );
 }
