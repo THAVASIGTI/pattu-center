@@ -107,6 +107,30 @@ export const branches: Branch[] = [
     ],
   },
   {
+    slug: "madurai-jaihindpuram",
+    city: "Madurai",
+    title: "Madurai Branch 2, Jaihindpuram",
+    shortLabel: "Madurai Branch 2",
+    badge: "Branch 2",
+    lines: [
+      "Opposite Aravind Theatre",
+      "Jaihindpuram 2nd Main Road",
+      "Jaihindpuram, Madurai 625 022",
+    ],
+    /* No coords: the shop has not given a map pin for this counter, so the
+       map link searches for the landmark instead. Replace with "lat,lng"
+       from their own Google Maps pin when they send it, and re-run npm run
+       qr, or the QR points at a search rather than the door. */
+    mapQuery: "Jaihindpuram+2nd+Main+Road+Opposite+Aravind+Theatre+Madurai",
+    phoneIndex: 1,
+    intro:
+      "Our second Madurai counter, on Jaihindpuram 2nd Main Road opposite Aravind Theatre. Walk in with your sarees or call ahead and we will collect them from your home.",
+    areas: [
+      "Jaihindpuram", "Ponnagaram", "Palanganatham", "Arasaradi",
+      "Thirunagar", "Villapuram", "Thirupparankundram", "Harvey Patti",
+    ],
+  },
+  {
     slug: "thoothukudi",
     city: "Thoothukudi",
     title: "Thoothukudi Branch 1, Shivan Kovil Street",
