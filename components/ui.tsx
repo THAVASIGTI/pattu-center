@@ -87,13 +87,18 @@ export function SectionHead({
 /* Buttons                                                             */
 /* ------------------------------------------------------------------ */
 
+/* No border COLOUR here. border-transparent in the base and border-green in a
+   variant are both border-color utilities in the same layer, so which one wins
+   is decided by emit order, not by specificity: the outline and ghost buttons
+   were rendering with rgba(0,0,0,0) borders, meaning no visible outline at
+   all. The width stays here; every variant now states its own colour. */
 const btnBase =
-  "inline-flex min-h-12 cursor-pointer items-center justify-center gap-2.5 whitespace-nowrap rounded-full border-[1.5px] border-transparent px-6 py-3 text-[0.93rem] font-semibold transition-all duration-200 active:translate-y-px";
+  "inline-flex min-h-12 cursor-pointer items-center justify-center gap-2.5 whitespace-nowrap rounded-full border-[1.5px] px-6 py-3 text-[0.93rem] font-semibold transition-all duration-200 active:translate-y-px";
 
 const variants = {
-  yellow: "foil text-[#3a2a06] shadow-[0_6px_20px_rgba(202,154,4,.36)] hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(202,154,4,.46)]",
-  whatsapp: "bg-[#25d366] text-[#06301a] shadow-[0_6px_20px_rgba(37,211,102,.34)] hover:-translate-y-0.5 hover:bg-[#37e378]",
-  green: "grad-green text-[#eafff0] shadow-[0_6px_20px_rgba(21,128,61,.4)] hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(21,128,61,.5)]",
+  yellow: "border-transparent foil text-[#3a2a06] shadow-[0_6px_20px_rgba(202,154,4,.36)] hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(202,154,4,.46)]",
+  whatsapp: "border-transparent bg-[#25d366] text-[#06301a] shadow-[0_6px_20px_rgba(37,211,102,.34)] hover:-translate-y-0.5 hover:bg-[#37e378]",
+  green: "border-transparent grad-green text-[#eafff0] shadow-[0_6px_20px_rgba(21,128,61,.4)] hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(21,128,61,.5)]",
   ghost: "border-cream/40 text-cream hover:-translate-y-0.5 hover:border-cream hover:bg-cream/10",
   outline: "border-green text-green hover:-translate-y-0.5 hover:bg-green hover:text-cream",
 } as const;

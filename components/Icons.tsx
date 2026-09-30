@@ -136,3 +136,41 @@ export const Facebook = (p: P) => (
     <path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.2c-1.2 0-1.6.8-1.6 1.6V12h2.7l-.4 2.9h-2.3v7A10 10 0 0 0 22 12" />
   </svg>
 );
+
+/* The four promises under the hero copy. Drawn at 1.7 for a 26px box: the
+   2.0 the rest of this file uses goes muddy once the shapes have interior
+   detail this small. */
+const fine = { ...stroke, strokeWidth: 1.7 } as const;
+
+export const Scale = (p: P) => (
+  <svg viewBox="0 0 24 24" {...fine} {...p}>
+    <path d="M12 4v16" />
+    <path d="M6 20h12" />
+    <path d="M4 8h16" />
+    <path d="M4 8l-2 5a2.8 2.8 0 0 0 4 0z" />
+    <path d="M20 8l2 5a2.8 2.8 0 0 1-4 0z" />
+  </svg>
+);
+
+export const ZariBorder = (p: P) => (
+  <svg viewBox="0 0 24 24" {...fine} {...p}>
+    <rect x="3" y="5" width="18" height="14" rx="2" />
+    <path d="M3 15h18" />
+    <path d="M6.5 17.8v-1.4M10.5 17.8v-1.4M14.5 17.8v-1.4M18 17.8v-1.4" />
+  </svg>
+);
+
+export const Ledger = (p: P) => (
+  <svg viewBox="0 0 24 24" {...fine} {...p}>
+    <path d="M6 3h9l4 4v14a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" />
+    <path d="M14.5 3v4.5H19" />
+    <path d="M8.5 13h7M8.5 16.5h4.5" />
+  </svg>
+);
+
+export const Shield = (p: P) => (
+  <svg viewBox="0 0 24 24" {...fine} {...p}>
+    <path d="M12 3l7.5 3v5.5c0 4.6-3.1 8.2-7.5 9.5-4.4-1.3-7.5-4.9-7.5-9.5V6z" />
+    <path d="M9 12.2l2.2 2.2L15.3 10" />
+  </svg>
+);

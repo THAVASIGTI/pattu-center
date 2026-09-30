@@ -3,19 +3,29 @@ import BranchCard from "@/components/BranchCard";
 import BranchMarquee from "@/components/BranchMarquee";
 import Counter from "@/components/Counter";
 import CtaBand from "@/components/CtaBand";
-import RotatingHeadline from "@/components/RotatingHeadline";
 import SilkTile from "@/components/SilkTile";
 import SilkStage from "@/components/SilkStage";
 import CulturalBanner from "@/components/CulturalBanner";
 import HeroBackdrop from "@/components/HeroBackdrop";
 import PriceScale from "@/components/PriceScale";
 import ReelWall from "@/components/ReelWall";
-import { ArrowRight, Check, Facebook, Phone, WhatsApp, YouTube, serviceIcons } from "@/components/Icons";
+import {
+  ArrowRight,
+  Check,
+  Facebook,
+  Ledger,
+  Phone,
+  Scale,
+  Shield,
+  WhatsApp,
+  YouTube,
+  ZariBorder,
+  serviceIcons,
+} from "@/components/Icons";
 import Reveal from "@/components/Reveal";
 import { Button, Section, SectionHead, Wrap } from "@/components/ui";
 import { branchCount, branchCountWordCap, branches, business, waLink } from "@/config/business";
 import {
-  heroSlogans,
   priceLedger,
   reels,
   sareeTypes,
@@ -44,61 +54,86 @@ export default function HomePage() {
             so they are one component; the copy stays here as its children. */}
         <SilkStage>
           <div className="order-1 text-center lg:text-left">
-            {/* Cinzel, carved Roman capitals, on the darker foil. It never
-                drops below 24px, which keeps it "large text" at 3:1 rather
-                than the 4.5:1 the foil would miss. A zari rule either side. The
-                gradient sits on the element holding the words: through an
-                inline-block wrapper background-clip would have nothing to
-                paint. */}
-            <p className="mb-5 flex items-center justify-center gap-3.5 lg:justify-start">
-              <span aria-hidden className="foil h-px w-7 shrink-0 sm:w-10" />
-              <span className="foil-text-deep foil-shimmer font-royal text-[clamp(1.5rem,3.8vw,2rem)] leading-[1.22] font-medium tracking-[0.1em] text-balance uppercase">
-                Welcome to {business.name}
-              </span>
-              <span aria-hidden className="foil h-px w-7 shrink-0 sm:w-10 lg:hidden" />
+            {/* What we buy, said before anything else. The reference this was
+                rebuilt from opens on the goods rather than a greeting, which
+                is the right call: a visitor who has found this page already
+                knows whose site it is, and the header carries the name. */}
+            <p className="mb-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 lg:justify-start">
+              <span aria-hidden className="foil hidden h-px w-8 shrink-0 lg:block" />
+              {["Old pattu sarees", "Silk vetti", "Zari and silver"].map((t, i) => (
+                <span key={t} className="flex items-center gap-3">
+                  {i > 0 && (
+                    <span aria-hidden className="h-3 w-px bg-line-yellow" />
+                  )}
+                  <span className="font-royal text-[0.78rem] font-medium tracking-[0.2em] text-yellow-ink uppercase">
+                    {t}
+                  </span>
+                </span>
+              ))}
             </p>
 
-            {/* The note that silk put away is not silk wasted, which is what
-                sends people to look in the almirah in the first place. The
-                sans face keeps it plain against the display serif above and
-                the headline below, so it reads as a statement rather than
-                more ornament. */}
-            <p className="mx-auto mb-7 max-w-[36ch] font-sans text-[clamp(1.05rem,2.8vw,1.22rem)] leading-[1.65] font-semibold text-ink lg:mx-0">
-              A saree folded away for twenty years has not lost its worth. The
-              silk is still silk, the zari is still silver, and we will pay you
-              for both.
+            {/* One headline, held still. The second line carries the claim and
+                takes the gold, so the eye lands on the promise rather than on
+                the noun. */}
+            <h1 className="mx-auto max-w-[15ch] font-serif text-[clamp(2.1rem,6.4vw,3.5rem)] leading-[1.12] text-green-deep lg:mx-0">
+              Your old silk is
+              <span className="foil-text-deep foil-shimmer block">still worth money.</span>
+            </h1>
+
+            <p className="mx-auto mt-5 max-w-[44ch] text-[clamp(1rem,2.7vw,1.1rem)] leading-[1.7] text-ink-soft lg:mx-0">
+              Pattu sarees, silk vetti, zari and silver. Weighed in front of you,
+              the figure explained before anything changes hands.
             </p>
 
-            <RotatingHeadline
-              foilTone="deep"
-              className="mx-auto max-w-[18ch] font-serif text-[clamp(2rem,6vw,3.4rem)] leading-[1.14] text-green-deep lg:mx-0"
-              slogans={heroSlogans}
-            />
-
-            <p className="mx-auto mt-4 max-w-[48ch] text-[clamp(.97rem,2.6vw,1.07rem)] text-ink-soft lg:mx-0">
-              Pattu sarees, silk vetti, zari and silver. Weighed in front of you, paid the same day.
-            </p>
-
-            <div className="mt-7 flex flex-wrap justify-center gap-2.5 lg:justify-start">
-              <Button href={business.phones[0].href} variant="yellow" className="flex-1 sm:flex-none">
+            {/* Solid then outlined, rather than two filled buttons. With the
+                gold now spent on the headline, a second gold button would
+                have been the third gold thing in a column of five. */}
+            <div className="mt-7 flex flex-wrap justify-center gap-3 lg:justify-start">
+              <Button href={business.phones[0].href} variant="green" className="flex-1 sm:flex-none">
                 <Phone className="size-[17px]" />
                 Call {business.phones[0].label}
               </Button>
-              <Button href={waLink()} variant="whatsapp" external className="flex-1 sm:flex-none">
+              <Button href={waLink()} variant="outline" external className="flex-1 sm:flex-none">
                 <WhatsApp className="size-[17px]" />
-                Sell Your Silk on WhatsApp
+                WhatsApp us
               </Button>
             </div>
 
-            {/* ink-soft, not ink-mute. One of HeroBackdrop's rings passes
-                under this line at rgba(21,128,61,.20), which paints the
-                ground there (207,230,214) and takes ink-mute to 4.02:1,
-                under the 4.5:1 body floor. The ring is decoration and the
-                line is a promise, so the line gets darker rather than the
-                ring getting fainter. 5.7:1 on the same ground. */}
-            <p className="mt-4 text-[0.84rem] text-ink-soft">
-              Free pickup · Cash same day · No obligation
+            {/* Condition, said plainly. Every one of these is a state the
+                price ledger already says we still pay for: condition adjusts
+                the figure and never disqualifies. */}
+            <p className="mt-7 flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1.5 text-[0.7rem] font-semibold tracking-[0.16em] text-ink-soft uppercase lg:justify-start">
+              <span aria-hidden className="hidden h-px w-5 bg-line-yellow lg:block" />
+              {["Old", "Faded", "Stained", "Moth-eaten"].map((t, i) => (
+                <span key={t} className="flex items-center gap-2.5">
+                  {i > 0 && <span aria-hidden className="size-1 rounded-full bg-yellow" />}
+                  {t}
+                </span>
+              ))}
+              <span className="text-green">all accepted</span>
             </p>
+
+            {/* The four promises. Deliberately none of these repeat the strip
+                of numbers directly below the hero, which already carries the
+                branch count, the years, free pickup and same-day cash: two
+                rows of four saying the same four things would have been the
+                first thing a visitor scrolled past twice. */}
+            <ul className="mx-auto mt-9 grid max-w-[30rem] grid-cols-2 gap-y-7 border-t border-line pt-7 sm:max-w-none sm:grid-cols-4 sm:gap-y-0 sm:divide-x sm:divide-line lg:mx-0">
+              {[
+                { Icon: Scale, a: "Weighed", b: "in front of you" },
+                { Icon: ZariBorder, a: "Zari priced", b: "separately" },
+                { Icon: Ledger, a: "Figure agreed", b: "before handover" },
+                { Icon: Shield, a: "No obligation", b: "to sell on the day" },
+              ].map(({ Icon, a, b }) => (
+                <li key={a} className="flex flex-col items-center gap-2.5 px-2 text-center sm:px-3">
+                  <Icon className="size-[26px] text-yellow-ink" />
+                  <span className="text-[0.82rem] leading-[1.45] text-ink-soft">
+                    <b className="block font-semibold text-green-deep">{a}</b>
+                    {b}
+                  </span>
+                </li>
+              ))}
+            </ul>
           </div>
         </SilkStage>
       </section>
