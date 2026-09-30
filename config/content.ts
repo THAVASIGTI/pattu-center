@@ -27,6 +27,13 @@ export const img = (id: number) => `${BASE_PATH}/img/silk-${id}.jpg`;
 
 /** Brand marks. `logoMark` is the emblem alone, the wordmark in the full
  *  lockup is illegible below about 120px, so small placements use the mark. */
+/** The three keepsake cards in the hero. Cropped and re-encoded rather than
+ *  pointed at the silk-*.jpg originals: they render at 86x104 CSS, and the
+ *  three originals together are 897KB against 41KB for these. They are hidden
+ *  below sm with display:none, which does NOT stop a browser fetching them,
+ *  so a phone was paying for all three too. */
+export const keepsakeImg = (n: number) => `${BASE_PATH}/img/keepsake-${n}.jpg`;
+
 export const logoMark = `${BASE_PATH}/img/logo-mark.png`;
 export const logoFull = `${BASE_PATH}/img/logo.png`;
 /** The nav badge wants the mark cropped to its ink and the gold pushed a

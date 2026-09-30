@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState, type ReactNode } from "react";
 import { Wrap } from "./ui";
-import { img, sareeTypes } from "@/config/content";
+import { img, keepsakeImg, sareeTypes } from "@/config/content";
 
 /**
  * The hero's ground: the silk itself, changing under the copy.
@@ -160,6 +160,89 @@ export default function SilkStage({ children }: { children: ReactNode }) {
             ground was pale cream; the banner brings its own ground, so there
             is one set of colours to reason about. */}
         <div className="order-2 mx-auto w-full max-w-[310px] sm:max-w-[440px] lg:mr-0 lg:ml-auto">
+          {/* Keepsakes over a zari swirl: the reference this was built from
+              has a fan of old photographs lifting out of the trunk on a
+              ribbon of gold. These are three silks in cream mounts, tilted
+              and overlapped, with the ribbon drawn under them.
+
+              Photographs, not an illustration. The mounts and the drop
+              shadow are what let them read at all, because unlike the
+              reference's plain wall the thing behind them here is another
+              photograph at full strength.
+
+              The three are chosen, not picked by id: a woman wearing silk,
+              gold on silk, and a zari close-up, so the fan reads as what a
+              saree is kept for. The first attempt took three ids off the
+              list without looking at them and got a market floor, a loom and
+              a shop rack.
+
+              From sm only. On a 360px column three overlapping cards and a
+              banner is more than the space can hold. */}
+          <div aria-hidden className="relative mb-8 hidden h-[178px] sm:block">
+            <svg
+              viewBox="0 0 420 200"
+              preserveAspectRatio="none"
+              className="absolute -inset-x-8 -top-2 h-[200px] w-[calc(100%+4rem)]"
+              fill="none"
+            >
+              <defs>
+                <linearGradient id="kpc-swirl" x1="0" y1="1" x2="1" y2="0">
+                  <stop offset="0%" stopColor="#a87f0a" stopOpacity="0" />
+                  <stop offset="28%" stopColor="#fde047" stopOpacity=".85" />
+                  <stop offset="58%" stopColor="#fffbe6" stopOpacity="1" />
+                  <stop offset="100%" stopColor="#a87f0a" stopOpacity="0" />
+                </linearGradient>
+              </defs>
+              <path
+                d="M8 168C48 58 150 14 244 52c94 38 148 96 168 132"
+                stroke="url(#kpc-swirl)"
+                strokeWidth="14"
+                strokeLinecap="round"
+                opacity=".3"
+                style={{ filter: "blur(9px)" }}
+              />
+              <path
+                d="M8 168C48 58 150 14 244 52c94 38 148 96 168 132"
+                stroke="url(#kpc-swirl)"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+              />
+              <path
+                d="M28 186C74 92 158 52 252 88c94 36 134 78 152 104"
+                stroke="url(#kpc-swirl)"
+                strokeWidth="1.2"
+                strokeLinecap="round"
+                opacity=".7"
+              />
+            </svg>
+
+            <div className="absolute inset-0 flex items-center justify-center gap-0">
+              {[
+                { n: 1, tilt: "-9deg", y: "10px", z: "z-10" },
+                { n: 2, tilt: "4deg", y: "-14px", z: "z-20" },
+                { n: 3, tilt: "11deg", y: "14px", z: "z-10" },
+              ].map(({ n, tilt, y, z }, i) => (
+                <span
+                  key={n}
+                  className={`relative block rounded-[10px] bg-cream p-1.5 pb-5 shadow-[0_14px_30px_rgba(10,46,26,.34)] ring-1 ring-yellow/35 ${z} ${
+                    i === 1 ? "-mx-3" : ""
+                  }`}
+                  style={{ transform: `rotate(${tilt}) translateY(${y})` }}
+                >
+                  <span className="relative block h-[104px] w-[86px] overflow-hidden rounded-[6px]">
+                    <Image
+                      src={keepsakeImg(n)}
+                      alt=""
+                      fill
+                      sizes="86px"
+                      className="object-cover"
+                    />
+                  </span>
+                </span>
+              ))}
+            </div>
+          </div>
+
           <div className="relative">
             <span
               aria-hidden
