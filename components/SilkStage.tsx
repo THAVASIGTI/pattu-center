@@ -49,29 +49,26 @@ export default function SilkStage({ children }: { children: ReactNode }) {
           Below xl the copy no longer sits over the picture at all, so there
           is no scrim.
 
-          From xl the picture bleeds top and bottom again and is faded at
-          BOTH edges: solid cream at the left edge, gone by 9%, then clear
-          until 86% and softening to 45% at the right. Her hair begins 9.5%
-          across the artwork, so the left fade stops just short of her.
+          From xl the picture bleeds top and bottom and is overlaid at both
+          edges: cream at the left, down to an 8% veil by 12%, held across
+          the middle, then back to cream by the right edge. The veil is what
+          sets the picture behind the copy rather than beside it; the edges
+          are what stop it butting against the page on a hard line.
 
-          The left fade is barely needed. The copy always ends at almost
-          exactly half the viewport, because Wrap is centred at 1180px and
-          its right edge works out to (100vw - 1180)/2 + 28 + 561, which is
-          50vw - 1px; measured, 719 at 1440, 639 at 1280, 959 at 1920. So the
-          panel is w-1/2 and starts where the words stop. The fade is there
-          to keep the picture from beginning on a hard vertical line, not to
-          hide anything.
+          Her hair begins 9.5% across the artwork and the left fade is clear
+          by 12%, so it reaches the wall beside her and stops.
 
-          Only the HEIGHT is cropped. The panel is 50vw wide, so the picture
-          would need 62vw of height to fit whole, and the section is shorter
-          than that at every width: the full width is always in frame and the
-          crop is 14% at 1440, 16% at 1280, 21% at 1920. object-position 20%
-          down keeps the highest floating photograph, at 7%, in frame.
-
+          The panel is 44vw, not 50, and sits in from the copy: an 87px
+          gutter of cream at 1440. Smaller picture, and the crop falls with
+          it, because at 44vw the artwork only needs 55vw of height to fit
+          whole and the section is close to that. Only the HEIGHT is ever
+          cropped and now only by 2.5% at 1440, 4.5% at 1280 and 9.7% at
+          1920. object-position 20% down keeps the highest floating
+          photograph, at 7%, in frame.
           Those stops are measured; scratchpad/probe.py shoots the bare
           ground and samples the real line boxes over it. Widen the copy and
           they have to move. */}
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-7 mx-auto h-[440px] w-full max-w-[380px] overflow-hidden rounded-[26px] shadow-[0_18px_44px_rgba(10,46,26,.18)] sm:bottom-9 sm:h-[520px] sm:max-w-[430px] xl:top-0 xl:right-0 xl:bottom-0 xl:left-auto xl:mx-0 xl:h-auto xl:w-1/2 xl:max-w-none xl:translate-y-0 xl:aspect-auto xl:rounded-none xl:shadow-none">
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-7 mx-auto h-[440px] w-full max-w-[380px] overflow-hidden rounded-[26px] shadow-[0_18px_44px_rgba(10,46,26,.18)] sm:bottom-9 sm:h-[520px] sm:max-w-[430px] xl:top-0 xl:right-0 xl:bottom-0 xl:left-auto xl:mx-0 xl:h-auto xl:w-[44%] xl:max-w-none xl:translate-y-0 xl:aspect-auto xl:rounded-none xl:shadow-none">
         <Image
           src={heroScene}
           alt=""
@@ -80,6 +77,12 @@ export default function SilkStage({ children }: { children: ReactNode }) {
           sizes="(max-width: 1279px) 100vw, 58vw"
           className="object-cover object-[50%_30%] xl:object-[15%_20%]"
         />
+        {/* The overlay. Cream at both edges so the picture is laid into the
+            page rather than butted against it, and a light 8% veil across
+            the middle so it sits back from the copy instead of shouting over
+            it. Her hair begins 9.5% across the artwork and the left fade is
+            clear by 12%, so it reaches the wall beside her and stops. */}
+        <span className="absolute inset-0 hidden bg-[linear-gradient(90deg,#fbfdf9_0%,rgba(251,253,249,.5)_6%,rgba(251,253,249,.08)_12%,rgba(251,253,249,.08)_82%,rgba(251,253,249,.5)_95%,#fbfdf9_100%)] xl:block" />
       </div>
 
       {/* One column of copy in a two column grid. The second cell is left
