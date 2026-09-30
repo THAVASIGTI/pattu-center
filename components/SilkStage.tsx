@@ -49,14 +49,28 @@ export default function SilkStage({ children }: { children: ReactNode }) {
           Below xl the copy no longer sits over the picture at all, so there
           is no scrim.
 
-          From xl there is a horizontal dissolve, and it is cut to what the
-          words actually need rather than to a round number. Measured, the
-          copy reaches 13.6% into the panel at 1280 and 1440, 2.2% at 1680
-          and not at all at 1920. It used to hold solid cream to 22% and not
-          clear until 100%, which masked four to eight times more of the
-          picture than anything was standing on. It is now solid to 16%, half
-          gone by 28% and clear by 58%, so most of the scene is simply
-          visible.
+          From xl there is a horizontal dissolve, solid to 4%, mostly gone
+          by 6% and clear by 8.5%: a fade about 35px wide, and that is all.
+
+          The panel is 52%, and going NARROWER is what made her visible.
+          Every widening made it worse, because the mask exists only to cover
+          the copy: a wider panel begins further left, so the copy sits
+          proportionally deeper into it and the cream has to follow. At 68%
+          the solid cream ran to 20% of the panel while her hair begins at
+          9.5% across the artwork, so the mask was over her face; at 74% it
+          swallowed her.
+
+          At 52% the panel starts almost exactly where the copy ends, and the
+          overlap is 3.7% at 1280, 1440, 1680 and 1920 alike, because Wrap is
+          centred so the copy's right edge scales with the viewport just as a
+          percentage panel does.
+
+          object-position is 15% across and 20% down, also measured. At 1280
+          the panel is narrower than the picture renders and 13.8% of width
+          is cropped; at 15% only a sixth of that comes off the left, which
+          keeps her hair at 8.6% and clear of the fade. At 1920 the height
+          crops instead, and 20% keeps the highest floating photograph, which
+          sits at 7%, in frame.
 
           Those stops are measured; scratchpad/probe.py shoots the bare
           ground and samples the real line boxes over it. Widen the copy and
