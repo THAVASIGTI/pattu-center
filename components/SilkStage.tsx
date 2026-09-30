@@ -49,24 +49,29 @@ export default function SilkStage({ children }: { children: ReactNode }) {
           Below xl the copy no longer sits over the picture at all, so there
           is no scrim.
 
-          From xl there is no dissolve at all, because there is nothing left
-          to cover. The copy always ends at almost exactly half the viewport:
-          Wrap is centred at 1180px, so its right edge works out to
-          (100vw - 1180)/2 + 28 + 561, which is 50vw - 1px. Measured, 719 at
-          1440, 639 at 1280, 959 at 1920. So the panel is w-1/2, starting
-          where the words stop, and no cream is needed over the picture.
+          From xl the picture bleeds top and bottom again and is faded at
+          BOTH edges: solid cream at the left edge, gone by 9%, then clear
+          until 86% and softening to 45% at the right. Her hair begins 9.5%
+          across the artwork, so the left fade stops just short of her.
 
-          It is also aspect-locked to the artwork's own 824:1024 and centred
-          vertically, so NEITHER dimension is cropped. Full bleed and no crop
-          cannot both be had unless the panel's aspect equals the picture's,
-          and every version before this one paid for the bleed by throwing
-          away 3 to 23% of the image. This one keeps all of it and takes
-          cream above and below instead.
+          The left fade is barely needed. The copy always ends at almost
+          exactly half the viewport, because Wrap is centred at 1180px and
+          its right edge works out to (100vw - 1180)/2 + 28 + 561, which is
+          50vw - 1px; measured, 719 at 1440, 639 at 1280, 959 at 1920. So the
+          panel is w-1/2 and starts where the words stop. The fade is there
+          to keep the picture from beginning on a hard vertical line, not to
+          hide anything.
+
+          Only the HEIGHT is cropped. The panel is 50vw wide, so the picture
+          would need 62vw of height to fit whole, and the section is shorter
+          than that at every width: the full width is always in frame and the
+          crop is 14% at 1440, 16% at 1280, 21% at 1920. object-position 20%
+          down keeps the highest floating photograph, at 7%, in frame.
 
           Those stops are measured; scratchpad/probe.py shoots the bare
           ground and samples the real line boxes over it. Widen the copy and
           they have to move. */}
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-7 mx-auto h-[440px] w-full max-w-[380px] overflow-hidden rounded-[26px] shadow-[0_18px_44px_rgba(10,46,26,.18)] sm:bottom-9 sm:h-[520px] sm:max-w-[430px] xl:top-1/2 xl:right-0 xl:bottom-auto xl:left-auto xl:mx-0 xl:h-auto xl:w-1/2 xl:max-w-[760px] xl:-translate-y-1/2 xl:aspect-[824/1024] xl:rounded-[28px] xl:shadow-[0_26px_64px_rgba(10,46,26,.2)]">
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-7 mx-auto h-[440px] w-full max-w-[380px] overflow-hidden rounded-[26px] shadow-[0_18px_44px_rgba(10,46,26,.18)] sm:bottom-9 sm:h-[520px] sm:max-w-[430px] xl:top-0 xl:right-0 xl:bottom-0 xl:left-auto xl:mx-0 xl:h-auto xl:w-1/2 xl:max-w-none xl:translate-y-0 xl:aspect-auto xl:rounded-none xl:shadow-none">
         <Image
           src={heroScene}
           alt=""

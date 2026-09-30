@@ -39,17 +39,11 @@ export default function HomePage() {
   return (
     <>
       {/* ---------------- Hero ---------------- */}
-      {/* xl:min-h is for the picture, not the copy. The scene is an upright
-          824x1024 and the panel is as tall as this section: at the 668px the
-          copy alone produced, cover was discarding 36% of the artwork's
-          height at 1440 and taking the top of her head with it.
-
-          900 is read off the picture, not picked. Her hair starts at 11.5%
-          of the image and the highest of the floating photographs at 7%, so
-          the crop has to begin above 7% or the scene loses its top. At 900
-          the whole vertical loss at 1440 is 13%, and at an object-position of
-          18% only 2.4% comes off the top, which clears both. */}
-      <section id="hero" className="relative overflow-hidden bg-cream text-ink xl:min-h-[960px]">
+      {/* The hero fills the screen and no more. 8.25rem is the measured
+          chrome above it: a 91px sticky header plus the 41px the section
+          starts down from it. min-height rather than height, so a short
+          window grows the section instead of clipping the copy into it. */}
+      <section id="hero" className="relative overflow-hidden bg-cream text-ink xl:min-h-[calc(100vh-8.25rem)]">
         <HeroBackdrop />
         {/* Saree border and kolam under the copy. Sits above the rings and
             motes and below the photograph, which covers whatever of it
