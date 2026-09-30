@@ -49,40 +49,39 @@ export default function SilkStage({ children }: { children: ReactNode }) {
           Below xl the copy no longer sits over the picture at all, so there
           is no scrim.
 
-          From xl the picture bleeds top and bottom and is overlaid at both
-          edges: cream at the left, down to an 8% veil by 12%, held across
-          the middle, then back to cream by the right edge. The veil is what
-          sets the picture behind the copy rather than beside it; the edges
-          are what stop it butting against the page on a hard line.
+          One treatment at every width now: a picture held to the artwork's
+          own 824:1024, with an overlay that fades it out on all four edges
+          into the page. Below xl it sits under the copy, from xl beside it.
+          Nothing is cropped at 1280 and up, and 3 to 8% of height on a phone
+          and tablet where the box is a little squarer than the picture.
 
-          Her hair begins 9.5% across the artwork and the left fade is clear
-          by 12%, so it reaches the wall beside her and stops.
+          The overlay is sized 50%/50%, and that is the part that has to be
+          right. A radial sized past that never reaches its last stop at the
+          edge midpoints: at 118%/108% the left edge sits at r=0.85, so the
+          fade stopped partway and the picture still ended on a visible line.
+          At 50%/50% the zero stop lands exactly on the edge, so it goes to
+          cream on every side and the corners with it.
 
-          The panel is 44vw, not 50, and sits in from the copy: an 87px
-          gutter of cream at 1440. Smaller picture, and the crop falls with
-          it, because at 44vw the artwork only needs 55vw of height to fit
-          whole and the section is close to that. Only the HEIGHT is ever
-          cropped and now only by 2.5% at 1440, 4.5% at 1280 and 9.7% at
-          1920. object-position 20% down keeps the highest floating
-          photograph, at 7%, in frame.
-          Those stops are measured; scratchpad/probe.py shoots the bare
+          The picture is 38vw from xl, down from 44 and 50 before that, and
+          the crop fell with it: 38vw needs only 47vw of height to fit whole,
+          which the section always has.          Those stops are measured; scratchpad/probe.py shoots the bare
           ground and samples the real line boxes over it. Widen the copy and
           they have to move. */}
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-7 mx-auto h-[440px] w-full max-w-[380px] overflow-hidden rounded-[26px] shadow-[0_18px_44px_rgba(10,46,26,.18)] sm:bottom-9 sm:h-[520px] sm:max-w-[430px] xl:top-0 xl:right-0 xl:bottom-0 xl:left-auto xl:mx-0 xl:h-auto xl:w-[44%] xl:max-w-none xl:translate-y-0 xl:aspect-auto xl:rounded-none xl:shadow-none">
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-6 mx-auto h-[400px] w-full max-w-[350px] overflow-hidden sm:bottom-8 sm:h-[470px] sm:max-w-[390px] xl:top-1/2 xl:right-0 xl:bottom-auto xl:left-auto xl:mx-0 xl:h-auto xl:w-[38%] xl:max-w-none xl:-translate-y-1/2 xl:aspect-[824/1024]">
         <Image
           src={heroScene}
           alt=""
           fill
           priority
-          sizes="(max-width: 1279px) 100vw, 58vw"
-          className="object-cover object-[50%_30%] xl:object-[15%_20%]"
+          sizes="(max-width: 1279px) 390px, 38vw"
+          className="object-cover object-center"
         />
         {/* The overlay. Cream at both edges so the picture is laid into the
             page rather than butted against it, and a light 8% veil across
             the middle so it sits back from the copy instead of shouting over
             it. Her hair begins 9.5% across the artwork and the left fade is
             clear by 12%, so it reaches the wall beside her and stops. */}
-        <span className="absolute inset-0 hidden bg-[linear-gradient(90deg,#fbfdf9_0%,rgba(251,253,249,.5)_6%,rgba(251,253,249,.08)_12%,rgba(251,253,249,.08)_82%,rgba(251,253,249,.5)_95%,#fbfdf9_100%)] xl:block" />
+        <span className="absolute inset-0 bg-[radial-gradient(50%_50%_at_50%_50%,rgba(251,253,249,0)_56%,rgba(251,253,249,.5)_84%,#fbfdf9_100%)]" />
       </div>
 
       {/* One column of copy in a two column grid. The second cell is left
