@@ -30,7 +30,7 @@
  */
 export default function CulturalBanner() {
   return (
-    <div aria-hidden className="pointer-events-none absolute inset-0 z-[1] overflow-hidden xl:z-auto">
+    <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
       <svg className="absolute inset-0 size-full" xmlns="http://www.w3.org/2000/svg">
         <defs>
           {/* Temple border: triangles stepping in from the edge, the band and

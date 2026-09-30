@@ -25,51 +25,40 @@ import { heroScene } from "@/config/content";
 export default function SilkStage({ children }: { children: ReactNode }) {
   return (
     <>
-      {/* From xl the scene covers the right 58% and its own gradient dissolves
-          it into the page before it reaches the copy: solid to 24%, gone by
-          40%. The artwork's own left edge is a plain wall, so the two creams
-          meet inside the dissolve rather than at a line.
+      {/* A framed portrait below xl, the right hand panel from xl.
 
-          Below xl it takes two layers, because one gradient cannot be open at
-          the sides and closed behind the words at once. A flat base carries
-          the foot of the section and a radial over it puts the cream back
-          where the copy is. What is left uncovered is the sides and the
-          bottom corners, and that is where the scene shows.
+          It used to be one full bleed layer at every width, and that was the
+          fault. A single 824x1024 portrait cannot cover panels whose aspect
+          runs from 0.37 on a phone to 1.67 at 1920, and measured, it was
+          discarding 53% of the picture's WIDTH at 360 and 52% of its height
+          at 1920. Half the artwork was not on the page.
 
-          The flat band from 185 to 425px is the row of four promises, the
-          real text down in the open part: measured at 200 to 405px off the
-          foot at 360, 390 and 430, and 220 to 323 at 768. These numbers move
-          whenever the section's height does, and they have already caught
-          one regression that way, so re-measure rather than assume.
+          A fixed height band was no better: full width at 1024 it kept 30% of
+          the height and showed a strip of trunk with the woman cropped off
+          the top entirely. So below xl the box holds close to the picture's
+          own 824:1024 instead, capped at 380 and 430px wide, and almost
+          nothing is lost. It reads as a framed photograph under the copy,
+          which suits an upright composition better than a letterbox.
 
-          The two column split is xl, not lg. At exactly 1024 there is not
-          room for this copy beside a picture: the column hugged the page
-          edge and ran into the temple border, the category line broke after
-          "silk vetti", the four promises wrapped to three lines each, and
-          the dissolve had only 95px to happen in so it read as a hard edge
-          down the middle of the artwork. 1024 to 1279 now gets the same
-          centred layout as a tablet, which was already the best of them.
+          From xl the panel is capped at 860px, and the section carries an
+          xl:min-h so the panel is tall enough to hold her: those two together
+          take the loss at 1440 from 36% to 17%.
 
-          58%, not 64%, and that is arithmetic rather than taste. The artwork
-          is 824x1024; at 64% of 1440 the panel is 920x900, cover scales it to
-          920x1144 and throws away 244px of height, which took the trunk of
-          sarees off the bottom. At 58% the panel is 835 wide, the scale drops
-          to 1.01 and the loss is 137px, so the trunk stays in frame.
-
-          object-position then sits at 38% rather than centred, because what
-          is left to give up is at the top, where the wall is, not at the
-          bottom, where the sarees are. */}
-      <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 w-full xl:w-[58%]">
+          Below xl the copy no longer sits over the picture at all, so there
+          is no scrim. From xl the horizontal dissolve stays: solid to 22%,
+          gone by 40%, so the two creams meet inside the fade rather than at
+          a line. Those stops are measured; scratchpad/probe.py shoots the
+          bare ground and samples the real line boxes over it. */}
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-7 mx-auto h-[440px] w-full max-w-[380px] overflow-hidden rounded-[26px] shadow-[0_18px_44px_rgba(10,46,26,.18)] sm:bottom-9 sm:h-[520px] sm:max-w-[430px] xl:bottom-0 xl:top-0 xl:left-auto xl:mx-0 xl:h-auto xl:max-w-[860px] xl:w-[58%] xl:rounded-none xl:shadow-none">
         <Image
           src={heroScene}
           alt=""
           fill
           priority
           sizes="(max-width: 1279px) 100vw, 58vw"
-          className="object-cover object-[52%_26%] xl:object-[55%_38%]"
+          className="object-cover object-[50%_30%] xl:object-[55%_32%]"
         />
-        <span className="absolute inset-0 bg-[linear-gradient(0deg,rgba(251,253,249,.10)_0px,rgba(251,253,249,.14)_150px,rgba(251,253,249,.88)_185px,rgba(251,253,249,.88)_425px,rgba(251,253,249,.55)_465px,rgba(251,253,249,.5)_100%)] xl:hidden" />
-        <span className="absolute inset-0 bg-[radial-gradient(78%_62%_at_50%_22%,rgba(251,253,249,.92)_0%,rgba(251,253,249,.86)_52%,rgba(251,253,249,.5)_88%,rgba(251,253,249,.16)_100%)] xl:hidden" />
+        <span className="absolute inset-0 hidden bg-[linear-gradient(90deg,#fbfdf9_0%,rgba(251,253,249,.97)_22%,rgba(251,253,249,.5)_40%,rgba(251,253,249,.12)_64%,rgba(251,253,249,0)_100%)] xl:block" />
         <span className="absolute inset-0 hidden bg-[linear-gradient(90deg,#fbfdf9_0%,rgba(251,253,249,.97)_24%,rgba(251,253,249,.5)_40%,rgba(251,253,249,.12)_62%,rgba(251,253,249,0)_100%)] xl:block" />
       </div>
 
@@ -84,7 +73,7 @@ export default function SilkStage({ children }: { children: ReactNode }) {
           thing in the artwork: when the banner was removed the section got
           shorter, the promises slid down into the open part of the scrim and
           the bottom two measured 1.04:1 sitting on bare wood. */}
-      <Wrap className="relative z-10 grid items-center gap-10 pt-12 pb-[200px] sm:pt-16 sm:pb-[220px] xl:grid-cols-[1.05fr_.95fr] xl:gap-14 xl:py-20 xl:pb-20">
+      <Wrap className="relative z-10 grid items-center gap-10 pt-12 pb-[510px] sm:pt-16 sm:pb-[600px] xl:grid-cols-[1.05fr_.95fr] xl:gap-14 xl:py-20 xl:pb-20">
         {children}
       </Wrap>
     </>

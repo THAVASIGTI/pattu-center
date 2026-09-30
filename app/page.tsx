@@ -39,7 +39,12 @@ export default function HomePage() {
   return (
     <>
       {/* ---------------- Hero ---------------- */}
-      <section id="hero" className="relative overflow-hidden bg-cream text-ink">
+      {/* xl:min-h is for the picture, not the copy. The scene is an upright
+          824x1024 and the panel is as tall as this section: at the 668px the
+          copy alone produced, cover was discarding 36% of the artwork's
+          height at 1440 and taking the top of her head with it. At 820 the
+          loss is 17%. */}
+      <section id="hero" className="relative overflow-hidden bg-cream text-ink xl:min-h-[820px]">
         <HeroBackdrop />
         {/* Saree border and kolam under the copy. Sits above the rings and
             motes and below the photograph, which covers whatever of it
