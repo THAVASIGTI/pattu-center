@@ -49,7 +49,7 @@ export default function HomePage() {
           the crop has to begin above 7% or the scene loses its top. At 900
           the whole vertical loss at 1440 is 13%, and at an object-position of
           18% only 2.4% comes off the top, which clears both. */}
-      <section id="hero" className="relative overflow-hidden bg-cream text-ink xl:min-h-[900px]">
+      <section id="hero" className="relative overflow-hidden bg-cream text-ink xl:min-h-[960px]">
         <HeroBackdrop />
         {/* Saree border and kolam under the copy. Sits above the rings and
             motes and below the photograph, which covers whatever of it
