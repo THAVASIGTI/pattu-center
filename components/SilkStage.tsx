@@ -45,10 +45,20 @@ export default function SilkStage({ children }: { children: ReactNode }) {
           take the loss at 1440 from 36% to 17%.
 
           Below xl the copy no longer sits over the picture at all, so there
-          is no scrim. From xl the horizontal dissolve stays: solid to 22%,
-          gone by 40%, so the two creams meet inside the fade rather than at
-          a line. Those stops are measured; scratchpad/probe.py shoots the
-          bare ground and samples the real line boxes over it. */}
+          is no scrim.
+
+          From xl there is a horizontal dissolve, and it is cut to what the
+          words actually need rather than to a round number. Measured, the
+          copy reaches 13.6% into the panel at 1280 and 1440, 2.2% at 1680
+          and not at all at 1920. It used to hold solid cream to 22% and not
+          clear until 100%, which masked four to eight times more of the
+          picture than anything was standing on. It is now solid to 16%, half
+          gone by 28% and clear by 58%, so most of the scene is simply
+          visible.
+
+          Those stops are measured; scratchpad/probe.py shoots the bare
+          ground and samples the real line boxes over it. Widen the copy and
+          they have to move. */}
       <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-7 mx-auto h-[440px] w-full max-w-[380px] overflow-hidden rounded-[26px] shadow-[0_18px_44px_rgba(10,46,26,.18)] sm:bottom-9 sm:h-[520px] sm:max-w-[430px] xl:bottom-0 xl:top-0 xl:left-auto xl:mx-0 xl:h-auto xl:max-w-[860px] xl:w-[58%] xl:rounded-none xl:shadow-none">
         <Image
           src={heroScene}
@@ -58,7 +68,7 @@ export default function SilkStage({ children }: { children: ReactNode }) {
           sizes="(max-width: 1279px) 100vw, 58vw"
           className="object-cover object-[50%_30%] xl:object-[55%_32%]"
         />
-        <span className="absolute inset-0 hidden bg-[linear-gradient(90deg,#fbfdf9_0%,rgba(251,253,249,.97)_22%,rgba(251,253,249,.5)_40%,rgba(251,253,249,.12)_64%,rgba(251,253,249,0)_100%)] xl:block" />
+        <span className="absolute inset-0 hidden bg-[linear-gradient(90deg,#fbfdf9_0%,rgba(251,253,249,.97)_16%,rgba(251,253,249,.5)_28%,rgba(251,253,249,.12)_42%,rgba(251,253,249,0)_58%)] xl:block" />
         <span className="absolute inset-0 hidden bg-[linear-gradient(90deg,#fbfdf9_0%,rgba(251,253,249,.97)_24%,rgba(251,253,249,.5)_40%,rgba(251,253,249,.12)_62%,rgba(251,253,249,0)_100%)] xl:block" />
       </div>
 
