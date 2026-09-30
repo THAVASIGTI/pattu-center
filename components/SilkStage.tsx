@@ -70,7 +70,7 @@ export default function SilkStage({ children }: { children: ReactNode }) {
           sizes="(max-width: 1279px) 100vw, 58vw"
           className="object-cover object-[50%_30%] xl:object-[55%_18%]"
         />
-        <span className="absolute inset-0 hidden bg-[linear-gradient(90deg,#fbfdf9_0%,rgba(251,253,249,.97)_16%,rgba(251,253,249,.5)_28%,rgba(251,253,249,.12)_42%,rgba(251,253,249,0)_58%)] xl:block" />
+        <span className="absolute inset-0 hidden bg-[linear-gradient(90deg,#fbfdf9_0%,rgba(251,253,249,.97)_15%,rgba(251,253,249,.45)_24%,rgba(251,253,249,.08)_32%,rgba(251,253,249,0)_40%)] xl:block" />
         <span className="absolute inset-0 hidden bg-[linear-gradient(90deg,#fbfdf9_0%,rgba(251,253,249,.97)_24%,rgba(251,253,249,.5)_40%,rgba(251,253,249,.12)_62%,rgba(251,253,249,0)_100%)] xl:block" />
       </div>
 
