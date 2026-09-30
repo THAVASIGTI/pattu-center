@@ -32,7 +32,7 @@ const PLATFORM = {
    be an <a> and one that will has to be a <button>, and they must look the
    same. */
 const CARD =
-  "group relative block h-full w-full cursor-pointer overflow-hidden rounded-[20px] border border-line-yellow bg-green-deep shadow-mid transition-all duration-500 hover:-translate-y-1.5 hover:border-yellow/60 hover:shadow-deep focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-green sm:aspect-9/16 sm:h-auto";
+  "group relative block aspect-9/16 w-full cursor-pointer overflow-hidden rounded-[20px] border border-line-yellow bg-green-deep shadow-mid transition-all duration-500 hover:-translate-y-1.5 hover:border-yellow/60 hover:shadow-deep focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-green";
 
 function Card({
   reel,
@@ -126,17 +126,17 @@ export default function ReelWall() {
 
   return (
     <>
-      {/* One card at a time on a phone, scrolled VERTICALLY inside its own
-          box, the way a reels feed reads. Eleven of these in a two-up grid
-          is a wall of thumbnails nobody scrolls past, and a sideways
-          carousel fights the page's own scroll direction. Each card is 86%
-          of the box so the next one shows below it and the swipe is
-          discoverable. From sm it is a grid again, three then four across. */}
-      <ul className="flex h-[74vh] max-h-[620px] min-h-[430px] snap-y snap-mandatory flex-col gap-3 overflow-y-auto overscroll-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:grid sm:h-auto sm:max-h-none sm:min-h-0 sm:snap-none sm:grid-cols-3 sm:gap-4 sm:overflow-visible lg:grid-cols-4">
+      {/* One card per row on a phone, in the page's own flow. No inner
+          scroller: a box that scrolls inside a page that also scrolls means
+          two scrolls competing for the same swipe, and the reader loses
+          track of which one they are moving. The card is capped at 320px so
+          a column of eleven does not run away with the page. From sm it is a
+          grid, three then four across. */}
+      <ul className="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-4">
         {reels.map((r, i) => {
           const { label, Icon, tint } = PLATFORM[r.platform];
           return (
-            <li key={r.slug} className="h-[86%] shrink-0 snap-start sm:h-auto sm:shrink">
+            <li key={r.slug} className="mx-auto w-full max-w-[320px] sm:mx-0 sm:max-w-none">
               <Card
                 reel={r}
                 index={i}
