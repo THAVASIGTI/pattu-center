@@ -49,33 +49,24 @@ export default function SilkStage({ children }: { children: ReactNode }) {
           Below xl the copy no longer sits over the picture at all, so there
           is no scrim.
 
-          From xl there is a horizontal dissolve, solid to 4%, mostly gone
-          by 6% and clear by 8.5%: a fade about 35px wide, and that is all.
+          From xl there is no dissolve at all, because there is nothing left
+          to cover. The copy always ends at almost exactly half the viewport:
+          Wrap is centred at 1180px, so its right edge works out to
+          (100vw - 1180)/2 + 28 + 561, which is 50vw - 1px. Measured, 719 at
+          1440, 639 at 1280, 959 at 1920. So the panel is w-1/2, starting
+          where the words stop, and no cream is needed over the picture.
 
-          The panel is 52%, and going NARROWER is what made her visible.
-          Every widening made it worse, because the mask exists only to cover
-          the copy: a wider panel begins further left, so the copy sits
-          proportionally deeper into it and the cream has to follow. At 68%
-          the solid cream ran to 20% of the panel while her hair begins at
-          9.5% across the artwork, so the mask was over her face; at 74% it
-          swallowed her.
-
-          At 52% the panel starts almost exactly where the copy ends, and the
-          overlap is 3.7% at 1280, 1440, 1680 and 1920 alike, because Wrap is
-          centred so the copy's right edge scales with the viewport just as a
-          percentage panel does.
-
-          object-position is 15% across and 20% down, also measured. At 1280
-          the panel is narrower than the picture renders and 13.8% of width
-          is cropped; at 15% only a sixth of that comes off the left, which
-          keeps her hair at 8.6% and clear of the fade. At 1920 the height
-          crops instead, and 20% keeps the highest floating photograph, which
-          sits at 7%, in frame.
+          It is also aspect-locked to the artwork's own 824:1024 and centred
+          vertically, so NEITHER dimension is cropped. Full bleed and no crop
+          cannot both be had unless the panel's aspect equals the picture's,
+          and every version before this one paid for the bleed by throwing
+          away 3 to 23% of the image. This one keeps all of it and takes
+          cream above and below instead.
 
           Those stops are measured; scratchpad/probe.py shoots the bare
           ground and samples the real line boxes over it. Widen the copy and
           they have to move. */}
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-7 mx-auto h-[440px] w-full max-w-[380px] overflow-hidden rounded-[26px] shadow-[0_18px_44px_rgba(10,46,26,.18)] sm:bottom-9 sm:h-[520px] sm:max-w-[430px] xl:bottom-0 xl:top-0 xl:left-auto xl:mx-0 xl:h-auto xl:max-w-[1000px] xl:w-[52%] xl:rounded-none xl:shadow-none">
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-7 mx-auto h-[440px] w-full max-w-[380px] overflow-hidden rounded-[26px] shadow-[0_18px_44px_rgba(10,46,26,.18)] sm:bottom-9 sm:h-[520px] sm:max-w-[430px] xl:top-1/2 xl:right-0 xl:bottom-auto xl:left-auto xl:mx-0 xl:h-auto xl:w-1/2 xl:max-w-[760px] xl:-translate-y-1/2 xl:aspect-[824/1024] xl:rounded-[28px] xl:shadow-[0_26px_64px_rgba(10,46,26,.2)]">
         <Image
           src={heroScene}
           alt=""
@@ -84,8 +75,6 @@ export default function SilkStage({ children }: { children: ReactNode }) {
           sizes="(max-width: 1279px) 100vw, 58vw"
           className="object-cover object-[50%_30%] xl:object-[15%_20%]"
         />
-        <span className="absolute inset-0 hidden bg-[linear-gradient(90deg,#fbfdf9_0%,rgba(251,253,249,.96)_4%,rgba(251,253,249,.3)_6%,rgba(251,253,249,0)_8.5%)] xl:block" />
-        <span className="absolute inset-0 hidden bg-[linear-gradient(90deg,#fbfdf9_0%,rgba(251,253,249,.97)_24%,rgba(251,253,249,.5)_40%,rgba(251,253,249,.12)_62%,rgba(251,253,249,0)_100%)] xl:block" />
       </div>
 
       {/* One column of copy in a two column grid. The second cell is left
