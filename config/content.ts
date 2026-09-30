@@ -27,12 +27,16 @@ export const img = (id: number) => `${BASE_PATH}/img/silk-${id}.jpg`;
 
 /** Brand marks. `logoMark` is the emblem alone, the wordmark in the full
  *  lockup is illegible below about 120px, so small placements use the mark. */
-/** The three keepsake cards in the hero. Cropped and re-encoded rather than
- *  pointed at the silk-*.jpg originals: they render at 86x104 CSS, and the
- *  three originals together are 897KB against 41KB for these. They are hidden
- *  below sm with display:none, which does NOT stop a browser fetching them,
- *  so a phone was paying for all three too. */
-export const keepsakeImg = (n: number) => `${BASE_PATH}/img/keepsake-${n}.jpg`;
+/** The hero subject: a bride in Kanchipuram silk, which is the saree that
+ *  ends up folded in an almirah for twenty years. One still photograph rather
+ *  than the five that used to cross-fade here, and 186KB at 900px wide
+ *  against the 304KB original. */
+export const heroSubject = `${BASE_PATH}/img/hero-subject.jpg`;
+
+/** The keepsake cards, which now carry the cycle the background used to.
+ *  Cropped per silk: they render at 86x104 CSS, so the originals would have
+ *  been about 1.4MB for five pictures the size of a thumbnail. */
+export const cardImg = (slug: string) => `${BASE_PATH}/img/card-${slug}.jpg`;
 
 export const logoMark = `${BASE_PATH}/img/logo-mark.png`;
 export const logoFull = `${BASE_PATH}/img/logo.png`;
