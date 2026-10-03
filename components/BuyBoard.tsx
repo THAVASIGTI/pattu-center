@@ -35,12 +35,29 @@ export default function BuyBoard() {
       {buyCategories.map((c, i) => (
         <li key={c.slug} className="h-full">
           <Reveal className="h-full" from="scale" delay={(i % 3) * 110} duration={850}>
-            {/* flex column with an h-full chain from the grid cell down, so
+            {/* A square box, not a tall card. The photo used to be the
+                square and the name sat below it, which made the card itself
+                340 tall against 284 wide. Now the CARD is the square and the
+                photo takes whatever the name leaves, so the whole thing is
+                shorter and reads as a box.
+
+                Square from sm up only. At 390 a square card is 166 tall, and
+                a name that wraps to two lines leaves the photograph about 85
+                of them: a strip too thin to show what the saree is. 5:6
+                gives it back about 50px and the card is still shorter than
+                the 252 it was.
+
+                flex column with an h-full chain from the grid cell down, so
                 every card in a row ends on the same line. Without it a name
                 that wraps to two lines makes its card taller than the one
                 beside it, which the poster this is drawn from never does. */}
-            <article className="group flex h-full flex-col overflow-hidden rounded-[20px] border border-yellow/45 bg-[rgba(10,46,26,.5)] shadow-deep transition-all duration-500 hover:-translate-y-1.5 hover:border-yellow/75">
-              <div className="relative aspect-square shrink-0 overflow-hidden">
+            <article className="group flex aspect-5/6 h-full flex-col sm:aspect-square overflow-hidden rounded-[16px] border border-yellow/45 bg-[rgba(10,46,26,.5)] shadow-deep transition-all duration-500 hover:-translate-y-1.5 hover:border-yellow/75">
+              {/* No aspect of its own any more: it fills what is left of
+                  the square after the name plate. The crop is harder for it,
+                  roughly a 1.35:1 slice of a 0.56 portrait, and it is taken
+                  from the centre because that is where the border and pallu
+                  of a flat-laid saree sit. */}
+              <div className="relative min-h-0 flex-1 overflow-hidden">
                 <Image
                   src={shopImg(c.shop)}
                   alt={c.alt}
@@ -57,7 +74,7 @@ export default function BuyBoard() {
                 />
               </div>
 
-              <div className="flex flex-1 flex-col justify-center border-t border-yellow/40 bg-[rgba(8,38,21,.86)] px-2.5 py-3 text-center sm:px-3.5 sm:py-3.5">
+              <div className="flex shrink-0 flex-col justify-center border-t border-yellow/40 bg-[rgba(8,38,21,.86)] px-2.5 py-3 text-center sm:px-3.5 sm:py-3.5">
                 <h3 className="font-serif text-[0.92rem] leading-snug text-cream sm:text-[1.02rem]">
                   {c.name}
                 </h3>
