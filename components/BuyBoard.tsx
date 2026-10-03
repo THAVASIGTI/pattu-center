@@ -26,8 +26,12 @@ import Reveal from "./Reveal";
  * button under the grid is the way through.
  */
 export default function BuyBoard() {
+  // The grid is capped well inside the wrapper. Left to fill it, three
+  // columns put each card at 357px at 1440, which is larger than a card
+  // carrying two short lines needs to be and larger than the poster's own
+  // proportions. 900px holds them at about 284.
   return (
-    <ul className="grid grid-cols-2 gap-3.5 sm:gap-5 lg:grid-cols-3 lg:gap-6">
+    <ul className="mx-auto grid max-w-[900px] grid-cols-2 gap-3.5 sm:max-w-[620px] sm:gap-4 lg:max-w-[900px] lg:grid-cols-3 lg:gap-5">
       {buyCategories.map((c, i) => (
         <li key={c.slug} className="h-full">
           <Reveal className="h-full" from="scale" delay={(i % 3) * 110} duration={850}>
@@ -41,7 +45,7 @@ export default function BuyBoard() {
                   src={shopImg(c.shop)}
                   alt={c.alt}
                   fill
-                  sizes="(max-width: 639px) 46vw, (max-width: 1023px) 30vw, 340px"
+                  sizes="(max-width: 639px) 46vw, (max-width: 1023px) 300px, 290px"
                   className="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.07]"
                 />
 
