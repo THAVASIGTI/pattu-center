@@ -37,12 +37,14 @@ const CARD =
 function Card({
   reel,
   index,
+  total,
   label,
   onOpen,
   children,
 }: {
   reel: Reel;
   index: number;
+  total: number;
   label: string;
   onOpen: (el: HTMLButtonElement) => void;
   children: ReactNode;
@@ -53,7 +55,7 @@ function Card({
         href={reel.href}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label={`Open video ${index + 1} of ${reels.length} on ${label}, in a new tab`}
+        aria-label={`Open video ${index + 1} of ${total} on ${label}, in a new tab`}
         className={CARD}
       >
         {children}
@@ -64,7 +66,7 @@ function Card({
     <button
       type="button"
       onClick={(e) => onOpen(e.currentTarget)}
-      aria-label={`Play video ${index + 1} of ${reels.length}, on ${label}`}
+      aria-label={`Play video ${index + 1} of ${total}, on ${label}`}
       aria-haspopup="dialog"
       className={CARD}
     >
@@ -73,7 +75,14 @@ function Card({
   );
 }
 
-export default function ReelWall() {
+/**
+ * `items` is which reels to show. The home page passes six, two from each
+ * platform; the gallery passes the lot. Everything that counts, the "video 3
+ * of 6" in the accessible names and the dialog's own label, reads from the
+ * list that was passed and not from the module's, or the home page would
+ * announce six cards as eleven.
+ */
+export default function ReelWall({ items = reels }: { items?: Reel[] }) {
   const [open, setOpen] = useState<number | null>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -122,7 +131,7 @@ export default function ReelWall() {
     };
   }, [open, close]);
 
-  const current = open === null ? null : reels[open];
+  const current = open === null ? null : items[open];
 
   return (
     <>
@@ -131,15 +140,30 @@ export default function ReelWall() {
           two scrolls competing for the same swipe, and the reader loses
           track of which one they are moving. The card is capped at 320px so
           a column of eleven does not run away with the page. From sm it is a
-          grid, three then four across. */}
-      <ul className="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-        {reels.map((r, i) => {
+          grid, three then four across.
+
+          Six cards go three across at every size above a phone, because four
+          would leave a row of four and a row of two. Longer sets take the
+          fourth column.
+
+          The short set is also capped at 920px. Three columns filling the
+          wrapper put each card at 360px wide and 640 tall, which is LARGER
+          than the eleven-card wall's 270 and the wrong direction entirely:
+          showing fewer videos should not make the section taller per card.
+          The cap holds them at about 296. */}
+      <ul
+        className={`grid grid-cols-1 gap-4 sm:grid-cols-3 ${
+          items.length > 6 ? "lg:grid-cols-4" : "lg:mx-auto lg:max-w-[920px]"
+        }`}
+      >
+        {items.map((r, i) => {
           const { label, Icon, tint } = PLATFORM[r.platform];
           return (
             <li key={r.slug} className="mx-auto w-full max-w-[320px] sm:mx-0 sm:max-w-none">
               <Card
                 reel={r}
                 index={i}
+                total={items.length}
                 label={label}
                 onOpen={(el) => {
                   openerRef.current = el;
@@ -200,7 +224,7 @@ export default function ReelWall() {
         <div
           role="dialog"
           aria-modal="true"
-          aria-label={`Video ${(open ?? 0) + 1} of ${reels.length}`}
+          aria-label={`Video ${(open ?? 0) + 1} of ${items.length}`}
           onMouseDown={(e) => {
             if (e.target === e.currentTarget) close();
           }}
@@ -233,7 +257,7 @@ export default function ReelWall() {
               <iframe
                 key={current.slug}
                 src={current.embed}
-                title={`Video ${(open ?? 0) + 1} of ${reels.length}`}
+                title={`Video ${(open ?? 0) + 1} of ${items.length}`}
                 allow="autoplay; encrypted-media; picture-in-picture; clipboard-write; web-share"
                 allowFullScreen
                 className="size-full border-0"

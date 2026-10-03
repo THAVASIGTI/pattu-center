@@ -12,14 +12,11 @@ import ReelWall from "@/components/ReelWall";
 import {
   ArrowRight,
   Check,
-  Facebook,
-  Instagram,
   Ledger,
   Phone,
   Scale,
   Shield,
   WhatsApp,
-  YouTube,
   ZariBorder,
   serviceIcons,
 } from "@/components/Icons";
@@ -28,6 +25,7 @@ import { Button, Section, SectionHead, Wrap } from "@/components/ui";
 import { branchCount, branchCountWordCap, branches, business, waLink } from "@/config/business";
 import {
   priceLedger,
+  homeReels,
   reels,
   sellingTips,
   services,
@@ -209,20 +207,16 @@ export default function HomePage() {
               lead="Clips from our own pages and channel, of the work as it happens. Tap any one to play it here."
             />
           </Reveal>
-          <ReelWall />
+          {/* Six here, two from each platform, not the whole wall. Eleven
+              cards ran 7,000px down a phone in the middle of the home page,
+              which is a long way to scroll past something nobody asked to
+              see all of. The rest are on the gallery, one click away. */}
+          <ReelWall items={homeReels} />
 
-          <div className="mt-8 flex flex-wrap justify-center gap-2.5">
-            <Button href={business.social.facebook} variant="outline" external>
-              <Facebook className="size-[17px]" />
-              Follow on Facebook
-            </Button>
-            <Button href={business.social.instagram} variant="outline" external>
-              <Instagram className="size-[17px]" />
-              Follow on Instagram
-            </Button>
-            <Button href={business.social.youtube} variant="outline" external>
-              <YouTube className="size-[17px]" />
-              Subscribe on YouTube
+          <div className="mt-8 text-center">
+            <Button href="/gallery#social" variant="outline">
+              See all {reels.length} videos
+              <ArrowRight className="size-[17px]" />
             </Button>
           </div>
         </Wrap>

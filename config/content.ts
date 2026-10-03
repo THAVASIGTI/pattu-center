@@ -554,6 +554,33 @@ export const reels: Reel[] = [
     poster: `${BASE_PATH}/img/reels/ig-6.jpg`,
   },
 ];
+
+/**
+ * The six the home page shows: two from each platform.
+ *
+ * Derived rather than listed, so adding a reel to `reels` above cannot leave
+ * this stale or, worse, leave the home page quietly showing three Facebook
+ * clips and no Instagram.
+ *
+ * `linkOnly` reels are skipped. Two of the Instagram posts carry licensed
+ * commercial audio and will not embed at all, and the section promises you
+ * can tap any one and watch it there. The gallery still carries them, where
+ * the card says on its face that it opens on Instagram.
+ *
+ * Interleaved, not grouped, so the first row holds one of each rather than
+ * two YouTube clips and a Facebook one.
+ */
+const twoEach = (n: number): Reel[] => {
+  const take = (p: Reel["platform"]) =>
+    reels.filter((r) => r.platform === p && !r.linkOnly).slice(0, n);
+  const columns = [take("youtube"), take("facebook"), take("instagram")];
+  return Array.from({ length: n }, (_, i) => columns.map((c) => c[i]))
+    .flat()
+    .filter(Boolean);
+};
+
+export const homeReels = twoEach(2);
+
 /* ------------------------------------------------------------------ */
 /* How the number is reached, ledger of what moves the price          */
 /* ------------------------------------------------------------------ */

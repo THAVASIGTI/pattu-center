@@ -3,13 +3,16 @@ import Image from "next/image";
 import CtaBand from "@/components/CtaBand";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
-import { Section, SectionHead, Wrap } from "@/components/ui";
-import { galleryImages, img, shopGallery, shopImg } from "@/config/content";
+import ReelWall from "@/components/ReelWall";
+import { Facebook, Instagram, YouTube } from "@/components/Icons";
+import { Button, Section, SectionHead, Wrap } from "@/components/ui";
+import { business } from "@/config/business";
+import { galleryImages, img, reels, shopGallery, shopImg } from "@/config/content";
 
 export const metadata: Metadata = {
   title: "Gallery",
   description:
-    "Silk, zari and handloom from the trade we work in every day across Tamil Nadu.",
+    "Every video from our Facebook, Instagram and YouTube, plus the silk, zari and handloom from the trade we work in every day across Tamil Nadu.",
   alternates: { canonical: "/gallery" },
 };
 
@@ -24,8 +27,53 @@ export default function GalleryPage() {
         image={img(33433875)}
       />
 
+      {/* Social first, because this is where the home page sends anyone who
+          pressed "See all videos" and it should be the thing under the
+          anchor, not something they have to scroll past a hundred stills to
+          reach. The whole set lives here, the two that will not embed
+          included, since a card that says it opens on Instagram is honest in
+          a place that promises everything. */}
+      {/* scroll-mt because the header is sticky. Jumping to #social puts
+          the section top at 0, and the header is 79px on a phone, which
+          swallows the ornament above the eyebrow. */}
+      <Section id="social" tone="cream" className="scroll-mt-20 sm:scroll-mt-24">
+        <Wrap>
+          <Reveal>
+            <SectionHead
+              eyebrow="Watch us"
+              title={<>All {reels.length} videos from our <span className="foil-text-deep">own pages</span>.</>}
+              lead="Everything we have posted to Facebook, Instagram and YouTube, of the work as it happens. Tap any one to play it here."
+            />
+          </Reveal>
+
+          <ReelWall />
+
+          <div className="mt-9 flex flex-wrap justify-center gap-2.5">
+            <Button href={business.social.facebook} variant="outline" external>
+              <Facebook className="size-[17px]" />
+              Follow on Facebook
+            </Button>
+            <Button href={business.social.instagram} variant="outline" external>
+              <Instagram className="size-[17px]" />
+              Follow on Instagram
+            </Button>
+            <Button href={business.social.youtube} variant="outline" external>
+              <YouTube className="size-[17px]" />
+              Subscribe on YouTube
+            </Button>
+          </div>
+        </Wrap>
+      </Section>
+
       <Section>
         <Wrap>
+          <Reveal>
+            <SectionHead
+              eyebrow="Our counters"
+              title="Sarees that passed through our hands."
+              lead="Photographs of the silk we have bought, taken at our own counters."
+            />
+          </Reveal>
           <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:gap-4">
             {shopGallery.map((g, i) => (
               <Reveal key={g.n} delay={(i % 3) * 70}>
