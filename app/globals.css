@@ -139,6 +139,30 @@
   -webkit-text-fill-color: transparent;
 }
 
+/* Foil for DARK grounds. The standard --foil ends at #a87f0a, and measured
+   through a glyph coverage mask that end reads 2.90:1 on the green section
+   at 1440 and 2.80:1 at 390, both under the 3:1 floor for large text.
+
+   Picking the gradient's dark end out of a screenshot takes the mask: a
+   threshold on "how far is this pixel from the ground" cannot do it, because
+   #fffbe6 sits 601 units from the dark green and #a87f0a only 233, so any
+   cut that keeps the bright middle discards the ends that need checking.
+   scratchpad/foil2.py paints the span flat, measures coverage, then reads
+   the real pixels back at full coverage only.
+
+   #c89608 is the same hue walked up until the worst case clears: 3.79:1 on
+   the section's median ground and 3.60:1 where the green radial lifts it.
+   The middle of the gradient is untouched, so it still reads as foil. */
+@utility foil-text-light {
+  background-image: linear-gradient(
+    100deg, #c89608 0%, #fde047 26%, #fffbe6 46%, #fde047 66%, #c89608 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
 /* Slow continuous sweep across gold foil text */
 @utility foil-shimmer {
   background-size: 200% 100%;

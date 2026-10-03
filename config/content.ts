@@ -149,6 +149,73 @@ export const sareeTypes: SareeType[] = [
   },
 ];
 
+/**
+ * The six headline categories for the home page board, in the order the
+ * client's own poster lists them.
+ *
+ * These are deliberately NOT `sareeTypes`. That list is the trade's own
+ * breakdown, nine entries deep, with a paragraph each, and it belongs on
+ * /what-we-buy where someone has come to read. This one is the poster: six
+ * names a customer already uses for what is folded in her almirah, on a
+ * photograph of that exact thing, with no prose at all.
+ *
+ * Every photograph here is one of theirs, from public/img/shop. The stock
+ * silk in `sareeTypes` is a stand-in; these are sarees they actually bought,
+ * which is the whole claim the section is making.
+ */
+export type BuyCategory = {
+  slug: string;
+  name: string;
+  ta: string;
+  shop: number;
+  alt: string;
+};
+
+export const buyCategories: BuyCategory[] = [
+  {
+    slug: "kanchipuram-pattu",
+    name: "Kanchipuram Pattu Sarees",
+    ta: "காஞ்சிபுரம் பட்டு புடவை",
+    shop: 22,
+    alt: "Teal Kanchipuram silk saree with woven annam motifs and a pink and gold zari border",
+  },
+  {
+    slug: "old-silk",
+    name: "Old Silk Sarees",
+    ta: "பழைய பட்டு புடவை",
+    shop: 13,
+    alt: "Lavender silk saree with small silver butta, creased from years folded away",
+  },
+  {
+    slug: "wedding",
+    name: "Wedding Sarees",
+    ta: "திருமண பட்டு புடவை",
+    shop: 19,
+    alt: "Orange and gold brocade wedding saree with a deep red border, laid out flat",
+  },
+  {
+    slug: "zari",
+    name: "Zari Sarees",
+    ta: "ஜரிகை புடவை",
+    shop: 18,
+    alt: "Gold tissue saree woven almost end to end in zari, edged in red",
+  },
+  {
+    slug: "banarasi-mysore",
+    name: "Banarasi & Mysore Silk",
+    ta: "பனாரஸ் & மைசூர் பட்டு",
+    shop: 16,
+    alt: "Purple silk saree with a dense gold Banarasi brocade pallu",
+  },
+  {
+    slug: "old-damaged",
+    name: "Old / Damaged Sarees",
+    ta: "பழுதான புடவை",
+    shop: 5,
+    alt: "Faded cream and pink silk saree with a worn gold zari border",
+  },
+];
+
 export type Service = {
   slug: string;
   title: string;

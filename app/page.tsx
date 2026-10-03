@@ -3,7 +3,7 @@ import BranchCard from "@/components/BranchCard";
 import BranchMarquee from "@/components/BranchMarquee";
 import Counter from "@/components/Counter";
 import CtaBand from "@/components/CtaBand";
-import SilkTile from "@/components/SilkTile";
+import BuyBoard from "@/components/BuyBoard";
 import SilkStage from "@/components/SilkStage";
 import CulturalBanner from "@/components/CulturalBanner";
 import HeroBackdrop from "@/components/HeroBackdrop";
@@ -29,7 +29,6 @@ import { branchCount, branchCountWordCap, branches, business, waLink } from "@/c
 import {
   priceLedger,
   reels,
-  sareeTypes,
   sellingTips,
   services,
   testimonials,
@@ -167,27 +166,32 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ---------------- What we buy ---------------- */}
-      <Section tone="cream">
+      {/* ---------------- What we buy ----------------
+
+          Laid out from the client's own poster: six named photographs on a
+          dark ground inside a gold hairline, with one gold pill under them.
+          Their poster is maroon; this is the deep green the rest of the site
+          already uses, so the section reads as theirs without introducing a
+          colour the brand does not have.
+
+          It is the only dark section in the first half of the page, which is
+          the point. This is the question every visitor arrives with, and a
+          page of alternating cream reads as one long paragraph. */}
+      <Section tone="green">
         <Wrap>
           <Reveal>
             <SectionHead
+              tone="dark"
               eyebrow="What we buy"
-              title="If it carries silk and zari, bring it to us."
-              lead="We take the whole saree: body, border and pallu. The price follows weight, silk purity and the amount of zari woven into it."
+              title={<>All types of <span className="foil-text-light">pattu and silk</span> sarees.</>}
+              lead="If it carries silk and zari, bring it to us. Body, border and pallu, priced on weight, silk purity and the amount of zari woven in."
             />
           </Reveal>
 
-          <div className="grid gap-7 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-9 lg:grid-cols-3">
-            {sareeTypes.slice(0, 6).map((t, i) => (
-              <Reveal key={t.slug} from="scale" delay={(i % 3) * 110} duration={850}>
-                <SilkTile item={t} />
-              </Reveal>
-            ))}
-          </div>
+          <BuyBoard />
 
-          <div className="mt-8 text-center">
-            <Button href="/what-we-buy" variant="outline">
+          <div className="mt-9 text-center">
+            <Button href="/what-we-buy" variant="yellow">
               See everything we buy
               <ArrowRight className="size-[17px]" />
             </Button>
