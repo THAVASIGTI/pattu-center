@@ -159,15 +159,20 @@ export const sareeTypes: SareeType[] = [
  * names a customer already uses for what is folded in her almirah, on a
  * photograph of that exact thing, with no prose at all.
  *
- * Every photograph here is one of theirs, from public/img/shop. The stock
- * silk in `sareeTypes` is a stand-in; these are sarees they actually bought,
- * which is the whole claim the section is making.
+ * The photographs are stacks of folded silk, not single flat-laid sarees,
+ * because that is what the client's poster shows and because a stack reads as
+ * a CATEGORY while one saree reads as one saree.
+ *
+ * They are Pexels stock, not the shop's own. Nothing in public/img/shop is a
+ * stack; every file there is a single saree laid flat. Their own photograph
+ * of a pile on the counter would beat any of these and should replace them
+ * when there is one.
  */
 export type BuyCategory = {
   slug: string;
   name: string;
   ta: string;
-  shop: number;
+  imageId: number;
   alt: string;
 };
 
@@ -176,43 +181,43 @@ export const buyCategories: BuyCategory[] = [
     slug: "kanchipuram-pattu",
     name: "Kanchipuram Pattu Sarees",
     ta: "காஞ்சிபுரம் பட்டு புடவை",
-    shop: 22,
-    alt: "Teal Kanchipuram silk saree with woven annam motifs and a pink and gold zari border",
+    imageId: 10317106,
+    alt: "A stack of folded Kanchipuram silk sarees in gold and purple, their zari borders laid one on another",
   },
   {
     slug: "old-silk",
     name: "Old Silk Sarees",
     ta: "பழைய பட்டு புடவை",
-    shop: 13,
-    alt: "Lavender silk saree with small silver butta, creased from years folded away",
+    imageId: 10317122,
+    alt: "Folded silk sarees in many colours spread across a shop counter, each with a woven gold motif",
   },
   {
     slug: "wedding",
     name: "Wedding Sarees",
     ta: "திருமண பட்டு புடவை",
-    shop: 19,
-    alt: "Orange and gold brocade wedding saree with a deep red border, laid out flat",
+    imageId: 10317124,
+    alt: "A pink silk wedding saree folded to show its broad gold zari border and pallu",
   },
   {
     slug: "zari",
     name: "Zari Sarees",
     ta: "ஜரிகை புடவை",
-    shop: 18,
-    alt: "Gold tissue saree woven almost end to end in zari, edged in red",
+    imageId: 10317127,
+    alt: "Red, purple and teal silk sarees folded together, each covered in dense gold zari butta",
   },
   {
     slug: "banarasi-mysore",
     name: "Banarasi & Mysore Silk",
     ta: "பனாரஸ் & மைசூர் பட்டு",
-    shop: 16,
-    alt: "Purple silk saree with a dense gold Banarasi brocade pallu",
+    imageId: 10317131,
+    alt: "A teal and gold silk saree folded into a neat pile, its fine zari checks running across the body",
   },
   {
     slug: "old-damaged",
     name: "Old / Damaged Sarees",
     ta: "பழுதான புடவை",
-    shop: 5,
-    alt: "Faded cream and pink silk saree with a worn gold zari border",
+    imageId: 9415606,
+    alt: "Faded silk sarees stacked high on a shop counter, their borders worn soft with age",
   },
 ];
 

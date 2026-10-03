@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { buyCategories, shopImg } from "@/config/content";
+import { buyCategories, img } from "@/config/content";
 import Reveal from "./Reveal";
 
 /**
@@ -16,10 +16,10 @@ import Reveal from "./Reveal";
  * over, the gold hairline, the photograph to the edges of it, the name on a
  * darker plate at the foot, the gold pill below the grid.
  *
- * The photographs are square. The shop files are all 0.56 portrait, so a
- * square crop drops 44% of the height, and that is deliberate: it lands on
- * the border and pallu, which is the part of a saree that says which kind it
- * is. A 4:3 card would have kept more of the frame and less of the subject.
+ * The photographs are stacks of folded silk, which is what the poster shows:
+ * a pile reads as a category, where one saree laid flat reads as one saree.
+ * They are 4:3 at source and the card shows roughly a 1.35:1 slice of the
+ * middle, so very little is lost.
  *
  * The cards are not links. Six of them pointing at the same page reads as
  * six identical links to a screen reader and buys nothing; the one gold
@@ -55,11 +55,11 @@ export default function BuyBoard() {
               {/* No aspect of its own any more: it fills what is left of
                   the square after the name plate. The crop is harder for it,
                   roughly a 1.35:1 slice of a 0.56 portrait, and it is taken
-                  from the centre because that is where the border and pallu
-                  of a flat-laid saree sit. */}
+                  from the centre, which on every one of these is the body of
+                  the stack. */}
               <div className="relative min-h-0 flex-1 overflow-hidden">
                 <Image
-                  src={shopImg(c.shop)}
+                  src={img(c.imageId)}
                   alt={c.alt}
                   fill
                   sizes="(max-width: 639px) 46vw, (max-width: 1023px) 300px, 290px"
