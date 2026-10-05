@@ -13,6 +13,7 @@ import {
   ArrowRight,
   Check,
   Ledger,
+  Lotus,
   Phone,
   Scale,
   Shield,
@@ -56,10 +57,27 @@ export default function HomePage() {
             so they are one component; the copy stays here as its children. */}
         <SilkStage>
           <div className="order-1 text-center xl:text-left">
-            {/* What we buy, said before anything else. The reference this was
-                rebuilt from opens on the goods rather than a greeting, which
-                is the right call: a visitor who has found this page already
-                knows whose site it is, and the header carries the name. */}
+            {/* The greeting, on its own ground.
+
+                It sits in a chip rather than as a bare line because of what
+                is behind it: rings, motes, a kolam and a temple border all
+                pass under this corner, and a chip gives the words a ground
+                that does not move with them. It also keeps the greeting from
+                reading as a second eyebrow, which a gold uppercase line
+                directly above a gold uppercase line would. */}
+            <p className="mb-4 inline-flex items-center gap-2.5 rounded-full border border-line-yellow glass-soft px-4 py-1.5 shadow-soft">
+              <Lotus aria-hidden className="size-4 shrink-0 text-yellow-ink" />
+              <span className="text-[0.84rem] text-ink-soft">
+                Welcome to{" "}
+                <b className="font-serif text-[0.95rem] font-normal text-green-deep">
+                  {business.name}
+                </b>
+              </span>
+            </p>
+
+            {/* What we buy, said next. The reference this was rebuilt from
+                opens on the goods, and that order is kept: the greeting is
+                one quiet line, then the goods, then the claim. */}
             <p className="mb-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 xl:justify-start">
               <span aria-hidden className="foil hidden h-px w-8 shrink-0 xl:block" />
               {["Old pattu sarees", "Silk vetti", "Zari and silver"].map((t, i) => (
