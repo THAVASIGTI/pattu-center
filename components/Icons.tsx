@@ -62,6 +62,29 @@ export const Lotus = (p: P) => (
   </svg>
 );
 
+/**
+ * Vanakkam: two palms pressed together, the Tamil greeting.
+ *
+ * Drawn at 1.5 and meant to be shown at 36px or larger. What makes this read
+ * as hands rather than as a leaf is the finger creases at the top and the
+ * sleeves splaying at the foot, and both of those close up below about 32px,
+ * at which point it goes back to being a leaf. Do not shrink it.
+ *
+ * The proportions come from the folded-hands glyph rather than from
+ * imagination: the real gesture is nearly as wide as it is tall. Five
+ * earlier attempts were tall and narrow, and every one of them read as a
+ * leaf for that reason alone.
+ */
+export const Vanakkam = (p: P) => (
+  <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.5} {...p}>
+    <path d="M12 2.9C10.1 4.5 8.2 6.9 6.8 9.6c-1.4 2.7-2 5.1-1.6 6.9.2 1.2 1 2.1 2.1 2.5H12" />
+    <path d="M12 2.9c1.9 1.6 3.8 4 5.2 6.7 1.4 2.7 2 5.1 1.6 6.9-.2 1.2-1 2.1-2.1 2.5H12" />
+    <path d="M12 2.9V19" />
+    <path d="M10.4 4.1 9.3 7.4M8.8 6.3 7.6 9.5M13.6 4.1l1.1 3.3M15.2 6.3l1.2 3.2" />
+    <path d="m7.3 19-2.5 2.7M16.7 19l2.5 2.7" />
+  </svg>
+);
+
 export const Menu = (p: P) => (
   <svg viewBox="0 0 24 24" {...stroke} {...p}>
     <path d="M4 7h16M4 12h16M4 17h16" />

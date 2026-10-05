@@ -13,10 +13,10 @@ import {
   ArrowRight,
   Check,
   Ledger,
-  Lotus,
   Phone,
   Scale,
   Shield,
+  Vanakkam,
   WhatsApp,
   ZariBorder,
   serviceIcons,
@@ -65,11 +65,14 @@ export default function HomePage() {
                 that does not move with them. It also keeps the greeting from
                 reading as a second eyebrow, which a gold uppercase line
                 directly above a gold uppercase line would. */}
-            <p className="mb-4 inline-flex items-center gap-2.5 rounded-full border border-line-yellow glass-soft px-4 py-1.5 shadow-soft">
-              <Lotus aria-hidden className="size-4 shrink-0 text-yellow-ink" />
-              <span className="text-[0.84rem] text-ink-soft">
+            <p className="mb-5 inline-flex items-center gap-3 rounded-full border border-line-yellow glass-soft px-5 py-2.5 shadow-soft">
+              {/* 36px, not the 16 an icon beside text would normally take.
+                  The finger creases and the splayed sleeves are what stop
+                  this reading as a leaf, and both close up below about 32. */}
+              <Vanakkam aria-hidden className="size-9 shrink-0 text-yellow-ink" />
+              <span className="text-[0.95rem] text-ink-soft">
                 Welcome to{" "}
-                <b className="font-serif text-[0.95rem] font-normal text-green-deep">
+                <b className="font-serif text-[1.15rem] font-normal text-green-deep">
                   {business.name}
                 </b>
               </span>
