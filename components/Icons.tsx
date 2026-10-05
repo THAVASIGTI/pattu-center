@@ -65,23 +65,23 @@ export const Lotus = (p: P) => (
 /**
  * Vanakkam: two palms pressed together, the Tamil greeting.
  *
- * Drawn at 1.5 and meant to be shown at 36px or larger. What makes this read
- * as hands rather than as a leaf is the finger creases at the top and the
- * sleeves splaying at the foot, and both of those close up below about 32px,
- * at which point it goes back to being a leaf. Do not shrink it.
+ * Phosphor Icons "hands-praying", regular weight, MIT licensed (c) 2023
+ * Phosphor Icons. Free for commercial use with no attribution required; the
+ * credit here is provenance, not an obligation.
  *
- * The proportions come from the folded-hands glyph rather than from
- * imagination: the real gesture is nearly as wide as it is tall. Five
- * earlier attempts were tall and narrow, and every one of them read as a
- * leaf for that reason alone.
+ * This is a drop-in replacement for one I drew by hand, and the hand-drawn
+ * one was bad. Six attempts, each rendered in the browser and looked at, and
+ * every one read as a leaf rather than as hands. Rendered beside this, the
+ * difference was not close. The lesson is worth keeping: a shape this
+ * specific is a job for an icon set, not for path data written blind.
+ *
+ * Note the 256 viewBox and the fill. Every other icon in this file is a
+ * 24-unit stroke drawing; this one is filled outlines at Phosphor's own
+ * scale, left exactly as shipped so it can be updated from upstream.
  */
 export const Vanakkam = (p: P) => (
-  <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.5} {...p}>
-    <path d="M12 2.9C10.1 4.5 8.2 6.9 6.8 9.6c-1.4 2.7-2 5.1-1.6 6.9.2 1.2 1 2.1 2.1 2.5H12" />
-    <path d="M12 2.9c1.9 1.6 3.8 4 5.2 6.7 1.4 2.7 2 5.1 1.6 6.9-.2 1.2-1 2.1-2.1 2.5H12" />
-    <path d="M12 2.9V19" />
-    <path d="M10.4 4.1 9.3 7.4M8.8 6.3 7.6 9.5M13.6 4.1l1.1 3.3M15.2 6.3l1.2 3.2" />
-    <path d="m7.3 19-2.5 2.7M16.7 19l2.5 2.7" />
+  <svg viewBox="0 0 256 256" fill="currentColor" {...p}>
+    <path d="M235.32,180l-36.24-36.25L162.62,23.46A21.76,21.76,0,0,0,128,12.93,21.76,21.76,0,0,0,93.38,23.46L56.92,143.76,20.68,180a16,16,0,0,0,0,22.62l32.69,32.69a16,16,0,0,0,22.63,0L124.28,187a40.68,40.68,0,0,0,3.72-4.29,40.68,40.68,0,0,0,3.72,4.29L180,235.32a16,16,0,0,0,22.63,0l32.69-32.69A16,16,0,0,0,235.32,180ZM64.68,224,32,191.32l12.69-12.69,32.69,32.69ZM120,158.75a23.85,23.85,0,0,1-7,17L88.68,200,56,167.32l13.65-13.66a8,8,0,0,0,2-3.34l37-122.22A5.78,5.78,0,0,1,120,29.78Zm23,17a23.85,23.85,0,0,1-7-17v-129a5.78,5.78,0,0,1,11.31-1.68l37,122.22a8,8,0,0,0,2,3.34l14.49,14.49-33.4,32ZM191.32,224l-12.56-12.57,33.39-32L224,191.32Z" />
   </svg>
 );
 

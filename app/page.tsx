@@ -66,10 +66,7 @@ export default function HomePage() {
                 reading as a second eyebrow, which a gold uppercase line
                 directly above a gold uppercase line would. */}
             <p className="mb-5 inline-flex items-center gap-3 rounded-full border border-line-yellow glass-soft px-5 py-2.5 shadow-soft">
-              {/* 36px, not the 16 an icon beside text would normally take.
-                  The finger creases and the splayed sleeves are what stop
-                  this reading as a leaf, and both close up below about 32. */}
-              <Vanakkam aria-hidden className="size-9 shrink-0 text-yellow-ink" />
+              <Vanakkam aria-hidden className="size-8 shrink-0 text-yellow-ink" />
               <span className="text-[0.95rem] text-ink-soft">
                 Welcome to{" "}
                 <b className="font-serif text-[1.15rem] font-normal text-green-deep">
