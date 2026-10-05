@@ -79,7 +79,6 @@ export default function HomePage() {
                 opens on the goods, and that order is kept: the greeting is
                 one quiet line, then the goods, then the claim. */}
             <p className="mb-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 xl:justify-start">
-              <span aria-hidden className="foil hidden h-px w-8 shrink-0 xl:block" />
               {["Old pattu sarees", "Silk vetti", "Zari and silver"].map((t, i) => (
                 <span key={t} className="flex items-center gap-3">
                   {i > 0 && (
