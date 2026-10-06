@@ -224,11 +224,14 @@ export default function HomePage() {
               lead="Clips from our own pages and channel, of the work as it happens. Tap any one to play it here."
             />
           </Reveal>
-          {/* Six here, two from each platform, not the whole wall. Eleven
+          {/* Three here, one from each platform, not the whole wall. Eleven
               cards ran 7,000px down a phone in the middle of the home page,
               which is a long way to scroll past something nobody asked to
-              see all of. The rest are on the gallery, one click away. */}
-          <ReelWall items={homeReels} />
+              see all of. The rest are on the gallery, one click away.
+
+              A rail rather than a grid, so on a phone the three are one
+              swipe sideways instead of three screens of scrolling. */}
+          <ReelWall items={homeReels} layout="rail" />
 
           <div className="mt-8 text-center">
             <Button href="/gallery#social" variant="outline">

@@ -561,7 +561,7 @@ export const reels: Reel[] = [
 ];
 
 /**
- * The six the home page shows: two from each platform.
+ * The three the home page shows: one from each platform.
  *
  * Derived rather than listed, so adding a reel to `reels` above cannot leave
  * this stale or, worse, leave the home page quietly showing three Facebook
@@ -572,10 +572,10 @@ export const reels: Reel[] = [
  * can tap any one and watch it there. The gallery still carries them, where
  * the card says on its face that it opens on Instagram.
  *
- * Interleaved, not grouped, so the first row holds one of each rather than
- * two YouTube clips and a Facebook one.
+ * Interleaved, not grouped, so taking one of each is a matter of taking the
+ * first three and a fourth would come back round to YouTube.
  */
-const twoEach = (n: number): Reel[] => {
+const perPlatform = (n: number): Reel[] => {
   const take = (p: Reel["platform"]) =>
     reels.filter((r) => r.platform === p && !r.linkOnly).slice(0, n);
   const columns = [take("youtube"), take("facebook"), take("instagram")];
@@ -584,7 +584,7 @@ const twoEach = (n: number): Reel[] => {
     .filter(Boolean);
 };
 
-export const homeReels = twoEach(2);
+export const homeReels = perPlatform(1);
 
 /* ------------------------------------------------------------------ */
 /* How the number is reached, ledger of what moves the price          */

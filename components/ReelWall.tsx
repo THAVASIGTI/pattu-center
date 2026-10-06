@@ -76,13 +76,25 @@ function Card({
 }
 
 /**
- * `items` is which reels to show. The home page passes six, two from each
- * platform; the gallery passes the lot. Everything that counts, the "video 3
- * of 6" in the accessible names and the dialog's own label, reads from the
+ * `items` is which reels to show. The home page passes three, one from each
+ * platform; the gallery passes the lot. Everything that counts, the "video 2
+ * of 3" in the accessible names and the dialog's own label, reads from the
  * list that was passed and not from the module's, or the home page would
- * announce six cards as eleven.
+ * announce three cards as eleven.
+ *
+ * `layout` is how they sit. "grid" wraps them into rows and is right for the
+ * gallery's eleven. "rail" is one row you swipe along, for the home page's
+ * three: on a phone that turns a 2,000px column into a single card with the
+ * next one peeking, and on a desktop the three fit the rail exactly, so it
+ * looks like the grid did and never scrolls.
  */
-export default function ReelWall({ items = reels }: { items?: Reel[] }) {
+export default function ReelWall({
+  items = reels,
+  layout = "grid",
+}: {
+  items?: Reel[];
+  layout?: "grid" | "rail";
+}) {
   const [open, setOpen] = useState<number | null>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -135,31 +147,48 @@ export default function ReelWall({ items = reels }: { items?: Reel[] }) {
 
   return (
     <>
-      {/* One card per row on a phone, in the page's own flow. No inner
-          scroller: a box that scrolls inside a page that also scrolls means
-          two scrolls competing for the same swipe, and the reader loses
-          track of which one they are moving. The card is capped at 320px so
-          a column of eleven does not run away with the page. From sm it is a
-          grid, three then four across.
+      {/* GRID. One card per row on a phone, in the page's own flow, capped
+          at 320px so a column of eleven does not run away with the page.
+          From sm it is three across, and four from lg once there are more
+          than six, because six at four across leaves a row of two.
 
-          Six cards go three across at every size above a phone, because four
-          would leave a row of four and a row of two. Longer sets take the
-          fourth column.
+          A short set is capped at 920px. Three columns filling the wrapper
+          put each card at 360px wide and 640 tall, which is LARGER than the
+          eleven-card wall's 270 and the wrong direction entirely: showing
+          fewer videos should not make the section taller per card.
 
-          The short set is also capped at 920px. Three columns filling the
-          wrapper put each card at 360px wide and 640 tall, which is LARGER
-          than the eleven-card wall's 270 and the wrong direction entirely:
-          showing fewer videos should not make the section taller per card.
-          The cap holds them at about 296. */}
+          RAIL. One row, scrolled sideways, snapping card to card. The
+          vertical-scroll objection to inner scrollers does not apply here:
+          this one moves on the other axis, so a swipe down still belongs to
+          the page. It bleeds to both edges of the viewport and puts the
+          wrapper's padding back as scroll padding, so a snapped card sits
+          where the text above it starts while the next one is still visibly
+          cut off at the edge, which is what says "there is more this way".
+          76vw is deliberately not a whole screen for that reason.
+
+          From sm the three share the rail with flex-1 and there is nothing
+          left to scroll, so the scrollbar never appears and it reads as the
+          grid did. */}
       <ul
-        className={`grid grid-cols-1 gap-4 sm:grid-cols-3 ${
-          items.length > 6 ? "lg:grid-cols-4" : "lg:mx-auto lg:max-w-[920px]"
-        }`}
+        className={
+          layout === "rail"
+            ? "-mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-5 px-5 pb-3 sm:mx-auto sm:max-w-[920px] sm:scroll-px-0 sm:px-0"
+            : `grid grid-cols-1 gap-4 sm:grid-cols-3 ${
+                items.length > 6 ? "lg:grid-cols-4" : "lg:mx-auto lg:max-w-[920px]"
+              }`
+        }
       >
         {items.map((r, i) => {
           const { label, Icon, tint } = PLATFORM[r.platform];
           return (
-            <li key={r.slug} className="mx-auto w-full max-w-[320px] sm:mx-0 sm:max-w-none">
+            <li
+              key={r.slug}
+              className={
+                layout === "rail"
+                  ? "w-[76vw] max-w-[320px] shrink-0 snap-start sm:w-auto sm:min-w-0 sm:max-w-none sm:flex-1"
+                  : "mx-auto w-full max-w-[320px] sm:mx-0 sm:max-w-none"
+              }
+            >
               <Card
                 reel={r}
                 index={i}
