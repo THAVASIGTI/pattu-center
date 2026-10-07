@@ -11,7 +11,7 @@ import { branchCount, branchCountWord, branches, waLink } from "@/config/busines
 export const metadata: Metadata = {
   title: "Branches",
   description:
-    `${branchCount} branches across Tamil Nadu: Madurai head office, two in Thoothukudi, two in Thanjavur, plus Villupuram, Tiruppur and Coimbatore.`,
+    `${branchCount} branches across Tamil Nadu: Madurai head office, two in Thoothukudi, two in Thanjavur, plus Trichy, Villupuram, Tiruppur and Coimbatore.`,
   alternates: { canonical: "/branches" },
 };
 

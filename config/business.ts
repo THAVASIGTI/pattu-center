@@ -212,6 +212,32 @@ export const branches: Branch[] = [
     ],
   },
   {
+    slug: "trichy",
+    city: "Trichy",
+    title: "Trichy",
+    lines: [
+      "Opposite Lalitha Jewellery",
+      "Sri Om Sakthi Complex",
+      "Trichy",
+    ],
+    /* No coords: the shop gave the landmark, not a map pin, so the map and
+       the QR search for Sri Om Sakthi Complex rather than pointing at the
+       door. Replace with "lat,lng" from their own Google Maps pin when they
+       send it and re-run npm run qr. */
+    mapQuery: "Sri+Om+Sakthi+Complex+Opposite+Lalitha+Jewellery+Trichy",
+    phoneIndex: 0,
+    intro:
+      "Our Trichy counter is in Sri Om Sakthi Complex, opposite Lalitha Jewellery. Walk in with your sarees or call ahead and we will collect them from your home.",
+    /* Picked to cover the city and the towns around it, not given to us by
+       the shop. Worth their confirmation before it is treated as a promise,
+       the same as the Jaihindpuram list. */
+    areas: [
+      "Thillai Nagar", "Srirangam", "Woraiyur", "Cantonment",
+      "K.K. Nagar", "Golden Rock", "Thiruverumbur", "Ariyamangalam",
+      "Lalgudi", "Manapparai", "Musiri", "Thuraiyur",
+    ],
+  },
+  {
     slug: "villupuram",
     city: "Villupuram",
     title: "Villupuram",
