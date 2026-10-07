@@ -1,6 +1,5 @@
 import Link from "next/link";
 import BranchCard from "@/components/BranchCard";
-import BranchMarquee from "@/components/BranchMarquee";
 import Counter from "@/components/Counter";
 import CtaBand from "@/components/CtaBand";
 import BuyBoard from "@/components/BuyBoard";
@@ -23,7 +22,7 @@ import {
 } from "@/components/Icons";
 import Reveal from "@/components/Reveal";
 import { Button, Section, SectionHead, Wrap } from "@/components/ui";
-import { branchCount, branchCountWordCap, branches, business, waLink } from "@/config/business";
+import { branchCountWordCap, branches, business, waLink } from "@/config/business";
 import {
   priceLedger,
   homeReels,
@@ -132,11 +131,11 @@ export default function HomePage() {
               <span className="text-green">all accepted</span>
             </p>
 
-            {/* The four promises. Deliberately none of these repeat the strip
-                of numbers directly below the hero, which already carries the
-                branch count, the years, free pickup and same-day cash: two
-                rows of four saying the same four things would have been the
-                first thing a visitor scrolled past twice. */}
+            {/* The four promises: how the price is arrived at, which is the
+                one thing a seller cannot check for herself. They say nothing
+                about branch count, years, pickup or cash, which is now the
+                only place on this page that mattered: the strip of numbers
+                that used to repeat them directly below the hero is gone. */}
             <ul className="mx-auto mt-9 grid max-w-[30rem] grid-cols-2 gap-y-7 border-t border-line pt-7 sm:max-w-none sm:grid-cols-4 sm:gap-y-0 sm:divide-x sm:divide-line xl:mx-0">
               {[
                 { Icon: Scale, a: "Weighed", b: "in front of you" },
@@ -157,29 +156,12 @@ export default function HomePage() {
         </SilkStage>
       </section>
 
-      {/* ---------------- Where we buy, scrolling past ---------------- */}
-      <BranchMarquee />
-
-      {/* ---------------- Trust strip ---------------- */}
-      <section className="border-y border-line-yellow bg-[linear-gradient(90deg,#e6f2e9_0%,#f4faf5_50%,#e6f2e9_100%)]">
-        <div className="grid grid-cols-2 gap-px bg-yellow/30 sm:grid-cols-4">
-          {[
-            { n: String(branchCount), l: "Branches" },
-            { n: "40+", l: "Years" },
-            { n: "Cash", l: "Same day" },
-            { n: "Free", l: "Pickup" },
-          ].map((s) => (
-            <div key={s.l} className="bg-[#eef6f0] px-3.5 py-5 text-center sm:py-6">
-              <b className="green-text block font-serif text-[clamp(1.5rem,5.4vw,1.9rem)] leading-none">
-                {s.n}
-              </b>
-              <span className="mt-2 block text-[0.7rem] font-semibold uppercase tracking-[0.11em] text-ink-soft">
-                {s.l}
-              </span>
-            </div>
-          ))}
-        </div>
-      </section>
+      {/* The hero used to be followed by two bands: the branch names
+          scrolling past, then a strip of four numbers. Both are gone at the
+          client's request, so the goods now come straight after the hero.
+          The branches still have their own section further down and their
+          own page; the four numbers were the only place the "40+ years"
+          claim appeared on this page. */}
 
       {/* ---------------- What we buy ----------------
 
