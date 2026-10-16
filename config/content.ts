@@ -40,14 +40,11 @@ export const catImg = (id: number) => `${BASE_PATH}/img/cat/silk-${id}.jpg`;
 
 /** Brand marks. `logoMark` is the emblem alone, the wordmark in the full
  *  lockup is illegible below about 120px, so small placements use the mark. */
-/** The artwork the client supplied for the hero.
+/** The artwork the client supplied for the hero, and what the hero shows.
  *
- *  NOT CURRENTLY ON THE SITE. The hero's right-hand column is now the shop's
- *  own sarees as a stack a visitor can tap through, which was asked for in
- *  place of this. The file and this export are kept so it can be put back in
- *  one line, and because it is the client's own asset and not ours to throw
- *  away. 846x1024 native, which was already a little small for the panel it
- *  used to fill. */
+ *  824x1024 native. It is displayed at up to 520 CSS px, so it is comfortable
+ *  on a 1x screen and slightly soft on a 2x one. A larger original is the
+ *  only fix; nothing here can invent detail that was never supplied. */
 export const heroScene = `${BASE_PATH}/img/hero-scene.jpg`;
 
 /** The warp on a loom, gold thread on a near-black ground, used as the field
@@ -82,13 +79,6 @@ export const qrImg = (slug: string) => `${BASE_PATH}/img/qr/${slug}.svg`;
 /** Photographs of our own stock, in public/img/shop. */
 export const shopImg = (n: number) =>
   `${BASE_PATH}/img/shop/shop-${String(n).padStart(2, "0")}.jpg`;
-
-/** The hero's stack: the same shop photographs, centre-cropped to one 3:4
- *  ratio and cut to 420px, because a pile only reads as a pile if every card
- *  in it is the same shape. Generated from public/img/shop with ImageMagick
- *  (`-resize 420x560^ -gravity center -extent 420x560`). */
-export const stackImg = (n: number) =>
-  `${BASE_PATH}/img/stack/saree-${String(n).padStart(2, "0")}.jpg`;
 
 /** The same photographs at 480px for places that show them small.
  *  A static export has no optimiser, so the full file downloads whatever the
