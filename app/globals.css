@@ -95,23 +95,26 @@
   50%      { transform: scale(1.15) translate3d(-1.8%, -1.4%, 0); }
 }
 
-/* The weave itself, drawn rather than photographed.
- *
- * Two sets of threads crossing: one running along x, one along y, each
- * panning on its own axis at its own speed. Because they travel
- * independently, the points where they cross travel too, which is what makes
- * it read as cloth being woven rather than a pattern sliding past.
- *
- * Both move background-position only, so nothing reflows and the field can be
- * any size. The travel must be an exact multiple of the thread spacing or the
- * loop visibly jumps: spacing is 12px and travel 240px, which is 20 periods. */
+/* The fine gold threads running along a drawn border band. Moves
+   background-position only, so nothing reflows and the strip can be any
+   width. The travel must be an exact multiple of the thread spacing or the
+   loop visibly jumps: spacing is 12px and travel 240px, which is 20
+   periods. */
 @keyframes thread-x {
   from { background-position: 0 0; }
   to   { background-position: -240px 0; }
 }
-@keyframes thread-y {
-  from { background-position: 0 0; }
-  to   { background-position: 0 -240px; }
+
+/* A band of saree border running sideways.
+ *
+ * The travel is exactly one tile, read from --tile on the element, so the
+ * loop has no seam whatever width the motif is. That custom property is the
+ * reason this is one keyframes block rather than one per band: a percentage
+ * would be measured against the element, which is the whole hero wide, not
+ * against the tile. */
+@keyframes band-pan {
+  from { background-position-x: 0; }
+  to   { background-position-x: calc(-1 * var(--tile, 48px)); }
 }
 
 /* Light running along the zari, the way a silver-gilt thread catches as the
@@ -362,7 +365,8 @@ body {
      The drawn thread is a one-shot on arrival, so it is simply shown done. */
   .zari-ground { animation-duration: 300s !important; }
   .cat-drift { animation-duration: 480s !important; }
-  .thread-x, .thread-y { animation-duration: 900s !important; }
+  .thread-x { animation-duration: 900s !important; }
+  .zari-border { animation-duration: 1200s !important; }
   .thread-draw { transition: none !important; transform: scaleX(1) !important; }
   /* The two sheens are pure travel with nothing underneath them to see, so
      unlike the weave they are cut rather than slowed. */

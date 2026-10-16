@@ -17,13 +17,12 @@ import {
   Scale,
   Shield,
   Vanakkam,
-  WhatsApp,
   ZariBorder,
   serviceIcons,
 } from "@/components/Icons";
 import Reveal from "@/components/Reveal";
 import { Button, Section, SectionHead, Wrap } from "@/components/ui";
-import { business, waLink } from "@/config/business";
+import { business } from "@/config/business";
 import {
   priceLedger,
   homeReels,
@@ -107,17 +106,19 @@ export default function HomePage() {
               the figure explained before anything changes hands.
             </p>
 
-            {/* Solid then outlined, rather than two filled buttons. With the
-                gold now spent on the headline, a second gold button would
-                have been the third gold thing in a column of five. */}
+            {/* One action, not two. The WhatsApp button that stood beside
+                this is gone at the client's request; WhatsApp is still one
+                tap away on every screen, from the fixed bar at the foot of a
+                phone and from the dock on a desktop, so the channel is not
+                lost, only the second button.
+
+                It keeps flex-1 below sm, which with a single button now
+                means it runs the full measure: the largest tap target on the
+                page for the thing the page most wants someone to do. */}
             <div className="mt-7 flex flex-wrap justify-center gap-3 xl:justify-start">
               <Button href={business.phones[0].href} variant="green" className="flex-1 sm:flex-none">
                 <Phone className="size-[17px]" />
                 Call {business.phones[0].label}
-              </Button>
-              <Button href={waLink()} variant="outline" external className="flex-1 sm:flex-none">
-                <WhatsApp className="size-[17px]" />
-                WhatsApp us
               </Button>
             </div>
 
