@@ -1,5 +1,5 @@
 import Link from "next/link";
-import BranchCard from "@/components/BranchCard";
+import BranchIndex from "@/components/BranchIndex";
 import Counter from "@/components/Counter";
 import CtaBand from "@/components/CtaBand";
 import BuyBoard from "@/components/BuyBoard";
@@ -8,6 +8,7 @@ import CulturalBanner from "@/components/CulturalBanner";
 import HeroBackdrop from "@/components/HeroBackdrop";
 import PriceScale from "@/components/PriceScale";
 import ReelWall from "@/components/ReelWall";
+import ZariGround, { ZariBand } from "@/components/Zari";
 import {
   ArrowRight,
   Check,
@@ -22,7 +23,7 @@ import {
 } from "@/components/Icons";
 import Reveal from "@/components/Reveal";
 import { Button, Section, SectionHead, Wrap } from "@/components/ui";
-import { branchCountWordCap, branches, business, waLink } from "@/config/business";
+import { business, waLink } from "@/config/business";
 import {
   priceLedger,
   homeReels,
@@ -42,14 +43,16 @@ export default function HomePage() {
           starts down from it. min-height rather than height, so a short
           window grows the section instead of clipping the copy into it. */}
       <section id="hero" className="relative overflow-hidden bg-cream text-ink xl:min-h-[calc(100vh-8.25rem)]">
+        {/* Real cloth first, then the drawn things over it. The hero is
+            composed as a saree: a plain body where the words go, woven zari
+            down the selvedge and across the foot. ZariGround carries the
+            field and the selvedge; ZariBand closes the section. */}
+        <ZariGround />
         <HeroBackdrop />
         {/* Saree border and kolam under the copy. Sits above the rings and
             motes and below the photograph, which covers whatever of it
             reaches the right of the section. */}
         <CulturalBanner />
-
-        {/* zari rule along the foot of the section */}
-        <span aria-hidden className="foil absolute inset-x-0 bottom-0 h-[3px]" />
 
         {/* SilkStage lays the rotating photograph under the section and puts
             the panel that names it beside the copy. The two share one index,
@@ -154,6 +157,13 @@ export default function HomePage() {
             </ul>
           </div>
         </SilkStage>
+
+        {/* The woven border that closes the section, in place of the 3px gold
+            rule that used to. Last child, so it paints over the foot of the
+            scene photograph, whose own fade has already gone to cream there. */}
+        <div className="absolute inset-x-0 bottom-0">
+          <ZariBand />
+        </div>
       </section>
 
       {/* The hero used to be followed by two bands: the branch names
@@ -387,43 +397,13 @@ export default function HomePage() {
         </Wrap>
       </Section>
 
-      {/* ---------------- Branches ---------------- */}
-      <Section>
-        <Wrap>
-          <Reveal>
-            <SectionHead
-              eyebrow="Find us"
-              title={`${branchCountWordCap} branches across Tamil Nadu.`}
-              lead="Walk in during shop hours, or call the nearest branch and we will come to you."
-            />
-          </Reveal>
-          <Reveal>
-            <div className="grid gap-3.5 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
-              {branches.map((b) => (
-                <BranchCard key={b.slug} branch={b} />
-              ))}
-              <article className="grad-green flex flex-col rounded-[22px] p-6 text-cream">
-                <h3 className="mb-3 font-serif text-[1.25rem] text-white">Not near a branch?</h3>
-                <p className="flex-1 text-[0.92rem] text-cream/80">
-                  We travel across Tamil Nadu, and we will come for even one or two sarees. Send photos on
-                  WhatsApp and we will tell you when we are next in your area.
-                </p>
-                <div className="mt-4 border-t border-yellow/30 pt-4">
-                  <a
-                    href={waLink("Hello, I want to sell my old silk sarees. I am not near a branch.")}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex min-h-10 items-center gap-1.5 rounded-full bg-yellow/20 px-3.5 text-[0.83rem] font-semibold text-yellow-light"
-                  >
-                    <WhatsApp className="size-3.5" />
-                    Message us
-                  </a>
-                </div>
-              </article>
-            </div>
-          </Reveal>
-        </Wrap>
-      </Section>
+      {/* ---------------- Branches ----------------
+
+          Its own component, because it is no longer a heading over a grid:
+          it carries its own dark ground, its own head-office block and its
+          own woven index of the other ten. See BranchIndex for why eleven
+          equal cards was the wrong shape for this content. */}
+      <BranchIndex />
 
       {/* ---------------- Testimonials ---------------- */}
       <Section tone="cream">

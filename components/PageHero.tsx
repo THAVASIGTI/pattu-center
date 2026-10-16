@@ -2,6 +2,7 @@ import Image from "next/image";
 import type { ReactNode } from "react";
 import { img } from "@/config/content";
 import { Crumbs, Ornament, Wrap } from "./ui";
+import { ZariBand } from "./Zari";
 
 /** Shared hero band for every inner page. */
 export default function PageHero({
@@ -29,7 +30,8 @@ export default function PageHero({
           fill
           priority
           sizes="100vw"
-          className="object-cover opacity-30"
+          className="zari-ground object-cover opacity-30"
+          style={{ animation: "zari-drift 150s ease-in-out infinite" }}
         />
         <div className="absolute inset-0 bg-[radial-gradient(780px_440px_at_10%_2%,rgba(202,154,4,.24),transparent_58%),radial-gradient(680px_560px_at_92%_96%,rgba(34,197,94,.46),transparent_64%),linear-gradient(172deg,rgba(10,46,26,.84),rgba(10,46,26,.95))]" />
       </div>
@@ -48,6 +50,11 @@ export default function PageHero({
         {lead && <p className="mx-auto mt-3.5 max-w-[58ch] text-cream/75">{lead}</p>}
         {children && <div className="mt-6 flex flex-wrap justify-center gap-2.5">{children}</div>}
       </Wrap>
+
+      {/* The same woven border that closes the home hero, so every inner page
+          is hemmed the same way. In flow rather than absolute, so it adds its
+          own height instead of sitting over the last line of copy. */}
+      <ZariBand className="h-9 sm:h-11" />
     </section>
   );
 }

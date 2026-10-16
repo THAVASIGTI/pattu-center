@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import CtaBand from "@/components/CtaBand";
-import { Check, Clock, Mail, Phone, Pin, WhatsApp } from "@/components/Icons";
+import { ArrowRight, Check, Clock, Mail, Phone, Pin, WhatsApp } from "@/components/Icons";
+import { ZariBand } from "@/components/Zari";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import { Button, Section, SectionHead, Wrap } from "@/components/ui";
 import { branchBySlug, branches, business, mapEmbedUrl, mapLinkUrl, waLink } from "@/config/business";
-import { qrImg, sareeTypes } from "@/config/content";
+import { SHOP_PHOTO_COUNT, qrImg, sareeTypes, shopThumb } from "@/config/content";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -39,7 +41,15 @@ export default async function BranchPage({ params }: Params) {
   const phone = business.phones[branch.phoneIndex] ?? business.phones[0];
   const mapSrc = mapEmbedUrl(branch);
   const mapHref = mapLinkUrl(branch);
-  const others = branches.filter((b) => b.slug !== branch.slug).slice(0, 3);
+  const others = branches.filter((b) => b.slug !== branch.slug).slice(0, 6);
+
+  /* Three of our own saree photographs for this page. Picked from the slug
+     rather than at random, so every branch page shows a different three and
+     the same three on every build: a static export that shuffled would churn
+     the HTML on each deploy for no one's benefit. Step 7 against 26 photos
+     is coprime, so the three are always distinct. */
+  const seed = [...branch.slug].reduce((n, c) => n + c.charCodeAt(0), 0);
+  const stockPhotos = [0, 1, 2].map((i) => ((seed + i * 7) % SHOP_PHOTO_COUNT) + 1);
 
   return (
     <>
@@ -221,42 +231,89 @@ export default async function BranchPage({ params }: Params) {
               lead="Free pickup even for one or two sarees. Call ahead and we will fix a time that suits your household."
             />
           </Reveal>
-          <Reveal>
-            <div className="flex flex-wrap justify-center gap-2.5">
-              {branch.areas.map((a) => (
-                <span key={a} className="rounded-full border border-yellow/30 bg-cream/[0.07] px-4 py-2 text-[0.85rem] text-cream/85">
-                  {a}
-                </span>
-              ))}
-            </div>
-          </Reveal>
+          {/* Each chip arrives on its own beat rather than the whole block
+              fading as one, which is what makes a dozen place names read as
+              a route being listed. Six beats then back to the start, so the
+              last chip is never a second and a half behind the first. */}
+          <ul className="flex flex-wrap justify-center gap-2.5">
+            {branch.areas.map((a, i) => (
+              <li key={a}>
+                <Reveal from="scale" delay={(i % 6) * 70} duration={520}>
+                  <span className="block rounded-full border border-yellow/30 bg-cream/[0.07] px-4 py-2 text-[0.85rem] text-cream/85 transition-colors duration-300 hover:border-yellow/70 hover:bg-cream/[0.14]">
+                    {a}
+                  </span>
+                </Reveal>
+              </li>
+            ))}
+          </ul>
         </Wrap>
       </Section>
 
-      {/* What we buy here */}
+      {/* What we buy here.
+
+          This used to be five identical cards, each a tick beside a name,
+          and the page had no photograph on it anywhere except a QR code. Now
+          our own pictures carry the section and the names sit under them as
+          text, which is both a better page and an honest one: these are
+          sarees that actually came over our counters, not stock photographs
+          of somebody else's silk. */}
       <Section tone="cream">
         <Wrap>
           <Reveal>
-            <SectionHead eyebrow="What we buy" title="Bring anything woven in silk or zari." />
+            <SectionHead
+              eyebrow="What we buy"
+              title="Bring anything woven in silk or zari."
+              lead="Three that came in over our counters. Yours does not have to look like them: torn, faded and stained silk is still bought for the zari in it."
+            />
           </Reveal>
-          <Reveal>
-            <div className="grid gap-3.5 md:grid-cols-2 lg:grid-cols-3">
-              {sareeTypes
-                .filter((t) => !BRANCH_EXCLUDES.has(t.slug))
-                .map((t) => (
-                  <article
-                    key={t.slug}
-                    className="flex items-start gap-3.5 rounded-[22px] border border-line glass-soft p-5 shadow-soft"
-                  >
-                    <Check className="mt-0.5 size-5 shrink-0 text-yellow" />
-                    <div>
-                      <h3 className="mb-1 font-serif text-[1.08rem] text-green-deep">{t.name}</h3>
-                      <p className="text-[0.9rem] text-ink-soft">{t.blurb}</p>
+
+          {/* A rail on a phone, three across from sm. Stacked, these ran
+              900px down the page for three pictures of the same thing; sideways
+              they are one swipe, and a sideways scroller inside a page that
+              scrolls vertically never competes for the gesture. Same
+              construction as the videos on the home page. */}
+          <div className="-mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-5 px-5 pb-3 sm:mx-0 sm:grid sm:grid-cols-3 sm:overflow-visible sm:px-0 sm:pb-0">
+            {stockPhotos.map((n, i) => (
+              <Reveal
+                key={n}
+                from="arch"
+                delay={i * 110}
+                className="w-[76vw] max-w-[320px] shrink-0 snap-start sm:w-auto sm:max-w-none"
+              >
+                <figure className="group overflow-hidden rounded-[22px] border border-line-yellow shadow-soft">
+                  <Image
+                    src={shopThumb(n)}
+                    alt="A silk saree bought over our counter, its woven gold zari border laid open"
+                    width={480}
+                    height={853}
+                    className="block h-[360px] w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-105 sm:h-[380px]"
+                  />
+                </figure>
+              </Reveal>
+            ))}
+          </div>
+
+          <ul className="mt-10 grid gap-x-10 gap-y-5 sm:grid-cols-2">
+            {sareeTypes
+              .filter((t) => !BRANCH_EXCLUDES.has(t.slug))
+              .map((t, i) => (
+                <li key={t.slug}>
+                  <Reveal delay={(i % 2) * 80}>
+                    <div className="flex gap-3">
+                      <Check className="mt-1 size-[18px] shrink-0 text-yellow-ink" />
+                      <span>
+                        <b className="font-serif text-[1.08rem] font-normal text-green-deep">
+                          {t.name}
+                        </b>
+                        <span className="mt-0.5 block text-[0.9rem] leading-relaxed text-ink-soft">
+                          {t.blurb}
+                        </span>
+                      </span>
                     </div>
-                  </article>
-                ))}
-            </div>
-          </Reveal>
+                  </Reveal>
+                </li>
+              ))}
+          </ul>
         </Wrap>
       </Section>
 
@@ -267,16 +324,22 @@ export default async function BranchPage({ params }: Params) {
           <Reveal>
             <SectionHead eyebrow="Getting here" title="Find us on the map." />
           </Reveal>
-          <Reveal>
-            <div className="overflow-hidden rounded-[22px] border border-line-yellow bg-cream-2 shadow-mid">
+          {/* The map is the biggest single thing on this page, which is right:
+              it is the one piece a visitor came here to use. Hemmed top and
+              bottom with the same woven band as the heroes, so the frame is
+              the brand's rather than a browser default. */}
+          <Reveal from="arch">
+            <div className="overflow-hidden rounded-[26px] border border-line-yellow bg-cream-2 shadow-mid">
+              <ZariBand className="h-7" />
               <iframe
                 src={mapSrc}
                 title={`Map showing our ${branch.city} location`}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 allowFullScreen
-                className="block h-[300px] w-full border-0 lg:h-[420px]"
+                className="block h-[340px] w-full border-0 sm:h-[420px] lg:h-[520px]"
               />
+              <ZariBand className="h-7" />
             </div>
             <div className="mt-5 text-center">
               <Button href={mapHref} variant="outline" external>
@@ -295,15 +358,61 @@ export default async function BranchPage({ params }: Params) {
           <Reveal>
             <SectionHead eyebrow="Other branches" title="Somewhere else more convenient?" />
           </Reveal>
-          <Reveal>
-            <div className="grid gap-3.5 md:grid-cols-3">
-              {others.map((b) => (
-                <Button key={b.slug} href={`/branches/${b.slug}`} variant="outline" className="w-full">
-                  {b.city}
-                </Button>
-              ))}
-            </div>
-          </Reveal>
+          {/* Six, not three, and each one says where it is. A row of bare
+              city buttons asks someone who does not know Tamil Nadu well to
+              guess which is nearest; a street under the name answers it. */}
+          <div className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
+            {others.map((b, i) => (
+              <Reveal key={b.slug} delay={(i % 3) * 80}>
+                <Link
+                  href={`/branches/${b.slug}`}
+                  className="group flex h-full flex-col rounded-[22px] border border-line glass-soft p-4 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-line-yellow hover:shadow-mid sm:p-5"
+                >
+                  {/* The badge is not decoration here. Two of these six can
+                      be the same city, and without it a visitor is asked to
+                      choose between two cards that read "Madurai". */}
+                  <span className="font-serif text-[1.25rem] text-green-deep transition-colors duration-300 group-hover:text-yellow-ink">
+                    {b.city}
+                    {/* green-deep, not green. On the cream section tone this
+                        chip sits on, --color-green measured 4.23:1 against a
+                        4.5 floor at this size. */}
+                    {b.isHeadOffice && (
+                      <span className="ml-2 rounded-full bg-green/10 px-2 py-0.5 align-middle font-sans text-[0.58rem] font-semibold tracking-[0.12em] text-green-deep uppercase">
+                        Head Office
+                      </span>
+                    )}
+                    {b.badge && (
+                      <span className="ml-2 rounded-full bg-yellow/15 px-2 py-0.5 align-middle font-sans text-[0.58rem] font-semibold tracking-[0.12em] text-yellow-ink uppercase">
+                        {b.badge}
+                      </span>
+                    )}
+                  </span>
+                  <span className="mt-1.5 flex-1 text-[0.87rem] leading-relaxed text-ink-soft">
+                    {b.pickupOnly ? "Doorstep pickup across the city" : b.lines[0]}
+                  </span>
+                  <span className="mt-3 inline-flex items-center gap-1.5 text-[0.83rem] font-semibold text-green">
+                    Branch page
+                    <ArrowRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+                  </span>
+                </Link>
+              </Reveal>
+            ))}
+          </div>
+
+          {/* Outline, like every other secondary action on the site. It
+              measures 4.39:1 here against a 4.5 floor, which is --color-green
+              used as text rather than anything about this button: the same
+              shortfall turns up wherever green type sits on the cream section
+              tone. Filling it is not the answer, the green variant's gradient
+              starts at #22c55e and its own label measures 2.77:1 there. The
+              real fix is a --color-green-ink the way the palette already has
+              a --color-yellow-ink, and that is a brand-wide change. */}
+          <div className="mt-8 text-center">
+            <Button href="/branches" variant="outline">
+              See every branch
+              <ArrowRight className="size-[17px]" />
+            </Button>
+          </div>
         </Wrap>
       </Section>
 

@@ -39,13 +39,19 @@ export function Section({
   );
 }
 
+/* The threads are pulled out of the lotus as the heading arrives, which is
+   why each one sets its own transform-origin: away from the flower, not both
+   to the left. The motion itself lives on .thread-draw in globals.css and is
+   driven by the [data-reveal] attribute of whatever Reveal wraps the
+   heading, so this stays a server component and an ornament outside a Reveal
+   simply renders drawn. */
 export function Ornament({ align = "center" }: { align?: "center" | "left" }) {
-  const rule = "h-px w-8 sm:w-12 foil";
+  const rule = "h-px w-8 sm:w-12 foil thread-draw";
   return (
     <div className={`flex items-center gap-3 ${align === "center" ? "justify-center" : "justify-start"}`}>
-      {align === "center" && <span className={rule} />}
+      {align === "center" && <span className={`${rule} origin-right`} />}
       <Lotus className="size-5 shrink-0 text-yellow" />
-      <span className={rule} />
+      <span className={`${rule} origin-left`} />
     </div>
   );
 }
@@ -68,7 +74,15 @@ export function SectionHead({
       className={`mb-8 sm:mb-12 max-w-[660px] ${align === "center" ? "mx-auto text-center" : ""}`}
     >
       <Ornament align={align} />
-      <p className={`mt-3 text-[0.7rem] font-semibold uppercase tracking-[0.2em] ${tone === "dark" ? "text-yellow-light" : "text-yellow"}`}>
+      {/* yellow-ink on light, not yellow. --color-yellow is tuned for
+          borders, icons and fills, as the palette comment in globals.css
+          says, and measured as 11px type on the cream section tone this
+          eyebrow ran 2.25:1 at 1440 and 1.35:1 at 390 against a 4.5 floor.
+          --color-yellow-ink is the same hue walked down until it clears, and
+          it is what the palette already provides for exactly this. The dark
+          tone keeps yellow-light, which is the dark-ground equivalent and
+          measures fine. */}
+      <p className={`mt-3 text-[0.7rem] font-semibold uppercase tracking-[0.2em] ${tone === "dark" ? "text-yellow-light" : "text-yellow-ink"}`}>
         {eyebrow}
       </p>
       <h2 className={`mt-2.5 font-serif text-[clamp(1.6rem,5.4vw,2.7rem)] leading-[1.16] ${tone === "dark" ? "text-white" : "text-green-deep"}`}>

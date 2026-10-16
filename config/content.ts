@@ -38,6 +38,28 @@ export const img = (id: number) => `${BASE_PATH}/img/silk-${id}.jpg`;
  *  would fix that; nothing here can. */
 export const heroScene = `${BASE_PATH}/img/hero-scene.jpg`;
 
+/** Zari woven into cloth, used as ground rather than as a picture.
+ *
+ *  `zariCloth` is gold brocade on an ivory body: the same two colours the
+ *  brand already runs on, which is why it can sit under the hero without a
+ *  third colour entering the page. It carries the hero's field and its
+ *  selvedge. `zariBand` is a horizontal slice of the same cloth for the
+ *  border strips, so a 60px band does not download a whole picture.
+ *  `zariThreads` is the warp on a loom, gold on a near-black ground: the dark
+ *  counterpart, which grounds the branch index where the field is deep green.
+ *
+ *  All three are cut down from the stock photographs in this folder
+ *  (silk-20181020 and silk-37892693) and re-encoded hard, because a static
+ *  export has no image optimiser and these are grounds, mostly seen under a
+ *  veil. Regenerate them with ImageMagick if the originals ever change.
+ *
+ *  They are stock, not the shop's own. Their own loom and their own counter
+ *  would be better in both places; these stand in until there are photographs
+ *  to replace them with. */
+export const zariCloth = `${BASE_PATH}/img/zari-ground.jpg`;
+export const zariBand = `${BASE_PATH}/img/zari-band.jpg`;
+export const zariThreads = `${BASE_PATH}/img/zari-dark.jpg`;
+
 export const logoMark = `${BASE_PATH}/img/logo-mark.png`;
 export const logoFull = `${BASE_PATH}/img/logo.png`;
 /** The nav badge wants the mark cropped to its ink and the gold pushed a
@@ -54,6 +76,16 @@ export const qrImg = (slug: string) => `${BASE_PATH}/img/qr/${slug}.svg`;
 /** Photographs of our own stock, in public/img/shop. */
 export const shopImg = (n: number) =>
   `${BASE_PATH}/img/shop/shop-${String(n).padStart(2, "0")}.jpg`;
+
+/** The same photographs at 480px for places that show them small.
+ *  A static export has no optimiser, so the full file downloads whatever the
+ *  rendered size is: three of these on a branch page is 220KB against the
+ *  640KB the originals would have cost. Regenerate alongside the originals. */
+export const shopThumb = (n: number) =>
+  `${BASE_PATH}/img/shop/thumb/shop-${String(n).padStart(2, "0")}.jpg`;
+
+/** Total photographs in that folder, so pickers can stay in range. */
+export const SHOP_PHOTO_COUNT = 26;
 
 export type SareeType = {
   slug: string;

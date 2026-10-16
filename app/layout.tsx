@@ -3,6 +3,7 @@ import { Cinzel, Cormorant_Garamond, Inter, Marcellus, Noto_Sans_Tamil } from "n
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileActionBar from "@/components/MobileActionBar";
+import ScrollThread from "@/components/ScrollThread";
 import SocialDock from "@/components/SocialDock";
 import { branches, business } from "@/config/business";
 import { img } from "@/config/content";
@@ -129,6 +130,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        <ScrollThread />
         <Header />
         <main>{children}</main>
         <Footer />

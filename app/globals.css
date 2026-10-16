@@ -86,6 +86,41 @@
   to   { background-position: 120px 120px; }
 }
 
+/* The hero's cloth, lifted. Scale and translate only, held inside the
+   section's overflow-hidden, and it starts scaled past 1 so the drift never
+   exposes an edge. Slow enough that nobody catches it moving; it reads as the
+   silk being alive rather than as an animation. */
+@keyframes zari-drift {
+  0%, 100% { transform: scale(1.08) translate3d(0, 0, 0); }
+  50%      { transform: scale(1.15) translate3d(-1.8%, -1.4%, 0); }
+}
+
+/* A woven border running past, the way cloth comes off a loom. This moves
+   background-position rather than the element, so the strip repeats forever,
+   nothing reflows, and the band can be any width. */
+@keyframes zari-weave {
+  from { background-position: 0 50%; }
+  to   { background-position: -1200px 50%; }
+}
+
+/* The gold threads beside a section's lotus, pulled out from it as the
+   heading arrives.
+ *
+ * A transition rather than an animation, and driven off the [data-reveal]
+ * attribute Reveal already writes, so it costs no script of its own and no
+ * component needs to know about it. The resting state is drawn: a thread
+ * that is not inside a Reveal, or inside one that has fired, is simply at
+ * full width, which is also what a reader with JavaScript off sees.
+ *
+ * transform-origin is set per side in the markup, so the two threads are
+ * pulled away from the lotus rather than both to the left. */
+.thread-draw {
+  transition: transform 900ms ease-out 120ms;
+}
+[data-reveal="out"] .thread-draw {
+  transform: scaleX(0);
+}
+
 @keyframes drain {
   from { transform: scaleX(1); }
   to   { transform: scaleX(0); }
@@ -293,4 +328,10 @@ body {
     animation-duration: 90s !important;
     opacity: 0.3 !important;
   }
+  /* The cloth layers are the same case as the hero backdrop: large, soft and
+     nowhere near the reading line, so they are slowed rather than stopped.
+     The drawn thread is a one-shot on arrival, so it is simply shown done. */
+  .zari-ground { animation-duration: 300s !important; }
+  .zari-band { animation-duration: 900s !important; }
+  .thread-draw { transition: none !important; transform: scaleX(1) !important; }
 }
