@@ -97,9 +97,18 @@ const ARCH = tile(
 
 /* top is a percentage so the bands spread over a hero that runs from 900px
    on a laptop to 1400 on a phone. dur is seconds for ONE tile of travel, so
-   it sets a speed rather than a period: these all work out between four and
-   six pixels a second, which is movement you notice only if you look for
-   it. Alternating `rev` is what makes the bands slide past one another. */
+   it sets a speed rather than a period.
+
+   The first version of these numbers was ten times slower, around five
+   pixels a second, on the theory that a background should be felt and not
+   watched. Measured, it was moving exactly as intended and nobody could
+   tell: a motif took eleven seconds to travel its own width, which reads as
+   a still image to anyone who is not timing it. "Running" and "visible" are
+   different tests and only the second one matters here. These run at
+   seventeen to twenty-five pixels a second, slow enough to sit behind
+   reading but fast enough that the cloth is plainly moving.
+
+   Alternating `rev` is what makes the bands slide past one another. */
 const BANDS: {
   top: string;
   h: number;
@@ -108,13 +117,13 @@ const BANDS: {
   dur: number;
   rev?: boolean;
 }[] = [
-  { top: "2%", h: 30, tile: 56, src: KUMBAM, dur: 11 },
-  { top: "16%", h: 24, tile: 40, src: RUDRAKSHA, dur: 10, rev: true },
-  { top: "30%", h: 26, tile: 48, src: BUTTA, dur: 8.5 },
-  { top: "44%", h: 20, tile: 36, src: CHEVRON, dur: 8, rev: true },
-  { top: "58%", h: 28, tile: 52, src: ARCH, dur: 9.5 },
-  { top: "72%", h: 26, tile: 48, src: BUTTA, dur: 10.5, rev: true },
-  { top: "86%", h: 30, tile: 56, src: KUMBAM, dur: 9 },
+  { top: "2%", h: 30, tile: 56, src: KUMBAM, dur: 2.4 },
+  { top: "16%", h: 24, tile: 40, src: RUDRAKSHA, dur: 2.0, rev: true },
+  { top: "30%", h: 26, tile: 48, src: BUTTA, dur: 2.6 },
+  { top: "44%", h: 20, tile: 36, src: CHEVRON, dur: 1.8, rev: true },
+  { top: "58%", h: 28, tile: 52, src: ARCH, dur: 2.3 },
+  { top: "72%", h: 26, tile: 48, src: BUTTA, dur: 2.9, rev: true },
+  { top: "86%", h: 30, tile: 56, src: KUMBAM, dur: 2.2 },
 ];
 
 /** The hero's field: bands of saree border, each running at its own pace. */
@@ -143,12 +152,13 @@ export default function ZariWeave() {
         />
       ))}
 
-      {/* The catch of light that gives silver-gilt thread its name. One slow
-          pass every two minutes rather than a loop, so it is noticed once and
-          then forgotten, which is the most a background should ask for. */}
+      {/* The catch of light that gives silver-gilt thread its name. It ran
+          on a two-minute cycle, which on a page nobody stays on for two
+          minutes meant it mostly never happened at all. Sixteen seconds
+          makes it a recurring shimmer across the borders instead. */}
       <span
         className="zari-sheen absolute inset-y-0 left-0 w-[36%] bg-[linear-gradient(100deg,transparent_0%,rgba(255,251,230,.55)_46%,rgba(254,240,138,.3)_62%,transparent_100%)]"
-        style={{ animation: "zari-sheen 115s ease-in-out infinite" }}
+        style={{ animation: "zari-sheen 16s ease-in-out infinite" }}
       />
     </div>
   );
