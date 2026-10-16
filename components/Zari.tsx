@@ -1,89 +1,156 @@
-import Image from "next/image";
-import { zariBand, zariCloth } from "@/config/content";
-
 /**
- * Real woven zari, used as ground.
+ * Zari, drawn rather than photographed.
  *
- * The idea these two pieces share: a saree is a plain body with a woven
- * border down its edges, so the hero is built the same way. The cloth runs
- * under the whole section but is held back to a whisper where the words are,
- * and it is let out to full strength exactly where a saree keeps its zari:
- * along the selvedge at the left and in the band across the foot.
+ * This replaces a pair of components that laid real brocade under the hero
+ * and across the foot of every inner page. The photograph was the wrong
+ * material for the job twice over: it was a silver-ivory cloth that read as
+ * its own object sitting behind the page rather than as the page's ground,
+ * and a 1600px picture had to be downloaded before a ground could be seen at
+ * all. Everything here is a gradient and one short path, so it weighs
+ * nothing, scales to any size, and is the brand's gold rather than a
+ * photograph's.
  *
- * That is also why the contrast survives. Everything here is decoration under
- * live text, and the hero's gold headline already measured near the 3:1 floor
- * for large text before any of this existed. The veil below is therefore not
- * a look, it is a budget: .94 and up across the whole middle of the section,
- * where every line of copy sits, and the cloth is only visible in the top
- * eighteenth and in the two borders, none of which a word ever crosses.
+ * It is also the only version of this that can actually move the way cloth
+ * does. A photograph can be slid about; threads can be woven. The two
+ * thread layers below pan along different axes at different speeds, so the
+ * points where they cross travel, and the field reads as being made rather
+ * than being scrolled.
  *
- * Raising any alpha here means re-measuring, not guessing. The hero carries
- * foil-text-deep, which has the least room of any type on the site.
+ * On contrast: the threads are 1px every 12px, so they cover about a sixth
+ * of the field between them. That is the whole trick of letting this be
+ * clearly visible. Locally a thread is strong enough to see; averaged over
+ * any glyph it barely moves the ground, and the worst case for the hero's
+ * gold headline, a stroke lying along a thread, still measures well clear of
+ * its 3:1 floor. Raising the alphas or tightening the spacing changes that,
+ * so re-measure rather than guess.
  */
 
-/** The hero's field: cloth under a cream veil, drifting. */
-export default function ZariGround() {
+/* The two directions are deliberately NOT matched. Equal lines crossing at
+   equal spacing is graph paper, which is what the first version of this
+   looked like: a technical grid laid over the page rather than cloth. Real
+   zari does not look like that. The warp is dense and fine, a thread every
+   6px, and it is what you actually see; the weft is four times as far apart
+   and half as strong, so it reads as the cloth's grain rather than as the
+   other half of a lattice.
+
+   Both spacings divide the 240px travel in the thread-x / thread-y keyframes
+   exactly, 40 periods and 10, so neither loop jumps. Change a spacing and
+   you must change the travel with it. */
+const WARP =
+  "repeating-linear-gradient(90deg, rgba(202,154,4,.26) 0 1px, rgba(0,0,0,0) 1px 6px)";
+const WEFT =
+  "repeating-linear-gradient(0deg, rgba(21,128,61,.12) 0 1px, rgba(202,154,4,.08) 1px 2px, rgba(0,0,0,0) 2px 24px)";
+
+/** The hero's field: a woven zari ground, in motion. */
+export default function ZariWeave() {
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-      <Image
-        src={zariCloth}
-        alt=""
-        fill
-        sizes="100vw"
-        className="zari-ground object-cover object-center"
-        style={{ animation: "zari-drift 120s ease-in-out infinite" }}
+      {/* Warp: the threads held on the loom, running sideways. */}
+      <span
+        className="thread-x absolute inset-0"
+        style={{ backgroundImage: WARP, animation: "thread-x 44s linear infinite" }}
+      />
+      {/* Weft: the thread carried across, running down. Slower, and green
+          rather than gold, because on a real pattu the body colour is the
+          weft and the zari is the warp. */}
+      <span
+        className="thread-y absolute inset-0"
+        style={{ backgroundImage: WEFT, animation: "thread-y 67s linear infinite" }}
       />
 
-      {/* The budget. Cloth reads at the top, where the greeting sits on its
-          own frosted chip and no bare text lands, then shuts down to .96
-          through the whole reading column and stays there to the foot. */}
-      <span className="absolute inset-0 bg-[linear-gradient(180deg,rgba(251,253,249,.60)_0%,rgba(251,253,249,.94)_18%,rgba(251,253,249,.96)_62%,rgba(251,253,249,.94)_94%,rgba(251,253,249,.88)_100%)]" />
+      {/* Butta: the small motif repeated across the body of a pattu saree,
+          between the borders. Drifting diagonally at a crawl, so the field
+          is never quite the same twice. */}
+      <svg className="absolute inset-0 size-full" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          {/* Two motifs per 150px tile, offset from each other, which is
+              about the density a pattu body carries. The first version put
+              four of them in a 96px tile and the result read as wallpaper:
+              on real cloth the butta is sparse and the ground between them
+              is most of what you see. */}
+          <pattern id="kpc-butta" width="150" height="150" patternUnits="userSpaceOnUse">
+            <g fill="none" stroke="rgba(202,154,4,.26)" strokeWidth="1">
+              <path d="M38 22 L45 34 L38 46 L31 34 Z" />
+              <path d="M113 97 L120 109 L113 121 L106 109 Z" />
+            </g>
+            <circle cx="38" cy="34" r="1.3" fill="rgba(202,154,4,.22)" />
+            <circle cx="113" cy="109" r="1.3" fill="rgba(202,154,4,.22)" />
+          </pattern>
+        </defs>
+        <rect
+          width="100%"
+          height="100%"
+          fill="url(#kpc-butta)"
+          style={{ animation: "weave-pan 90s linear infinite" }}
+        />
+      </svg>
 
-      {/* Below xl the scene photograph sits in the lower half of the section
-          and fades its own edges out to flat cream. Against a ground that now
-          has cloth in it, that fade stopped reading as a fade and started
-          reading as a pale rectangle: same brightness, but texture on one
-          side of the line and none on the other. So the ground goes properly
-          flat before the photograph begins, and the cloth keeps to the top of
-          the section, which is the only part of a phone hero it was visible
-          in anyway. From xl the photograph is beside the copy, not over the
-          ground, and none of this applies. */}
-      <span className="absolute inset-x-0 bottom-0 h-[52%] bg-[linear-gradient(180deg,rgba(251,253,249,0)_0%,#fbfdf9_22%)] xl:hidden" />
-
-      {/* The selvedge, from xl only. Below that width the copy runs the full
-          measure and there is no margin to give it. The drawn temple border
-          in CulturalBanner paints over this, so the triangles sit on real
-          cloth rather than on paper. */}
-      <span className="absolute inset-y-0 left-0 hidden w-[76px] overflow-hidden xl:block">
-        <Image src={zariCloth} alt="" fill sizes="76px" className="object-cover object-left" />
-        <span className="absolute inset-0 bg-[linear-gradient(90deg,rgba(251,253,249,.18),rgba(251,253,249,.62)_72%,#fbfdf9_100%)]" />
-      </span>
+      {/* The catch of light that gives silver-gilt thread its name. One slow
+          pass every two minutes rather than a loop, so it is noticed once and
+          then forgotten, which is the most a background should ask for. */}
+      <span
+        className="zari-sheen absolute inset-y-0 left-0 w-[36%] bg-[linear-gradient(100deg,transparent_0%,rgba(255,251,230,.55)_46%,rgba(254,240,138,.3)_62%,transparent_100%)]"
+        style={{ animation: "zari-sheen 115s ease-in-out infinite" }}
+      />
     </div>
   );
 }
 
 /**
- * A woven border across the full width, for the foot of a section.
+ * A woven border for the foot of a section, in place of the brocade strip
+ * that used to sit here.
  *
- * Three layers: the cloth, a row of gold threads running across it, and a
- * green wash that ties it to whatever it borders. The threads are what move.
- * They are a repeating gradient rather than a second photograph because a
- * photograph cannot be tiled without a seam, and a gradient pans forever: the
- * period is 6px and the travel 1200px, an exact multiple, so it never jumps.
+ * The motif is the temple border, the stepped triangles down the selvedge of
+ * a Kanchipuram saree. preserveAspectRatio="none" stretches one authored
+ * path to whatever height the band is given, which is what lets a 32px band
+ * and a 48px one be the same markup.
+ *
+ * The catch is that it stretches the WIDTH too, so the number of teeth fixes
+ * how wide each one ends up. Eight of them across a 1440px page came out
+ * 180px wide and 32px tall, which is a wide zigzag and not a temple border:
+ * the real thing is always taller than it is broad. So the count is chosen
+ * per breakpoint instead, thirty on a wide screen and ten on a phone, which
+ * lands both at roughly 50px and 39px wide against a 48px and 32px band.
+ * Two SVGs rather than one is the price, and it is cheap: they are each one
+ * path.
  */
-export function ZariBand({ className = "h-12 sm:h-16" }: { className?: string }) {
+const teeth = (n: number) => {
+  const w = 100 / n;
+  const path = Array.from(
+    { length: n },
+    (_, i) => `L${((i + 0.5) * w).toFixed(2)} 1.5 L${((i + 1) * w).toFixed(2)} 12`,
+  ).join(" ");
+  return `M0 12 ${path}`;
+};
+
+function Teeth({ n, className }: { n: number; className: string }) {
+  const d = teeth(n);
   return (
-    <div aria-hidden className={`relative w-full overflow-hidden ${className}`}>
-      <Image src={zariBand} alt="" fill sizes="100vw" className="object-cover object-center" />
+    <svg
+      className={`absolute inset-0 size-full ${className}`}
+      viewBox="0 0 100 12"
+      preserveAspectRatio="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d={`${d} L100 12 Z`} fill="rgba(202,154,4,.30)" />
+      <path d={d} fill="none" stroke="rgba(253,224,71,.55)" strokeWidth="0.7" />
+    </svg>
+  );
+}
+
+export function ZariRule({ className = "h-9 sm:h-12" }: { className?: string }) {
+  return (
+    <div aria-hidden className={`relative w-full overflow-hidden bg-green-deep ${className}`}>
       <span
-        className="zari-band absolute inset-0"
+        className="thread-x absolute inset-0"
         style={{
           backgroundImage:
-            "repeating-linear-gradient(90deg, rgba(254,249,195,.42) 0 1px, rgba(202,154,4,.14) 1px 3px, rgba(0,0,0,0) 3px 6px)",
-          animation: "zari-weave 30s linear infinite",
+            "repeating-linear-gradient(90deg, rgba(253,224,71,.42) 0 1px, rgba(202,154,4,.16) 1px 3px, rgba(0,0,0,0) 3px 12px)",
+          animation: "thread-x 30s linear infinite",
         }}
       />
-      <span className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,46,26,.34)_0%,rgba(10,46,26,.04)_46%,rgba(10,46,26,.38)_100%)]" />
+      <Teeth n={10} className="sm:hidden" />
+      <Teeth n={30} className="hidden sm:block" />
       <span className="foil absolute inset-x-0 top-0 h-[2px]" />
       <span className="foil absolute inset-x-0 bottom-0 h-[2px]" />
     </div>

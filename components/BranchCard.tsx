@@ -2,15 +2,14 @@ import Link from "next/link";
 import type { Branch } from "@/config/business";
 import { business } from "@/config/business";
 import { ArrowRight, Clock, Phone, Pin } from "./Icons";
-import { ZariBand } from "./Zari";
 
 /**
  * A branch, at length. Used on /branches only: the home page shows the same
  * branches as a compact index instead, so this one is free to carry
  * everything a visitor might want before she decides to travel.
  *
- * The head office gets a real woven band across its top and the others get a
- * gold thread that draws across on hover, which is the whole hierarchy: one
+ * The head office gets a gold rule across its top and the others get the
+ * same thread drawn across on hover, which is the whole hierarchy: one
  * card is marked permanently, the rest answer when you point at them.
  *
  * The city name does the work the icon used to. A 34px pin in a circle is the
@@ -25,7 +24,7 @@ export default function BranchCard({ branch }: { branch: Branch }) {
   return (
     <article className="group relative flex h-full flex-col overflow-hidden rounded-[22px] border border-line glass-soft shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-line-yellow hover:shadow-mid">
       {branch.isHeadOffice ? (
-        <ZariBand className="h-7" />
+        <span aria-hidden className="foil absolute inset-x-0 top-0 h-[3px]" />
       ) : (
         <span
           aria-hidden

@@ -25,39 +25,45 @@ export const BASE_PATH = RAW_BASE === "/" ? "" : RAW_BASE.replace(/\/+$/, "");
 
 export const img = (id: number) => `${BASE_PATH}/img/silk-${id}.jpg`;
 
+/** The same photographs at 620px, for the six cards on the category board.
+ *
+ *  Those cards are 166px wide on a phone and 290px on a laptop, and they were
+ *  pulling the full-size originals: 691KB of the 1.1MB the home page loaded
+ *  at 390, for pictures shown at a fifth of their width. A static export has
+ *  no optimiser to do this at request time, so the sizes have to exist as
+ *  files. 620px still covers a 2x laptop screen.
+ *
+ *  Only the six ids in `buyCategories` have one of these. Regenerate
+ *  alongside the originals with
+ *  `convert silk-<id>.jpg -resize 620x -quality 62 cat/silk-<id>.jpg`. */
+export const catImg = (id: number) => `${BASE_PATH}/img/cat/silk-${id}.jpg`;
+
 /** Brand marks. `logoMark` is the emblem alone, the wordmark in the full
  *  lockup is illegible below about 120px, so small placements use the mark. */
-/** The hero scene: the artwork the client supplied, cropped away from the
- *  text that was baked into it. Everything in the picture is theirs, and the
- *  copy over it is live HTML rather than pixels, so it can be read aloud,
- *  selected, translated and clicked.
+/** The artwork the client supplied for the hero.
  *
- *  846x1024 native. That is the whole of what was supplied, and the panel it
- *  fills is about 920 CSS px wide on a laptop, so it is already being
- *  stretched slightly and will be soft on a 2x screen. A larger original
- *  would fix that; nothing here can. */
+ *  NOT CURRENTLY ON THE SITE. The hero's right-hand column is now the shop's
+ *  own sarees as a stack a visitor can tap through, which was asked for in
+ *  place of this. The file and this export are kept so it can be put back in
+ *  one line, and because it is the client's own asset and not ours to throw
+ *  away. 846x1024 native, which was already a little small for the panel it
+ *  used to fill. */
 export const heroScene = `${BASE_PATH}/img/hero-scene.jpg`;
 
-/** Zari woven into cloth, used as ground rather than as a picture.
+/** The warp on a loom, gold thread on a near-black ground, used as the field
+ *  under the branch index where the section is deep green.
  *
- *  `zariCloth` is gold brocade on an ivory body: the same two colours the
- *  brand already runs on, which is why it can sit under the hero without a
- *  third colour entering the page. It carries the hero's field and its
- *  selvedge. `zariBand` is a horizontal slice of the same cloth for the
- *  border strips, so a 60px band does not download a whole picture.
- *  `zariThreads` is the warp on a loom, gold on a near-black ground: the dark
- *  counterpart, which grounds the branch index where the field is deep green.
+ *  The last photograph used as a ground anywhere on the site. The hero's
+ *  brocade field and the brocade border strips are gone: both are drawn now,
+ *  in Zari.tsx, which is lighter in every sense and can actually be woven
+ *  rather than slid about. This one stays because it is gold on black rather
+ *  than silver on ivory, so it reads as the inside of a loom instead of as a
+ *  picture of cloth laid behind the page.
  *
- *  All three are cut down from the stock photographs in this folder
- *  (silk-20181020 and silk-37892693) and re-encoded hard, because a static
- *  export has no image optimiser and these are grounds, mostly seen under a
- *  veil. Regenerate them with ImageMagick if the originals ever change.
- *
- *  They are stock, not the shop's own. Their own loom and their own counter
- *  would be better in both places; these stand in until there are photographs
- *  to replace them with. */
-export const zariCloth = `${BASE_PATH}/img/zari-ground.jpg`;
-export const zariBand = `${BASE_PATH}/img/zari-band.jpg`;
+ *  Cut down from silk-37892693 in this folder and re-encoded hard, because a
+ *  static export has no image optimiser and this is seen under a wash heavy
+ *  enough to keep cream type above 4.5:1. It is stock, not the shop's own;
+ *  a photograph of their own counter would be better. */
 export const zariThreads = `${BASE_PATH}/img/zari-dark.jpg`;
 
 export const logoMark = `${BASE_PATH}/img/logo-mark.png`;
@@ -76,6 +82,13 @@ export const qrImg = (slug: string) => `${BASE_PATH}/img/qr/${slug}.svg`;
 /** Photographs of our own stock, in public/img/shop. */
 export const shopImg = (n: number) =>
   `${BASE_PATH}/img/shop/shop-${String(n).padStart(2, "0")}.jpg`;
+
+/** The hero's stack: the same shop photographs, centre-cropped to one 3:4
+ *  ratio and cut to 420px, because a pile only reads as a pile if every card
+ *  in it is the same shape. Generated from public/img/shop with ImageMagick
+ *  (`-resize 420x560^ -gravity center -extent 420x560`). */
+export const stackImg = (n: number) =>
+  `${BASE_PATH}/img/stack/saree-${String(n).padStart(2, "0")}.jpg`;
 
 /** The same photographs at 480px for places that show them small.
  *  A static export has no optimiser, so the full file downloads whatever the

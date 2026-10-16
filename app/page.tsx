@@ -8,7 +8,7 @@ import CulturalBanner from "@/components/CulturalBanner";
 import HeroBackdrop from "@/components/HeroBackdrop";
 import PriceScale from "@/components/PriceScale";
 import ReelWall from "@/components/ReelWall";
-import ZariGround, { ZariBand } from "@/components/Zari";
+import ZariWeave, { ZariRule } from "@/components/Zari";
 import {
   ArrowRight,
   Check,
@@ -43,11 +43,12 @@ export default function HomePage() {
           starts down from it. min-height rather than height, so a short
           window grows the section instead of clipping the copy into it. */}
       <section id="hero" className="relative overflow-hidden bg-cream text-ink xl:min-h-[calc(100vh-8.25rem)]">
-        {/* Real cloth first, then the drawn things over it. The hero is
-            composed as a saree: a plain body where the words go, woven zari
-            down the selvedge and across the foot. ZariGround carries the
-            field and the selvedge; ZariBand closes the section. */}
-        <ZariGround />
+        {/* The ground is woven rather than photographed: two sets of gold
+            threads crossing and travelling, with the saree's own butta
+            repeated over them. See Zari.tsx for why a drawn field beats a
+            picture of cloth here, and for the thread spacing the contrast
+            depends on. */}
+        <ZariWeave />
         <HeroBackdrop />
         {/* Saree border and kolam under the copy. Sits above the rings and
             motes and below the photograph, which covers whatever of it
@@ -158,12 +159,11 @@ export default function HomePage() {
           </div>
         </SilkStage>
 
-        {/* The woven border that closes the section, in place of the 3px gold
-            rule that used to. Last child, so it paints over the foot of the
-            scene photograph, whose own fade has already gone to cream there. */}
-        <div className="absolute inset-x-0 bottom-0">
-          <ZariBand />
-        </div>
+        {/* The temple border that closes the section, drawn and running. In
+            flow rather than absolute now: the picture beside the copy is a
+            grid cell rather than an absolute layer, so there is nothing left
+            for this to have to paint over. */}
+        <ZariRule className="h-9 sm:h-12" />
       </section>
 
       {/* The hero used to be followed by two bands: the branch names

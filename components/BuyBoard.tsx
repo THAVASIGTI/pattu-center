@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { buyCategories, img } from "@/config/content";
+import { buyCategories, catImg } from "@/config/content";
 import Reveal from "./Reveal";
 
 /**
@@ -58,16 +58,39 @@ export default function BuyBoard() {
                   from the centre, which on every one of these is the body of
                   the stack. */}
               <div className="relative min-h-0 flex-1 overflow-hidden">
-                <Image
-                  src={img(c.imageId)}
-                  alt={c.alt}
-                  fill
-                  sizes="(max-width: 639px) 46vw, (max-width: 1023px) 300px, 290px"
-                  className="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.07]"
+                {/* The drift lives on a wrapper and the hover scale on the
+                    picture, because they are both transforms and an
+                    animation beats a transition on the same element: put
+                    them together and the card stops answering the pointer.
+                    Each card gets its own period so the six never breathe in
+                    time, which is what makes a grid look mechanical. */}
+                <span
+                  aria-hidden
+                  className="cat-drift absolute inset-0 block"
+                  style={{ animation: `zari-drift ${62 + i * 9}s ease-in-out infinite` }}
+                >
+                  <Image
+                    src={catImg(c.imageId)}
+                    alt={c.alt}
+                    fill
+                    sizes="(max-width: 639px) 46vw, (max-width: 1023px) 300px, 290px"
+                    className="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.07]"
+                  />
+                </span>
+
+                {/* Light walking across the board one card at a time. The
+                    stagger is the whole effect: at 1.4s apart over six cards
+                    it reads as a single catch of light travelling along a
+                    folded pile, not as six cards flashing. */}
+                <span
+                  aria-hidden
+                  className="card-sheen pointer-events-none absolute inset-0 bg-[linear-gradient(105deg,transparent_36%,rgba(255,251,230,.46)_50%,transparent_64%)]"
+                  style={{ animation: `card-sheen 11s ease-in-out ${i * 1.4}s infinite` }}
                 />
 
                 {/* The same zari sweep the silk tiles use, so the two grids
-                    behave alike even though they no longer look alike. */}
+                    behave alike even though they no longer look alike. This
+                    one answers the pointer; the one above runs on its own. */}
                 <span
                   aria-hidden
                   className="pointer-events-none absolute inset-0 -translate-x-full bg-[linear-gradient(105deg,transparent_38%,rgba(255,251,230,.42)_50%,transparent_62%)] transition-transform duration-[1100ms] ease-out group-hover:translate-x-full"

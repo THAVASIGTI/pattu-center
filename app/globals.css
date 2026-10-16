@@ -95,12 +95,41 @@
   50%      { transform: scale(1.15) translate3d(-1.8%, -1.4%, 0); }
 }
 
-/* A woven border running past, the way cloth comes off a loom. This moves
-   background-position rather than the element, so the strip repeats forever,
-   nothing reflows, and the band can be any width. */
-@keyframes zari-weave {
-  from { background-position: 0 50%; }
-  to   { background-position: -1200px 50%; }
+/* The weave itself, drawn rather than photographed.
+ *
+ * Two sets of threads crossing: one running along x, one along y, each
+ * panning on its own axis at its own speed. Because they travel
+ * independently, the points where they cross travel too, which is what makes
+ * it read as cloth being woven rather than a pattern sliding past.
+ *
+ * Both move background-position only, so nothing reflows and the field can be
+ * any size. The travel must be an exact multiple of the thread spacing or the
+ * loop visibly jumps: spacing is 12px and travel 240px, which is 20 periods. */
+@keyframes thread-x {
+  from { background-position: 0 0; }
+  to   { background-position: -240px 0; }
+}
+@keyframes thread-y {
+  from { background-position: 0 0; }
+  to   { background-position: 0 -240px; }
+}
+
+/* Light running along the zari, the way a silver-gilt thread catches as the
+   cloth is turned. One slow pass, then a long wait, so it is an event rather
+   than a loop you can watch. */
+@keyframes zari-sheen {
+  0%        { transform: translate3d(-70%, 0, 0); opacity: 0; }
+  6%        { opacity: 1; }
+  26%       { opacity: 1; }
+  32%, 100% { transform: translate3d(170%, 0, 0); opacity: 0; }
+}
+
+/* The same catch of light across a single card, used on the category board
+   so the whole grid shimmers in turn instead of only answering the pointer. */
+@keyframes card-sheen {
+  0%        { transform: translateX(-130%); }
+  18%       { transform: translateX(130%); }
+  100%      { transform: translateX(130%); }
 }
 
 /* The gold threads beside a section's lotus, pulled out from it as the
@@ -332,6 +361,14 @@ body {
      nowhere near the reading line, so they are slowed rather than stopped.
      The drawn thread is a one-shot on arrival, so it is simply shown done. */
   .zari-ground { animation-duration: 300s !important; }
-  .zari-band { animation-duration: 900s !important; }
+  .cat-drift { animation-duration: 480s !important; }
+  .thread-x, .thread-y { animation-duration: 900s !important; }
   .thread-draw { transition: none !important; transform: scaleX(1) !important; }
+  /* The two sheens are pure travel with nothing underneath them to see, so
+     unlike the weave they are cut rather than slowed. */
+  .zari-sheen, .card-sheen { animation: none !important; opacity: 0 !important; }
+  /* The stack keeps changing, because which saree is on top is the content;
+     it is the travel between positions that is slowed, the same decision
+     already taken for .cat-slide above. */
+  .saree-card { transition-duration: 1500ms !important; }
 }

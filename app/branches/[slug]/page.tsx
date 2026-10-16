@@ -4,7 +4,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import CtaBand from "@/components/CtaBand";
 import { ArrowRight, Check, Clock, Mail, Phone, Pin, WhatsApp } from "@/components/Icons";
-import { ZariBand } from "@/components/Zari";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import { Button, Section, SectionHead, Wrap } from "@/components/ui";
@@ -325,12 +324,11 @@ export default async function BranchPage({ params }: Params) {
             <SectionHead eyebrow="Getting here" title="Find us on the map." />
           </Reveal>
           {/* The map is the biggest single thing on this page, which is right:
-              it is the one piece a visitor came here to use. Hemmed top and
-              bottom with the same woven band as the heroes, so the frame is
-              the brand's rather than a browser default. */}
+              it is the one piece a visitor came here to use. It carried a
+              brocade strip above and below it; the gold hairline does the
+              framing on its own and leaves the map the whole of the panel. */}
           <Reveal from="arch">
-            <div className="overflow-hidden rounded-[26px] border border-line-yellow bg-cream-2 shadow-mid">
-              <ZariBand className="h-7" />
+            <div className="overflow-hidden rounded-[26px] border-2 border-line-yellow bg-cream-2 shadow-mid">
               <iframe
                 src={mapSrc}
                 title={`Map showing our ${branch.city} location`}
@@ -339,7 +337,6 @@ export default async function BranchPage({ params }: Params) {
                 allowFullScreen
                 className="block h-[340px] w-full border-0 sm:h-[420px] lg:h-[520px]"
               />
-              <ZariBand className="h-7" />
             </div>
             <div className="mt-5 text-center">
               <Button href={mapHref} variant="outline" external>

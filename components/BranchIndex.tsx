@@ -3,7 +3,6 @@ import Link from "next/link";
 import { ArrowRight, Phone, Pin, WhatsApp } from "./Icons";
 import Reveal from "./Reveal";
 import { Button, Section, SectionHead, Wrap } from "./ui";
-import { ZariBand } from "./Zari";
 import { branchCountWordCap, branches, business, waLink } from "@/config/business";
 import { zariThreads } from "@/config/content";
 
@@ -74,8 +73,12 @@ export default function BranchIndex() {
               where she lives, so it carries the address and the phone in
               full and the other ten carry a name and a street. */}
           <Reveal from="right" delay={120}>
+            {/* A gold rule across the top, where a strip of real brocade used
+                to sit. One line of the brand's own foil marks the head office
+                just as well as a photograph of cloth did, and it does not ask
+                anyone to download a picture to see a border. */}
             <article className="overflow-hidden rounded-[26px] border border-yellow/25 bg-green-deep/70">
-              <ZariBand className="h-9" />
+              <span aria-hidden className="foil block h-[3px] w-full" />
               <div className="p-6 sm:p-7">
                 <p className="text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-yellow-light">
                   Head office

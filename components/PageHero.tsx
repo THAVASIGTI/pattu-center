@@ -2,7 +2,7 @@ import Image from "next/image";
 import type { ReactNode } from "react";
 import { img } from "@/config/content";
 import { Crumbs, Ornament, Wrap } from "./ui";
-import { ZariBand } from "./Zari";
+import { ZariRule } from "./Zari";
 
 /** Shared hero band for every inner page. */
 export default function PageHero({
@@ -51,10 +51,10 @@ export default function PageHero({
         {children && <div className="mt-6 flex flex-wrap justify-center gap-2.5">{children}</div>}
       </Wrap>
 
-      {/* The same woven border that closes the home hero, so every inner page
-          is hemmed the same way. In flow rather than absolute, so it adds its
-          own height instead of sitting over the last line of copy. */}
-      <ZariBand className="h-9 sm:h-11" />
+      {/* The same temple border that closes the home hero, so every inner
+          page is hemmed the same way. In flow rather than absolute, so it
+          adds its own height instead of sitting over the last line of copy. */}
+      <ZariRule className="h-9 sm:h-12" />
     </section>
   );
 }
