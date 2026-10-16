@@ -105,6 +105,30 @@
   to   { background-position: -240px 0; }
 }
 
+/* The hero arriving.
+ *
+ * Everything below the fold enters on scroll through Reveal, and the hero
+ * had nothing at all: the one screen everybody sees was the one screen that
+ * never moved. This is that entrance, and it is a CSS animation rather than
+ * Reveal's observer because the hero is on screen at load, so there is
+ * nothing to observe, and because a plain animation runs without
+ * JavaScript. animation-fill-mode both holds the start state before the
+ * delay elapses, which is what lets the parts arrive in sequence.
+ *
+ * Travel and opacity only, and 18px of it, which is small enough to read as
+ * settling rather than flying in. */
+@keyframes rise-in {
+  from { opacity: 0; transform: translate3d(0, 18px, 0); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* The picture breathing, once it has arrived. Eight pixels over seven
+   seconds, far enough from any reading line to be free to move. */
+@keyframes float-y {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50%      { transform: translate3d(0, -9px, 0); }
+}
+
 /* A band of saree border running sideways.
  *
  * The travel is exactly one tile, read from --tile on the element, so the
@@ -329,6 +353,14 @@ body {
   -webkit-tap-highlight-color: rgba(202, 154, 4, 0.18);
 }
 
+.rise {
+  animation: rise-in 760ms cubic-bezier(.2, .7, .3, 1) both;
+}
+
+.float-y {
+  animation: float-y 7s ease-in-out infinite;
+}
+
 .rail::-webkit-scrollbar { display: none; }
 .rail > * { scroll-snap-align: center; }
 
@@ -346,6 +378,12 @@ body {
   /* The hold bar would otherwise snap to empty, so show it filled. */
   .hero-progress { animation: none !important; transform: scaleX(1) !important; }
   .foil-shimmer { animation: none !important; }
+  /* The hero's entrance is travel with nothing underneath it to
+     see, so it is cut rather than slowed, and the content is simply
+     there. The float is small, slow and nowhere near a reading
+     line, so it is slowed on the same reasoning as the backdrop. */
+  .rise { animation: none !important; }
+  .float-y { animation-duration: 90s !important; }
   /* The hero backdrop is the one place motion is the point, so it is slowed
      rather than stopped: "reduce" taken literally. Everything here is small,
      low-contrast and far from the reading line, which is the kind of movement

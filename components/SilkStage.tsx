@@ -45,18 +45,23 @@ export default function SilkStage({ children }: { children: ReactNode }) {
   return (
     <Wrap className="relative z-10 grid items-center gap-10 py-12 sm:gap-12 sm:py-16 xl:grid-cols-[1.05fr_.95fr] xl:gap-14 xl:py-20">
       {children}
-      <div className="order-2 mx-auto w-full max-w-[330px] sm:max-w-[400px] xl:mx-0 xl:ml-auto xl:max-w-[520px]">
-        <Image
-          src={heroScene}
-          alt=""
-          aria-hidden
-          width={824}
-          height={1024}
-          priority
-          sizes="(max-width: 639px) 330px, (max-width: 1279px) 400px, 520px"
-          className="block h-auto w-full"
-          style={{ WebkitMaskImage: FADE, maskImage: FADE }}
-        />
+      {/* rise brings it in with the copy; float-y keeps it breathing after.
+          Two animations, so they sit on separate elements: both on one and
+          the second would simply replace the first. */}
+      <div className="rise [animation-delay:240ms] order-2 mx-auto w-full max-w-[330px] sm:max-w-[400px] xl:mx-0 xl:ml-auto xl:max-w-[520px]">
+        <div className="float-y">
+          <Image
+            src={heroScene}
+            alt=""
+            aria-hidden
+            width={824}
+            height={1024}
+            priority
+            sizes="(max-width: 639px) 330px, (max-width: 1279px) 400px, 520px"
+            className="block h-auto w-full"
+            style={{ WebkitMaskImage: FADE, maskImage: FADE }}
+          />
+        </div>
       </div>
     </Wrap>
   );

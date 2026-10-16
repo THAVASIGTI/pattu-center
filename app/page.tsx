@@ -67,7 +67,7 @@ export default function HomePage() {
                 that does not move with them. It also keeps the greeting from
                 reading as a second eyebrow, which a gold uppercase line
                 directly above a gold uppercase line would. */}
-            <p className="mb-5 inline-flex items-center gap-3 rounded-full border border-line-yellow glass-soft px-5 py-2.5 shadow-soft">
+            <p className="rise mb-5 inline-flex items-center gap-3 rounded-full border border-line-yellow glass-soft px-5 py-2.5 shadow-soft">
               <Vanakkam aria-hidden className="size-8 shrink-0 text-yellow-ink" />
               <span className="text-[0.95rem] text-ink-soft">
                 Welcome to{" "}
@@ -80,7 +80,7 @@ export default function HomePage() {
             {/* What we buy, said next. The reference this was rebuilt from
                 opens on the goods, and that order is kept: the greeting is
                 one quiet line, then the goods, then the claim. */}
-            <p className="mb-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 xl:justify-start">
+            <p className="rise [animation-delay:90ms] mb-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 xl:justify-start">
               {["Old pattu sarees", "Silk vetti", "Zari and silver"].map((t, i) => (
                 <span key={t} className="flex items-center gap-3">
                   {i > 0 && (
@@ -96,12 +96,12 @@ export default function HomePage() {
             {/* One headline, held still. The second line carries the claim and
                 takes the gold, so the eye lands on the promise rather than on
                 the noun. */}
-            <h1 className="mx-auto max-w-[15ch] font-serif text-[clamp(2.1rem,6.4vw,3.5rem)] leading-[1.12] text-green-deep xl:mx-0">
+            <h1 className="rise [animation-delay:180ms] mx-auto max-w-[15ch] font-serif text-[clamp(2.1rem,6.4vw,3.5rem)] leading-[1.12] text-green-deep xl:mx-0">
               Your old silk is
-              <span className="foil-text-deep foil-shimmer block">still worth money.</span>
+              <span className="rise [animation-delay:300ms] foil-text-deep foil-shimmer block">still worth money.</span>
             </h1>
 
-            <p className="mx-auto mt-5 max-w-[44ch] text-[clamp(1rem,2.7vw,1.1rem)] leading-[1.7] text-ink-soft xl:mx-0">
+            <p className="rise [animation-delay:420ms] mx-auto mt-5 max-w-[44ch] text-[clamp(1rem,2.7vw,1.1rem)] leading-[1.7] text-ink-soft xl:mx-0">
               Pattu sarees, silk vetti, zari and silver. Weighed in front of you,
               the figure explained before anything changes hands.
             </p>
@@ -115,7 +115,7 @@ export default function HomePage() {
                 It keeps flex-1 below sm, which with a single button now
                 means it runs the full measure: the largest tap target on the
                 page for the thing the page most wants someone to do. */}
-            <div className="mt-7 flex flex-wrap justify-center gap-3 xl:justify-start">
+            <div className="rise [animation-delay:540ms] mt-7 flex flex-wrap justify-center gap-3 xl:justify-start">
               <Button href={business.phones[0].href} variant="green" className="flex-1 sm:flex-none">
                 <Phone className="size-[17px]" />
                 Call {business.phones[0].label}
@@ -125,7 +125,7 @@ export default function HomePage() {
             {/* Condition, said plainly. Every one of these is a state the
                 price ledger already says we still pay for: condition adjusts
                 the figure and never disqualifies. */}
-            <p className="mt-7 flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1.5 text-[0.7rem] font-semibold tracking-[0.16em] text-ink-soft uppercase xl:justify-start">
+            <p className="rise [animation-delay:650ms] mt-7 flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1.5 text-[0.7rem] font-semibold tracking-[0.16em] text-ink-soft uppercase xl:justify-start">
               <span aria-hidden className="hidden h-px w-5 bg-line-yellow xl:block" />
               {["Old", "Faded", "Stained", "Moth-eaten"].map((t, i) => (
                 <span key={t} className="flex items-center gap-2.5">
@@ -141,7 +141,7 @@ export default function HomePage() {
                 about branch count, years, pickup or cash, which is now the
                 only place on this page that mattered: the strip of numbers
                 that used to repeat them directly below the hero is gone. */}
-            <ul className="mx-auto mt-9 grid max-w-[30rem] grid-cols-2 gap-y-7 border-t border-line pt-7 sm:max-w-none sm:grid-cols-4 sm:gap-y-0 sm:divide-x sm:divide-line xl:mx-0">
+            <ul className="rise [animation-delay:760ms] mx-auto mt-9 grid max-w-[30rem] grid-cols-2 gap-y-7 border-t border-line pt-7 sm:max-w-none sm:grid-cols-4 sm:gap-y-0 sm:divide-x sm:divide-line xl:mx-0">
               {[
                 { Icon: Scale, a: "Weighed", b: "in front of you" },
                 { Icon: ZariBorder, a: "Zari priced", b: "separately" },
