@@ -8,6 +8,7 @@ import CulturalBanner from "@/components/CulturalBanner";
 import HeroBackdrop from "@/components/HeroBackdrop";
 import PriceScale from "@/components/PriceScale";
 import ReelWall from "@/components/ReelWall";
+import SareeCycle from "@/components/SareeCycle";
 import ZariWeave, { ZariRule } from "@/components/Zari";
 import {
   ArrowRight,
@@ -27,7 +28,6 @@ import {
   priceLedger,
   homeReels,
   reels,
-  sellingTips,
   services,
   testimonials,
   whyChooseUs,
@@ -42,11 +42,16 @@ export default function HomePage() {
           starts down from it. min-height rather than height, so a short
           window grows the section instead of clipping the copy into it. */}
       <section id="hero" className="relative overflow-hidden bg-cream text-ink xl:min-h-[calc(100vh-8.25rem)]">
-        {/* The ground is woven rather than photographed: two sets of gold
-            threads crossing and travelling, with the saree's own butta
-            repeated over them. See Zari.tsx for why a drawn field beats a
-            picture of cloth here, and for the thread spacing the contrast
-            depends on. */}
+        {/* The ground, in layers, bottom up.
+
+            SareeCycle is the photographs: six stacks of the shop's own silk
+            changing every two seconds under a cream wash. ZariWeave is the
+            drawn saree borders running sideways over them, which still do
+            the work they were added for: the wash flattens the photographs
+            into a field, and the borders are what keeps that field moving at
+            the scale of a motif rather than only at the scale of a whole
+            picture. Everything that follows sits on top of both. */}
+        <SareeCycle />
         <ZariWeave />
         <HeroBackdrop />
         {/* Saree border and kolam under the copy. Sits above the rings and
@@ -133,7 +138,9 @@ export default function HomePage() {
                   {t}
                 </span>
               ))}
-              <span className="text-green">all accepted</span>
+              {/* green-ink, not green: this is 11px type and the ground
+                  under it is now a photograph under a wash. Measured. */}
+              <span className="text-green-ink">all accepted</span>
             </p>
 
             {/* The four promises: how the price is arrived at, which is the
@@ -315,61 +322,12 @@ export default function HomePage() {
         </Wrap>
       </Section>
 
-      {/* ---------------- Do's and don'ts ---------------- */}
-      <Section tone="cream">
-        <Wrap>
-          <Reveal>
-            <SectionHead
-              eyebrow="Before you sell"
-              title="Five things to do, five to avoid."
-              lead="A few minutes of preparation usually means a better price and a much faster visit."
-            />
-          </Reveal>
-
-          <div className="grid gap-5 lg:grid-cols-2 lg:gap-6">
-            <Reveal>
-              <div className="h-full rounded-[22px] border-t-4 border-green glass-soft p-6 shadow-soft sm:p-7">
-                <h3 className="mb-4 flex items-center gap-2.5 font-serif text-[1.3rem] text-green-deep">
-                  <span className="grid size-8 place-items-center rounded-full bg-green-soft/15">
-                    <Check className="size-4 text-green" />
-                  </span>
-                  Please do
-                </h3>
-                <ul className="grid gap-3">
-                  {sellingTips.dos.map((t) => (
-                    <li key={t} className="flex items-start gap-3 text-[0.94rem] text-ink-soft">
-                      <Check className="mt-0.5 size-4.5 shrink-0 text-green-soft" />
-                      <span>{t}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </Reveal>
-
-            <Reveal delay={100}>
-              <div className="h-full rounded-[22px] border-t-4 border-yellow glass-soft p-6 shadow-soft sm:p-7">
-                <h3 className="mb-4 flex items-center gap-2.5 font-serif text-[1.3rem] text-green-deep">
-                  <span className="grid size-8 place-items-center rounded-full bg-yellow/15">
-                    <span aria-hidden className="font-serif text-[1.1rem] leading-none text-yellow-ink">!</span>
-                  </span>
-                  Please don&apos;t
-                </h3>
-                <ul className="grid gap-3">
-                  {sellingTips.donts.map((t) => (
-                    <li key={t} className="flex items-start gap-3 text-[0.94rem] text-ink-soft">
-                      <span
-                        aria-hidden
-                        className="mt-1.5 size-2 shrink-0 rotate-45 rounded-[1px] bg-yellow"
-                      />
-                      <span>{t}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </Reveal>
-          </div>
-        </Wrap>
-      </Section>
+      {/* The price ledger used to be followed by "Before you sell: five
+          things to do, five to avoid", two columns of preparation advice.
+          Gone at the client's request. The copy itself is still in
+          config/content.ts as `sellingTips`, unused by any page, because it
+          is good advice and the FAQ is the obvious home for it if they ever
+          want it back. */}
 
       {/* ---------------- Why choose us ---------------- */}
       <Section tone="cream">

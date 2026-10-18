@@ -654,6 +654,12 @@ export const priceLedger = [
 
 /* ------------------------------------------------------------------ */
 /* Before you sell, practical do's and don'ts                         */
+/*                                                                    */
+/* NOT RENDERED ANYWHERE at present. This had a section of its own on  */
+/* the home page and the client asked for that section to come out.    */
+/* The copy is kept because it is sound advice and the FAQ would take  */
+/* it as two more entries if they want it back; delete it here if they */
+/* decide they do not.                                                 */
 /* ------------------------------------------------------------------ */
 
 export const sellingTips = {
