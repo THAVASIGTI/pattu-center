@@ -81,7 +81,7 @@ export default function HomePage() {
             produces. The bottom padding clears the temple rule, which is
             absolute and would otherwise sit over the promises. */}
         <Wrap className="relative z-10 py-16 pb-24 sm:py-20 sm:pb-28 xl:py-24 xl:pb-32">
-          <div className="mx-auto w-full max-w-[46rem] text-center">
+          <div className="on-silk mx-auto w-full max-w-[46rem] text-center">
             {/* The greeting, on its own ground.
 
                 It sits in a chip rather than as a bare line because of what
@@ -125,13 +125,21 @@ export default function HomePage() {
                 takes the gold, so the eye lands on the promise rather than on
                 the noun.
 
-                foil-text-light, not foil-text-deep: the deep variant is the
-                gold tuned for cream grounds and would disappear here. The
-                light one is the dark-ground gold, already measured on the
-                green sections. */}
+                Both lines are white at the client's request. The second
+                one carried the brand's gold foil, and gold was the tightest
+                colour anywhere on this site: over a photograph it ran 3.48:1
+                against a 3.0 floor with nothing to spare, and it was the one
+                thing standing between the hero and a thinner scrim. White
+                measures 8.5:1 to 10.2:1 on the same ground, which is what
+                paid for the silk now showing through.
+
+                The gold has not left the hero. It is on the eyebrow, the
+                goods line, the icons, the borders and the call button, which
+                is where it earns more: the one brightest thing on the screen
+                should be the action, not a noun. */}
             <h1 className="rise [animation-delay:180ms] mx-auto max-w-[16ch] font-serif text-[clamp(2.2rem,6.6vw,3.9rem)] leading-[1.1] text-white">
               Your old silk is
-              <span className="rise [animation-delay:300ms] foil-text-light foil-shimmer block">still worth money.</span>
+              <span className="rise [animation-delay:300ms] block">still worth money.</span>
             </h1>
 
             <p className="rise [animation-delay:420ms] mx-auto mt-5 max-w-[46ch] text-[clamp(1rem,2.7vw,1.12rem)] leading-[1.7] text-cream/85">
@@ -154,7 +162,7 @@ export default function HomePage() {
               <Button
                 href={business.phones[0].href}
                 variant="yellow"
-                className="w-full text-[1rem] sm:w-auto sm:px-8"
+                className="w-full text-[1rem] [text-shadow:none] sm:w-auto sm:px-8"
               >
                 <Phone className="size-[17px]" />
                 Call {business.phones[0].label}

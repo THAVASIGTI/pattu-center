@@ -28,23 +28,37 @@ import { buyCategories, catImg } from "@/config/content";
  * to be crisp. If the shop ever supplies large photographs of their own
  * counter, point `catImg` at them and this gets better for nothing.
  *
- * The scrim is not decoration. The alphas below were set by measuring glyph
- * pixels against the rendered ground, once per phase of the cycle and at
- * three widths, and the worst phase is the one they answer to. Where the
- * hero stands now, worst case of eighteen measurements per run of text:
+ * The scrim is not decoration, but it is thinner than it was, twice over.
+ * The client asked to see more of the silk, and the way to afford that was
+ * not to thin the scrim and hope: it was to find more contrast elsewhere
+ * first and spend it here. Two things paid for it.
  *
- *     gold headline   3.48:1   floor 3.0, large text
- *     goods chips     4.67:1   floor 4.5
- *     promise sub     4.85:1   floor 4.5
- *     welcome line    5.18:1   floor 4.5
- *     lead            5.57:1   floor 4.5
- *     condition tags  5.90:1   floor 4.5
+ * A soft dark halo on the copy, `on-silk` in globals.css, which darkens the
+ * ground only where there is a glyph instead of everywhere. And the second
+ * line of the headline going from the brand's gold foil to white, at the
+ * client's request, which happened to retire the single tightest colour on
+ * the site: gold over a photograph ran 3.48:1 against a 3.0 floor with
+ * nothing to spare and was the one thing holding the scrim up. White on the
+ * same ground measures around 8:1.
+ *
+ * Between them the compounded scrim came down from about 0.88 over the copy
+ * to about 0.65, and every run of type still clears its floor with room.
+ *
+ * The alphas were set by measuring glyph pixels against the rendered
+ * ground, once per phase of the cycle and at three widths, and the worst
+ * phase is the one they answer to. Worst case of eighteen measurements per
+ * run of text:
+ *
+ *     promise sub     5.12:1   floor 4.5
+ *     goods chips     5.44:1   floor 4.5
+ *     welcome line    5.45:1   floor 4.5
+ *     condition tags  5.70:1   floor 4.5
+ *     lead            5.80:1   floor 4.5
  *     call button     5.96:1   floor 4.5
- *     headline line 1 7.70:1   floor 3.0
+ *     headline        7.43:1   floor 3.0, large text
  *
- * The gold headline is the tightest thing on the site and always has been.
- * Thinning the scrim to show more silk comes straight out of that 0.48.
- * Re-measure, do not guess.
+ * The promise row is the binding constraint now. Thinning further comes
+ * straight out of its 0.62. Re-measure, do not guess.
  */
 
 /* The keyframes in globals.css cut the cycle into six equal slots, so this
@@ -107,7 +121,7 @@ export default function SareeCycle() {
           centred radial does it, and the corners are left alone: at the
           four corners of the hero only the floor applies and the silk is
           as clear as it gets. Compounded in the middle the two come to
-          about 0.88, at the edges about 0.78.
+          about 0.65, at the edges about 0.52.
 
           The scrim colour is darker and much less saturated than the
           brand's green-deep, and that is the one choice here that is about
@@ -129,8 +143,8 @@ export default function SareeCycle() {
           on a dark one light it. The fix was in Zari.tsx. Measure what is
           actually under the glyph before thickening the scrim; the scrim
           costs the silk and might not even be the thing in the way. */}
-      <span className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,24,14,.86)_0%,rgba(5,24,14,.76)_26%,rgba(5,24,14,.78)_62%,rgba(5,24,14,.90)_100%)]" />
-      <span className="absolute inset-0 bg-[radial-gradient(95%_80%_at_50%_50%,rgba(5,24,14,.50)_0%,rgba(5,24,14,.34)_58%,rgba(5,24,14,0)_100%)]" />
+      <span className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,24,14,.66)_0%,rgba(5,24,14,.50)_26%,rgba(5,24,14,.52)_62%,rgba(5,24,14,.70)_100%)]" />
+      <span className="absolute inset-0 bg-[radial-gradient(95%_80%_at_50%_50%,rgba(5,24,14,.30)_0%,rgba(5,24,14,.20)_58%,rgba(5,24,14,0)_100%)]" />
     </div>
   );
 }

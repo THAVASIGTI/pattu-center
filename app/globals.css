@@ -461,6 +461,34 @@ body {
   -webkit-tap-highlight-color: rgba(202, 154, 4, 0.18);
 }
 
+/* Type set over a photograph.
+ *
+ * This is what lets the hero's scrim be thin. The whole section is a trade
+ * between how much silk you can see and whether the words on top of it can
+ * be read, and for a while the only lever was the scrim: every step towards
+ * showing the cloth came straight out of the contrast budget, and the gold
+ * headline, which is the tightest thing on this site, ran out first.
+ *
+ * A shadow changes the terms, because it darkens the ground only where
+ * there is a glyph. It is not a trick for the measurement either: the probe
+ * reads the ground by painting the text transparent, and text-shadow is
+ * drawn from the glyph's geometry rather than its colour, so the shadow
+ * stays in that shot and what gets measured is the ground a reader actually
+ * sees. It works under background-clip: text as well; the shadow is laid
+ * down first and the clipped gradient paints over it.
+ *
+ * Two layers. The tight one does the work on thin strokes, where a wide
+ * blur has almost no peak opacity left. The wide one sits the whole block
+ * on a soft pool so the type does not look pasted on.
+ *
+ * Not for anything on a solid ground. On the gold button it would be a
+ * smudge, which is why that one turns it off again. */
+@utility on-silk {
+  text-shadow:
+    0 1px 2px rgba(5, 24, 14, 0.92),
+    0 2px 18px rgba(5, 24, 14, 0.72);
+}
+
 .rise {
   animation: rise-in 760ms cubic-bezier(.2, .7, .3, 1) both;
 }
