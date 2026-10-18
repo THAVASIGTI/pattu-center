@@ -192,6 +192,17 @@
   to   { transform: translate3d(-50%, 0, 0); }
 }
 
+/* The travel lives here rather than as an inline style on the track, and
+   that is not tidiness. `animation:` is a shorthand, so it sets
+   animation-play-state: running along with everything else, and set inline
+   it outranks any stylesheet rule that is not !important. With the duration
+   written in the markup the pause below silently did nothing: the track
+   went on travelling under the pointer and the only evidence was a frame
+   diff that had been measured wrongly. Keep it in CSS. */
+.marquee-track {
+  animation: branch-marquee 58s linear infinite;
+}
+
 /* Hovering stops it, which is the point of a moving list: the pointer is
    how someone says "that one". focus-within does the same for the keyboard,
    or tabbing into the rail would walk a card out from under the caret, and
