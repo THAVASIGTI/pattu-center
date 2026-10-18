@@ -17,20 +17,76 @@ import { zariThreads } from "@/config/content";
  * somewhere else and wants to find her own town in a list as fast as she can.
  *
  * So the section now does both separately. The head office is one large block
- * with its address, its phone and its hours. The other ten are a tight index
- * of names, set large enough to scan at arm's length, laid on a single woven
- * panel instead of ten floating cards.
+ * with its address, its phone and its hours. The other ten travel past in a
+ * rail, at the client's request, and stop the moment a pointer touches them.
  *
- * The panel is the point of the gold gaps: the tiles sit on a gold ground
- * with a 1px gutter, so the grid reads as threads crossing between them, and
- * the whole index is one piece of cloth rather than ten objects. That is also
- * why none of these tiles carries glass. A backdrop-filter samples whatever
- * is painted behind it, including that gold, and would pull it through and
- * turn the panel beige, which is the trap already recorded in globals.css.
+ * The travel is what makes the count felt. Ten tiles in a static grid is a
+ * block of text nobody counts; ten going by is a line of branches that keeps
+ * producing another town, which is the one thing this section is for. Pausing
+ * on hover is not a nicety either: a list that moves is unusable without it,
+ * because reaching for a card means chasing it.
+ *
+ * The tiles sit on a gold ground with a 1px gutter, so the rail reads as one
+ * length of cloth with threads between the panels rather than as ten floating
+ * cards. That is also why none of them carries glass. A backdrop-filter
+ * samples whatever is painted behind it, including that gold, and would pull
+ * it through and turn the rail beige, which is the trap already recorded in
+ * globals.css.
  *
  * The ground is a loom warp, gold on near-black, under a green wash heavy
  * enough to keep cream type above 4.5:1. The wash is not optional.
  */
+
+type Branch = (typeof branches)[number];
+
+/** One town in the rail. Lifted out of the markup because the rail renders
+ *  the whole list twice: once as the real thing and once as an inert clone
+ *  that exists only so the loop can close without a seam. */
+function BranchTile({ b }: { b: Branch }) {
+  const phone = business.phones[b.phoneIndex] ?? business.phones[0];
+  return (
+    <div className="group relative flex h-full flex-col p-5 transition-colors duration-300 hover:bg-green-mid/60 sm:p-6">
+      {/* A thread drawn across the top as the pointer arrives. scaleX from
+          the left, so it is pulled rather than faded, and it is a transform
+          so it costs nothing. */}
+      <span
+        aria-hidden
+        className="foil absolute inset-x-0 top-0 h-[2px] origin-left scale-x-0 transition-transform duration-500 ease-out group-hover:scale-x-100"
+      />
+      <h3 className="font-serif text-[1.4rem] leading-tight text-cream transition-colors duration-300 group-hover:text-yellow-light">
+        <Link href={`/branches/${b.slug}`} className="after:absolute after:inset-0">
+          {b.city}
+        </Link>
+        {b.badge && (
+          <span className="ml-2 align-middle font-sans text-[0.6rem] font-semibold uppercase tracking-[0.12em] text-yellow-light/80">
+            {b.badge}
+          </span>
+        )}
+      </h3>
+      <p className="mt-1.5 flex-1 text-[0.86rem] leading-relaxed text-cream/60">
+        {b.pickupOnly ? "Doorstep pickup across the city" : b.lines[0]}
+      </p>
+      <p className="mt-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-2.5">
+        <span className="inline-flex items-center gap-2 text-[0.8rem] font-semibold text-yellow-light">
+          <Pin className="size-3.5" />
+          Branch page
+          <ArrowRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+        </span>
+        {/* Above the link overlay, so a thumb can dial from the rail without
+            opening the branch page first. */}
+        <a
+          href={phone.href}
+          aria-label={`Call our ${b.city} branch`}
+          className="relative z-10 inline-flex min-h-10 items-center gap-1.5 rounded-full border border-yellow/30 px-3.5 text-[0.8rem] font-semibold text-cream transition-colors hover:bg-yellow/20 hover:text-yellow-light"
+        >
+          <Phone className="size-3.5" />
+          {phone.label}
+        </a>
+      </p>
+    </div>
+  );
+}
+
 export default function BranchIndex() {
   const head = branches.find((b) => b.isHeadOffice) ?? branches[0];
   const rest = branches.filter((b) => b.slug !== head.slug);
@@ -112,94 +168,84 @@ export default function BranchIndex() {
           </Reveal>
         </div>
 
-        {/* The other ten, as names. One gold ground showing through a 1px
-            gutter, so this is a woven panel and not ten cards.
+        {/* The other ten, going past.
 
-            The closing invitation is the last tile rather than a block below
-            the panel, and that is arithmetic as much as composition: ten
-            tiles in three columns leaves two empty cells, and an empty cell
-            in this construction is not blank, it is a bare patch of the gold
-            ground. Spanning the invitation across two makes every row full
-            at each of the three column counts (1, 2 and 3). */}
-        <ul className="mt-10 grid gap-px overflow-hidden rounded-[26px] bg-yellow/35 sm:mt-12 sm:grid-cols-2 lg:grid-cols-3">
-          {rest.map((b, i) => {
-            const phone = business.phones[b.phoneIndex] ?? business.phones[0];
-            return (
-              <li key={b.slug} className="bg-green-deep/85">
-                <Reveal delay={(i % 3) * 70} className="h-full">
-                  <div className="group relative flex h-full flex-col p-5 transition-colors duration-300 hover:bg-green-mid/60 sm:p-6">
-                    {/* A thread drawn across the top as the pointer arrives.
-                        scaleX from the left, so it is pulled rather than
-                        faded, and it is a transform so it costs nothing. */}
-                    <span
-                      aria-hidden
-                      className="foil absolute inset-x-0 top-0 h-[2px] origin-left scale-x-0 transition-transform duration-500 ease-out group-hover:scale-x-100"
-                    />
-                    <h3 className="font-serif text-[1.4rem] leading-tight text-cream transition-colors duration-300 group-hover:text-yellow-light">
-                      <Link href={`/branches/${b.slug}`} className="after:absolute after:inset-0">
-                        {b.city}
-                      </Link>
-                      {b.badge && (
-                        <span className="ml-2 align-middle font-sans text-[0.6rem] font-semibold uppercase tracking-[0.12em] text-yellow-light/80">
-                          {b.badge}
-                        </span>
-                      )}
-                    </h3>
-                    <p className="mt-1.5 flex-1 text-[0.86rem] leading-relaxed text-cream/60">
-                      {b.pickupOnly ? "Doorstep pickup across the city" : b.lines[0]}
-                    </p>
-                    {/* One row, not two stacked. Ten tiles on a phone is a
-                        long column already, and folding these together takes
-                        about 400px off it for nothing lost. */}
-                    <p className="mt-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-2.5">
-                      <span className="inline-flex items-center gap-2 text-[0.8rem] font-semibold text-yellow-light">
-                        <Pin className="size-3.5" />
-                        Branch page
-                        <ArrowRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-1" />
-                      </span>
-                      {/* Above the link overlay, so a thumb can dial from the
-                          index without opening the branch page first. */}
-                      <a
-                        href={phone.href}
-                        aria-label={`Call our ${b.city} branch`}
-                        className="relative z-10 inline-flex min-h-10 items-center gap-1.5 rounded-full border border-yellow/30 px-3.5 text-[0.8rem] font-semibold text-cream transition-colors hover:bg-yellow/20 hover:text-yellow-light"
-                      >
-                        <Phone className="size-3.5" />
-                        {phone.label}
-                      </a>
-                    </p>
-                  </div>
-                </Reveal>
-              </li>
-            );
-          })}
+            The rail breaks out of the Wrap on purpose. A marquee that starts
+            and ends inside the page gutter reads as a widget sitting in the
+            column; one that runs out past both edges reads as a length of
+            cloth being drawn through, which is the whole idea.
 
-          <li className="bg-green-mid/70 sm:col-span-2">
-            <Reveal className="h-full">
-              <div className="flex h-full flex-col items-start gap-5 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
-                <div>
-                  <h3 className="font-serif text-[1.35rem] text-white">Not near a branch?</h3>
-                  <p className="mt-1.5 max-w-[56ch] text-[0.92rem] leading-relaxed text-cream/75">
-                    We run collection routes across the state and will come for even one or
-                    two sarees. Send photos on WhatsApp and we will tell you when we are next
-                    in your area.
-                  </p>
-                </div>
-                <Button
-                  href={waLink(
-                    "Hello, I want to sell my old silk sarees. I am not near a branch.",
-                  )}
-                  variant="whatsapp"
-                  external
-                  className="w-full shrink-0 sm:w-auto"
-                >
-                  <WhatsApp className="size-[17px]" />
-                  Message us
-                </Button>
-              </div>
-            </Reveal>
-          </li>
-        </ul>
+            calc(50% - 50vw) is how it gets there in one declaration at every
+            width. The percentage resolves against this element's own width,
+            which is Wrap's content box, so the margin is exactly minus the
+            distance from here to the viewport edge whether that distance is
+            Wrap's 20px padding on a phone or half the leftover on a wide
+            screen. It overshoots by half a scrollbar on a desktop, which the
+            body's overflow-x: hidden clips and the edge mask hides anyway.
+
+            The edges are masked to transparent rather than cut, so a card
+            arriving fades up out of the ground instead of appearing at a
+            hard line. */}
+        <div className="marquee group relative mt-10 mx-[calc(50%-50vw)] sm:mt-12">
+          <div className="marquee-viewport overflow-hidden [mask-image:linear-gradient(90deg,transparent_0,#000_5%,#000_95%,transparent_100%)]">
+            <ul
+              className="marquee-track flex w-max gap-px bg-yellow/35"
+              style={{ animation: "branch-marquee 58s linear infinite" }}
+            >
+              {[0, 1].map((copy) =>
+                rest.map((b) => (
+                  <li
+                    key={`${copy}-${b.slug}`}
+                    className={`w-[270px] shrink-0 bg-green-deep/85 sm:w-[310px] ${
+                      copy === 1 ? "marquee-clone" : ""
+                    }`}
+                    /* The second pass is scenery. inert keeps it out of the
+                       tab order and off the accessibility tree in one
+                       attribute, so ten branches are announced once and a
+                       keyboard reaches each card exactly once. */
+                    {...(copy === 1 ? { "aria-hidden": true, inert: true } : {})}
+                  >
+                    <BranchTile b={b} />
+                  </li>
+                )),
+              )}
+            </ul>
+          </div>
+          {/* Said plainly, because a rail that stops under the pointer is
+              only obvious once you have already done it by accident. Both
+              verbs, because both work: the thumb gets it through :active. */}
+          <p className="mt-3 px-5 text-center text-[0.74rem] font-medium uppercase tracking-[0.12em] text-cream/50">
+            Hover or hold any branch to stop the rail
+          </p>
+        </div>
+
+        {/* The closing invitation, which used to be the last tile of the
+            grid. It cannot ride in the rail: it is twice the width of a
+            branch and carries the one WhatsApp button in this section, and a
+            button that travels sideways is a button nobody can press. */}
+        <Reveal>
+          <div className="mt-6 flex flex-col items-start gap-5 rounded-[26px] border border-yellow/20 bg-green-mid/70 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
+            <div>
+              <h3 className="font-serif text-[1.35rem] text-white">Not near a branch?</h3>
+              <p className="mt-1.5 max-w-[56ch] text-[0.92rem] leading-relaxed text-cream/75">
+                We run collection routes across the state and will come for even one or
+                two sarees. Send photos on WhatsApp and we will tell you when we are next
+                in your area.
+              </p>
+            </div>
+            <Button
+              href={waLink(
+                "Hello, I want to sell my old silk sarees. I am not near a branch.",
+              )}
+              variant="whatsapp"
+              external
+              className="w-full shrink-0 sm:w-auto"
+            >
+              <WhatsApp className="size-[17px]" />
+              Message us
+            </Button>
+          </div>
+        </Reveal>
       </Wrap>
     </Section>
   );

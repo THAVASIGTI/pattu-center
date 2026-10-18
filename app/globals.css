@@ -7,6 +7,17 @@
    ------------------------------------------------------------------ */
 @theme {
   --color-green: #15803d;
+  /* Green for SMALL TEXT on light grounds, the mirror of --color-yellow-ink.
+     --color-green is a fill colour: as type it has never cleared the 4.5:1
+     body minimum, measuring 4.35 to 4.48 on cream, and once the hero gained
+     a photographic ground under its wash the hero's own green run fell to
+     3.83. This is the same hue walked down until the worst case clears with
+     room to spare, at 5.4:1 there.
+
+     Only the hero uses it so far. The other places --color-green is set as
+     type (several buttons and inline links) are still on the fill colour and
+     still measure 4.38 to 4.48; moving them is a separate pass. */
+  --color-green-ink: #116832;
   --color-green-deep: #0a2e1a;
   --color-green-mid: #14532d;
   --color-green-soft: #22c55e;
@@ -139,6 +150,56 @@
 @keyframes band-pan {
   from { background-position-x: 0; }
   to   { background-position-x: calc(-1 * var(--tile, 48px)); }
+}
+
+/* The hero's ground, one stack of silk at a time.
+ *
+ * Six layers share this one block and are staggered with a positive
+ * animation-delay, so the slots below are fixed at a sixth of the cycle
+ * each. SareeCycle.tsx slices its list to six for that reason; change the
+ * count there and these percentages have to be rewritten with it.
+ *
+ * There is no fill-mode, which is the whole trick: before its delay elapses
+ * a layer holds the opacity: 0 it carries in CSS, so the six come up in
+ * turn rather than all at once. The layer underneath them all is a static
+ * copy of the LAST stack, so the wrap from six back to one crossfades
+ * against the picture it is already showing instead of flashing the cream
+ * through. Mid-dissolve the ground is a blend of two photographs over that
+ * base; under the wash that sits on top of all of it, that reads as a
+ * dissolve and never as a gap.
+ *
+ * The zoom finishes by 20% rather than running the whole cycle: spread over
+ * twelve seconds a 9% scale moves about a pixel while the layer is actually
+ * visible, which is the same "running but invisible" trap the border bands
+ * fell into. */
+@keyframes saree-cycle {
+  0%      { opacity: 0; transform: scale(1.09); }
+  3%      { opacity: 1; }
+  16.667% { opacity: 1; }
+  20%     { opacity: 0; transform: scale(1); }
+  100%    { opacity: 0; transform: scale(1); }
+}
+
+/* The branch index travelling sideways.
+ *
+ * The track holds the ten branches twice over and moves exactly half its
+ * own width, so the second copy arrives where the first began and the loop
+ * has no seam. Two copies rather than one is the cost of that: the clone is
+ * inert and aria-hidden, so it is scenery to a screen reader and skipped by
+ * the tab key, and only the first copy is a real list of links. */
+@keyframes branch-marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+
+/* Hovering stops it, which is the point of a moving list: the pointer is
+   how someone says "that one". focus-within does the same for the keyboard,
+   or tabbing into the rail would walk a card out from under the caret, and
+   :active does it for a thumb, which has no hover to offer. */
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track,
+.marquee:active .marquee-track {
+  animation-play-state: paused;
 }
 
 /* Light running along the zari, the way a silver-gilt thread catches as the
@@ -413,4 +474,16 @@ body {
      it is the travel between positions that is slowed, the same decision
      already taken for .cat-slide above. */
   .saree-card { transition-duration: 1500ms !important; }
+  /* The hero's ground stops on one picture rather than cycling. A full-bleed
+     photograph swapping every two seconds behind the copy is the largest
+     moving thing on the site and sits directly under the reading line, which
+     is the case reduced-motion exists for; it is cut, not slowed. The static
+     base layer underneath is still there, so the hero keeps its ground. */
+  .saree-cycle { animation: none !important; opacity: 0 !important; }
+  /* The branch rail stops travelling and becomes a rail you push yourself.
+     The clone only exists to make the loop seamless, so with the loop gone
+     it is two hundred per cent of a scroll track for nothing. */
+  .marquee-track { animation: none !important; }
+  .marquee-clone { display: none !important; }
+  .marquee-viewport { overflow-x: auto !important; }
 }
