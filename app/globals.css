@@ -180,6 +180,23 @@
   100%    { opacity: 0; transform: scale(1); }
 }
 
+/* Written out longhand, and the layer's index is the only thing the markup
+   passes. A shorthand would reset animation-delay to zero, and setting the
+   whole thing inline on each layer, which is how this started, put the
+   duration out of the stylesheet's reach: reduced motion could then only
+   cut the cycle dead, because slowing it without scaling the six delays to
+   match piles every layer on top of the others. Two custom properties keep
+   both ends adjustable from one place. */
+.saree-cycle {
+  --cycle: 12s;
+  --slot: 2s;
+  animation-name: saree-cycle;
+  animation-duration: var(--cycle);
+  animation-delay: calc(var(--i, 0) * var(--slot));
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
 /* The branch index travelling sideways.
  *
  * The track holds the ten branches twice over and moves exactly half its
@@ -201,6 +218,19 @@
    diff that had been measured wrongly. Keep it in CSS. */
 .marquee-track {
   animation: branch-marquee 58s linear infinite;
+}
+
+/* No scrollbar, ever. The rail carries two copies of the list, so it is
+   always wider than its box, and any state that lets overflow show gives
+   the section a scrollbar across it. Belt and braces with the
+   overflow-hidden in the markup: this one also covers a user stylesheet or
+   a platform that insists on a classic bar. */
+.marquee-viewport {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.marquee-viewport::-webkit-scrollbar {
+  display: none;
 }
 
 /* Hovering stops it, which is the point of a moving list: the pointer is
@@ -485,16 +515,32 @@ body {
      it is the travel between positions that is slowed, the same decision
      already taken for .cat-slide above. */
   .saree-card { transition-duration: 1500ms !important; }
-  /* The hero's ground stops on one picture rather than cycling. A full-bleed
-     photograph swapping every two seconds behind the copy is the largest
-     moving thing on the site and sits directly under the reading line, which
-     is the case reduced-motion exists for; it is cut, not slowed. The static
-     base layer underneath is still there, so the hero keeps its ground. */
-  .saree-cycle { animation: none !important; opacity: 0 !important; }
-  /* The branch rail stops travelling and becomes a rail you push yourself.
-     The clone only exists to make the loop seamless, so with the loop gone
-     it is two hundred per cent of a scroll track for nothing. */
-  .marquee-track { animation: none !important; }
-  .marquee-clone { display: none !important; }
-  .marquee-viewport { overflow-x: auto !important; }
+  /* The hero's ground and the branch rail are slowed, not cut, and that is
+     a deliberate change from how they started.
+   *
+   * Both were cut outright on the reasoning that a full-bleed photograph
+   * swapping every two seconds and a list of cards travelling sideways are
+   * exactly what this setting is for. What that produced in practice was
+   * the feature being absent: anyone with reduce-motion on, the client
+   * included, met a frozen photograph and a dead list that had sprouted a
+   * scrollbar, and reasonably read it as broken. Two things the client
+   * asked for by name are not a decoration to be withheld.
+   *
+   * So "reduce" is taken literally here, as it already is for the backdrop
+   * and the drawn cloth above. The hero keeps changing picture at a quarter
+   * of the pace, eight seconds a stack instead of two, and the important
+   * transform below removes the Ken Burns zoom entirely: the zoom is the
+   * only part of that layer that MOVES, and a crossfade with no travel in
+   * it is the gentle half of this effect. The rail keeps going at under
+   * half speed. Neither pans, zooms or parallaxes any more.
+   *
+   * The clone stays rendered and the viewport stays overflow-hidden,
+   * because the loop still runs and still needs the second copy to close
+   * without a seam. */
+  .saree-cycle {
+    --cycle: 48s !important;
+    --slot: 8s !important;
+    transform: none !important;
+  }
+  .marquee-track { animation-duration: 130s !important; }
 }

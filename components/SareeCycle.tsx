@@ -45,9 +45,16 @@ import { buyCategories, catImg } from "@/config/content";
    category to the board cannot quietly break the loop. */
 const STACKS = buyCategories.slice(0, 6);
 
-/** Seconds each stack holds the ground, the client's number. */
-const SLOT = 2;
-const CYCLE = SLOT * STACKS.length;
+/* Two seconds a stack, the client's number, lives in globals.css beside the
+   keyframes as --slot, with the cycle as --cycle. It cannot be written here
+   as an inline `animation:` shorthand, which is what it was: a shorthand
+   sets animation-play-state and animation-duration along with everything
+   else, and inline it outranks any stylesheet rule that is not !important.
+   That left no way to slow the cycle for prefers-reduced-motion without
+   also hard-coding the six delays, so the only thing the rule there could
+   do was cut it dead, and anyone with that setting on got a frozen
+   photograph instead of the feature. All this passes now is the layer's
+   index; the stylesheet multiplies it by the slot. */
 
 export default function SareeCycle() {
   /* The bottom layer is a static copy of the LAST stack in the cycle, which
@@ -75,7 +82,7 @@ export default function SareeCycle() {
           fill
           sizes="100vw"
           className="saree-cycle object-cover object-center opacity-0"
-          style={{ animation: `saree-cycle ${CYCLE}s linear ${i * SLOT}s infinite` }}
+          style={{ "--i": i } as React.CSSProperties}
         />
       ))}
 

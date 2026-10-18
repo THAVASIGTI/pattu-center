@@ -62,16 +62,20 @@ export function SectionHead({
   lead,
   align = "center",
   tone = "light",
+  className = "",
 }: {
   eyebrow: string;
   title: ReactNode;
   lead?: string;
   align?: "center" | "left";
   tone?: "light" | "dark";
+  /** For the odd caller that has to overrule the bottom margin, such as a
+   *  heading sharing a row with something aligned to its baseline. */
+  className?: string;
 }) {
   return (
     <div
-      className={`mb-8 sm:mb-12 max-w-[660px] ${align === "center" ? "mx-auto text-center" : ""}`}
+      className={`mb-8 sm:mb-12 max-w-[660px] ${align === "center" ? "mx-auto text-center" : ""} ${className}`}
     >
       <Ornament align={align} />
       {/* yellow-ink on light, not yellow. --color-yellow is tuned for

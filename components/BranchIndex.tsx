@@ -7,40 +7,36 @@ import { branchCountWordCap, branches, business, waLink } from "@/config/busines
 import { zariThreads } from "@/config/content";
 
 /**
- * The branches on the home page, as an index rather than a card grid.
+ * The branches on the home page: a heading, then all eleven of them
+ * travelling past in a rail that stops under the pointer.
  *
- * Eleven identical panels is what this was, and eleven of anything identical
- * is a list the eye refuses to read: every branch was given the same size, so
- * none of them was given any. What a visitor actually needs from this section
- * is one of two things, and they are not the same shape. Either she is in
- * Madurai and wants the head office, address and phone and all, or she is
- * somewhere else and wants to find her own town in a list as fast as she can.
+ * The shape has changed twice and both changes came from the client.
  *
- * So the section now does both separately. The head office is one large block
- * with its address, its phone and its hours. The other ten travel past in a
- * rail, at the client's request, and stop the moment a pointer touches them.
+ * It was a grid of eleven identical panels, then a heading beside one large
+ * head-office block with the other ten as a grid of names below. The big
+ * block is gone now and Madurai rides in the rail with the rest. What it
+ * loses is its full address and the opening hours, both of which are one
+ * click away on its own page and in the footer; what the section gains is
+ * one idea instead of two, and a heading with the whole measure to sit in.
+ * The head office leads the rail, says what it is on its eyebrow and
+ * carries a gold edge at the weight the other cards only reach on hover.
  *
- * The travel is what makes the count felt. Ten tiles in a static grid is a
- * block of text nobody counts; ten going by is a line of branches that keeps
- * producing another town, which is the one thing this section is for. Pausing
- * on hover is not a nicety either: a list that moves is unusable without it,
- * because reaching for a card means chasing it.
+ * The travel is what makes the count felt. Eleven tiles in a static grid is
+ * a block nobody reads to the end of; eleven going by is a line that keeps
+ * producing another town, which is the one thing this section is for.
+ * Pausing is not a nicety on top of that, it is what makes it usable:
+ * reaching for a card that is moving means chasing it.
  *
  * Each one is a card in its own right, not a cell of a panel. It was a panel
- * once: ten flat tiles butted together with a 1px gold gutter between them,
- * on the reasoning that a continuous surface reads as one length of cloth.
- * That reasoning holds for a grid sitting still and fails for a rail that
- * moves, because a continuous surface going sideways is a surface going
- * sideways, and nothing in it is an object. Ten separate cards with air
- * between them are ten things travelling, which is the only version of this
- * anyone reads as a list of branches.
- *
- * So each card has its own ground, its own gold hairline and a saree border
- * across its top, and it lifts and gilds under the pointer, which is also
- * when the rail stops: pointing at a branch both halts it and picks it out.
+ * once: flat tiles butted together with a 1px gold gutter, on the reasoning
+ * that a continuous surface reads as one length of cloth. That holds for a
+ * grid sitting still and fails for a rail that moves, because a continuous
+ * surface going sideways is a surface going sideways and nothing in it is an
+ * object. Separate cards with air between them are things travelling, which
+ * is the only version of this anyone reads as a list of branches.
  *
  * None of this uses glass. A backdrop-filter samples everything painted
- * behind it, which here is a photograph under a wash, and twenty of them
+ * behind it, which here is a photograph under a wash, and twenty-two of them
  * being translated across the screen would make the browser re-composite
  * that whole ground every frame. The card grounds are plain gradients for
  * that reason, and the lift is a transform, so the only thing the
@@ -59,8 +55,19 @@ type Branch = (typeof branches)[number];
  *  loop can close without a seam. */
 function BranchTile({ b }: { b: Branch }) {
   const phone = business.phones[b.phoneIndex] ?? business.phones[0];
+  /* The head office rides in the rail with the rest now, so its precedence
+     has to come from the card rather than from a panel of its own: it leads
+     the list, it says what it is on the eyebrow, and its edge is gold at
+     the weight the others only reach under the pointer. That is as far as
+     it goes. Making it taller or wider would break the cell arithmetic the
+     seamless loop depends on. */
+  const lead = b.isHeadOffice;
   return (
-    <article className="group relative flex h-full flex-col overflow-hidden rounded-[22px] border border-yellow/20 bg-[linear-gradient(168deg,rgba(26,97,55,.95)_0%,rgba(12,54,30,.97)_100%)] shadow-[0_8px_24px_rgba(0,0,0,.28)] transition-all duration-300 hover:-translate-y-1.5 hover:border-yellow/55 hover:shadow-[0_14px_30px_rgba(0,0,0,.45)]">
+    <article
+      className={`group relative flex h-full flex-col overflow-hidden rounded-[22px] border bg-[linear-gradient(168deg,rgba(26,97,55,.95)_0%,rgba(12,54,30,.97)_100%)] shadow-[0_8px_24px_rgba(0,0,0,.28)] transition-all duration-300 hover:-translate-y-1.5 hover:border-yellow/55 hover:shadow-[0_14px_30px_rgba(0,0,0,.45)] ${
+        lead ? "border-yellow/55" : "border-yellow/20"
+      }`}
+    >
       {/* The border off the top of the card, which is what makes it a saree
           card rather than a panel with a line on it: a foil rule with the
           temple teeth of the drawn zari just under it. */}
@@ -90,7 +97,9 @@ function BranchTile({ b }: { b: Branch }) {
             name on one line starting at the same height. */}
         <p className="flex h-4 items-center gap-2 text-[0.6rem] font-semibold tracking-[0.18em] text-yellow-light uppercase">
           <Pin aria-hidden className="size-3" />
-          {b.badge ?? (b.pickupOnly ? "Collection" : "Branch")}
+          {lead
+            ? "Head office"
+            : (b.badge ?? (b.pickupOnly ? "Collection" : "Branch"))}
         </p>
 
         <h3 className="mt-2 font-serif text-[1.5rem] leading-tight text-cream transition-colors duration-300 group-hover:text-yellow-light">
@@ -138,9 +147,15 @@ function BranchTile({ b }: { b: Branch }) {
 }
 
 export default function BranchIndex() {
-  const head = branches.find((b) => b.isHeadOffice) ?? branches[0];
-  const rest = branches.filter((b) => b.slug !== head.slug);
-  const headPhone = business.phones[head.phoneIndex] ?? business.phones[0];
+  /* Head office first, then the rest in their configured order. It rides in
+     the rail with everything else now; the large panel that used to carry
+     its full address is gone at the client's request. Leading the rail is
+     the whole of its remaining precedence, with its own eyebrow and a
+     brighter edge on the card. */
+  const rail = [
+    ...branches.filter((b) => b.isHeadOffice),
+    ...branches.filter((b) => !b.isHeadOffice),
+  ];
 
   return (
     <Section id="branches" tone="green" className="relative">
@@ -159,66 +174,31 @@ export default function BranchIndex() {
       </div>
 
       <Wrap className="relative z-10">
-        <div className="grid items-end gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-14">
+        {/* One heading block across the measure, with the button sitting on
+            the baseline at the far end of it. This was two columns, the
+            heading beside the head office panel; with the panel gone a
+            half-width heading would have left the right of the section
+            empty, so the title takes the room it used to share. */}
+        <div className="grid items-end gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-14">
           <Reveal from="left">
             <SectionHead
               tone="dark"
               align="left"
+              className="mb-0"
               eyebrow="Find us"
               title={`${branchCountWordCap} branches across Tamil Nadu.`}
               lead="Walk in during shop hours, or call the nearest branch and we will come to you. Free pickup even for one or two sarees."
             />
-            <Button href="/branches" variant="ghost">
+          </Reveal>
+          <Reveal from="right" delay={120}>
+            <Button href="/branches" variant="ghost" className="w-full sm:w-auto">
               All branch details
               <ArrowRight className="size-[17px]" />
             </Button>
           </Reveal>
-
-          {/* The head office, at the size it deserves. It is the only branch
-              a stranger to the business can be told to go to without asking
-              where she lives, so it carries the address and the phone in
-              full and the other ten carry a name and a street. */}
-          <Reveal from="right" delay={120}>
-            {/* A gold rule across the top, where a strip of real brocade used
-                to sit. One line of the brand's own foil marks the head office
-                just as well as a photograph of cloth did, and it does not ask
-                anyone to download a picture to see a border. */}
-            <article className="overflow-hidden rounded-[26px] border border-yellow/25 bg-green-deep/70">
-              <span aria-hidden className="foil block h-[3px] w-full" />
-              <div className="p-6 sm:p-7">
-                <p className="text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-yellow-light">
-                  Head office
-                </p>
-                <h3 className="mt-1.5 font-serif text-[clamp(1.7rem,4.6vw,2.3rem)] leading-[1.1] text-white">
-                  {head.city}
-                </h3>
-                <address className="mt-3 text-[0.95rem] leading-relaxed text-cream/75 not-italic">
-                  {head.lines.map((l) => (
-                    <span key={l} className="block">
-                      {l}
-                    </span>
-                  ))}
-                </address>
-                <div className="mt-5 flex flex-wrap gap-2.5">
-                  <Button href={headPhone.href} variant="yellow">
-                    <Phone className="size-[17px]" />
-                    {headPhone.label}
-                  </Button>
-                  <Button href={`/branches/${head.slug}`} variant="ghost">
-                    Branch page
-                    <ArrowRight className="size-[17px]" />
-                  </Button>
-                </div>
-                <p className="mt-5 inline-flex items-center gap-2 text-[0.84rem] text-cream/70">
-                  <span aria-hidden className="size-1.5 rounded-full bg-green-soft" />
-                  {business.hours}
-                </p>
-              </div>
-            </article>
-          </Reveal>
         </div>
 
-        {/* The other ten, going past.
+        {/* All eleven, going past.
 
             The rail breaks out of the Wrap on purpose. A marquee that starts
             and ends inside the page gutter reads as a widget sitting in the
@@ -240,18 +220,18 @@ export default function BranchIndex() {
           <div className="marquee-viewport overflow-hidden [mask-image:linear-gradient(90deg,transparent_0,#000_5%,#000_95%,transparent_100%)]">
             {/* The gutter is padding inside each fixed-width cell, never a
                 gap on the track, and that is arithmetic rather than taste.
-                With `gap` there are nineteen gutters across two copies of
-                ten, so half the track is one copy plus half a gutter and the
-                loop jumps by that much every time it comes round. Folding
-                the gutter into the cell makes every cell exactly the same
-                width, so half the track is exactly one copy. */}
+                With `gap` there is one fewer gutter than there are cells,
+                so half the track is one copy plus half a gutter and the loop
+                jumps by that much every time it comes round. Folding the
+                gutter into the cell makes every cell exactly the same width,
+                so half the track is exactly one copy, whatever the count. */}
             {/* The travel itself is in globals.css, on .marquee-track. It
                 has to be: as an inline shorthand it carried
                 animation-play-state: running with it and outranked the rule
                 that pauses this on hover. */}
             <ul className="marquee-track flex w-max items-stretch py-4">
               {[0, 1].map((copy) =>
-                rest.map((b) => (
+                rail.map((b) => (
                   <li
                     key={`${copy}-${b.slug}`}
                     className={`w-[286px] shrink-0 pr-4 sm:w-[326px] sm:pr-5 ${
