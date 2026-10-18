@@ -21,6 +21,12 @@
   --color-green-deep: #0a2e1a;
   --color-green-mid: #14532d;
   --color-green-soft: #22c55e;
+  /* Green for TEXT on dark grounds, the mirror of --color-yellow-light.
+     --color-green-soft is a fill colour, and as 11px type over the hero's
+     scrimmed photographs it measured 3.16:1 at 390 against a 4.5 floor.
+     This is the same hue walked up until the worst case clears, at 5.2:1
+     there. --color-green-ink is the light-ground equivalent. */
+  --color-green-light: #86efac;
 
   --color-yellow: #ca9a04;
   /* Gold for TEXT on light grounds. --color-yellow is tuned for borders,

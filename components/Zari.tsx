@@ -38,9 +38,20 @@ const tile = (w: number, h: number, body: string) =>
     `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">${body}</svg>`,
   )}")`;
 
-const GOLD = "rgba(202,154,4,.34)";
-const SOFT = "rgba(202,154,4,.20)";
-const LEAF = "rgba(21,128,61,.16)";
+/* These three alphas carry the whole contrast cost of this component, and
+   they were cut by a third when the hero went from cream to dark.
+   Brightness is not symmetric: gold at .34 over cream darkened the ground a
+   little and over a scrimmed photograph it LIGHTENS it a lot. Measured, a
+   band crossing a line of type painted the ground (113,104,43) and took the
+   hero's lead to 4.33:1 against a 4.5 floor; the photograph underneath had
+   nothing to do with it. At these values the same band leaves the ground
+   near (87,79,28) and every run of hero type clears.
+
+   They are also more visible than they were, not less. On near-black, gold
+   at .22 reads better than gold at .34 did on cream. */
+const GOLD = "rgba(202,154,4,.22)";
+const SOFT = "rgba(202,154,4,.13)";
+const LEAF = "rgba(21,128,61,.10)";
 
 /* Every one of these is a real border off a south Indian saree, and each is
    built the way a woven one is: a plain zari stripe, the motif row, another
@@ -155,9 +166,17 @@ export default function ZariWeave() {
       {/* The catch of light that gives silver-gilt thread its name. It ran
           on a two-minute cycle, which on a page nobody stays on for two
           minutes meant it mostly never happened at all. Sixteen seconds
-          makes it a recurring shimmer across the borders instead. */}
+          makes it a recurring shimmer across the borders instead.
+
+          The alphas came down by two thirds and the band narrowed when the
+          hero went dark. On cream, a 36%-wide pass of rgba(255,251,230,.55)
+          was a glint on a surface that was nearly that colour already. On a
+          scrimmed photograph it is a searchlight: it bleached a third of
+          the section, flattened the silk under it and lifted the ground
+          under whatever type it crossed. Brightness that reads as a
+          highlight on light reads as fog on dark. */}
       <span
-        className="zari-sheen absolute inset-y-0 left-0 w-[36%] bg-[linear-gradient(100deg,transparent_0%,rgba(255,251,230,.55)_46%,rgba(254,240,138,.3)_62%,transparent_100%)]"
+        className="zari-sheen absolute inset-y-0 left-0 w-[26%] bg-[linear-gradient(100deg,transparent_0%,rgba(255,251,230,.17)_46%,rgba(254,240,138,.10)_62%,transparent_100%)]"
         style={{ animation: "zari-sheen 16s ease-in-out infinite" }}
       />
     </div>

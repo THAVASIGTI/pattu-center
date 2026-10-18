@@ -40,11 +40,17 @@ export const catImg = (id: number) => `${BASE_PATH}/img/cat/silk-${id}.jpg`;
 
 /** Brand marks. `logoMark` is the emblem alone, the wordmark in the full
  *  lockup is illegible below about 120px, so small placements use the mark. */
-/** The artwork the client supplied for the hero, and what the hero shows.
+/** The artwork the client supplied for the hero.
  *
- *  824x1024 native. It is displayed at up to 520 CSS px, so it is comfortable
- *  on a 1x screen and slightly soft on a 2x one. A larger original is the
- *  only fix; nothing here can invent detail that was never supplied. */
+ *  NOT RENDERED ANYWHERE at present. It stood beside the hero copy until the
+ *  client asked for it to come out, and for the shop's own stacks of silk to
+ *  be the hero's whole ground instead. The export and the file both stay:
+ *  it is their artwork, it is the only picture of a person on the site, and
+ *  an About or a Contact page is a reasonable home for it.
+ *
+ *  824x1024 native, which is comfortable at up to about 520 CSS px and soft
+ *  beyond that on a 2x screen. A larger original is the only fix; nothing
+ *  here can invent detail that was never supplied. */
 export const heroScene = `${BASE_PATH}/img/hero-scene.jpg`;
 
 /** The warp on a loom, gold thread on a near-black ground, used as the field

@@ -3,7 +3,6 @@ import BranchIndex from "@/components/BranchIndex";
 import Counter from "@/components/Counter";
 import CtaBand from "@/components/CtaBand";
 import BuyBoard from "@/components/BuyBoard";
-import SilkStage from "@/components/SilkStage";
 import CulturalBanner from "@/components/CulturalBanner";
 import HeroBackdrop from "@/components/HeroBackdrop";
 import PriceScale from "@/components/PriceScale";
@@ -36,47 +35,71 @@ import {
 export default function HomePage() {
   return (
     <>
-      {/* ---------------- Hero ---------------- */}
-      {/* The hero fills the screen and no more. 8.25rem is the measured
-          chrome above it: a 91px sticky header plus the 41px the section
-          starts down from it. min-height rather than height, so a short
-          window grows the section instead of clipping the copy into it. */}
-      <section id="hero" className="relative overflow-hidden bg-cream text-ink xl:min-h-[calc(100vh-8.25rem)]">
+      {/* ---------------- Hero ----------------
+
+          Dark, full bleed, and the shop's own silk is the picture.
+
+          It used to be a cream section in two columns: copy on the left, a
+          piece of supplied artwork on the right, and the photographs behind
+          both under a wash dense enough to turn them into a tint. The
+          artwork is gone at the client's request and the photographs are the
+          hero now, so the section had to flip from light to dark. That is
+          not a style preference, it is the only way round that works: a
+          cream wash heavy enough to carry dark type over a photograph is
+          heavy enough to hide the photograph, whereas darkening coloured
+          silk deepens it. Everything below is restyled for the dark ground;
+          see SareeCycle for the scrim and the measurements.
+
+          One column, centred at every width, because there is no longer a
+          second thing to sit beside.
+
+          The height: 8.25rem is the measured chrome above it, a 91px sticky
+          header plus the 41px the section starts down from it. A floor on
+          small screens too now, which it did not need when a 510px
+          photograph was setting the height and does now that nothing is. */}
+      <section
+        id="hero"
+        className="relative flex min-h-[36rem] flex-col justify-center overflow-hidden bg-green-deep text-cream sm:min-h-[40rem] xl:min-h-[calc(100vh-8.25rem)]"
+      >
         {/* The ground, in layers, bottom up.
 
-            SareeCycle is the photographs: six stacks of the shop's own silk
-            changing every two seconds under a cream wash. ZariWeave is the
-            drawn saree borders running sideways over them, which still do
-            the work they were added for: the wash flattens the photographs
-            into a field, and the borders are what keeps that field moving at
-            the scale of a motif rather than only at the scale of a whole
-            picture. Everything that follows sits on top of both. */}
+            SareeCycle is the photographs and the scrim over them: six stacks
+            of the shop's own silk changing every two seconds. ZariWeave is
+            the drawn saree borders running sideways over that, which still
+            do the work they were added for: the scrim settles the
+            photographs into one field, and the borders are what keeps that
+            field moving at the scale of a motif rather than only at the
+            scale of a whole picture. Everything that follows is on top. */}
         <SareeCycle />
         <ZariWeave />
         <HeroBackdrop />
-        {/* Saree border and kolam under the copy. Sits above the rings and
-            motes and below the photograph, which covers whatever of it
-            reaches the right of the section. */}
+        {/* Saree border down the gutter and kolam across the field. */}
         <CulturalBanner />
 
-        {/* SilkStage lays the rotating photograph under the section and puts
-            the panel that names it beside the copy. The two share one index,
-            so they are one component; the copy stays here as its children. */}
-        <SilkStage>
-          <div className="order-1 text-center xl:text-left">
+        {/* The section is a centring flex column, so this is its only child
+            in flow and sits in the middle of whatever height the minimum
+            produces. The bottom padding clears the temple rule, which is
+            absolute and would otherwise sit over the promises. */}
+        <Wrap className="relative z-10 py-16 pb-24 sm:py-20 sm:pb-28 xl:py-24 xl:pb-32">
+          <div className="mx-auto w-full max-w-[46rem] text-center">
             {/* The greeting, on its own ground.
 
                 It sits in a chip rather than as a bare line because of what
-                is behind it: rings, motes, a kolam and a temple border all
-                pass under this corner, and a chip gives the words a ground
-                that does not move with them. It also keeps the greeting from
-                reading as a second eyebrow, which a gold uppercase line
-                directly above a gold uppercase line would. */}
-            <p className="rise mb-5 inline-flex items-center gap-3 rounded-full border border-line-yellow glass-soft px-5 py-2.5 shadow-soft">
-              <Vanakkam aria-hidden className="size-8 shrink-0 text-yellow-ink" />
-              <span className="text-[0.95rem] text-ink-soft">
+                is behind it: rings, motes, a kolam, a temple border and now
+                a photograph all pass under this corner, and a chip gives the
+                words a ground that does not move with them. It also keeps
+                the greeting from reading as a second eyebrow, which a gold
+                uppercase line directly above a gold uppercase line would.
+
+                glass-dark rather than glass-soft, and it is the one place on
+                this page where a backdrop-filter earns its keep: the ground
+                behind it is a photograph, which is exactly the case the note
+                in globals.css says to pay for. One element, not twenty. */}
+            <p className="rise mb-5 inline-flex items-center gap-3 rounded-full border border-yellow/30 glass-dark px-5 py-2.5">
+              <Vanakkam aria-hidden className="size-8 shrink-0 text-yellow-light" />
+              <span className="text-[0.95rem] text-cream/85">
                 Welcome to{" "}
-                <b className="font-serif text-[1.15rem] font-normal text-green-deep">
+                <b className="font-serif text-[1.15rem] font-normal text-white">
                   {business.name}
                 </b>
               </span>
@@ -85,13 +108,13 @@ export default function HomePage() {
             {/* What we buy, said next. The reference this was rebuilt from
                 opens on the goods, and that order is kept: the greeting is
                 one quiet line, then the goods, then the claim. */}
-            <p className="rise [animation-delay:90ms] mb-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 xl:justify-start">
+            <p className="rise [animation-delay:90ms] mb-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
               {["Old pattu sarees", "Silk vetti", "Zari and silver"].map((t, i) => (
                 <span key={t} className="flex items-center gap-3">
                   {i > 0 && (
-                    <span aria-hidden className="h-3 w-px bg-line-yellow" />
+                    <span aria-hidden className="h-3 w-px bg-yellow/45" />
                   )}
-                  <span className="font-royal text-[0.78rem] font-medium tracking-[0.2em] text-yellow-ink uppercase">
+                  <span className="font-royal text-[0.78rem] font-medium tracking-[0.2em] text-yellow-light uppercase">
                     {t}
                   </span>
                 </span>
@@ -100,13 +123,18 @@ export default function HomePage() {
 
             {/* One headline, held still. The second line carries the claim and
                 takes the gold, so the eye lands on the promise rather than on
-                the noun. */}
-            <h1 className="rise [animation-delay:180ms] mx-auto max-w-[15ch] font-serif text-[clamp(2.1rem,6.4vw,3.5rem)] leading-[1.12] text-green-deep xl:mx-0">
+                the noun.
+
+                foil-text-light, not foil-text-deep: the deep variant is the
+                gold tuned for cream grounds and would disappear here. The
+                light one is the dark-ground gold, already measured on the
+                green sections. */}
+            <h1 className="rise [animation-delay:180ms] mx-auto max-w-[16ch] font-serif text-[clamp(2.2rem,6.6vw,3.9rem)] leading-[1.1] text-white">
               Your old silk is
-              <span className="rise [animation-delay:300ms] foil-text-deep foil-shimmer block">still worth money.</span>
+              <span className="rise [animation-delay:300ms] foil-text-light foil-shimmer block">still worth money.</span>
             </h1>
 
-            <p className="rise [animation-delay:420ms] mx-auto mt-5 max-w-[44ch] text-[clamp(1rem,2.7vw,1.1rem)] leading-[1.7] text-ink-soft xl:mx-0">
+            <p className="rise [animation-delay:420ms] mx-auto mt-5 max-w-[46ch] text-[clamp(1rem,2.7vw,1.12rem)] leading-[1.7] text-cream/85">
               Pattu sarees, silk vetti, zari and silver. Weighed in front of you,
               the figure explained before anything changes hands.
             </p>
@@ -117,11 +145,17 @@ export default function HomePage() {
                 phone and from the dock on a desktop, so the channel is not
                 lost, only the second button.
 
-                It keeps flex-1 below sm, which with a single button now
-                means it runs the full measure: the largest tap target on the
-                page for the thing the page most wants someone to do. */}
-            <div className="rise [animation-delay:540ms] mt-7 flex flex-wrap justify-center gap-3 xl:justify-start">
-              <Button href={business.phones[0].href} variant="green" className="flex-1 sm:flex-none">
+                Gold, not green, now that the section is dark. The green
+                variant is a green gradient and would sink into the ground it
+                is sitting on; the gold foil is the one thing on this screen
+                brighter than the headline, which is right for the thing the
+                page most wants someone to do. */}
+            <div className="rise [animation-delay:540ms] mt-8 flex flex-wrap justify-center gap-3">
+              <Button
+                href={business.phones[0].href}
+                variant="yellow"
+                className="w-full text-[1rem] sm:w-auto sm:px-8"
+              >
                 <Phone className="size-[17px]" />
                 Call {business.phones[0].label}
               </Button>
@@ -130,17 +164,19 @@ export default function HomePage() {
             {/* Condition, said plainly. Every one of these is a state the
                 price ledger already says we still pay for: condition adjusts
                 the figure and never disqualifies. */}
-            <p className="rise [animation-delay:650ms] mt-7 flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1.5 text-[0.7rem] font-semibold tracking-[0.16em] text-ink-soft uppercase xl:justify-start">
-              <span aria-hidden className="hidden h-px w-5 bg-line-yellow xl:block" />
+            <p className="rise [animation-delay:650ms] mt-7 flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1.5 text-[0.7rem] font-semibold tracking-[0.16em] text-cream/80 uppercase">
               {["Old", "Faded", "Stained", "Moth-eaten"].map((t, i) => (
                 <span key={t} className="flex items-center gap-2.5">
-                  {i > 0 && <span aria-hidden className="size-1 rounded-full bg-yellow" />}
+                  {i > 0 && <span aria-hidden className="size-1 rounded-full bg-yellow-light/70" />}
                   {t}
                 </span>
               ))}
-              {/* green-ink, not green: this is 11px type and the ground
-                  under it is now a photograph under a wash. Measured. */}
-              <span className="text-green-ink">all accepted</span>
+              {/* green-light, not green-soft and certainly not green-ink.
+                  The ink green is tuned for cream grounds and goes black
+                  here; green-soft is a fill colour and measured 3.16:1 as
+                  11px type over the brightest phase at 390. This is the
+                  dark-ground green, and it clears. */}
+              <span className="text-green-light">all accepted</span>
             </p>
 
             {/* The four promises: how the price is arrived at, which is the
@@ -148,7 +184,7 @@ export default function HomePage() {
                 about branch count, years, pickup or cash, which is now the
                 only place on this page that mattered: the strip of numbers
                 that used to repeat them directly below the hero is gone. */}
-            <ul className="rise [animation-delay:760ms] mx-auto mt-9 grid max-w-[30rem] grid-cols-2 gap-y-7 border-t border-line pt-7 sm:max-w-none sm:grid-cols-4 sm:gap-y-0 sm:divide-x sm:divide-line xl:mx-0">
+            <ul className="rise [animation-delay:760ms] mx-auto mt-10 grid max-w-[30rem] grid-cols-2 gap-y-7 border-t border-yellow/25 pt-8 sm:max-w-none sm:grid-cols-4 sm:gap-y-0 sm:divide-x sm:divide-yellow/20">
               {[
                 { Icon: Scale, a: "Weighed", b: "in front of you" },
                 { Icon: ZariBorder, a: "Zari priced", b: "separately" },
@@ -156,22 +192,22 @@ export default function HomePage() {
                 { Icon: Shield, a: "No obligation", b: "to sell on the day" },
               ].map(({ Icon, a, b }) => (
                 <li key={a} className="flex flex-col items-center gap-2.5 px-2 text-center sm:px-3">
-                  <Icon className="size-[26px] text-yellow-ink" />
-                  <span className="text-[0.82rem] leading-[1.45] text-ink-soft">
-                    <b className="block font-semibold text-green-deep">{a}</b>
+                  <Icon className="size-[26px] text-yellow-light" />
+                  <span className="text-[0.82rem] leading-[1.45] text-cream/75">
+                    <b className="block font-semibold text-white">{a}</b>
                     {b}
                   </span>
                 </li>
               ))}
             </ul>
           </div>
-        </SilkStage>
+        </Wrap>
 
-        {/* The temple border that closes the section, drawn and running. In
-            flow rather than absolute now: the picture beside the copy is a
-            grid cell rather than an absolute layer, so there is nothing left
-            for this to have to paint over. */}
-        <ZariRule className="h-9 sm:h-12" />
+        {/* The temple border that closes the section, drawn and running.
+            Absolute again: the copy is vertically centred in a section with
+            a minimum height, so there is no longer a last element in flow
+            for this to sit after. */}
+        <ZariRule className="absolute inset-x-0 bottom-0 h-9 sm:h-12" />
       </section>
 
       {/* The hero used to be followed by two bands: the branch names

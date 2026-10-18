@@ -2,42 +2,49 @@ import Image from "next/image";
 import { buyCategories, catImg } from "@/config/content";
 
 /**
- * The hero's ground: stacks of silk, one at a time, under a wash.
+ * The hero's ground: stacks of silk, full bleed, one at a time.
  *
- * The section's field was drawn gold on flat cream. This puts photographs of
- * the goods behind that instead, each holding for two seconds and dissolving
- * into the next, with the drawn borders still running over the top.
+ * This is the whole hero now. There was a piece of supplied artwork beside
+ * the copy, a woman with a trunk of sarees, and the photographs sat behind
+ * everything under a cream wash dense enough that they read as a tint
+ * rather than as cloth. The artwork is gone at the client's request and the
+ * silk is the picture: full width, each stack holding two seconds and
+ * dissolving into the next.
  *
- * Two decisions are worth recording.
+ * That flipped the section from light to dark, and it had to. A cream wash
+ * heavy enough to carry dark type over a photograph is heavy enough to hide
+ * the photograph, which is the trap the first version fell into: at 0.97
+ * the hero was cream with a faint stain of colour in it. A dark scrim does
+ * the opposite. Light type needs the ground DARKER, and darkening a
+ * photograph of coloured silk deepens it rather than erasing it, so the
+ * sarees read more strongly at 0.80 dark than they ever did at 0.90 light.
+ * Everything in the copy had to be restyled for a dark ground; see page.tsx.
  *
  * The photographs are the SAME SIX FILES the category board further down the
  * page already loads, at the same 620px. A hero-sized set would have been
  * sharper and would have cost the page another 150KB on top of the ones it
- * downloads anyway, for pictures that are about to be covered by a wash.
- * 620px stretched across a 1440px section is a little over two times up, and
- * soft is what a ground should be; it is the copy that has to be crisp. If
- * the shop ever supplies large photographs of their own counter, point
- * `catImg` at them and this gets better for nothing.
+ * downloads anyway. 620px stretched across a 1440px section is a little over
+ * two times up, and soft is what a ground should be; it is the copy that has
+ * to be crisp. If the shop ever supplies large photographs of their own
+ * counter, point `catImg` at them and this gets better for nothing.
  *
- * The wash is not decoration. Six photographs of coloured silk is the most
- * hostile ground this site has ever put under type, so the alphas below were
- * set by measuring glyph pixels against the rendered ground, once per phase
- * of the cycle, and the worst phase is the one they answer to.
+ * The scrim is not decoration. The alphas below were set by measuring glyph
+ * pixels against the rendered ground, once per phase of the cycle and at
+ * three widths, and the worst phase is the one they answer to. Where the
+ * hero stands now, worst case of eighteen measurements per run of text:
  *
- * What it cost, worst case over all six photographs and three widths:
+ *     gold headline   3.48:1   floor 3.0, large text
+ *     goods chips     4.67:1   floor 4.5
+ *     promise sub     4.85:1   floor 4.5
+ *     welcome line    5.18:1   floor 4.5
+ *     lead            5.57:1   floor 4.5
+ *     condition tags  5.90:1   floor 4.5
+ *     call button     5.96:1   floor 4.5
+ *     headline line 1 7.70:1   floor 3.0
  *
- *     gold headline   5.23 -> 4.38   floor 3.0, large text
- *     lead paragraph  4.84 -> 4.54   floor 4.5
- *     goods chips     5.15 -> 4.84   floor 4.5
- *     condition tags  4.35 -> 5.35   floor 4.5, see below
- *
- * The lead was the binding constraint and is what fixed the core of the
- * desktop wash at 0.97: at 0.94 it measured 4.39, under the floor. The
- * condition tags went UP because this change forced a fix that was already
- * outstanding, the green used as small type, now --color-green-ink.
- *
- * Thinning any of these to show more silk costs contrast directly, and the
- * numbers above are the whole margin there is. Re-measure, do not guess.
+ * The gold headline is the tightest thing on the site and always has been.
+ * Thinning the scrim to show more silk comes straight out of that 0.48.
+ * Re-measure, do not guess.
  */
 
 /* The keyframes in globals.css cut the cycle into six equal slots, so this
@@ -86,24 +93,44 @@ export default function SareeCycle() {
         />
       ))}
 
-      {/* The wash, shaped to the copy rather than spread evenly.
+      {/* The scrim, in two passes, one element each so the two jobs stay
+          separable.
 
-          An even wash is the obvious thing and it is the wrong thing: set
-          dense enough for the headline it flattens the whole section to
-          cream and there is no point having put photographs there, and set
-          light enough to see the silk it puts a maroon border under a line
-          of type. So it is a radial centred on the block of copy, heavy in
-          the middle where every word is and thinning towards the edges,
-          where the only things over it are the artwork and empty field.
+          The first is the floor: the whole frame goes down to the brand's
+          darkest green, a little heavier at the very top where the header
+          sits over it and at the foot where the temple rule closes the
+          section. It is what makes every pixel of the hero dark enough to
+          take light type at all.
 
-          Two of them, because the copy is not in the same place at both
-          layouts: centred over the full width below xl, a left column with
-          the artwork beside it from xl. Two elements rather than one
-          responsive gradient, because Tailwind can only swap a whole
-          background-image at a breakpoint and interpolating the stops into
-          one declaration would hide which number belongs to which layout. */}
-      <span className="absolute inset-0 bg-[radial-gradient(120%_64%_at_50%_33%,rgba(251,253,249,.95)_0%,rgba(251,253,249,.92)_58%,rgba(251,253,249,.70)_100%)] xl:hidden" />
-      <span className="absolute inset-0 hidden bg-[radial-gradient(60%_80%_at_30%_53%,rgba(251,253,249,.97)_0%,rgba(251,253,249,.95)_52%,rgba(251,253,249,.64)_86%,rgba(251,253,249,.48)_100%)] xl:block" />
+          The second is the pool under the copy. The copy is centred at
+          every width now that the artwork beside it is gone, so one
+          centred radial does it, and the corners are left alone: at the
+          four corners of the hero only the floor applies and the silk is
+          as clear as it gets. Compounded in the middle the two come to
+          about 0.88, at the edges about 0.78.
+
+          The scrim colour is darker and much less saturated than the
+          brand's green-deep, and that is the one choice here that is about
+          the photographs rather than the type. At this alpha the scrim's
+          own hue is most of what you see, so a saturated green turned every
+          stack of silk green and the magenta and gold went with it. Pulling
+          it down to near-black with a green cast lets the cloth keep its
+          own colour while doing the same work on luminance.
+
+          Separate elements rather than stacked background-images, because
+          each has to be able to change without disturbing the other.
+
+          Worth knowing before reaching for more of this: when the hero's
+          type came up short the obvious suspect was the photographs, and a
+          third pass was added here to hold them down. It made almost no
+          difference, because the bright ground under those glyphs was not a
+          photograph at all. It was the drawn zari bands, which sit ABOVE
+          this component and which, on a cream hero, darkened the ground and
+          on a dark one light it. The fix was in Zari.tsx. Measure what is
+          actually under the glyph before thickening the scrim; the scrim
+          costs the silk and might not even be the thing in the way. */}
+      <span className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,24,14,.86)_0%,rgba(5,24,14,.76)_26%,rgba(5,24,14,.78)_62%,rgba(5,24,14,.90)_100%)]" />
+      <span className="absolute inset-0 bg-[radial-gradient(95%_80%_at_50%_50%,rgba(5,24,14,.50)_0%,rgba(5,24,14,.34)_58%,rgba(5,24,14,0)_100%)]" />
     </div>
   );
 }
