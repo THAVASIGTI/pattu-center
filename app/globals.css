@@ -174,10 +174,14 @@
  * base; under the wash that sits on top of all of it, that reads as a
  * dissolve and never as a gap.
  *
- * The zoom finishes by 20% rather than running the whole cycle: spread over
- * twelve seconds a 9% scale moves about a pixel while the layer is actually
- * visible, which is the same "running but invisible" trap the border bands
- * fell into. */
+ * The zoom finishes by 20% rather than running the whole cycle, and that
+ * matters more the longer the cycle gets. Spread over the full thirty
+ * seconds a 9% scale would move under half a pixel in the five that the
+ * layer is actually on screen, which is the same "running but invisible"
+ * trap the border bands fell into. Held to the first 20%, the whole 9%
+ * happens across six seconds, so it is a slow settle under a stack you are
+ * looking at rather than a drift nobody can see. Both numbers are
+ * fractions of --cycle, so they keep that relationship at any slot. */
 @keyframes saree-cycle {
   0%      { opacity: 0; transform: scale(1.09); }
   3%      { opacity: 1; }
@@ -194,8 +198,8 @@
    match piles every layer on top of the others. Two custom properties keep
    both ends adjustable from one place. */
 .saree-cycle {
-  --cycle: 12s;
-  --slot: 2s;
+  --cycle: 30s;
+  --slot: 5s;
   animation-name: saree-cycle;
   animation-duration: var(--cycle);
   animation-delay: calc(var(--i, 0) * var(--slot));
@@ -553,7 +557,7 @@ body {
      a deliberate change from how they started.
    *
    * Both were cut outright on the reasoning that a full-bleed photograph
-   * swapping every two seconds and a list of cards travelling sideways are
+   * swapping every five seconds and a list of cards travelling sideways are
    * exactly what this setting is for. What that produced in practice was
    * the feature being absent: anyone with reduce-motion on, the client
    * included, met a frozen photograph and a dead list that had sprouted a
@@ -562,7 +566,7 @@ body {
    *
    * So "reduce" is taken literally here, as it already is for the backdrop
    * and the drawn cloth above. The hero keeps changing picture at a quarter
-   * of the pace, eight seconds a stack instead of two, and the important
+   * of the pace, twelve seconds a stack instead of five, and the important
    * transform below removes the Ken Burns zoom entirely: the zoom is the
    * only part of that layer that MOVES, and a crossfade with no travel in
    * it is the gentle half of this effect. The rail keeps going at under
@@ -572,8 +576,8 @@ body {
    * because the loop still runs and still needs the second copy to close
    * without a seam. */
   .saree-cycle {
-    --cycle: 48s !important;
-    --slot: 8s !important;
+    --cycle: 72s !important;
+    --slot: 12s !important;
     transform: none !important;
   }
   .marquee-track { animation-duration: 130s !important; }

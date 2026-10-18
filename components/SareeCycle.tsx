@@ -8,7 +8,7 @@ import { buyCategories, catImg } from "@/config/content";
  * the copy, a woman with a trunk of sarees, and the photographs sat behind
  * everything under a cream wash dense enough that they read as a tint
  * rather than as cloth. The artwork is gone at the client's request and the
- * silk is the picture: full width, each stack holding two seconds and
+ * silk is the picture: full width, each stack holding five seconds and
  * dissolving into the next.
  *
  * That flipped the section from light to dark, and it had to. A cream wash
@@ -66,9 +66,13 @@ import { buyCategories, catImg } from "@/config/content";
    category to the board cannot quietly break the loop. */
 const STACKS = buyCategories.slice(0, 6);
 
-/* Two seconds a stack, the client's number, lives in globals.css beside the
-   keyframes as --slot, with the cycle as --cycle. It cannot be written here
-   as an inline `animation:` shorthand, which is what it was: a shorthand
+/* Five seconds a stack, the client's number, lives in globals.css beside
+   the keyframes as --slot, with the cycle as --cycle. It began at two,
+   which never let the ground settle; five is long enough to look at a
+   stack and short enough that a visitor sees several.
+
+   It cannot be written here as an inline `animation:` shorthand, which is
+   what it was at first: a shorthand
    sets animation-play-state and animation-duration along with everything
    else, and inline it outranks any stylesheet rule that is not !important.
    That left no way to slow the cycle for prefers-reduced-motion without

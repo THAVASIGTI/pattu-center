@@ -64,7 +64,7 @@ export default function HomePage() {
         {/* The ground, in layers, bottom up.
 
             SareeCycle is the photographs and the scrim over them: six stacks
-            of the shop's own silk changing every two seconds. ZariWeave is
+            of the shop's own silk changing every five seconds. ZariWeave is
             the drawn saree borders running sideways over that, which still
             do the work they were added for: the scrim settles the
             photographs into one field, and the borders are what keeps that
