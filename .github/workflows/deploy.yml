@@ -68,12 +68,43 @@ jobs:
           # taking every stylesheet and script with it.
           test -f out/.nojekyll  || { echo "::error::no .nojekyll"; exit 1; }
 
-          # Assets must carry the base path, or they 404 once deployed.
-          if [ -n "$BASE" ] && grep -q 'src="/img/' out/index.html; then
-            echo "::error::image paths are missing the $BASE prefix"
+          # ----------------------------------------------------------------
+          # The base path has to match where the site is actually served
+          # from, and getting it wrong is silent: every page still returns
+          # 200, the HTML is correct, and not one stylesheet, script or
+          # image loads. That is exactly what shipped when the custom domain
+          # was connected. A site served from an apex domain lives at the
+          # root; a project site lives under /<repo>. These checks make a
+          # mismatch fail the build instead of reaching anybody.
+          # ----------------------------------------------------------------
+
+          # What prefix did the build actually bake into its asset URLs?
+          PREFIX=$(grep -o 'href="[^"]*/_next/static/[^"]*"' out/index.html \
+                   | head -1 | sed 's|^href="||; s|/_next/static/.*||')
+
+          if [ "$PREFIX" != "$BASE" ]; then
+            echo "::error::assets are built for '${PREFIX:-/}' but Pages serves from '${BASE:-/}'"
             exit 1
           fi
 
+          # A CNAME means a custom domain, and a custom domain always serves
+          # from the root. If configure-pages still reports the old project
+          # path, the equality check above would happily pass a build that
+          # is wrong in both halves, so this is the one that catches it.
+          if [ -f out/CNAME ]; then
+            DOMAIN=$(tr -d '[:space:]' < out/CNAME)
+            if [ -n "$BASE" ]; then
+              echo "::error::$DOMAIN serves from the root, but the build used base path '$BASE'"
+              exit 1
+            fi
+            if ! grep -q "https://$DOMAIN" out/index.html; then
+              echo "::error::canonical URL does not point at $DOMAIN; check business.siteUrl"
+              exit 1
+            fi
+            echo "custom domain: $DOMAIN"
+          fi
+
+          echo "base path:   '${BASE:-/}'"
           echo "pages built: $(find out -name '*.html' | wc -l)"
           echo "images:      $(find out/img -type f | wc -l)"
 

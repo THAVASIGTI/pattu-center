@@ -15,10 +15,20 @@ export const business = {
   ownersLabel: "M. Rasukutti & M. Sarathkumar",
   foundedText: "40 years in silk",
   foundedTextTa: "40 ஆண்டு அனுபவம்",
-  // Drives canonical URLs and Open Graph. Currently the GitHub Pages address
-  // this deploys to, change it (and basePath in next.config.ts) when a real
-  // domain is pointed at the site.
-  siteUrl: "https://thavasigti.github.io/pattu-center",
+  // Drives canonical URLs, Open Graph and the LocalBusiness JSON-LD.
+  //
+  // The shop's own domain, which is now what GitHub Pages serves: the old
+  // thavasigti.github.io/pattu-center address redirects here. It was still
+  // set to that old address after the domain was connected, so every page
+  // was telling search engines its canonical home was a URL that redirects
+  // somewhere else.
+  //
+  // Note there is no path on the end any more, and that matters beyond this
+  // line. An apex domain serves the site from its root, so the build's
+  // basePath has to be empty to match; the two are set in different places
+  // and the deploy workflow now fails if they disagree. See public/CNAME and
+  // the "Verify the export" step in .github/workflows/deploy.yml.
+  siteUrl: "https://kamatchipattucenter.com",
 
   phones: [
     { label: "+91 85955 20856", href: "tel:+918595520856", raw: "8595520856" },
