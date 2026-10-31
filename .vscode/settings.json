@@ -1,0 +1,32 @@
+{
+  // Linux gives each user a fixed number of inotify watches, and a file
+  // watcher that walks node_modules eats thousands of them per project.
+  // With two projects open the limit was reached, and the symptom was not
+  // "too many watches": it was Turbopack reporting
+  //
+  //     Module not found: Can't resolve 'react/jsx-runtime'
+  //
+  // because it could not watch node_modules/react, so it could not read
+  // that package's package.json. The real line is further down the error,
+  // and it says "OS file watch limit reached".
+  //
+  // None of the four below is a directory anyone edits by hand. They are a
+  // dependency tree, two build outputs and a git object store; nothing in
+  // them should ever wake an editor up.
+  "files.watcherExclude": {
+    "**/node_modules/**": true,
+    "**/.next/**": true,
+    "**/out/**": true,
+    "**/.git/**": true
+  },
+
+  // out/ is committed on purpose, so the built site is visible in the repo,
+  // which means a project-wide search otherwise returns every match twice:
+  // once in the source and once in the generated HTML. Excluding it from
+  // search keeps the duplicates out without hiding the files.
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/.next": true,
+    "**/out": true
+  }
+}
