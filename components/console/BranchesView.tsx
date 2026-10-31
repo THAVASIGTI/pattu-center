@@ -1,9 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
-import { byBranch, rupees, rupeesShort, totals } from "@/config/console";
+import { business } from "@/config/business";
+import { branchRows, branchesMissingPins, totals } from "@/config/console";
 import ConsoleShell from "./ConsoleShell";
-import { HBarChart } from "./Charts";
 import { IconPin, IconPlus } from "./icons";
 import { useToast } from "./Toast";
 import {
@@ -11,41 +12,45 @@ import {
   Field,
   GhostButton,
   Modal,
-  Panel,
   PrimaryButton,
   StatTile,
   inputClass,
 } from "./ui";
 
 /**
- * Branches as cards, which is the brief's own example of how a section
- * should work: cards, an "add new" above them, a form behind that, and a
- * toast where a save would be.
+ * The branches, as they are on the live site.
  *
- * These are the eleven real branches from config/business.ts, the same list
- * the public site renders. Only the trading figures beside them are
- * invented. That matters: a demo whose branch list disagrees with the
- * website's is a demo that cannot be shown to anybody who has seen the
- * website.
+ * This is the brief's own example of how a section should work, and the
+ * part the client asked for by name: add a new branch, remove an old one,
+ * change the details of one that moved. All three are here, and all three
+ * end at a toast, because the site is a static export and a branch only
+ * really changes when config/business.ts changes and the site is rebuilt.
  *
- * Cards rather than a table because the question here is "how is Thanjavur
- * doing", one branch at a time, not "rank these by payout". The ranking is
- * the chart underneath, which is the right form for that question.
+ * Each card carries its map state, because that is the one thing about a
+ * branch that is silently wrong rather than obviously missing: without
+ * `coords` the map still renders and the QR code still scans, they just
+ * point at a landmark down the road instead of the shop door. Nobody
+ * notices until a customer does.
+ *
+ * Removing is deliberately heavier than adding. A branch page is a URL
+ * people have in their phones and a QR code printed on paper, so the
+ * dialog says what else goes with it rather than asking "are you sure?".
  */
 export default function BranchesView() {
   const toast = useToast();
-  const [open, setOpen] = useState(false);
+  const [adding, setAdding] = useState(false);
+  const [removing, setRemoving] = useState<string | null>(null);
 
-  const busiest = byBranch[0];
+  const target = branchRows.find((b) => b.slug === removing);
 
   return (
     <ConsoleShell
       title="Branches"
-      lede="Eleven branches across Tamil Nadu. The list matches the public site; the trading figures beside each one are sample data."
+      lede="The eleven branches exactly as the website lists them. Adding, changing or removing one takes effect when the site is rebuilt."
       actions={
         <button
           type="button"
-          onClick={() => setOpen(true)}
+          onClick={() => setAdding(true)}
           className="inline-flex items-center gap-1.5 rounded-lg bg-green-deep px-3 py-2 text-[0.78rem] font-semibold text-cream hover:bg-green-mid"
         >
           <IconPlus className="size-4" />
@@ -54,18 +59,22 @@ export default function BranchesView() {
       }
     >
       <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-        <StatTile label="Branches" value={String(byBranch.length)} sub="Ten counters and one collection route" />
-        <StatTile label="Busiest" value={busiest.city} sub={`${rupees(busiest.payout)} paid out`} />
-        <StatTile label="Open enquiries" value={String(totals.openPipeline)} sub="Across all branches" />
+        <StatTile label="Branches" value={String(totals.branches)} sub="Ten counters and one collection route" />
+        <StatTile label="Collection areas" value={String(totals.areas)} sub="Listed across all branches" />
         <StatTile
-          label="Areas covered"
-          value={String(byBranch.reduce((s, b) => s + b.areas, 0))}
-          sub="Collection areas listed on the site"
+          label="With a map pin"
+          value={`${branchRows.filter((b) => b.hasPin).length} of ${branchRows.filter((b) => !b.pickupOnly).length}`}
+          sub="Counters only; a collection route has no door"
+        />
+        <StatTile
+          label="Needs a pin"
+          value={String(branchesMissingPins.length)}
+          sub={branchesMissingPins.map((b) => b.city).join(", ") || "None"}
         />
       </div>
 
       <div className="mt-3 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-        {byBranch.map((b) => (
+        {branchRows.map((b) => (
           <article
             key={b.slug}
             className="flex flex-col rounded-xl border border-slate-200 bg-white p-4 shadow-[0_1px_2px_rgba(15,23,42,.05)] transition-shadow hover:shadow-[0_8px_24px_rgba(15,23,42,.08)]"
@@ -85,65 +94,80 @@ export default function BranchesView() {
                     </span>
                   )}
                 </h3>
-                <p className="mt-1 flex items-center gap-1.5 text-[0.76rem] text-slate-500">
-                  <IconPin className="size-3.5 shrink-0 text-slate-400" />
-                  <span className="truncate">
-                    {b.pickupOnly ? "Doorstep collection across the city" : b.street}
-                  </span>
+                <p className="mt-1 truncate text-[0.76rem] text-slate-500">
+                  {b.pickupOnly ? "Doorstep collection across the city" : b.street}
                 </p>
               </div>
               <EditButton what={`the ${b.city} branch`} compact />
             </header>
 
-            <dl className="mt-4 grid grid-cols-3 gap-2 border-t border-slate-100 pt-3">
-              {[
-                ["Paid out", rupeesShort(b.payout)],
-                ["Purchases", String(b.purchases)],
-                ["Open", String(b.open)],
-              ].map(([k, v]) => (
-                <div key={k}>
-                  <dt className="text-[0.66rem] tracking-[0.04em] text-slate-400 uppercase">
-                    {k}
-                  </dt>
-                  <dd className="mt-0.5 text-[0.95rem] font-semibold text-slate-900 tabular-nums">
-                    {v}
-                  </dd>
-                </div>
-              ))}
+            {/* The map state, said plainly. This is the defect that hides. */}
+            <p
+              className={`mt-3 inline-flex w-fit items-center gap-1.5 rounded-full px-2 py-0.5 text-[0.7rem] font-medium ring-1 ring-inset ${
+                b.pickupOnly
+                  ? "bg-slate-100 text-slate-500 ring-slate-400/20"
+                  : b.hasPin
+                    ? "bg-emerald-50 text-emerald-700 ring-emerald-600/20"
+                    : "bg-amber-50 text-amber-800 ring-amber-600/20"
+              }`}
+            >
+              <IconPin className="size-3" />
+              {b.pickupOnly
+                ? "No counter to pin"
+                : b.hasPin
+                  ? "Map pinned to the door"
+                  : "Map searches for a landmark"}
+            </p>
+
+            <dl className="mt-3 grid grid-cols-2 gap-2 border-t border-slate-100 pt-3">
+              <div>
+                <dt className="text-[0.66rem] tracking-[0.04em] text-slate-400 uppercase">
+                  Collection areas
+                </dt>
+                <dd className="mt-0.5 text-[0.95rem] font-semibold text-slate-900 tabular-nums">
+                  {b.areas.length}
+                </dd>
+              </div>
+              <div>
+                <dt className="text-[0.66rem] tracking-[0.04em] text-slate-400 uppercase">
+                  Phone
+                </dt>
+                <dd className="mt-0.5 text-[0.82rem] font-medium text-slate-700">
+                  {(business.phones[b.phoneIndex] ?? business.phones[0]).label}
+                </dd>
+              </div>
             </dl>
 
-            <p className="mt-3 text-[0.72rem] text-slate-400">
-              {b.enquiries} enquiries · {b.areas} collection areas
-            </p>
+            <div className="mt-3 flex gap-2 border-t border-slate-100 pt-3">
+              <Link
+                href={`/branches/${b.slug}`}
+                className="flex-1 rounded-lg border border-slate-200 px-2.5 py-1.5 text-center text-[0.76rem] font-semibold text-slate-700 hover:bg-slate-50"
+              >
+                View page
+              </Link>
+              <button
+                type="button"
+                onClick={() => setRemoving(b.slug)}
+                className="flex-1 rounded-lg border border-slate-200 px-2.5 py-1.5 text-[0.76rem] font-semibold text-slate-700 hover:border-rose-200 hover:bg-rose-50 hover:text-rose-700"
+              >
+                Remove
+              </button>
+            </div>
           </article>
         ))}
       </div>
 
-      <Panel
-        className="mt-3"
-        title="Branches ranked by amount paid out"
-        note="Six months. The grey figure is purchases made."
-      >
-        <HBarChart
-          data={byBranch.map((b) => ({
-            label: b.badge ? `${b.city} ${b.badge.replace(/Branch /, 'B')}` : b.city,
-            value: b.payout,
-            note: `${b.purchases} buys`,
-          }))}
-          format={rupeesShort}
-        />
-      </Panel>
-
+      {/* ---------------- add ---------------- */}
       <Modal
-        open={open}
+        open={adding}
         title="Add a new branch"
-        note="Goes to the head office for approval. Nothing is stored by this console."
-        onClose={() => setOpen(false)}
+        note="Goes to the head office. This console cannot publish on its own."
+        onClose={() => setAdding(false)}
       >
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            setOpen(false);
+            setAdding(false);
             toast.sentToAdmin("The new branch");
           }}
           className="space-y-3.5"
@@ -163,8 +187,11 @@ export default function BranchesView() {
             <input className={inputClass} placeholder="Opposite the bus stand" />
           </Field>
           <div className="grid gap-3.5 sm:grid-cols-2">
-            <Field label="Contact number">
-              <input className={inputClass} required placeholder="+91 85955 20856" />
+            <Field
+              label="Map coordinates"
+              hint="From the shop's own Google Maps pin. Without this the map points at a landmark."
+            >
+              <input className={inputClass} placeholder="10.3673, 77.9803" />
             </Field>
             <Field label="Type">
               <select className={inputClass} defaultValue="counter">
@@ -175,16 +202,76 @@ export default function BranchesView() {
           </div>
           <Field
             label="Collection areas"
-            hint="Separate with commas. These appear on the branch page."
+            hint="Separate with commas. These appear on the branch page and in search."
           >
-            <textarea className={inputClass} rows={3} placeholder="Begambur, Palani Road, NGO Colony" />
+            <textarea
+              className={inputClass}
+              rows={3}
+              placeholder="Begambur, Palani Road, NGO Colony"
+            />
           </Field>
 
           <div className="flex justify-end gap-2 border-t border-slate-100 pt-4">
-            <GhostButton onClick={() => setOpen(false)}>Cancel</GhostButton>
-            <PrimaryButton type="submit">Send for approval</PrimaryButton>
+            <GhostButton onClick={() => setAdding(false)}>Cancel</GhostButton>
+            <PrimaryButton type="submit">Send to head office</PrimaryButton>
           </div>
         </form>
+      </Modal>
+
+      {/* ---------------- remove ---------------- */}
+      <Modal
+        open={removing !== null}
+        title={target ? `Remove ${target.city}${target.badge ? ` ${target.badge.toLowerCase()}` : ""}?` : "Remove branch"}
+        note="Goes to the head office. This console cannot publish on its own."
+        onClose={() => setRemoving(null)}
+      >
+        {target && (
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              setRemoving(null);
+              toast.sentToAdmin(`Removing the ${target.city} branch`);
+            }}
+            className="space-y-3.5"
+          >
+            {/* What else goes, said before it is asked for. "Are you sure?"
+                asks somebody to confirm a thing they have not been told. */}
+            <div className="rounded-lg bg-slate-50 p-3.5">
+              <p className="text-[0.8rem] font-semibold text-slate-900">
+                Removing it also takes down
+              </p>
+              <ul className="mt-2 space-y-1 text-[0.78rem] text-slate-600">
+                <li>
+                  · the page at{" "}
+                  <code className="rounded bg-white px-1 py-0.5 text-[0.72rem]">
+                    /branches/{target.slug}
+                  </code>
+                  , which customers may have saved
+                </li>
+                <li>· its {target.areas.length} collection areas, and their search entries</li>
+                <li>· its printed QR code, which stops resolving</li>
+                <li>· one card from the home page rail and the branches page</li>
+              </ul>
+            </div>
+
+            <Field
+              label="Why is it closing?"
+              hint="Recorded so the head office can answer a customer who turns up there."
+            >
+              <textarea className={inputClass} rows={2} required />
+            </Field>
+
+            <div className="flex justify-end gap-2 border-t border-slate-100 pt-4">
+              <GhostButton onClick={() => setRemoving(null)}>Keep it</GhostButton>
+              <button
+                type="submit"
+                className="inline-flex items-center justify-center rounded-lg bg-rose-600 px-3.5 py-2 text-[0.8rem] font-semibold text-white transition-colors hover:bg-rose-700"
+              >
+                Request removal
+              </button>
+            </div>
+          </form>
+        )}
       </Modal>
     </ConsoleShell>
   );

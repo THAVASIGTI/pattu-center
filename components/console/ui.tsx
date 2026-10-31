@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useId, useRef } from "react";
-import type { Stage } from "@/config/console";
 import { IconArrowDown, IconArrowUp, IconClose, IconPencil } from "./icons";
 import { useToast } from "./Toast";
 
@@ -101,34 +100,6 @@ export function StatTile({
         </span>
       </div>
     </div>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/* Status                                                              */
-/* ------------------------------------------------------------------ */
-
-/* Status colours are reserved and never reused as series colours, and every
-   chip carries its word. The stages in the middle of the funnel are
-   deliberately neutral: they are positions in a process, not warnings, and
-   painting five of them five colours turns a pipeline into a fruit bowl. */
-const STAGE_STYLE: Record<Stage, string> = {
-  "New enquiry": "bg-sky-50 text-sky-700 ring-sky-600/20",
-  Contacted: "bg-slate-100 text-slate-700 ring-slate-500/20",
-  "Pickup scheduled": "bg-amber-50 text-amber-800 ring-amber-600/20",
-  Valued: "bg-violet-50 text-violet-700 ring-violet-600/20",
-  Purchased: "bg-emerald-50 text-emerald-700 ring-emerald-600/20",
-  "Did not proceed": "bg-slate-100 text-slate-500 ring-slate-400/20",
-};
-
-export function StageChip({ stage }: { stage: Stage }) {
-  return (
-    <span
-      className={`inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 text-[0.7rem] font-medium whitespace-nowrap ring-1 ring-inset ${STAGE_STYLE[stage]}`}
-    >
-      <span aria-hidden className="size-1.5 rounded-full bg-current opacity-70" />
-      {stage}
-    </span>
   );
 }
 

@@ -145,3 +145,28 @@ export const IconLock = (p: P) => (
 
 export const IconArrowUp = (p: P) => <S {...p} d={<path d="M12 19V5M6 11l6-6 6 6" />} />;
 export const IconArrowDown = (p: P) => <S {...p} d={<path d="M12 5v14M6 13l6 6 6-6" />} />;
+
+export const IconImage = (p: P) => (
+  <S
+    {...p}
+    d={
+      <>
+        <rect x="3" y="4.5" width="18" height="15" rx="2" />
+        <circle cx="8.5" cy="9.5" r="1.5" />
+        <path d="m3.5 17 5-5 4 4 3-2.5 5 4.5" />
+      </>
+    }
+  />
+);
+
+export const IconVideo = (p: P) => (
+  <S
+    {...p}
+    d={
+      <>
+        <rect x="3" y="5" width="13" height="14" rx="2" />
+        <path d="m16 10.5 5-3v9l-5-3z" />
+      </>
+    }
+  />
+);

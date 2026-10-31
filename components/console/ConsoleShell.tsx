@@ -5,7 +5,6 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { logoNavLight } from "@/config/content";
-import { periodEndLabel } from "@/config/console";
 import {
   CONSOLE_USER,
   SESSION_HOURS,
@@ -17,13 +16,13 @@ import {
 } from "@/lib/console-session";
 import {
   IconGrid,
-  IconInbox,
+  IconImage,
   IconLogout,
   IconMenu,
   IconPin,
-  IconReceipt,
   IconTag,
   IconUser,
+  IconVideo,
 } from "./icons";
 import { useToast } from "./Toast";
 import { useMounted } from "./useMounted";
@@ -88,12 +87,15 @@ function subscribe(onChange: () => void) {
   };
 }
 
+/* Five sections, one per kind of content the website is made of. They were
+   a CRM once, invented enquiries and purchases, and that was replaced: a
+   console attached to a real site should manage the real site. */
 const NAV = [
   { href: "/console/control/overview", label: "Overview", Icon: IconGrid },
-  { href: "/console/control/enquiries", label: "Enquiries", Icon: IconInbox },
-  { href: "/console/control/purchases", label: "Purchases", Icon: IconReceipt },
+  { href: "/console/control/hero", label: "Hero images", Icon: IconImage },
   { href: "/console/control/branches", label: "Branches", Icon: IconPin },
-  { href: "/console/control/rate-card", label: "Rate card", Icon: IconTag },
+  { href: "/console/control/categories", label: "Categories", Icon: IconTag },
+  { href: "/console/control/gallery", label: "Gallery", Icon: IconVideo },
 ] as const;
 
 export default function ConsoleShell({
@@ -177,8 +179,11 @@ export default function ConsoleShell({
 
           <div className="min-w-0 flex-1">
             <p className="truncate text-[0.95rem] font-semibold text-slate-900">{title}</p>
+            {/* This used to say "sample data". It cannot now: the figures
+                are counted from the live content. What is still true, and
+                what this has to say instead, is that nothing here saves. */}
             <p className="truncate text-[0.72rem] text-slate-500">
-              Sample data, period ending {periodEndLabel}
+              Live content · changes are sent for approval, not published
             </p>
           </div>
 
@@ -272,12 +277,15 @@ function Sidebar({
         })}
       </ul>
 
-      {/* Said on every screen, not buried in a tooltip. Anyone shown this
-          console should know within one glance that the figures are made
-          up, and the sidebar is the one piece of furniture always on it. */}
+      {/* Said on every screen rather than buried in a tooltip, and the
+          wording changed with the data. The numbers are real now, read from
+          the files the site is built from; what is not real is the editing.
+          The sidebar is the one piece of furniture always on screen, so it
+          is where the caveat belongs. */}
       <p className="m-3 rounded-lg bg-white/5 p-3 text-[0.68rem] leading-relaxed text-cream/60">
-        Demonstration console. Every figure is sample data and nothing you
-        change here is saved.
+        The figures here are read from the live site. Editing is a
+        demonstration: the site is a static export, so content changes only
+        take effect when it is rebuilt.
       </p>
     </nav>
   );

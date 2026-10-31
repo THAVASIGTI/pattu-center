@@ -42,18 +42,20 @@ export function useToast() {
           title: "Only an admin can edit",
           body: `Your account is read-only, so ${what} cannot be changed here. Ask the head office to raise your access.`,
         }),
-      /** The brief's line, on every create form. */
+      /** The brief's line, on every create form. The second sentence is
+       *  the accurate part: this is a static site, so even an approved
+       *  change only appears once the site is rebuilt. */
       sentToAdmin: (what: string) =>
         push({
           tone: "success",
           title: "Sent for admin approval",
-          body: `${what} has gone to the head office to be approved. Nothing is saved until an admin accepts it.`,
+          body: `${what} has gone to the head office. Nothing changes on the website until it is approved and the site is rebuilt.`,
         }),
       demo: (what: string) =>
         push({
           tone: "info",
           title: "Demonstration only",
-          body: `${what} is not wired to anything. This console shows sample figures and saves nothing.`,
+          body: `${what} is not wired to anything. This console reads the live content but cannot publish to it.`,
         }),
     }),
     [push],
