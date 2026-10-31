@@ -1,12 +1,7 @@
 import type { Metadata } from "next";
-import { Cinzel, Cormorant_Garamond, Inter, Marcellus, Noto_Sans_Tamil } from "next/font/google";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import MobileActionBar from "@/components/MobileActionBar";
-import ScrollThread from "@/components/ScrollThread";
-import SocialDock from "@/components/SocialDock";
-import { branches, business } from "@/config/business";
+import { business } from "@/config/business";
 import { img } from "@/config/content";
+import { Cinzel, Cormorant_Garamond, Inter, Marcellus, Noto_Sans_Tamil } from "next/font/google";
 import "./globals.css";
 
 const marcellus = Marcellus({
@@ -84,29 +79,19 @@ export const viewport = {
   viewportFit: "cover" as const,
 };
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  name: business.name,
-  description:
-    "Buyers of old silk sarees, pattu sarees, silk vetti, zari and silver across Tamil Nadu.",
-  telephone: business.phones.map((p) => `+91${p.raw}`),
-  email: business.email,
-  url: business.siteUrl,
-  priceRange: "₹₹",
-  openingHours: "Mo-Su 10:00-20:00",
-  founder: business.owners.map((name) => ({ "@type": "Person", name })),
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: branches[0].lines.join(", "),
-    addressLocality: branches[0].city,
-    addressRegion: "Tamil Nadu",
-    addressCountry: "IN",
-  },
-  areaServed: branches.map((b) => b.city),
-  sameAs: Object.values(business.social),
-};
-
+/**
+ * The document, and only the document.
+ *
+ * <html>, <body>, the five fonts and the site-wide metadata. Everything that
+ * used to sit here, the header, the footer, the social dock, the fixed phone
+ * bar and the LocalBusiness schema, has moved into app/(site)/layout.tsx.
+ *
+ * The reason is the console at /console/control. It is a dashboard, and it
+ * cannot share a frame with a marketing site; in the App Router the way to
+ * give two parts of one domain two different frames is to stop putting
+ * either of them in the root. Route groups make that free, because a group
+ * contributes nothing to a URL: app/(site)/about still serves /about.
+ */
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${marcellus.variable} ${cormorant.variable} ${cinzel.variable} ${inter.variable} ${tamil.variable}`}>
@@ -115,27 +100,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           cz-shortcut-listen, Grammarly's data-gr-*, and similar). It applies
           only to this element's own attributes and text. Mismatches anywhere
           in the tree below are still reported. */}
-      <body suppressHydrationWarning className="font-sans antialiased pb-[58px] xl:pb-0">
-        {/* Reveal renders its children at opacity 0 and only an
-            IntersectionObserver brings them back, so without JavaScript 25 of
-            these blocks and 8 of the 12 section headings on the home page are
-            invisible: the page is a static export whose content needs a
-            script to be seen at all. The reduced-motion rule in globals.css
-            already forces [data-reveal] visible; this does the same when
-            nothing is running to set it. */}
-        <noscript>
-          <style>{`[data-reveal],[data-word]{opacity:1!important;transform:none!important}`}</style>
-        </noscript>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-        <ScrollThread />
-        <Header />
-        <main>{children}</main>
-        <Footer />
-        <SocialDock />
-        <MobileActionBar />
+      <body suppressHydrationWarning className="font-sans antialiased">
+        {children}
       </body>
     </html>
   );
